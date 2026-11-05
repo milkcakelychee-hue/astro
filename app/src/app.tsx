@@ -4,6 +4,7 @@ import { AddPerson } from './pages/AddPerson.tsx'
 import { Aspects } from './pages/Aspects.tsx'
 import { DesignPreview } from './pages/DesignPreview.tsx'
 import { Main } from './pages/Main.tsx'
+import { Today } from './pages/Today.tsx'
 
 function useHash() {
   const [h, setH] = useState(location.hash)
@@ -32,6 +33,8 @@ export function App() {
       return <AddPerson />
     case 'aspects':
       return <Aspects />
+    case 'today':
+      return <Today />
     case 'design':
       return <DesignPreview />
     default:

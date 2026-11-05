@@ -1,0 +1,9 @@
+/* หน้า "วันนี้" — คลาสเฉพาะหน้าตาม design/Today.dc.html */
+.pg-today a { color: #7FB8FF; }
+.pg-today .card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.10); border-radius: 20px; }
+.pg-today .lbl { font-size: 12px; color: #9AA1B5; }
+.pg-today .h2 { margin: 0; font-size: 18px; font-weight: 600; }
+.pg-today .help { width: 28px; height: 28px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); background: transparent; color: #C9CEDC; font: 600 13px var(--font); display: inline-flex; align-items: center; justify-content: center; padding: 0; flex: none; }
+.pg-today .row { display: grid; grid-template-columns: 28px minmax(0,1fr) 104px 20px; align-items: center; min-height: 44px; width: 100%; padding: 0 4px; border: none; border-top: 1px solid rgba(255,255,255,.06); background: transparent; color: #F2F4FA; font: 14px var(--font); text-align: left; cursor: pointer; }
+.pg-today .tr { display: flex; flex-direction: row; gap: 12px; align-items: flex-start; padding: 14px 16px; border: none; width: 100%; background: transparent; color: #F2F4FA; text-align: left; font-family: inherit; }
+.pg-today .tchip { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.08); color: #C9CEDC; }
