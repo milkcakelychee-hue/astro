@@ -56,7 +56,9 @@ export function People() {
   if (err) return <Page background={BG}><div style={{ padding: '62px 20px', color: '#FF9A9A' }}>{err}</div><TabBar active="people" /></Page>
   const all = rows ?? []
   const qq = q.trim()
-  const shown = qq ? all.filter((r) => [r.p.name, r.sun, r.moon, r.ac].some((x) => x.includes(qq))) : all
+  // ผู้ใช้ขอ: ชาร์ตของฉันไม่อยู่ในรายชื่อ — แสดงเฉพาะตอนเลือกเปรียบเทียบ
+  const listed = selecting ? all : all.filter((r) => !r.p.isMe)
+  const shown = qq ? listed.filter((r) => [r.p.name, r.sun, r.moon, r.ac].some((x) => x.includes(qq))) : listed
   const byId = new Map(all.map((r) => [r.p.id, r]))
   const ready = sel.length === 2
 
@@ -73,7 +75,7 @@ export function People() {
       <div class="pg-people" style={{ padding: '62px 20px 230px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-            <span class="lbl">ชาร์ตที่บันทึกไว้ · {all.length} คน</span>
+            <span class="lbl">ชาร์ตที่บันทึกไว้ · {all.filter((r) => !r.p.isMe).length} คน</span>
             <h1 style={{ margin: 0, fontSize: '28px', fontWeight: 600 }}>บุคคล</h1>
           </div>
           <div style={{ display: 'flex', gap: '8px' }}>
