@@ -62,7 +62,7 @@ export function People() {
 
   const pick = (id: string) => {
     if (!selecting) {
-      location.hash = '#/main?id=' + id
+      location.hash = '#/people?id=' + id
       return
     }
     setSel((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id].slice(-2)))

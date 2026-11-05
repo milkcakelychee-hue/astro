@@ -139,10 +139,9 @@ export function AddPerson() {
             {!unknown ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '8px' }}>
-                  <label>{lab('ชั่วโมง')}<input class={'in' + (hh && h === null ? ' bad' : '')} inputmode="numeric" maxLength={2} value={hh} onInput={(e) => setHh(e.currentTarget.value)} style={{ textAlign: 'center', fontVariantNumeric: 'tabular-nums' }} /></label>
-                  <label>{lab('นาที')}<input class={'in' + (mi && m === null ? ' bad' : '')} inputmode="numeric" maxLength={2} value={mi} onInput={(e) => setMi(e.currentTarget.value)} style={{ textAlign: 'center', fontVariantNumeric: 'tabular-nums' }} /></label>
+                  <label>{lab('ชั่วโมง')}{/* ผู้ใช้ขอ: เลื่อนเลือก (iPhone แสดงเป็นวงล้อ) แทนการพิมพ์ */}<select class="in sel" value={hh} onChange={(e) => setHh(e.currentTarget.value)} style={{ textAlign: 'center', textAlignLast: 'center', fontVariantNumeric: 'tabular-nums' }}><option value="" disabled>–</option>{Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0')).map((x) => <option value={x}>{x}</option>)}</select></label>
+                  <label>{lab('นาที')}<select class="in sel" value={mi} onChange={(e) => setMi(e.currentTarget.value)} style={{ textAlign: 'center', textAlignLast: 'center', fontVariantNumeric: 'tabular-nums' }}><option value="" disabled>–</option>{Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0')).map((x) => <option value={x}>{x}</option>)}</select></label>
                 </div>
-                <span class="lbl">ระบบ 24 ชั่วโมง เช่น 20:33 = สองทุ่มสามสิบสามนาที</span>
               </div>
             ) : (
               <div style={{ display: 'flex', gap: '10px', padding: '12px', borderRadius: '14px', background: 'rgba(243,212,110,.08)', border: '1px solid rgba(243,212,110,.30)' }}>

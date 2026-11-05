@@ -35,8 +35,11 @@ export function App() {
       return <AddPerson />
     case 'aspects':
       return <Aspects />
-    case 'people':
-      return <People />
+    case 'people': {
+      const id = new URLSearchParams(location.hash.split('?')[1] ?? '').get('id')
+      // แตะชื่อคน → ชาร์ตของคนนั้น อยู่ในแท็บบุคคล (ผู้ใช้ขอ)
+      return id ? <Main key={id} tab="people" /> : <People />
+    }
     case 'today':
       return <Today />
     case 'design':

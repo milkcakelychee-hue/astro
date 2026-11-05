@@ -12,7 +12,7 @@ import {
 } from '../ui/astro-labels.ts'
 import { ChartWheel } from '../ui/ChartWheel.tsx'
 import { c, isLightTheme, setRenderLight } from '../ui/theme.ts'
-import { Page } from '../ui/components.tsx'
+import { BackLink, Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
 import { MainEmpty } from './MainEmpty.tsx'
 import { PlanetSheet } from './PlanetSheet.tsx'
@@ -37,7 +37,9 @@ interface Data {
   dom: Dominants
 }
 
-export function Main() {
+/** ชาร์ตของคนอื่นเปิดในแท็บบุคคล: #/people?id=<คน> */
+export function Main(props: { tab?: 'main' | 'people' } = {}) {
+  const tab = props.tab ?? 'main'
   const [data, setData] = useState<Data | null | 'none'>(null)
   const [err, setErr] = useState<string | null>(null)
   const load = () => {
@@ -55,13 +57,14 @@ export function Main() {
   }
   useEffect(load, [])
 
-  if (err) return <Page background={BG}><div style={{ padding: '62px 20px', color: c('#FF9A9A') }}>{err}</div><TabBar active="main" /></Page>
+  if (err) return <Page background={BG}><div style={{ padding: '62px 20px', color: c('#FF9A9A') }}>{err}</div><TabBar active={tab} /></Page>
   if (data === 'none') return <MainEmpty background={BG} onLoaded={load} />
-  if (!data) return <Page background={BG}><TabBar active="main" /></Page>
-  return <MainView {...data} />
+  if (!data) return <Page background={BG}><TabBar active={tab} /></Page>
+  return <MainView {...data} navTab={tab} />
 }
 
-function MainView({ person, chart, aspects, dom }: Data) {
+function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'main' | 'people' }) {
+  const base = person.isMe ? '#/main' : '#/people?id=' + person.id
   // โทนสว่างตาม design/ChartLight.dc.html
   const light = isLightTheme()
   setRenderLight(light)
@@ -127,7 +130,9 @@ function MainView({ person, chart, aspects, dom }: Data) {
 
   return (
     <Page background={light ? BG_LIGHT : BG} light={light}>
-      <div class={light ? 'pg-main light' : 'pg-main'} style={{ padding: '62px 20px 150px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      {/* ชาร์ตของคนอื่น: ปุ่มย้อนกลับไปรายชื่อ (คอมโพเนนต์กลางจาก DesignSystem) */}
+      {!person.isMe && <BackLink href="#/people" label="บุคคล" />}
+      <div class={light ? 'pg-main light' : 'pg-main'} style={{ padding: person.isMe ? '62px 20px 150px' : '4px 20px 150px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           {/* ผู้ใช้ขอ: ปุ่ม ? ของหัวข้อหน้าชิดขวาสุดทุกหน้า (flex:1 ให้กล่องหัวข้อเต็มความกว้าง) */}
           <div style={{ flex: 1, position: 'relative', paddingRight: '40px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
@@ -150,7 +155,7 @@ function MainView({ person, chart, aspects, dom }: Data) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2">วงชาร์ตเกิด <span class="lbl" style={{ fontWeight: 400 }}>(Birth Chart)</span></h2>{help('วงชาร์ตคืออะไร')}</div>
           <div class="card" style={{ padding: '14px 14px 12px', display: 'flex', flexDirection: 'column', gap: '10px', background: c('rgba(12,14,24,.55)') }}>
-            <ChartWheel chart={chart} aspects={aspects} showHouses={known} label={`วงชาร์ตเกิด ${label}`} onPick={(p) => (location.hash = '#/main?' + (person.isMe ? '' : 'id=' + person.id + '&') + 'p=' + p)} />
+            <ChartWheel chart={chart} aspects={aspects} showHouses={known} label={`วงชาร์ตเกิด ${label}`} onPick={(p) => (location.hash = base + (person.isMe ? '?' : '&') + 'p=' + p)} />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '6px 12px', fontSize: '12px', color: c('#C9CEDC') }}>
               {[[c('#4FD1A5'), 'ส่งเสริม (Trine 120°)'], [c('#7FB8FF'), 'เปิดโอกาส (Sextile 60°)'], [c('#FF8A4C'), 'ท้าทาย (Square 90°)'], [c('#FF6B6B'), 'ตรงข้าม (Opposition 180°)']].map(([c, t]) => (
                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><span style={{ width: '16px', height: '2px', background: c }} />{t}</span>
@@ -283,9 +288,9 @@ function MainView({ person, chart, aspects, dom }: Data) {
         {/* ดาวที่ควรรู้จักก่อน + รูปแบบพิเศษ: รอข้อความหมวดใหม่จาก lib/gen2.py */}
       </div>
       {sheetPt && chart.pos[sheetPt] && lib && (
-        <PlanetSheet pt={sheetPt} chart={chart} aspects={aspects} lib={lib} known={known} personId={person.id} onClose={() => (location.hash = person.isMe ? '#/main' : '#/main?id=' + person.id)} />
+        <PlanetSheet pt={sheetPt} chart={chart} aspects={aspects} lib={lib} known={known} personId={person.id} onClose={() => (location.hash = base)} />
       )}
-      <TabBar active="main" />
+      <TabBar active={navTab} />
     </Page>
   )
 }
