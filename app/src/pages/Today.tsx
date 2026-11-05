@@ -10,7 +10,7 @@ import {
 } from '../engine/sky.ts'
 import type { Swe } from '../engine/swe.ts'
 import { birthInput, getMe, timeKnown } from '../data/people.ts'
-import { loadLib, splitTitle, text, transitKey, type InterpLib } from '../lib/interp.ts'
+import { loadLib, signKey, splitTitle, text, transitKey, type InterpLib } from '../lib/interp.ts'
 import { ASPECT_COLOR, ASPECT_GLYPH, ELEMENT_COLOR, SIGN_GLYPH, SIGN_TH, fmtDeg, glyph, hhmm } from '../ui/astro-labels.ts'
 import { Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
@@ -151,6 +151,15 @@ function transitLine(lib: InterpLib, t: Transit): string | null {
   return head.startsWith('แก่นเรื่อง: ') ? head.slice(12) : rest || head
 }
 
+/** จากคลัง planet_sign: คำอธิบายศักดิ์ (หลังป้าย เช่น "พลังอ่อน ต้องใช้ความพยายามมากขึ้น") และแก่นเรื่องของดาว */
+function signLib(lib: InterpLib, p: Pt, sign: number): { dgDesc: string | null; theme: string | null } {
+  const t = text(lib, 'planet_sign', signKey(p, sign))
+  if (!t) return { dgDesc: null, theme: null }
+  const body = splitTitle(t).body
+  const m = /(?:เกษตร|อุจ|ประ|นิจ) \((?:Domicile|Exaltation|Detriment|Fall)\) ([^·]+)$/.exec(body)
+  return { dgDesc: m ? m[1]!.trim() : null, theme: body.split(' แสดงออกแบบ')[0]!.trim() || null }
+}
+
 function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
   const [sel, setSel] = useState(-1)
   const tp = thaiParts(now)
@@ -200,7 +209,7 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
             <span style={{ fontSize: '13px', fontWeight: 600, color: '#B9A6FF', letterSpacing: '.02em' }}>วันนี้ · {DAY[tp.wd]}</span>
-            <h1 style={{ margin: 0, display: 'flex', alignItems: 'baseline', gap: '10px', fontWeight: 600 }}>
+            <h1 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 600 }}>
               <span style={{ fontSize: '56px', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>{tp.d}</span>
               <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.25 }}>
                 <span style={{ fontSize: '22px' }}>{MONTH[tp.mo - 1]}</span>
@@ -284,7 +293,11 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                 <span style={{ fontSize: '14px', fontWeight: 600 }}>ตอนนี้มีดาวเสีย {debilitated.length} ดวง</span>
                 {debilitated.map((r) => (
-                  <span style={{ fontSize: '13px', color: '#DCE0EA', lineHeight: 1.5 }}>{NAME[r.p]}ในราศี{SIGN_TH[r.sign]} เป็น{DG[r.dg!][0]} ทำงานได้ไม่เต็มที่</span>
+                  // ข้อความจากคลัง planet_sign: ศักดิ์ + แก่นเรื่องของดาวที่ได้รับผล
+                  (() => {
+                    const L = signLib(lib, r.p, r.sign)
+                    return <span style={{ fontSize: '13px', color: '#DCE0EA', lineHeight: 1.5 }}>{NAME[r.p]}ในราศี{SIGN_TH[r.sign]} เป็น{DG[r.dg!][0]} {L.dgDesc ?? DG[r.dg!][4]}{L.theme ? ` · เรื่องที่ได้รับผล: ${L.theme}` : ''}</span>
+                  })()
                 ))}
               </div>
             </div>
@@ -294,8 +307,8 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
               const open = i === sel
               const dg = r.dg ? DG[r.dg] : null
               return (
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <button class="row" onClick={() => setSel(open ? -1 : i)} aria-expanded={open} style={open ? { background: 'rgba(255,255,255,.05)', borderRadius: '10px' } : undefined}>
+                <div style={{ display: 'flex', flexDirection: 'column', ...(open ? { background: 'rgba(255,255,255,.05)', borderRadius: '12px', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,.08)', margin: '2px 0 6px' } : {}) }}>
+                  <button class="row" onClick={() => setSel(open ? -1 : i)} aria-expanded={open} style={open ? { borderTopColor: 'transparent' } : undefined}>
                     <span style={{ fontSize: '17px' }}>{glyph(r.p)}</span>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0, whiteSpace: 'nowrap' }}>
                       <span>{NAME[r.p]}</span>
@@ -307,20 +320,21 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
                       )}
                     </span>
                     <span style={{ fontVariantNumeric: 'tabular-nums' }}>{fmtDeg(r.body.lon).padStart(6, '0')} <span style={{ color: ELEMENT_COLOR[r.sign % 4] }}>{SIGN_GLYPH[r.sign]}</span> {SIGN_TH[r.sign]}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9AA1B5" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9AA1B5" stroke-width="2" aria-hidden="true" style={open ? { transform: 'rotate(180deg)' } : undefined}><path d="m6 9 6 6 6-6" /></svg>
                   </button>
                   {open && (
-                    <>
+                    // ผู้ใช้ขอ: รายละเอียดต่อเนื่องจากแถวดาวเป็นกรอบเดียว (เดิม 2 กล่องแยก)
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '2px 12px 12px 36px', fontSize: '13px', lineHeight: 1.5, color: '#DCE0EA' }}>
                       {dg && (
-                        <div style={{ margin: '0 4px 6px', padding: '8px 12px', borderRadius: '12px', background: dg[2], display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#DCE0EA' }}>
-                          <b style={{ color: dg[1], fontWeight: 600, whiteSpace: 'nowrap' }}>{dg[0]}</b><span>{dg[4]}</span>
+                        <div style={{ display: 'flex', gap: '8px', alignItems: 'baseline' }}>
+                          <b style={{ color: dg[1], fontWeight: 600, whiteSpace: 'nowrap' }}>{dg[0]}</b><span>{signLib(lib, r.p, r.sign).dgDesc ?? dg[4]}</span>
                         </div>
                       )}
-                      <div style={{ margin: '0 4px 10px', padding: '10px 12px', borderRadius: '12px', background: 'rgba(127,184,255,.10)', border: '1px solid rgba(127,184,255,.28)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7FB8FF" stroke-width="1.8" aria-hidden="true" style={{ flex: 'none' }}><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>
-                        <span style={{ fontSize: '13px', lineHeight: 1.5, color: '#DCE0EA' }}>{nextText(r)}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', ...(dg ? { paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,.08)' } : {}) }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7FB8FF" stroke-width="1.8" aria-hidden="true" style={{ flex: 'none', marginTop: '2px' }}><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>
+                        <span>{nextText(r)}</span>
                       </div>
-                    </>
+                    </div>
                   )}
                 </div>
               )
