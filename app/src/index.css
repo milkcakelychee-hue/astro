@@ -45,3 +45,7 @@ summary::-webkit-details-marker { display: none; }
 .chv svg { transition: transform .2s; }
 .chv[data-o="true"] svg { transform: rotate(180deg); }
 button { cursor: pointer; }
+
+/* กฎตัดบรรทัด (ผู้ใช้ขอ) — ดู ui/linebreak.ts */
+h1, h2, h3, .h2, .st, .tn, .ch { text-wrap: balance; }
+p, .td, .lbl { text-wrap: pretty; }

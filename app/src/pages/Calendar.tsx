@@ -143,7 +143,8 @@ function CalendarView({ ctx }: { ctx: Ctx }) {
         <div style={{ padding: '8px 20px 140px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
           <div style={{ position: 'relative', paddingRight: '40px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
             <span class="lbl">ชาร์ตของ {ctx.name}</span>
-            <h1 style={{ margin: 0, fontSize: '26px', fontWeight: 600 }}>ปฏิทินดวงส่วนตัว <span style={{ fontSize: '15px', color: '#9AA1B5', fontWeight: 400 }}>(Personal calendar)</span></h1>
+            {/* ชื่ออังกฤษของหัวหน้า: บรรทัดของตัวเองเสมอ (กฎตัดบรรทัด) */}
+            <h1 style={{ margin: 0, fontSize: '26px', fontWeight: 600 }}>ปฏิทินดวงส่วนตัว <span style={{ display: 'block', fontSize: '15px', color: '#9AA1B5', fontWeight: 400 }}>(Personal calendar)</span></h1>
             <span style={{ fontSize: '13px', color: '#C9CEDC', lineHeight: 1.6 }}>วันที่ดาวบนฟ้าทำมุมพอดีกับดาวในชาร์ตเกิดของคุณ</span>
             <details style={{ marginRight: '-40px' }}>
               <summary aria-label="หน้านี้คืออะไร" style={{ listStyle: 'none', position: 'absolute', right: '0px', top: '18px', width: '30px', height: '30px', borderRadius: '50%', border: '1px solid rgba(200,210,255,.35)', background: 'rgba(255,255,255,.06)', color: '#D6DEFF', display: 'flex', alignItems: 'center', justifyContent: 'center', font: '600 15px var(--font)', cursor: 'pointer' }}>?</summary>
