@@ -1,0 +1,12 @@
+/* ตาม design/Aspects.dc.html */
+.pg-asp .lbl{font-size:12px;color:#9AA1B5}
+.pg-asp .seg{flex:1;height:40px;border:none;border-radius:12px;background:transparent;color:#C9CEDC;font:500 13px var(--font)}
+.pg-asp .seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.pg-asp .ar{display:flex;flex-direction:column;width:100%;border:none;border-top:1px solid rgba(255,255,255,.07);background:transparent;color:#F2F4FA;font-family:inherit;text-align:left;gap:10px;padding:14px}
+.pg-asp .lg{display:flex;align-items:center;gap:6px;font-size:12px;color:#C9CEDC}
+.pg-asp .rk{width:30px;height:30px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.pg-asp .pc{display:flex;align-items:center;gap:8px;min-width:0}
+.pg-asp .gl{width:30px;height:30px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+.pg-asp .ai{width:34px;height:34px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700}
+.pg-asp .chip{height:22px;padding:0 8px;border-radius:7px;display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.pg-asp summary::-webkit-details-marker{display:none}
