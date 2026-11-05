@@ -1,7 +1,5 @@
 // หน้า "ตั้งค่า" — ตาม design/Settings.dc.html
 import { useState } from 'preact/hooks'
-import { exportAll, importAll } from '../data/people.ts'
-import { setShowPoint, showPoint, type PointToggle } from '../data/settings.ts'
 import { getThemePref, setThemePref, type ThemePref } from '../ui/theme.ts'
 import { Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
@@ -11,52 +9,14 @@ const BG = 'radial-gradient(520px 420px at 85% -40px,rgba(59,107,255,.40),transp
 const V = '︎'
 const VERSION = __APP_VERSION__
 
-const PTS: [PointToggle, string, string, string][] = [
-  ['L', '⚸' + V, 'ลิลิธ', 'จุดดวงจันทร์ดำ · ค่าเฉลี่ย (Mean)'],
-  ['c', '⚷' + V, 'ไครอน', 'บาดแผลและการเยียวยา'],
-  ['ast', '⚳' + V, 'ดาวเคราะห์น้อย 4 ดวง', 'Ceres, Pallas, Juno, Vesta'],
-  ['F', '⊗' + V, 'จุดโชคลาภ', 'Part of Fortune'],
-  ['south', '☋' + V, 'เกตุ', 'จุดตรงข้ามราหู'],
-  ['X', 'Vx', 'Vertex', 'จุดพบเจอที่ถูกกำหนด'],
-]
 const chev = <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
 const ri = (bg: string, fg: string, kids: preact.ComponentChildren, fs?: string) => <span class="ri" style={{ background: bg, color: fg, ...(fs ? { fontSize: fs } : {}) }}>{kids}</span>
 const ic = (d: preact.ComponentChildren) => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">{d}</svg>
 const two = (a: string, b: string) => <span style={{ flex: 1, display: 'flex', flexDirection: 'column' }}><span>{a}</span><span class="lbl">{b}</span></span>
 
 export function Settings() {
-  const [on, setOn] = useState(() => Object.fromEntries(PTS.map(([k]) => [k, showPoint(k)])) as Record<PointToggle, boolean>)
   const [th, setTh] = useState<ThemePref>(getThemePref())
-  const [msg, setMsg] = useState<string | null>(null)
-
-  const toggle = (k: PointToggle) => { setShowPoint(k, !on[k]); setOn({ ...on, [k]: !on[k] }) }
   const theme = (v: ThemePref) => { setThemePref(v); setTh(v) }
-  const backup = async () => {
-    const blob = new Blob([await exportAll()], { type: 'application/json' })
-    const t = new Date()
-    const name = `astro-backup-${t.getFullYear()}${String(t.getMonth() + 1).padStart(2, '0')}${String(t.getDate()).padStart(2, '0')}.json`
-    const file = new File([blob], name, { type: 'application/json' })
-    // iPhone: เปิดหน้าแชร์ (บันทึกลงไฟล์ได้) · อย่างอื่นดาวน์โหลด
-    if (navigator.canShare?.({ files: [file] })) {
-      try { await navigator.share({ files: [file] }); return } catch { return }
-    }
-    const a = document.createElement('a')
-    a.href = URL.createObjectURL(blob)
-    a.download = name
-    a.click()
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000)
-  }
-  const restore = () => {
-    const inp = document.createElement('input')
-    inp.type = 'file'
-    inp.accept = 'application/json,.json'
-    inp.onchange = async () => {
-      const f = inp.files?.[0]
-      if (!f) return
-      try { setMsg(`นำเข้าแล้ว ${await importAll(await f.text())} คน`) } catch (e) { setMsg(e instanceof Error ? e.message : String(e)) }
-    }
-    inp.click()
-  }
 
   return (
     <Page background={BG}>
@@ -81,20 +41,6 @@ export function Settings() {
         </div>
 
         <div class="sec">
-          <span class="sh">ดาวและจุดที่แสดงในชาร์ต</span>
-          <div class="box">
-            {PTS.map(([k, g, n, d]) => (
-              <div class="row">
-                <span style={{ width: '28px', fontSize: '17px', color: '#DCE0EA' }}>{g}</span>{two(n, d)}
-                <button role="switch" aria-checked={on[k]} aria-label={n} onClick={() => toggle(k)} style={{ width: '52px', height: '32px', borderRadius: '999px', border: 'none', padding: '3px', background: on[k] ? '#4FD1A5' : 'rgba(255,255,255,.18)', display: 'flex', justifyContent: on[k] ? 'flex-end' : 'flex-start' }}>
-                  <span style={{ width: '26px', height: '26px', borderRadius: '999px', background: '#FFFFFF' }} />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="sec">
           <span class="sh">การแสดงผล</span>
           <div class="box">
             <div class="row" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '10px' }}>
@@ -111,16 +57,6 @@ export function Settings() {
           <div class="box">
             <a href="#/symbols" class="row" style={{ textDecoration: 'none' }}>{ri('rgba(243,212,110,.16)', '#F3D46E', '♀' + V, '16px')}{two('ความหมายสัญลักษณ์', 'ดาว ราศี มุมดาว และเรือน')}<span class="rv">{chev}</span></a>
           </div>
-        </div>
-
-        <div class="sec">
-          <span class="sh">ข้อมูลของฉัน</span>
-          <div class="box">
-            <button class="row" onClick={backup}>{ri('rgba(127,184,255,.16)', '#7FB8FF', ic(<path d="M12 3v12M7 10l5 5 5-5M5 21h14" />))}{two('สำรองข้อมูล', 'บันทึกทุกคนและโน้ตเป็นไฟล์ JSON')}</button>
-            <button class="row" onClick={restore}>{ri('rgba(111,224,192,.16)', '#6FE0C0', ic(<path d="M12 21V9M7 14l5-5 5 5M5 3h14" />))}{two('นำเข้าข้อมูล', 'จากไฟล์ JSON ที่สำรองไว้')}</button>
-          </div>
-          {msg && <span class="lbl" role="status" style={{ padding: '0 4px', color: '#7FE3C0' }}>{msg}</span>}
-          <span class="lbl" style={{ padding: '0 4px' }}>ข้อมูลทั้งหมดเก็บในเครื่องนี้ ไม่มีบัญชีและไม่ส่งขึ้นเน็ต ควรสำรองไว้ก่อนเปลี่ยนเครื่องหรือล้าง Safari</span>
         </div>
 
         <div class="sec">

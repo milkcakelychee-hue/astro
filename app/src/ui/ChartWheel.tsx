@@ -1,6 +1,5 @@
 // วงชาร์ตเกิด (SVG 340×340) — รูปทรง รัศมี สี และขนาดตัวอักษรตาม Main.dc.html
 // ลัคนาอยู่ซ้าย (180°) จักรราศีทวนเข็ม
-import { showPoint } from '../data/settings.ts'
 import type { Aspect } from '../engine/aspects.ts'
 import type { Chart, Pt } from '../engine/chart.ts'
 import { ASPECT_COLOR, ELEMENT_COLOR, glyph, SIGN_GLYPH } from './astro-labels.ts'
@@ -16,9 +15,9 @@ const R_DEG = 107
 const R_HNUM = 72
 const MIN_SEP = 9.5
 
-const ALL_WHEEL_PTS: Pt[] = ['S', 'M', 'm', 'V', 'a', 'J', 's', 'U', 'N', 'P', 'n', 'L', 'c']
+const WHEEL_PTS: Pt[] = ['S', 'M', 'm', 'V', 'a', 'J', 's', 'U', 'N', 'P', 'n', 'L', 'c']
 const MINOR = new Set<Pt>(['n', 'L', 'c'])
-const LINE_PTS = new Set<Pt>([...ALL_WHEEL_PTS, 'A', 'C'])
+const LINE_PTS = new Set<Pt>([...WHEEL_PTS, 'A', 'C'])
 
 const f1 = (n: number) => n.toFixed(1)
 
@@ -61,8 +60,6 @@ export function ChartWheel(props: { chart: Chart; aspects: Aspect[]; label: stri
   }
   const txt = { 'text-anchor': 'middle', 'dominant-baseline': 'central' } as const
 
-  // ลิลิธ/ไครอน ปิดได้ในหน้าตั้งค่า
-  const WHEEL_PTS = ALL_WHEEL_PTS.filter((p) => (p !== 'L' && p !== 'c') || showPoint(p))
   const lons = WHEEL_PTS.map((p) => chart.pos[p].lon)
   const shown = spread(lons)
   const [acx, acy] = xy(asc, R_OUT)
@@ -95,7 +92,7 @@ export function ChartWheel(props: { chart: Chart; aspects: Aspect[]; label: stri
           )
         })}
       {aspects
-        .filter((a) => a.type !== '0' && LINE_PTS.has(a.a) && LINE_PTS.has(a.b) && (WHEEL_PTS.includes(a.a) || a.a === 'A' || a.a === 'C') && (WHEEL_PTS.includes(a.b) || a.b === 'A' || a.b === 'C') && (props.showHouses || (a.a !== 'A' && a.a !== 'C' && a.b !== 'A' && a.b !== 'C')))
+        .filter((a) => a.type !== '0' && LINE_PTS.has(a.a) && LINE_PTS.has(a.b) && (props.showHouses || (a.a !== 'A' && a.a !== 'C' && a.b !== 'A' && a.b !== 'C')))
         .map((a) => {
           const [x1, y1] = xy(chart.aspectPos[a.a].lon, R_CORE)
           const [x2, y2] = xy(chart.aspectPos[a.b].lon, R_CORE)
