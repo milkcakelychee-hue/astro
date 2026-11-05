@@ -1,0 +1,13 @@
+/* หน้า "ปฏิทินดวงส่วนตัว" — คลาสเฉพาะหน้าตาม design/Calendar.dc.html */
+.pg-cal a { color: #7FB8FF; }
+.pg-cal .lbl { font-size: 12px; color: #9AA1B5; }
+.pg-cal .card { border-radius: 22px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.10); }
+.pg-cal .nav { width: 44px; height: 44px; border-radius: 14px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); color: #F2F4FA; display: flex; align-items: center; justify-content: center; padding: 0; }
+.pg-cal .wd { text-align: center; font-size: 11px; color: #9AA1B5; padding: 4px 0; }
+.pg-cal .day { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; height: 58px; padding: 6px 0 0; box-sizing: border-box; border: none; border-radius: 14px; background: transparent; color: #F2F4FA; font: 500 14px var(--font); font-variant-numeric: tabular-nums; }
+.pg-cal .dots { display: flex; gap: 3px; height: 6px; }
+.pg-cal .dots i { width: 6px; height: 6px; border-radius: 9px; }
+.pg-cal .lg { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #C9CEDC; }
+.pg-cal .ev { display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 12px; padding: 14px 0; border-top: 1px solid rgba(255,255,255,.07); }
+.pg-cal .ei { width: 40px; height: 40px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 700; box-sizing: border-box; }
+.pg-cal .chip { height: 22px; padding: 0 8px; border-radius: 7px; display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; white-space: nowrap; }

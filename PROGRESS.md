@@ -66,7 +66,8 @@
   - **งานท้ายสุด (ผู้ใช้สั่ง)**: ทำธีมสว่างให้ทุกหน้า หลังทำครบทุกหน้าแล้ว
   - **ปุ่ม ? ระดับหัวข้อ** (Main 5, Today 3, Compare 1): ผู้ใช้อนุมัติข้อความแล้ว → `HelpHead` + `SECTION_HELP` ใน ui/components.tsx · ปุ่ม ? ใหม่ในหน้าถัดไปต้องมีคำอธิบายเสมอ
   - ผู้ใช้สั่งเอา **โน้ตส่วนตัว** ออกจากหน้า Sheet แล้ว (store 'notes' ใน IndexedDB ยังอยู่แต่ไม่ใช้)
-  - **หน้าถัดไป: Calendar** แล้ว Timeline, …
+  - **Calendar ทำแล้ว รอผู้ใช้ตรวจ**: `pages/Calendar.tsx` + `engine/calendar.ts` · ตรงข้อมูลดีไซน์ พ.ย./ธ.ค. 2569, ม.ค. 2570 (มุมพอดี ข้างขึ้นแรม พุธ/ศุกร์เดินหน้า แถบถอยหลัง) — ดีไซน์ไม่มีมุมกับ MC (แต่หมายเหตุรวม → แอปรวม) และขาด JqM 28 ม.ค. 70 (Timeline มี) · เลื่อนได้เดือนนี้ +2 เดือนตามดีไซน์ · เกณฑ์ตั้งเอง: วันเด่น = วันโทนนั้นชัด เรียงตามจำนวนมุมโทนนั้น เลือก 4 · ข้อความ: คลัง transit/moon/retrograde
+  - **หน้าถัดไป: Timeline** แล้ว Transit, …
 
 ## ล็อกการทำงาน (เพิ่มท้ายไฟล์ ใหม่สุดอยู่ล่าง)
 - 5 พ.ย. 2569 (เครื่อง 1): สร้าง `app/`, ตรวจ swisseph-wasm 0.1.0 ด้วย `app/scripts/smoke-swisseph.mjs` (`node scripts/smoke-swisseph.mjs`) → **ผ่าน**: มี `set_delta_t_userdef`, `houses_armc`, `sidtime`, `SEFLG_TRUEPOS`; โหลด `engine/ephe/*.se1` เข้า FS เสมือนด้วย `SweModule.FS.writeFile('/eph/..')` + `set_ephe_path('/eph')`; ตำแหน่ง Sun/Moon/Saturn/Chiron ของชาร์ตอ้างอิงตรง docs/02 (ระดับลิปดา). หมายเหตุ: สคริปต์จบด้วย exit code 255 แม้ผลครบ (ข้อควรระวังของ wasm ไม่กระทบ) · แพ็กเกจนี้ **ไม่ต้องสร้าง swisseph เอง**
