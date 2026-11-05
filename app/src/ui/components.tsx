@@ -11,7 +11,7 @@ export function Page(props: { background: string; light?: boolean; children: Com
         width: '100%',
         maxWidth: '390px',
         margin: '0 auto',
-        minHeight: '100dvh',
+        minHeight: '100svh',
         boxSizing: 'border-box',
         position: 'relative',
         overflow: 'hidden',

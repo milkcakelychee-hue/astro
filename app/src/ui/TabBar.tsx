@@ -22,6 +22,8 @@ export function TabBar(props: { active?: TabId }) {
         boxSizing: 'border-box', borderRadius: '32px 32px 0 0', background: 'linear-gradient(180deg,#1C1D24,#000000)',
         boxShadow: '0 -8px 30px rgba(0,0,0,.30)', display: 'grid', gridTemplateColumns: 'repeat(5,minmax(0,1fr))', alignItems: 'end',
         borderTop: '1px solid rgba(255,255,255,.10)',
+        // แยกเลเยอร์ให้ GPU — แถบไม่สั่นตอนหน้าเปลี่ยนความสูง (กาง/พับ)
+        transform: 'translateZ(0)', willChange: 'transform',
       }}
     >
       <a href="#/main" class="tab" style={st('main')} aria-current={cur('main')}>{ICON.main}ชาร์ตของฉัน</a>

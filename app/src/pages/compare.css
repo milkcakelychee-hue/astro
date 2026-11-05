@@ -1,0 +1,13 @@
+/* หน้า "เปรียบเทียบ" — คลาสเฉพาะหน้าตาม design/Compare.dc.html */
+.pg-compare a { color: #7FB8FF; }
+.pg-compare .card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.10); border-radius: 20px; }
+.pg-compare .lbl { font-size: 12px; color: #9AA1B5; }
+.pg-compare .h2 { margin: 0; font-size: 18px; font-weight: 600; }
+.pg-compare .help { width: 28px; height: 28px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); background: transparent; color: #C9CEDC; font: 600 13px var(--font); display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+.pg-compare .seg { flex: 1; height: 40px; border: none; border-radius: 12px; background: transparent; color: #C9CEDC; font: 500 13px var(--font); padding: 0 4px; cursor: pointer; }
+.pg-compare .seg.on { background: #F2F4FA; color: #06070D; font-weight: 600; }
+.pg-compare .cat { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.10); }
+.pg-compare .ch { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; }
+.pg-compare .ic { width: 36px; height: 36px; flex: none; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.pg-compare .pill { font-size: 12px; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,.08); color: #DCE0EA; }
+.pg-compare .more { align-self: flex-start; border: none; background: transparent; color: #7FB8FF; font: 500 13px var(--font); min-height: 36px; padding: 0; display: flex; align-items: center; gap: 4px; cursor: pointer; }

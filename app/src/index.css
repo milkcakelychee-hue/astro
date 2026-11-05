@@ -20,9 +20,13 @@
   --tab-idle: #4A4E5C;
 }
 
-html, body { margin: 0; background: var(--bg); }
-body { font-family: var(--font); color: var(--text); -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
-#app { min-height: 100dvh; }
+/* ผู้ใช้ขอ: เลื่อนได้แนวตั้งอย่างเดียว ห้ามซูม/เลื่อนข้าง ไม่เด้งยืด (rubber-band) ให้แถบเมนูนิ่ง */
+html, body { margin: 0; background: var(--bg); overflow-x: hidden; overscroll-behavior: none; touch-action: pan-y; }
+body { font-family: var(--font); color: var(--text); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+/* svh = ความสูงคงที่ (dvh เปลี่ยนตามแถบ Safari ทำให้หน้ากระตุก) */
+#app { min-height: 100svh; }
+/* แตะปุ่มไม่หน่วง 300ms / ไม่ซูมเมื่อแตะสองครั้ง */
+button, a, summary, label, select, input { touch-action: manipulation; }
 
 a { color: var(--info); }
 a:hover { color: var(--info-hover); }
