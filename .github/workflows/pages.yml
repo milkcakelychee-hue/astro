@@ -1,4 +1,5 @@
-# สร้างแอปแล้วเผยแพร่บน GitHub Pages ทุกครั้งที่ push เข้า main
+# เผยแพร่บน GitHub Pages เฉพาะเมื่อผู้ใช้สั่งเท่านั้น — push ปกติเข้า main ไม่เผยแพร่
+# วิธีสั่ง: commit ล่าสุดที่ push มีคำว่า [deploy] ในข้อความ  หรือกด "Run workflow" ในแท็บ Actions
 # เปิดครั้งแรก: Settings → Pages → Source = GitHub Actions
 name: Deploy to GitHub Pages
 
@@ -18,6 +19,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[deploy]')
     runs-on: ubuntu-latest
     defaults:
       run:
