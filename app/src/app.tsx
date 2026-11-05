@@ -10,6 +10,7 @@ import { Compare } from './pages/Compare.tsx'
 import { Forecast } from './pages/Forecast.tsx'
 import { Settings } from './pages/Settings.tsx'
 import { Calendar } from './pages/Calendar.tsx'
+import { Timeline } from './pages/Timeline.tsx'
 
 function useHash() {
   const [h, setH] = useState(location.hash)
@@ -48,6 +49,8 @@ export function App() {
       return <Compare key={location.hash} />
     case 'calendar':
       return <Calendar />
+    case 'timeline':
+      return <Timeline />
     case 'settings':
       return <Settings />
     case 'forecast':
