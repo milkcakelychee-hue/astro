@@ -109,18 +109,19 @@ function CalendarView({ ctx }: { ctx: Ctx }) {
     notes.push({ g: '℞', c: '#FF6B9A', bg: 'rgba(255,107,154,.10)', t: s.dir === 'D' ? `ดาว${nm}เดินหน้า (Direct) วันนี้` : `ดาว${nm}เริ่มถอยหลัง (Retrograde) วันนี้${r ? ' · ' + splitTitle(r).body.split(' · ')[0] : ''}` })
   }
 
-  const go = (o: number) => { if (o < 0 || o > 2) return; setOff(o); setSel(o === 0 ? today.d : 1) }
+  const go = (o: number) => { if (o < 0 || o > 2) return; setOff(o); setSel(o === 0 ? today.d : 0) }  // เดือนอื่น: ยังไม่เลือกวัน (ผู้ใช้ขอ)
   const cells = []
   for (let k = 0; k < first; k++) cells.push(<span />)
   for (let d = 1; d <= days; d++) {
     const ev = byDay(d)
     const tones: string[] = []
     ev.forEach((e) => { if (!tones.includes(TONE[e.type])) tones.push(TONE[e.type]) })
+    // ปักวันนี้เสมอ แม้ถูกเลือก (ผู้ใช้ขอ)
     const on = d === sel, td = isToday(d)
     const rx = m.rx[d] === 'full' ? '#FF6B9A' : m.rx[d] === 'part' ? 'rgba(255,107,154,.45)' : 'transparent'
     cells.push(
       <button class="day" onClick={() => setSel(d)} aria-pressed={on} aria-label={`${d} ${MONTH[mo - 1]}`}
-        style={{ ...(on ? { background: 'linear-gradient(160deg,rgba(138,92,255,.55),rgba(31,165,135,.35))' } : ev.length ? { background: 'rgba(255,255,255,.05)' } : {}), ...(td && !on ? { boxShadow: 'inset 0 0 0 1.5px #B9A6FF' } : {}) }}>
+        style={{ ...(on ? { background: 'linear-gradient(160deg,rgba(138,92,255,.55),rgba(31,165,135,.35))' } : ev.length ? { background: 'rgba(255,255,255,.05)' } : {}), ...(td ? { boxShadow: on ? 'inset 0 0 0 2px #D6CEFF' : 'inset 0 0 0 1.5px #B9A6FF' } : {}) }}>
         <span style={on ? { fontWeight: 700 } : td ? { color: '#D6CEFF', fontWeight: 700 } : ev.length ? {} : { color: '#9AA1B5' }}>{d}</span>
         <span class="dots">{tones.map((c) => <i style={{ background: c }} />)}</span>
         <span style={{ position: 'absolute', top: '4px', right: '5px', fontSize: '9px', color: '#DCE3F5' }}>{m.moon[d] ? MOON_G[m.moon[d]!] : ''}</span>
@@ -176,6 +177,11 @@ function CalendarView({ ctx }: { ctx: Ctx }) {
             </div>
           </div>
 
+          {sel === 0 ? (
+            <div class="card" style={{ padding: '18px 16px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', textAlign: 'center' }}>
+              <span style={{ fontSize: '14px', color: '#C9CEDC' }}>แตะวันที่ในปฏิทินเพื่อดูรายละเอียด</span>
+            </div>
+          ) : (
           <div class="card" style={{ padding: '16px 16px 4px', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '10px', paddingBottom: '12px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
@@ -217,7 +223,7 @@ function CalendarView({ ctx }: { ctx: Ctx }) {
               </div>
             )}
           </div>
-
+          )}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <span style={{ fontSize: '15px', fontWeight: 600 }}>วันเด่นของเดือนนี้</span>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '10px' }}>
