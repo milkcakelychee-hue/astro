@@ -12,7 +12,7 @@ import {
 } from '../ui/astro-labels.ts'
 import { ChartWheel } from '../ui/ChartWheel.tsx'
 import { c, isLightTheme, setRenderLight } from '../ui/theme.ts'
-import { BackLink, Page } from '../ui/components.tsx'
+import { BackLink, HelpHead, Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
 import { MainEmpty } from './MainEmpty.tsx'
 import { PlanetSheet } from './PlanetSheet.tsx'
@@ -81,7 +81,6 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
   const [o4, setO4] = useState(false)
 
   const label = `${person.name} · ${thaiDate(person.y, person.mo, person.d)}${known ? ` · ${hhmm(person.hh!, person.mi!)} น.` : ''} · ${PROVINCE_TH[person.province]}`
-  const help = (aria: string) => <button class="help" aria-label={aria}>?</button>
 
   // ตารางดาว: ดาว 10 + โหนด ลิลิธ ไครอน + ลัคนา กลางฟ้า
   const rowsPts: Pt[] = [...PLANETS, 'n', 'L', 'c', ...(known ? (['A', 'C'] as Pt[]) : [])]
@@ -153,7 +152,7 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2">วงชาร์ตเกิด <span class="lbl" style={{ fontWeight: 400 }}>(Birth Chart)</span></h2>{help('วงชาร์ตคืออะไร')}</div>
+          <HelpHead k="wheel" aria="วงชาร์ตคืออะไร" head={<h2 class="h2">วงชาร์ตเกิด <span class="lbl" style={{ fontWeight: 400 }}>(Birth Chart)</span></h2>} />
           <div class="card" style={{ padding: '14px 14px 12px', display: 'flex', flexDirection: 'column', gap: '10px', background: c('rgba(12,14,24,.55)') }}>
             <ChartWheel chart={chart} aspects={aspects} showHouses={known} label={`วงชาร์ตเกิด ${label}`} onPick={(p) => (location.hash = base + (person.isMe ? '?' : '&') + 'p=' + p)} />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '6px 12px', fontSize: '12px', color: c('#C9CEDC') }}>
@@ -166,7 +165,7 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2">3 ตำแหน่งหลัก <span class="lbl" style={{ fontWeight: 400 }}>(Big Three)</span></h2>{help('Big Three คืออะไร')}</div>
+          <HelpHead k="big3" aria="Big Three คืออะไร" head={<h2 class="h2">3 ตำแหน่งหลัก <span class="lbl" style={{ fontWeight: 400 }}>(Big Three)</span></h2>} />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,minmax(0,1fr))', gap: '8px' }}>
             {big3.map((b) => {
               const lon = chart.pos[b.p].lon
@@ -200,7 +199,7 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2">สรุปชาร์ต</h2><span class="lbl">ตรงกับ astro-seek</span></div>
 
           <div class="card" style={{ padding: '14px 12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 4px' }}><span style={{ fontSize: '15px', fontWeight: 600 }}>ตำแหน่งดาวและจุดสำคัญ <span class="lbl" style={{ fontWeight: 400 }}>(Planets &amp; Points)</span></span>{help('อ่านตารางนี้อย่างไร')}</div>
+            <HelpHead k="table" aria="อ่านตารางนี้อย่างไร" style={{ padding: '0 4px' }} head={<span style={{ fontSize: '15px', fontWeight: 600 }}>ตำแหน่งดาวและจุดสำคัญ <span class="lbl" style={{ fontWeight: 400 }}>(Planets &amp; Points)</span></span>} />
             <div style={{ display: 'grid', gridTemplateColumns: '26px minmax(0,1fr) 92px 36px', fontSize: '11px', color: c('#9AA1B5'), padding: '0 4px' }}><span /><span>ดาว/จุด</span><span>ตำแหน่ง</span><span style={{ textAlign: 'right' }}>เรือน</span></div>
             {shownRows.map((p) => (
               <div style={{ display: 'grid', gridTemplateColumns: '26px minmax(0,1fr) 92px 36px', alignItems: 'center', minHeight: '34px', padding: '0 4px', borderTop: c('1px solid rgba(255,255,255,.06)'), fontSize: '14px' }}>
@@ -215,7 +214,7 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
           </div>
 
           <div class="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><span style={{ fontSize: '15px', fontWeight: 600 }}>ธาตุในชาร์ต <span class="lbl" style={{ fontWeight: 400 }}>(Elements)</span></span>{help('ธาตุคืออะไร')}</div>
+            <HelpHead k="elements" aria="ธาตุคืออะไร" head={<span style={{ fontSize: '15px', fontWeight: 600 }}>ธาตุในชาร์ต <span class="lbl" style={{ fontWeight: 400 }}>(Elements)</span></span>} />
             <span class="lbl">คิดเป็นคะแนนแบบเดียวกับส่วน Dominants ของ astro-seek</span>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {el.map((e, i) => (
@@ -243,7 +242,7 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
           </div>
 
           <div class="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><span style={{ fontSize: '15px', fontWeight: 600 }}>ดาวเด่นในชาร์ต <span class="lbl" style={{ fontWeight: 400 }}>(Dominant Planets)</span></span>{help('ดาวเด่นคืออะไร')}</div>
+            <HelpHead k="dominant" aria="ดาวเด่นคืออะไร" head={<span style={{ fontSize: '15px', fontWeight: 600 }}>ดาวเด่นในชาร์ต <span class="lbl" style={{ fontWeight: 400 }}>(Dominant Planets)</span></span>} />
             <p style={{ margin: 0, fontSize: '13px', lineHeight: '1.6', color: c('#C9CEDC') }}>ดาวแต่ละดวงได้คะแนนตามตำแหน่ง ราศี เรือน และมุมที่ทำ ดาวคะแนนสูงคือพลังที่คุณใช้บ่อยที่สุด</p>
             <div style={{ display: 'flex', gap: '14px', alignItems: 'center', padding: '14px', borderRadius: '16px', background: c('linear-gradient(120deg,rgba(138,92,255,.30),rgba(31,165,135,.20))'), border: c('1px solid rgba(170,160,255,.35)') }}>
               <span style={{ width: '52px', height: '52px', flex: 'none', borderRadius: '999px', background: c('rgba(6,7,13,.5)'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', color: c('#F3D46E') }}>{glyph(top.planet)}</span>

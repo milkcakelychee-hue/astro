@@ -9,7 +9,7 @@ import { REL_AVATAR, birthInput, getPerson, timeKnown, type Person } from '../da
 import { loadLib, splitTitle, synastryKey, text, type InterpLib } from '../lib/interp.ts'
 import { ASPECT_COLOR, ASPECT_GLYPH, SIGN_TH, glyph, thaiDate } from '../ui/astro-labels.ts'
 import { SingleWheel, SynastryWheel, WHEEL_VARS } from '../ui/CompareWheel.tsx'
-import { Page } from '../ui/components.tsx'
+import { HelpHead, Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
 import './compare.css'
 
@@ -174,7 +174,7 @@ function CompareView({ A, B, lib, comp, dav }: Data) {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2">ภาพรวมความสัมพันธ์</h2><button class="help" aria-label="อ่านส่วนนี้อย่างไร">?</button></div>
+            <HelpHead k="relation" aria="อ่านส่วนนี้อย่างไร" head={<h2 class="h2">ภาพรวมความสัมพันธ์</h2>} />
             <span class="lbl">อธิบายเป็นเรื่อง ๆ ไม่ใช้คะแนน % เพราะความสัมพันธ์ไม่ได้วัดด้วยตัวเลขเดียว</span>
             {CATS.map((cat, ci) => {
               const xs = asp.filter(cat.pick)

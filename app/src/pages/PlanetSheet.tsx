@@ -1,9 +1,8 @@
 // แผ่นคำอธิบายดาว (Bottom sheet) — ตาม design/Sheet.dc.html · เปิดจากการแตะดาวในวงชาร์ต (#/main?p=a)
-import { useEffect, useState } from 'preact/hooks'
+import { useState } from 'preact/hooks'
 import type { Aspect, AspectType } from '../engine/aspects.ts'
 import type { Chart, Pt } from '../engine/chart.ts'
 import { signOf } from '../engine/dominants.ts'
-import { getNote, saveNote } from '../data/people.ts'
 import { aspectKey, splitTitle, text, type InterpLib } from '../lib/interp.ts'
 import { ASPECT_COLOR, ASPECT_GLYPH, PT_EN, SIGN_EN, SIGN_GLYPH, SIGN_TH, degMin } from '../ui/astro-labels.ts'
 import './sheet.css'
@@ -59,11 +58,6 @@ export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; li
     .sort((x, y) => x.orb - y.orb)
   const [sel, setSel] = useState(0)
   const [open1, setOpen1] = useState(false)
-  const [note, setNote] = useState('')
-  const noteId = `${props.personId}:${pt}`
-  useEffect(() => {
-    getNote(noteId).then(setNote)
-  }, [noteId])
 
   // เหตุผลที่ดาวมีพลังเข้มข้น (ตามรายการในดีไซน์) — มุมรูปแบบใหญ่ (Grand Cross ฯลฯ) รอเครื่องคำนวณ patterns
   const tight = mine.filter((a) => a.orb <= 3).length
@@ -163,13 +157,6 @@ export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; li
             </div>
           )}
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <label for="note" style={{ fontSize: '13px', fontWeight: 600, color: '#C9CEDC', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z" /></svg>โน้ตส่วนตัว
-            </label>
-            <textarea id="note" rows={3} placeholder="จดสิ่งที่ตรงกับชีวิตคุณ เช่น เหตุการณ์ที่เคยเจอ" value={note} onInput={(e) => setNote(e.currentTarget.value)} onBlur={() => saveNote(noteId, note)} style={{ boxSizing: 'border-box', width: '100%', padding: '12px 14px', borderRadius: '14px', border: '1px solid rgba(255,255,255,.14)', background: 'rgba(255,255,255,.04)', color: '#F2F4FA', font: '14px/1.6 var(--font)', resize: 'none' }} />
-            <span style={{ fontSize: '11px', color: '#9AA1B5' }}>บันทึกในเครื่องนี้เท่านั้น</span>
-          </div>
         </div>
       </section>
     </div>

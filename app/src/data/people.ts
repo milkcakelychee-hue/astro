@@ -65,12 +65,3 @@ export function birthInput(p: Person): BirthInput {
   if (!prov) throw new Error('ไม่พบจังหวัด ' + p.province)
   return { y: p.y, mo: p.mo, d: p.d, hh: p.hh ?? 12, mi: p.mi ?? 0, lat: latOf(prov), lon: lonOf(prov) }
 }
-
-export async function getNote(id: string): Promise<string> {
-  return ((await (await db()).get('notes', id)) as { text: string } | undefined)?.text ?? ''
-}
-export async function saveNote(id: string, text: string): Promise<void> {
-  const d = await db()
-  if (text.trim()) await d.put('notes', { id, text })
-  else await d.delete('notes', id)
-}

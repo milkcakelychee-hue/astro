@@ -12,7 +12,7 @@ import type { Swe } from '../engine/swe.ts'
 import { birthInput, getMe, timeKnown } from '../data/people.ts'
 import { loadLib, signKey, splitTitle, text, transitKey, type InterpLib } from '../lib/interp.ts'
 import { ASPECT_COLOR, ASPECT_GLYPH, ELEMENT_COLOR, SIGN_GLYPH, SIGN_TH, fmtDeg, glyph, hhmm } from '../ui/astro-labels.ts'
-import { Page } from '../ui/components.tsx'
+import { HelpHead, Page, SECTION_HELP } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
 import './today.css'
 
@@ -195,12 +195,8 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
   }
   const debilitated = rows.filter((r) => bad(r.dg))
 
-  const help = (aria: string) => <button class="help" aria-label={aria}>?</button>
-  const H2 = (p: { t: string; en?: string; aria: string }) => (
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <h2 class="h2">{p.t}{p.en && <> <span class="lbl" style={{ fontWeight: 400 }}>({p.en})</span></>}</h2>
-      {help(p.aria)}
-    </div>
+  const H2 = (p: { t: string; en?: string; aria: string; k: keyof typeof SECTION_HELP }) => (
+    <HelpHead k={p.k} aria={p.aria} head={<h2 class="h2">{p.t}{p.en && <> <span class="lbl" style={{ fontWeight: 400 }}>({p.en})</span></>}</h2>} />
   )
 
   return (
@@ -222,7 +218,7 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
 
         {/* ดวงจันทร์ */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <H2 t="ดวงจันทร์วันนี้" en="Moon" aria="ดวงจันทร์บอกอะไร" />
+          <H2 t="ดวงจันทร์วันนี้" en="Moon" aria="ดวงจันทร์บอกอะไร" k="moon" />
           <div class="card" style={{ padding: '18px', display: 'flex', flexDirection: 'column', gap: '16px', background: 'linear-gradient(140deg,rgba(59,107,255,.28),rgba(138,92,255,.20) 55%,rgba(31,165,135,.18))', borderColor: 'rgba(150,170,255,.35)' }}>
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <MoonDisc elong={moon.elong} illum={moon.illum} />
@@ -251,7 +247,7 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
         {/* ทรานซิต (ต้องมีชาร์ตของฉัน) */}
         {transits && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <H2 t="ดาวตอนนี้กระทบชาร์ตคุณ" en="Transits" aria="ดาวจรคืออะไร" />
+            <H2 t="ดาวตอนนี้กระทบชาร์ตคุณ" en="Transits" aria="ดาวจรคืออะไร" k="transits" />
             <span class="lbl">เรียงจากสำคัญที่สุด · ดาวเคลื่อนช้าส่งผลนานกว่า · "ห่าง" = ห่างจากมุมพอดี (Orb)</span>
             {transits.length > 0 && (
               <div class="card" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
@@ -285,7 +281,7 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
 
         {/* ตำแหน่งดาวตอนนี้ */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <H2 t="ตำแหน่งดาวตอนนี้" aria="ตารางนี้คืออะไร" />
+          <H2 t="ตำแหน่งดาวตอนนี้" aria="ตารางนี้คืออะไร" k="sky" />
           <span class="lbl">แตะดาวเพื่อดูว่าจะย้ายราศีเมื่อไหร่ (Ingress)</span>
           {debilitated.length > 0 && (
             <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', padding: '12px 14px', borderRadius: '14px', background: 'rgba(255,107,107,.08)', border: '1px solid rgba(255,107,107,.30)' }}>

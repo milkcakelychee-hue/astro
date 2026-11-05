@@ -161,3 +161,39 @@ export function useToggle(initial = false): [boolean, () => void] {
   const [v, set] = useState(initial)
   return [v, () => set((x) => !x)]
 }
+
+export interface Intro { what: string; use: string; why: string }
+/** ข้อความปุ่ม ? ของหัวข้อย่อย (ดีไซน์มีแต่ปุ่ม — ผู้ใช้อนุมัติข้อความแล้ว) */
+export const SECTION_HELP: Record<string, Intro> = {
+  wheel: { what: 'แผนที่ท้องฟ้า ณ เวลาที่คุณเกิด', use: 'ดาวแต่ละดวงอยู่ราศีไหน เรือนไหน และทำมุมกันอย่างไร', why: 'เป็นพื้นฐานของทุกหน้าในแอป' },
+  big3: { what: 'อาทิตย์ จันทร์ และลัคนา', use: 'อาทิตย์คือตัวตน จันทร์คืออารมณ์ ลัคนาคือภาพที่คนอื่นเห็น', why: 'สามจุดนี้บอกนิสัยหลักได้มากที่สุด' },
+  table: { what: 'ตารางองศา ราศี และเรือนของดาวทุกดวง', use: 'R = ดาวถอยหลัง แตะแถวเพื่ออ่านความหมาย', why: 'ใช้เทียบกับเว็บอื่น หรือดูละเอียดทีละดวง' },
+  elements: { what: 'สัดส่วนดาวในธาตุไฟ ดิน ลม น้ำ', use: 'ธาตุที่มากบอกพลังที่ใช้ง่าย ธาตุที่น้อยบอกสิ่งที่ต้องฝึก', why: 'ช่วยให้เข้าใจสมดุลของตัวเอง' },
+  dominant: { what: 'ดาวที่มีน้ำหนักมากที่สุดในชาร์ต นับจากราศี เรือน และมุม', use: 'ดาวอันดับต้นเป็นสีหลักของนิสัย', why: 'บอกว่าพลังไหนนำชีวิตคุณ' },
+  moon: { what: 'ข้างขึ้นข้างแรม ราศีของดวงจันทร์ และช่วงจันทร์ว่าง', use: 'อารมณ์ของวัน และจังหวะเริ่มเรื่องใหม่', why: 'ดวงจันทร์เปลี่ยนเร็วที่สุด จึงบอกบรรยากาศรายวันได้ดี' },
+  transits: { what: 'ดาวบนฟ้าตอนนี้ที่ทำมุมกับดาวในชาร์ตเกิดของคุณ', use: 'ป้ายบอกว่าผลอยู่นานแค่ไหน ดาวช้าอยู่บนสุด', why: 'บอกว่าช่วงนี้เรื่องไหนในชีวิตถูกกระตุ้น' },
+  sky: { what: 'ตำแหน่งดาวทุกดวงบนฟ้าตอนนี้', use: 'ป้ายเขียว = ดาวอยู่ราศีที่ทำงานได้ดี ป้ายแดง = ดาวเสีย · แตะแถวเพื่อดูวันย้ายราศี', why: 'เห็นภาพรวมท้องฟ้าที่ทุกคนเจอเหมือนกัน' },
+  relation: { what: 'สรุป 5 ด้านจากมุมระหว่างชาร์ตสองคน', use: 'แต่ละด้านดูจากดาวที่เกี่ยวข้อง เช่น ความรักดูจากศุกร์', why: 'เห็นจุดที่เข้ากันง่าย และจุดที่ต้องปรับเข้าหากัน' },
+}
+
+/** หัวข้อย่อย + ปุ่ม ? ชิดขวา · แตะแล้วกางคำอธิบายใต้หัวข้อ (รูปแบบเดียวกับปุ่ม ? ของหน้า) */
+export function HelpHead(props: { head: ComponentChildren; aria: string; k: keyof typeof SECTION_HELP; style?: CSS }) {
+  const [open, setOpen] = useState(false)
+  const t = SECTION_HELP[props.k]!
+  const row = (k: string, v: string) => (
+    <div style={{ display: 'flex', gap: '10px' }}><span style={{ flex: 'none', width: '78px', color: '#9AA1B5' }}>{k}</span><span style={{ flex: 1, minWidth: 0, color: '#E6E9F2' }}>{v}</span></div>
+  )
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', ...props.style }}>
+        {props.head}
+        <button class="help" aria-label={props.aria} aria-expanded={open} onClick={() => setOpen(!open)}>?</button>
+      </div>
+      {open && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '14px 16px', borderRadius: '18px', marginTop: '10px', background: 'rgba(255,255,255,.05)', border: '1px solid rgba(200,210,255,.16)', fontSize: '13.5px', lineHeight: '1.6' }}>
+          {row('คืออะไร', t.what)}{row('ใช้ดู', t.use)}{row('ทำไมสำคัญ', t.why)}
+        </div>
+      )}
+    </div>
+  )
+}
