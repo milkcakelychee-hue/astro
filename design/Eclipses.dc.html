@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>อุปราคา</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.lbl{font-size:12px;color:#9AA1B5}
+.card{border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10)}
+.seg{flex:1;height:40px;border:none;border-radius:12px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif;white-space:nowrap}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.tr{display:flex;flex-direction:column;gap:10px;width:100%;padding:14px;box-sizing:border-box;border:none;border-top:1px solid rgba(255,255,255,.07);background:transparent;color:#F2F4FA;font-family:inherit;text-align:left}
+.gl{width:34px;height:34px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(255,255,255,.14)}
+.ai{width:30px;height:30px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+.chip{height:22px;padding:0 8px;border-radius:7px;display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.hr{display:grid;grid-template-columns:26px minmax(0,1fr) auto 44px;align-items:center;gap:8px;min-height:40px;border-top:1px solid rgba(255,255,255,.06);font-size:13.5px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:64px;color:#4A4E5C;text-decoration:none;font-size:12px;white-space:nowrap}
+.ht{display:flex;flex-direction:column;gap:4px;min-height:74px;padding:8px;box-sizing:border-box;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+summary::-webkit-details-marker{display:none}
+.xd svg{transition:transform .2s}.xd[open] svg{transform:rotate(180deg)}
+.chv svg{transition:transform .2s}.chv[data-o="true"] svg{transform:rotate(180deg)}
+</style>
+</helmet>
+<div style="width:390px;min-height:2800px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 85% -40px,rgba(220,227,245,.24),transparent 70%),radial-gradient(460px 380px at -10% 380px,rgba(59,107,255,.28),transparent 70%),radial-gradient(500px 420px at 90% 1300px,rgba(138,92,255,.22),transparent 70%),#06070D">
+
+<div style="padding:54px 12px 0;display:flex;align-items:center">
+<a href="Forecast.dc.html" style="height:44px;padding:0 8px;display:flex;align-items:center;gap:4px;font-size:15px;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>ดูดวงล่วงหน้า</a>
+</div>
+
+
+<div style="padding:4px 20px 140px;display:flex;flex-direction:column;gap:20px">
+<div style="position:relative;padding-right:40px;display:flex;flex-direction:column;gap:2px"><span class="lbl">ชาร์ตของ ตัวอย่าง · ส.ค. 2569 – ธ.ค. 2571</span><h1 style="margin:0;font-size:26px;font-weight:600;line-height:1.3">สุริยุปราคา จันทรุปราคา</h1><span style="font-size:13px;color:#9AA1B5">(Eclipses)</span><details style="margin-right:-40px"><summary aria-label="หน้านี้คืออะไร" style="list-style:none;position:absolute;right:0;top:18px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(200,210,255,.35);background:rgba(255,255,255,.06);color:#D6DEFF;display:flex;align-items:center;justify-content:center;font:600 15px 'IBM Plex Sans Thai Looped',sans-serif;cursor:pointer">?</summary><div data-intro style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:18px;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(200,210,255,.16);font-size:13.5px;line-height:1.6"><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">คืออะไร</span><span style="flex:1;min-width:0;color:#E6E9F2">สุริยุปราคาและจันทรุปราคาที่จะเกิด ปีละ 4–6 ครั้ง ตกตามแนวจุดโหนด (Nodes) ของดวงจันทร์</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ใช้ดู</span><span style="flex:1;min-width:0;color:#E6E9F2">ดูว่าอุปราคาครั้งไหนตกเรือนใด และไปแตะดาวในชาร์ตเราหรือไม่</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ทำไมสำคัญ</span><span style="flex:1;min-width:0;color:#E6E9F2">อุปราคาที่แตะดาวหรือมุมสำคัญ มักเป็นจุดเปลี่ยนที่ส่งผลนาน 6 เดือนถึงหลายปี</span></div></div></details></div>
+
+<div class="card" style="padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">ยังมีผลอยู่ตอนนี้</span><span class="lbl">อุปราคาที่เกิดไปแล้ว แต่ผลยังค่อยๆ ปรากฏราว 6 เดือน</span></div>
+<sc-for list="{{act}}" as="a" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:16px;border:1px solid {{a.cb}};background:{{a.cg}}">
+<div style="display:flex;align-items:center;gap:12px"><span style="flex:none;position:relative;width:30px;height:30px;border-radius:50%;background:{{a.ib}}"><span style="position:absolute;inset:{{a.ii}};border-radius:50%;background:{{a.ic}}"></span></span><span style="flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.4"><span style="font-size:13.5px;font-weight:600">{{a.title}}</span><span class="lbl">{{a.when}} · ราศี{{a.pos}} · เรือน {{a.h}}</span></span></div>
+<div style="display:flex;justify-content:space-between;font-size:12px;font-weight:600"><span style="color:{{a.lc}}">{{a.lt}}</span><span style="color:#9AA1B5;font-weight:500">{{a.ld}}</span></div>
+<div style="position:relative;height:8px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden"><span style="position:absolute;left:0;top:0;bottom:0;width:{{a.pc}}%;border-radius:4px;background:linear-gradient(90deg,#8A90A3,#B9A6FF)"></span></div>
+<div style="display:flex;justify-content:space-between" class="lbl"><span>เกิด {{a.st}}</span><span>ผ่านมา {{a.pc}}% · ผลค่อยๆ หมดราว {{a.end}}</span></div>
+<span style="font-size:13px;line-height:1.6;color:#DCE0EA">{{a.m}}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:24px;background:linear-gradient(140deg,rgba(40,30,50,.95),rgba(255,138,101,.22) 60%,rgba(138,92,255,.22));border:1px solid rgba(255,190,160,.30)">
+<span style="font-size:12px;color:#FFD0BA">อุปราคาครั้งถัดไป · อีก {{cd}}</span>
+<div style="display:flex;align-items:center;gap:16px">
+<span style="flex:none;position:relative;width:76px;height:76px;border-radius:50%;background:#FFC46B;box-shadow:0 0 28px rgba(255,196,107,.55)"><span style="position:absolute;inset:7px;border-radius:50%;background:#0B0C12"></span></span>
+<div style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:19px;font-weight:600;line-height:1.35">{{nTitle}}</span><span style="font-size:13px;color:#E6E9F2">{{nWhen}}</span><span style="font-size:13px;color:#E6E9F2">{{nWhere}}</span></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{nHits}}" as="h" hint-placeholder-count="2"><span class="chip" style="background:rgba(255,176,138,.18);color:#FFD0BA">{{h}}</span></sc-for></div>
+<details class="xd" style="border-top:1px solid rgba(255,255,255,.12);padding-top:10px"><summary style="list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:13.5px;font-weight:600;color:#FFD0BA;cursor:pointer">จะเกิดอะไร · ต้องระวังอะไร<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;font-size:13px;line-height:1.6;color:#E6E9F2">
+<div><b style="color:#FFD0BA">จะเกิดอะไร</b><br>เริ่มต้นใหม่แบบไม่ทันตั้งตัวในเรื่องภายในใจ (เรือน 12) เพราะไปกุมดาวยูเรนัส อาจอยากหลุดจากกรอบเดิม เปลี่ยนวิธีคิด หรือเลิกนิสัยที่ฉุดรั้ง และเพราะเล็งดวงอาทิตย์ จะรู้สึกว่าตัวตนหรือเป้าหมายต้องปรับ</div>
+<div><b style="color:#FFD0BA">ต้องระวัง</b><br>การตัดสินใจหุนหันช่วงก่อนและหลัง 6 ก.พ. ราว 1–2 สัปดาห์ · พักผ่อนให้พอ เพราะเรือน 12 เกี่ยวกับการพักฟื้น · ยังไม่ต้องเริ่มเรื่องใหญ่ทันที ให้ดูสัญญาณก่อน</div>
+<div><b style="color:#FFD0BA">ควรทำ</b><br>จดสิ่งที่อยากปล่อยวาง และเปิดรับความคิดใหม่ ผลจะค่อยๆ ชัดใน 6 เดือน</div>
+</div></details>
+</div>
+
+<div class="card" style="padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:15px;font-weight:600">แกนอุปราคาในชาร์ตคุณ</span><span style="font-size:12.5px;line-height:1.6;color:#C9CEDC">อุปราคามาเป็นคู่ ตกสองฝั่งตรงข้ามของชาร์ตเสมอ เหมือนตาชั่ง 2 ข้าง ชีวิตช่วงนั้นจะถูกดึงให้หาสมดุลระหว่าง 2 เรื่องนี้</span></div>
+<sc-for list="{{axes}}" as="x" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:16px;background:{{x.bg}};border:1px solid {{x.bd}}">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13.5px;font-weight:600">{{x.t}}</span><span class="chip" style="background:rgba(255,255,255,.08);color:#C9CEDC">{{x.p}}</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);align-items:stretch">
+<div style="display:flex;flex-direction:column;gap:2px;padding:10px;border-radius:12px;background:rgba(255,196,107,.12)"><span style="font-size:11px;color:#FFD9A0">{{x.sa}}</span><b style="font-size:13px">{{x.ah}}</b><span style="font-size:12px;line-height:1.45;color:#DCE0EA">{{x.at}}</span></div>
+<span style="display:flex;align-items:center;justify-content:center;color:#9AA1B5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg></span>
+<div style="display:flex;flex-direction:column;gap:2px;padding:10px;border-radius:12px;background:rgba(127,184,255,.12)"><span style="font-size:11px;color:#B5D6FF">{{x.sb}}</span><b style="font-size:13px">{{x.bh}}</b><span style="font-size:12px;line-height:1.45;color:#DCE0EA">{{x.bt}}</span></div>
+</div>
+<span style="font-size:12.5px;line-height:1.6;color:#DCE0EA">{{x.d}}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px">
+<sc-for list="{{filters}}" as="f" hint-placeholder-count="4"><button onClick="{{f.pick}}" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:14px;border:1px solid {{f.bd}};background:{{f.bg}};color:#F2F4FA;font:500 11.5px 'IBM Plex Sans Thai Looped',sans-serif"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{f.i}}"/></svg>{{f.t}}<span style="font-size:11px;color:#9AA1B5">{{f.n}} ครั้ง</span></button></sc-for>
+</div>
+
+<div style="display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:#C9CEDC;padding:0 2px"><span style="display:flex;align-items:center;gap:6px"><i style="width:10px;height:10px;border-radius:50%;background:#FF8A65"></i>ผลแรง · แตะดาวในชาร์ต (แถบ 2–3 ขีด)</span><span style="display:flex;align-items:center;gap:6px"><i style="width:10px;height:10px;border-radius:50%;border:2px solid #6B7186;box-sizing:border-box"></i>ผลเบา · ตามธีมเรือน</span></div>
+<sc-for list="{{years}}" as="y" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column">
+<span style="font-size:15px;font-weight:600;padding:0 0 8px 2px">{{y.y}}</span>
+<sc-for list="{{y.rows}}" as="e" hint-placeholder-count="3">
+<div style="display:grid;grid-template-columns:46px minmax(0,1fr);opacity:{{e.op}}">
+<div style="position:relative;display:flex;justify-content:center;padding-top:14px"><span style="position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;background:rgba(255,255,255,.10)"></span><span style="position:relative;width:40px;height:40px;box-sizing:border-box;border-radius:50%;background:{{e.rb}};border:2px solid {{e.rc}};display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05"><b style="font-size:13px">{{e.d}}</b><span style="font-size:9.5px;color:#C9CEDC">{{e.m}}</span></span></div>
+<button onClick="{{e.tog}}" style="margin:6px 0 10px;display:flex;flex-direction:column;gap:10px;width:100%;padding:14px;box-sizing:border-box;border-radius:18px;border:1px solid {{e.cb}};background:{{e.cg}};color:#F2F4FA;font-family:inherit;text-align:left">
+<div style="display:flex;align-items:center;gap:12px;width:100%">
+<span style="flex:none;position:relative;width:34px;height:34px;border-radius:50%;background:{{e.ib}};box-shadow:{{e.ish}}"><span style="position:absolute;inset:{{e.ii}};border-radius:50%;background:{{e.ic}}"></span></span>
+<span style="flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.4"><span style="font-size:14px;font-weight:600">{{e.title}}</span><span class="lbl">{{e.time}} · ราศี{{e.pos}} · เรือน {{e.h}}</span></span>
+</div>
+<div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:600"><span style="color:{{e.lc}}">{{e.lt}}</span><span style="color:#9AA1B5;font-weight:500">{{e.vis}}</span></div><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px"><span style="height:5px;border-radius:3px;background:{{e.b1}}"></span><span style="height:5px;border-radius:3px;background:{{e.b2}}"></span><span style="height:5px;border-radius:3px;background:{{e.b3}}"></span></div><span class="lbl">{{e.ld}}</span></div>
+<sc-if value="{{e.open}}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:14px;background:rgba(255,255,255,.04);font-size:13px;line-height:1.6;color:#DCE0EA"><span><b style="color:#F2F4FA">เรือน {{e.h}}:</b> {{e.hm}}</span><sc-for list="{{e.hd}}" as="d" hint-placeholder-count="1"><span><b style="color:#FFD0BA">{{d.t}}:</b> {{d.m}}</span></sc-for><span class="lbl">{{e.kindm}}</span></div></sc-if>
+<span class="chv" data-o="{{e.open}}" style="align-self:center;margin:2px auto 0;width:max-content;display:flex;align-items:center;gap:4px;font-size:11px;color:#9AA1B5;line-height:1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button>
+</div>
+</sc-for>
+</div>
+</sc-for>
+<span class="lbl">คำนวณด้วย Swiss Ephemeris เวลาไทย · ตรวจกับ astro-seek แล้ว ชนิด วันเวลา และองศาตรงทุกครั้ง · ระดับผล: เบา = ไม่แตะดาว มีผลตามธีมเรือน / แรง = ห่างดาวกำเนิดไม่เกิน 5° (กุมหรือเล็ง) / แรงมาก = ห่างไม่เกิน 2° หรือแตะดวงอาทิตย์ ดวงจันทร์ไม่เกิน 3° · การมองเห็นคิดที่กรุงเทพฯ · ข้อความอธิบายเป็นตัวอย่าง รอดึงจากคลังคำอธิบาย</span>
+</div>
+
+<nav aria-label="แท็บหลัก" style="position:absolute;left:0;right:0;bottom:0;height:91px;padding:0 6px 26px;box-sizing:border-box;border-radius:32px 32px 0 0;background:linear-gradient(180deg,#1C1D24,#000000);box-shadow:0 -8px 30px rgba(0,0,0,.30);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;border-top:1px solid rgba(255,255,255,.10)">
+<a href="Main.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><path d="M12 3v5M12 16v5M3 12h5M16 12h5"></path></svg>ชาร์ตของฉัน</a>
+<a href="People.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg>บุคคล</a>
+<a href="Today.dc.html" class="tab" style="position:relative;color:#C9CEDC;font-weight:500"><span style="position:absolute;top:-44px;left:50%;margin-left:-44px;width:88px;height:88px;border-radius:999px;background:#0A0B10;display:flex;align-items:center;justify-content:center"><span style="width:72px;height:72px;border-radius:999px;background:radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21);display:flex;align-items:center;justify-content:center;color:#B9A6FF"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span></span>วันนี้</a>
+<a href="Forecast.dc.html" class="tab" aria-current="page" style="color:#B9A6FF;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"></path></svg>ดวงล่วงหน้า</a>
+<a href="Settings.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"></path></svg>ตั้งค่า</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2800}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this; var st = this.state || {}; var flt = st.f || 'all'; var op = st.o === undefined ? -1 : st.o;
+var M = ['','ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+var E = [
+['sun','วงแหวน',2027,2,6,'22:59','กุมภ์',"17°39′",12,[['ยูเรนัส','กุม',2.7],['อาทิตย์','เล็ง',4.9]],'no'],
+['moon','เงามัว',2027,2,21,'06:12','กันย์',"1°58′",6,[['ศุกร์','กุม',2.3]],'low'],
+['moon','เงามัว',2027,7,18,'23:02','มังกร',"25°57′",11,[['พุธ','เล็ง',2.6]],'yes'],
+['sun','เต็มดวง',2027,8,2,'17:06','สิงห์',"9°55′",5,[['อาทิตย์','กุม',2.8],['ยูเรนัส','เล็ง',5.0]],'no'],
+['moon','เงามัว',2027,8,17,'14:13','กุมภ์',"24°04′",12,[],'no'],
+['moon','บางส่วน',2028,1,12,'11:12','กรกฎ',"21°33′",5,[],'no'],
+['sun','วงแหวน',2028,1,26,'22:07','กุมภ์',"6°08′",11,[['เนปจูน','กุม',3.5]],'no'],
+['moon','บางส่วน',2028,7,7,'01:19','มังกร',"15°15′",11,[],'yes'],
+['sun','เต็มดวง',2028,7,22,'09:55','กรกฎ',"29°46′",5,[['พุธ','กุม',1.2],['เนปจูน','เล็ง',2.9]],'no'],
+['moon','เต็มดวง',2028,12,31,'23:51','กรกฎ',"10°34′",4,[],'yes']];
+var HM = {4:'บ้าน ครอบครัว รากฐาน และความรู้สึกมั่นคงภายใน',5:'ความรัก ความสนุก งานสร้างสรรค์ และการแสดงตัวตน',6:'งานประจำ สุขภาพ กิจวัตร และการดูแลตัวเอง',11:'เพื่อน กลุ่ม เครือข่าย และความหวังระยะยาว',12:'เรื่องภายในใจ การพักฟื้น สิ่งที่ซ่อนอยู่ และการปล่อยวาง'};
+var PM = {'อาทิตย์':'ตัวตนและทิศทางชีวิตถูกกระตุ้น อาจมีการปรับเป้าหมายครั้งใหญ่','ยูเรนัส':'มีเรื่องเปลี่ยนแปลงฉับพลัน อยากเป็นอิสระ หรือได้มุมมองใหม่','ศุกร์':'ความสัมพันธ์ คุณค่า และเรื่องเงินถูกทบทวน','พุธ':'ความคิด การสื่อสาร และการตัดสินใจมีจุดเปลี่ยน','เนปจูน':'ความฝัน แรงบันดาลใจ หรือความสับสน ต้องแยกให้ออกระหว่างจริงกับคาดหวัง'};
+var now = Date.UTC(2026,10,3);
+var rows = E.map(function(e,i){ var sun = e[0]==='sun'; return { i:i, sun:sun, y:e[2], hit:e[9].length>0,
+title:(sun?'สุริยุปราคา':'จันทรุปราคา')+e[1], when: e[4]+' '+M[e[3]]+' '+(e[2]+543)+' · '+e[5]+' น.', pos:e[6]+' '+e[7], h:e[8],
+hasHit:e[9].length>0, hitS:e[9].map(function(x){return x[1]+'ดาว'+x[0]+' '+x[2]+'°';}).join(', '),
+vis: sun ? 'ไม่เห็นในไทย' : e[10]==='yes' ? 'เห็นในไทย' : e[10]==='low' ? 'เห็นได้ต่ำมากใกล้ขอบฟ้า' : 'ไม่เห็นในไทย',
+vb: e[10]==='yes' ? 'rgba(124,224,167,.16)' : 'rgba(255,255,255,.06)', vc: e[10]==='yes' ? '#9FEAC0' : '#9AA1B5',
+ib: sun ? '#FFC46B' : '#C2412D', ish: sun ? '0 0 12px rgba(255,196,107,.45)' : '0 0 12px rgba(194,65,45,.45)', ii: sun ? (e[1]==='วงแหวน'?'4px':'2px') : '0', ic: sun ? '#0B0C12' : (e[1]==='เงามัว' ? 'rgba(233,236,245,.75)' : e[1]==='บางส่วน' ? 'linear-gradient(90deg,#C2412D 55%,#E9ECF5 55%)' : '#A8321F'),
+hm: HM[e[8]]||'', hd: e[9].map(function(x){ return { t: x[1]+'ดาว'+x[0]+'กำเนิด', m: PM[x[0]]||'' }; }),
+kindm: sun ? 'สุริยุปราคาเกิดตอนจันทร์ดับ เป็นพลังของการเริ่มต้นใหม่ที่เข้มข้น ผลมักค่อยๆ ปรากฏในช่วง 6 เดือนถัดไป' : 'จันทรุปราคาเกิดตอนจันทร์เต็ม เป็นพลังของการปิดฉาก เห็นผล หรือปล่อยเรื่องเดิมออกไป',
+d: e[4], m: M[e[3]], time: e[5]+' น.', op: 1,
+lvl: e[9].length ? (e[9].some(function(x){return x[2]<=2 || ((x[0]==='อาทิตย์'||x[0]==='จันทร์') && x[2]<=3);}) ? 3 : 2) : 1,
+open: op===i, tog: function(){ self.setState({ o: op===i ? -1 : i }); } }; });
+rows.forEach(function(r){ var L=r.lvl, hot=L>1; r.lt = L===3 ? 'ผลแรงมาก · แตะดาวแนบชิดหรือแตะดวงอาทิตย์' : L===2 ? 'ผลแรง · แตะดาวในชาร์ต' : 'ผลเบา · ตามธีมเรือน';
+r.ld = hot ? 'แตะ '+r.hitS : 'ไม่แตะดาวกำเนิด กระตุ้นเรื่องของเรือน '+r.h+' แบบเบาๆ';
+r.lc = hot ? '#FFB08A' : '#C9CEDC'; var on='#FF8A65', off='rgba(255,255,255,.10)'; r.b1 = hot ? on : '#8A90A3'; r.b2 = L>=2 ? on : off; r.b3 = L>=3 ? on : off;
+r.rc = hot ? '#FF8A65' : '#6B7186'; r.rb = hot ? 'rgba(255,138,101,.22)' : '#12131A'; r.cb = hot ? 'rgba(255,138,101,.40)' : 'rgba(255,255,255,.10)'; r.cg = hot ? 'rgba(255,138,101,.07)' : 'rgba(255,255,255,.04)'; });
+var FL = [['all','M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z','ทั้งหมด'],['sun','M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2','สุริยุปราคา'],['moon','M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z','จันทรุปราคา'],['hit','M12 4a8 8 0 1 0 0 16a8 8 0 1 0 0-16M12 9a3 3 0 1 0 0 6a3 3 0 1 0 0-6','ผลแรง']];
+function pass(r,k){ return k==='all' || (k==='sun'&&r.sun) || (k==='moon'&&!r.sun) || (k==='hit'&&r.hit); }
+var filters = FL.map(function(f){ var on = f[0]===flt; return { i:f[1], t:f[2], n: rows.filter(function(r){return pass(r,f[0]);}).length, bd: on?'#B9A6FF':'rgba(255,255,255,.10)', bg: on?'rgba(185,166,255,.18)':'rgba(255,255,255,.03)', pick:function(){ self.setState({ f:f[0], o:-1 }); } }; });
+var vis = rows.filter(function(r){ return pass(r,flt); }); var years = [];
+[2027,2028].forEach(function(y){ var rr = vis.filter(function(r){return r.y===y;}); if (rr.length) years.push({ y:'พ.ศ. '+(y+543), rows: rr }); });
+var n = E[0]; var days = Math.round((Date.UTC(n[2],n[3]-1,n[4]) - now)/864e5);
+var A=[['sun','สุริยุปราคาเต็มดวง','13 ส.ค. 2569 · 00:45 น.','สิงห์ 20°06′',6,1,'ผลเบา · ตามธีมเรือน','ไม่แตะดาวกำเนิด','เริ่มต้นใหม่เรื่องงานประจำ กิจวัตร และสุขภาพ ช่วงนี้เหมาะปรับระบบการทำงานหรือนิสัยประจำวัน',Date.UTC(2026,7,13),'13 ส.ค.','ก.พ. 2570'],
+['moon','จันทรุปราคาบางส่วน','28 ส.ค. 2569 · 11:12 น.','มีน 4°50′',12,3,'ผลแรงมาก · แตะดาวแนบชิด','เล็งดาวศุกร์ 0.6°','ปิดฉากหรือปล่อยวางเรื่องความรัก ความสัมพันธ์ และคุณค่าที่ให้ตัวเอง อาจเห็นชัดว่าอะไรควรไปต่อหรือพอแค่นี้',Date.UTC(2026,7,28),'28 ส.ค.','ปลาย ก.พ. 2570']];
+var act=A.map(function(a){ var hot=a[5]>1, sun=a[0]==='sun'; return { title:a[1], when:a[2], pos:a[3], h:a[4], lt:a[6], ld:a[7], m:a[8], st:a[10], end:a[11], pc:Math.min(100,Math.round((now-a[9])/(182*864e5)*100)), lc:hot?'#FFB08A':'#C9CEDC', cb:hot?'rgba(255,138,101,.40)':'rgba(255,255,255,.10)', cg:hot?'rgba(255,138,101,.07)':'rgba(255,255,255,.03)', ib:sun?'#FFC46B':'#C2412D', ii:sun?'2px':'0', ic:sun?'#0B0C12':'linear-gradient(90deg,#C2412D 55%,#E9ECF5 55%)' }; });
+return { act: act, cd: Math.floor(days/30)+' เดือน '+(days%30)+' วัน', nTitle: rows[0].title, nWhen: rows[0].when, nWhere: 'ราศี'+rows[0].pos+' · เรือน 12 ของคุณ', nHits: E[0][9].map(function(x){return x[1]+'ดาว'+x[0]+'กำเนิด '+x[2]+'°';}),
+axes: [{ t:'ชุดที่ 1 · ตอนนี้ – กลางปี 2571', p:'กำลังมีผล', sa:'ราศีสิงห์', ah:'เรือน 5', at:'ความรัก ความสุข งานสร้างสรรค์', sb:'ราศีกุมภ์', bh:'เรือน 11–12', bt:'เพื่อน กลุ่ม เป้าหมาย และโลกภายใน', d:'ถามตัวเองว่า "ความสุขของฉัน" กับ "สิ่งที่ทำเพื่อกลุ่มหรือเป้าหมายใหญ่" สมดุลไหม ชุดนี้แตะดวงอาทิตย์และยูเรนัสกำเนิด จึงรู้สึกชัดเป็นพิเศษ', bg:'rgba(255,138,101,.06)', bd:'rgba(255,138,101,.35)' },
+{ t:'ชุดที่ 2 · ปี 2571 – 2572', p:'กำลังจะมา', sa:'ราศีกรกฎ', ah:'เรือน 4–5', at:'บ้าน ครอบครัว รากฐาน', sb:'ราศีมังกร', bh:'เรือน 11', bt:'สังคม เครือข่าย บทบาทภายนอก', d:'ย้ายมาชั่งระหว่างชีวิตในบ้านกับบทบาทในสังคม อาจมีเรื่องที่อยู่อาศัยหรือครอบครัวให้ตัดสินใจ', bg:'rgba(255,255,255,.03)', bd:'rgba(255,255,255,.10)' }],
+filters: filters, years: years };
+}
+}
+</script>
+</body>
+</html>

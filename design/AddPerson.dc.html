@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>เพิ่มคน</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.lbl{font-size:12px;color:#9AA1B5}
+.fl{font-size:14px;font-weight:600;color:#DCE0EA}
+.in{box-sizing:border-box;width:100%;height:52px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#F2F4FA;font:16px 'IBM Plex Sans Thai Looped',sans-serif;outline:none}
+.sel{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239AA1B5' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
+.chip{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);font:500 14px 'IBM Plex Sans Thai Looped',sans-serif;color:#C9CEDC;white-space:nowrap}
+.chip.on{background:#F2F4FA;color:#06070D;border-color:#F2F4FA;font-weight:600}
+.seg{flex:1;height:36px;border:none;border-radius:10px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.rt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:72px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);font:500 14px 'IBM Plex Sans Thai Looped',sans-serif;color:#C9CEDC;padding:0}
+.rt.on{background:linear-gradient(135deg,rgba(138,92,255,.55),rgba(59,107,255,.45));border-color:rgba(180,170,255,.6);color:#FFFFFF;font-weight:600}
+.group{display:flex;flex-direction:column;gap:14px;padding:16px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+</style>
+</helmet>
+<div style="width:390px;min-height:1620px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 90% -40px,rgba(138,92,255,.42),transparent 70%),radial-gradient(460px 380px at -10% 300px,rgba(31,165,135,.30),transparent 70%),#06070D">
+
+<div style="position:sticky;top:0;padding:54px 12px 10px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(6,7,13,.95),rgba(6,7,13,.6));z-index:2">
+<a href="People.dc.html" style="height:44px;padding:0 10px;display:flex;align-items:center;gap:4px;font-size:15px;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>ยกเลิก</a>
+<h1 style="margin:0;font-size:17px;font-weight:600">เพิ่มคน</h1>
+<span style="width:80px"></span>
+</div>
+
+<form style="padding:8px 20px 40px;display:flex;flex-direction:column;gap:18px" onSubmit="{{noop}}">
+
+<div class="group">
+<div style="display:flex;flex-direction:column;gap:8px"><label for="nm" class="fl">ชื่อ</label><input id="nm" class="in" placeholder="ชื่อเล่น หรือชื่อจริง"></div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<span class="fl" id="rel">ความสัมพันธ์</span>
+<div role="radiogroup" aria-labelledby="rel" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+<button type="button" role="radio" aria-checked="{{o0}}" class="{{c0}}" onClick="{{p0}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>ฉัน</button>
+<button type="button" role="radio" aria-checked="{{o1}}" class="{{c1}}" onClick="{{p1}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M12 18s-3-1.8-3-3.6a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 1.8-3 3.6-3 3.6z"/></svg>ครอบครัว</button>
+<button type="button" role="radio" aria-checked="{{o2}}" class="{{c2}}" onClick="{{p2}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20a6 6 0 0 1 12 0M10 20a6 6 0 0 1 12 0"/></svg>เพื่อน</button>
+<button type="button" role="radio" aria-checked="{{o3}}" class="{{c3}}" onClick="{{p3}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 20s-7-4.4-7-9.5A4 4 0 0 1 12 8a4 4 0 0 1 7 2.5C19 15.6 12 20 12 20z"/></svg>คนรัก</button>
+<button type="button" role="radio" aria-checked="{{o4}}" class="{{c4}}" onClick="{{p4}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>ที่ทำงาน</button>
+<button type="button" class="rt" style="border-style:dashed;color:#7FB8FF;border-color:rgba(127,184,255,.5)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>เพิ่มหมวด</button>
+</div>
+<span class="lbl">หมวดที่เพิ่มเองเลือกไอคอนได้ · กดค้างที่หมวดเพื่อแก้ไขหรือลบ</span>
+</div>
+</div>
+
+<div class="group">
+<span class="fl">วันเกิด</span>
+<div style="display:grid;grid-template-columns:72px minmax(0,1fr) 96px;gap:8px">
+<label><span class="lbl" style="display:block;margin-bottom:4px">วัน</span><select class="in sel"><option>5</option></select></label>
+<label><span class="lbl" style="display:block;margin-bottom:4px">เดือน</span><select class="in sel"><option>สิงหาคม</option></select></label>
+<label><span class="lbl" style="display:block;margin-bottom:4px">ปี พ.ศ.</span><select class="in sel"><option>2542</option></select></label>
+</div>
+<span class="lbl">รองรับปีเกิดตั้งแต่ พ.ศ. 2538 เป็นต้นไป</span>
+</div>
+
+<div class="group">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+<span class="fl">เวลาเกิด</span>
+<label style="display:flex;align-items:center;gap:10px;font-size:14px;color:#C9CEDC;min-height:44px">ไม่ทราบเวลาเกิด
+<button type="button" role="switch" aria-checked="{{unknown}}" aria-label="ไม่ทราบเวลาเกิด" onClick="{{toggleUnknown}}" style="width:52px;height:32px;border-radius:999px;border:none;padding:3px;background:{{swBg}};display:flex;justify-content:{{swJ}}"><span style="width:26px;height:26px;border-radius:999px;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.4)"></span></button>
+</label>
+</div>
+<sc-if value="{{known}}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<label><span class="lbl" style="display:block;margin-bottom:4px">ชั่วโมง</span><input class="in" inputmode="numeric" value="20" style="text-align:center;font-variant-numeric:tabular-nums"></label>
+<label><span class="lbl" style="display:block;margin-bottom:4px">นาที</span><input class="in" inputmode="numeric" value="33" style="text-align:center;font-variant-numeric:tabular-nums"></label>
+</div>
+<span class="lbl">ระบบ 24 ชั่วโมง เช่น 20:33 = สองทุ่มสามสิบสามนาที</span>
+</div>
+</sc-if>
+<sc-if value="{{unknown}}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;gap:10px;padding:12px;border-radius:14px;background:rgba(243,212,110,.08);border:1px solid rgba(243,212,110,.30)">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F3D46E" stroke-width="1.8" aria-hidden="true" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+<span style="font-size:13px;line-height:1.6;color:#DCE0EA">ลัคนาและเรือนเปลี่ยนทุก ๆ ไม่กี่นาที จึงจะซ่อนไว้ ดาวอื่นจะคำนวณจากเวลา 12:00 น. ส่วนดวงจันทร์อาจคลาดได้ราว ±6°</span>
+</div>
+</sc-if>
+</div>
+
+<div class="group">
+<div style="display:flex;flex-direction:column;gap:8px">
+<label for="pv" class="fl">จังหวัดที่เกิด</label>
+<div style="position:relative"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9AA1B5" stroke-width="2" aria-hidden="true" style="position:absolute;left:14px;top:17px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="pv" class="in" value="เพชรบุรี" style="padding-left:42px"></div>
+<span class="lbl">เลือกได้เฉพาะ 77 จังหวัดในประเทศไทย</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<div style="padding:12px;border-radius:14px;background:rgba(6,7,13,.45);border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:2px"><span class="lbl">พิกัด</span><span style="font-size:15px;font-weight:600;font-variant-numeric:tabular-nums">13°7′N 99°57′E</span></div>
+<div style="padding:12px;border-radius:14px;background:rgba(6,7,13,.45);border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:2px"><span class="lbl">เขตเวลา</span><span style="font-size:15px;font-weight:600">UTC+7 เวลาไทย</span></div>
+</div>
+</div>
+
+<div class="group">
+<label for="nt" class="fl">โน้ต <span class="lbl" style="font-weight:400">(ไม่บังคับ)</span></label>
+<textarea id="nt" rows="3" placeholder="เช่น ที่มาของเวลาเกิด สูติบัตร หรือแม่บอก" style="box-sizing:border-box;width:100%;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#F2F4FA;font:15px/1.6 'IBM Plex Sans Thai Looped',sans-serif;resize:none"></textarea>
+</div>
+
+<button type="submit" style="height:56px;border:none;border-radius:16px;background:linear-gradient(135deg,#8A5CFF,#3B6BFF 55%,#1FA587);color:#FFFFFF;font:600 17px 'IBM Plex Sans Thai Looped',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>บันทึกและดูชาร์ต</button>
+<span class="lbl" style="text-align:center">ข้อมูลเก็บในเครื่องนี้เท่านั้น</span>
+</form>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1620}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this; var st = this.state || {};
+var rel = st.rel === undefined ? 3 : st.rel;
+var unknown = !!st.unknown;
+var out = {};
+[0,1,2,3,4].forEach(function(i){ out['o' + i] = i === rel; out['c' + i] = i === rel ? 'rt on' : 'rt'; out['p' + i] = function(){ self.setState({ rel: i }); }; });
+return Object.assign(out, {
+unknown: unknown, known: !unknown,
+swBg: unknown ? '#4FD1A5' : 'rgba(255,255,255,.18)', swJ: unknown ? 'flex-end' : 'flex-start',
+toggleUnknown: function(){ self.setState({ unknown: !unknown }); },
+noop: function(e){ if (e && e.preventDefault) e.preventDefault(); }
+});
+}
+}
+</script>
+</body>
+</html>

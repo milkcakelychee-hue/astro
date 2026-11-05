@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>มุมดาวทั้งหมด</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.lbl{font-size:12px;color:#9AA1B5}
+.seg{flex:1;height:40px;border:none;border-radius:12px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.ar{display:flex;flex-direction:column;gap:6px;width:100%;padding:12px 14px;border:none;border-top:1px solid rgba(255,255,255,.07);background:transparent;color:#F2F4FA;font-family:inherit;text-align:left}
+.lg{display:flex;align-items:center;gap:6px;font-size:12px;color:#C9CEDC}
+.ar{gap:10px;padding:14px}
+.rk{width:30px;height:30px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.pc{display:flex;align-items:center;gap:8px;min-width:0}
+.gl{width:30px;height:30px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+.ai{width:34px;height:34px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700}
+.chip{height:22px;padding:0 8px;border-radius:7px;display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.bars{display:flex;gap:3px;align-items:flex-end;height:16px}
+.bars i{display:block;width:5px;border-radius:2px}
+.tier{display:flex;align-items:center;gap:8px;padding:10px 14px 8px;font-size:12px;font-weight:600;letter-spacing:.02em}
+summary::-webkit-details-marker{display:none}
+</style>
+</helmet>
+<div style="width:390px;min-height:1500px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 85% -40px,rgba(138,92,255,.42),transparent 70%),radial-gradient(460px 380px at -10% 300px,rgba(31,165,135,.28),transparent 70%),#06070D">
+
+<div style="padding:54px 12px 0;display:flex;align-items:center;justify-content:space-between">
+<a href="Main.dc.html" style="height:44px;padding:0 8px;display:flex;align-items:center;gap:4px;font-size:15px;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>ชาร์ตของฉัน</a>
+<span style="width:72px"></span>
+</div>
+
+<div style="padding:8px 20px 40px;display:flex;flex-direction:column;gap:18px">
+<div style="position:relative;padding-right:40px;display:flex;flex-direction:column;gap:2px"><span class="lbl">ตัวอย่าง · 5 ส.ค. 2542 · 20:33 น.</span><h1 style="margin:0;font-size:26px;font-weight:600">มุมดาวทั้งหมด <span style="font-size:15px;color:#9AA1B5;font-weight:400">(Aspects)</span></h1><details style="margin-right:-40px"><summary aria-label="หน้านี้คืออะไร" style="list-style:none;position:absolute;right:0;top:18px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(200,210,255,.35);background:rgba(255,255,255,.06);color:#D6DEFF;display:flex;align-items:center;justify-content:center;font:600 15px 'IBM Plex Sans Thai Looped',sans-serif;cursor:pointer">?</summary><div data-intro style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:18px;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(200,210,255,.16);font-size:13.5px;line-height:1.6"><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">คืออะไร</span><span style="flex:1;min-width:0;color:#E6E9F2">มุมทั้งหมดที่ดาวในชาร์ตกำเนิดทำต่อกัน เรียงจากมีอิทธิพลมากไปน้อย</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ใช้ดู</span><span style="flex:1;min-width:0;color:#E6E9F2">ดูว่าพลังด้านต่างๆ ในตัวเราเสริมกันหรือขัดกันตรงไหน</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ทำไมสำคัญ</span><span style="flex:1;min-width:0;color:#E6E9F2">มุมที่ใกล้ตรงพอดีมาก คือแก่นนิสัยและบทเรียนที่เด่นที่สุดในชีวิต</span></div></div></details></div>
+
+<div role="tablist" aria-label="กลุ่มมุม" style="display:flex;gap:4px;padding:4px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10)">
+<button role="tab" aria-selected="{{isP}}" class="{{t0}}" onClick="{{setP}}">ระหว่างดาว · 18</button>
+<button role="tab" aria-selected="{{isO}}" class="{{t1}}" onClick="{{setO}}">กับจุดอื่น · 34</button>
+</div>
+<span class="lbl">{{tabHint}}</span>
+
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
+<span class="lg"><b style="color:#F3D46E">☌&#xFE0E;</b> กุมกัน (Conjunction) 0°</span>
+<span class="lg"><b style="color:#7FB8FF">⚹&#xFE0E;</b> เปิดโอกาส (Sextile) 60°</span>
+<span class="lg"><b style="color:#FF8A4C">□&#xFE0E;</b> ท้าทาย (Square) 90°</span>
+<span class="lg"><b style="color:#4FD1A5">△&#xFE0E;</b> ส่งเสริม (Trine) 120°</span>
+<span class="lg"><b style="color:#FF6B6B">☍&#xFE0E;</b> ตรงข้าม (Opposition) 180°</span>
+<span class="lg">ตัวเลข = ห่างจากมุมพอดี (Orb)</span>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:flex-end"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">เรียงจากมุมที่มีอิทธิพลมากที่สุด</span><span class="lbl">ยิ่งดาวสองดวงทำมุมใกล้พอดี ยิ่งมีอิทธิพลต่อชีวิตมาก</span></div><span class="lbl">แตะเพื่ออ่าน</span></div>
+
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+<sc-for list="{{top}}" as="t" hint-placeholder-count="3">
+<button onClick="{{t.pick}}" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px;border-radius:16px;border:1px solid {{t.bd}};background:{{t.bg}};color:#F2F4FA;font-family:inherit">
+<span style="font-size:11px;color:#D6CEFF;font-weight:600">อันดับ {{t.k}}</span>
+<span style="display:flex;align-items:center;gap:4px;font-size:18px"><span>{{t.g1}}</span><span style="color:{{t.c}};font-weight:700">{{t.s}}</span><span>{{t.g2}}</span></span>
+<span style="font-size:12px;text-align:center;line-height:1.35">{{t.n1}}<br>{{t.tw}} {{t.n2}}</span>
+<span style="font-size:11px;color:#C9CEDC;font-variant-numeric:tabular-nums">orb {{t.o}}</span>
+</button>
+</sc-for>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{groups}}" as="gp" hint-placeholder-count="4">
+<div style="border-radius:18px;background:rgba(255,255,255,.05);border:1px solid {{gp.bd}};overflow:hidden">
+<button onClick="{{gp.toggle}}" aria-expanded="{{gp.open}}" style="display:flex;align-items:center;gap:10px;width:100%;min-height:56px;padding:0 16px;border:none;background:{{gp.bg}};color:#F2F4FA;font-family:inherit;text-align:left">
+<span style="width:10px;height:10px;flex:none;border-radius:9px;background:{{gp.c}};box-shadow:0 0 10px {{gp.c}}"></span>
+<span style="display:flex;flex-direction:column;flex:1;min-width:0"><span style="font-size:15px;font-weight:600;color:{{gp.c}}">{{gp.t}}</span><span class="lbl">{{gp.sub}}</span></span>
+<span style="font-size:12px;color:#C9CEDC;white-space:nowrap">{{gp.n}}</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9CEDC" stroke-width="2" aria-hidden="true" style="{{gp.rot}}"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+<sc-if value="{{gp.open}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{gp.rows}}" as="r" hint-placeholder-count="4">
+<button class="ar" onClick="{{r.pick}}" aria-expanded="{{r.open}}" style="{{r.st}}">
+<span style="display:flex;align-items:center;gap:10px;width:100%">
+<span class="rk" style="background:{{r.rb}};color:{{r.rc}}">{{r.k}}</span>
+<span style="flex:1;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);align-items:center;gap:6px">
+<span class="pc"><span class="gl">{{r.g1}}</span><span style="display:flex;flex-direction:column;min-width:0"><span style="font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{r.n1}}</span><span class="lbl" style="font-size:11px">{{r.e1}}</span></span></span>
+<span class="ai" style="color:{{r.c}};background:{{r.cb}};border:1px solid {{r.cd}}">{{r.s}}</span>
+<span class="pc"><span class="gl">{{r.g2}}</span><span style="display:flex;flex-direction:column;min-width:0"><span style="font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{r.n2}}</span><span class="lbl" style="font-size:11px">{{r.e2}}</span></span></span>
+</span>
+</span>
+<span style="display:flex;align-items:center;gap:6px;width:100%;min-width:0;padding-left:40px;box-sizing:border-box">
+<span class="chip" style="color:{{r.c}};background:{{r.cb}}">{{r.tn}}</span>
+<span class="chip" style="color:#C9CEDC;background:rgba(255,255,255,.07)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="{{r.ap}}"/></svg>{{r.as}}</span>
+<span style="margin-left:auto;flex:none;display:flex;align-items:center;gap:6px"><span style="position:relative;width:40px;height:10px"><span style="position:absolute;left:0;right:0;top:4px;height:2px;border-radius:9px;background:rgba(255,255,255,.15)"></span><span style="position:absolute;left:50%;top:0;width:2px;height:10px;margin-left:-1px;background:rgba(255,255,255,.6)"></span><span style="position:absolute;top:1px;left:{{r.mx}};width:8px;height:8px;margin-left:-4px;border-radius:9px;background:{{r.c}}"></span></span><span style="font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;color:#F2F4FA">{{r.o}}</span></span>
+</span>
+<sc-if value="{{r.open}}" hint-placeholder-val="{{ false }}">
+<span style="display:flex;flex-direction:column;gap:8px;margin:4px 0 0 40px;box-sizing:border-box;width:calc(100% - 40px);padding:12px;border-radius:14px;background:rgba(6,7,13,.45);border:1px solid rgba(255,255,255,.08)">
+<span style="display:flex;flex-direction:column;gap:4px">
+<span style="position:relative;height:16px">
+<span style="position:absolute;left:0;right:0;top:7px;height:2px;border-radius:9px;background:linear-gradient(90deg,rgba(127,227,192,.15),rgba(127,227,192,.6) 48%,rgba(255,255,255,.9) 50%,rgba(154,161,181,.5) 52%,rgba(154,161,181,.12))"></span>
+<span style="position:absolute;left:50%;top:1px;width:2px;height:14px;margin-left:-1px;background:#F2F4FA;border-radius:2px"></span>
+<span style="position:absolute;top:3px;left:{{r.mx}};width:10px;height:10px;margin-left:-5px;border-radius:9px;background:{{r.c}};box-shadow:0 0 8px {{r.c}}"></span>
+</span>
+<span style="display:flex;justify-content:space-between;font-size:10.5px;color:#9AA1B5"><span>← เข้าใกล้</span><span style="color:#F2F4FA">ตรงพอดี</span><span>ห่างออก →</span></span>
+<span style="display:flex;justify-content:space-between;font-size:12px;color:#9AA1B5"><span>ระดับอิทธิพล <b style="color:#F2F4FA">{{r.pct}}</b></span><span>ห่าง {{r.o}} จากที่นับได้ {{r.max}}</span></span>
+</span>
+<span style="font-size:11.5px;line-height:1.5;color:#9AA1B5">{{r.why}}</span>
+<span style="font-size:13px;line-height:1.65;color:#DCE0EA">{{r.mean}}</span>
+</span>
+</sc-if>
+</button>
+</sc-for>
+</sc-if>
+</div>
+</sc-for>
+</div>
+<span class="lbl">มุมและตัวเลข orb ตรงกับตาราง Aspects ของ astro-seek สำหรับชาร์ตนี้</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1500}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this; var st = this.state || {}; var V = '︎';
+var tab = st.tab || 0; var sel = st.sel === undefined ? -1 : st.sel; var op = st.op || {};
+var P = [['☉','อาทิตย์','Sun'],['☽','จันทร์','Moon'],['☿','พุธ','Mercury'],['♀','ศุกร์','Venus'],['♂','อังคาร','Mars'],['♃','พฤหัสบดี','Jupiter'],['♄','เสาร์','Saturn'],['♅','ยูเรนัส','Uranus'],['♆','เนปจูน','Neptune'],['♇','พลูโต','Pluto'],['☊','ราหู','North Node'],['⚸','ลิลิธ','Lilith'],['⚷','ไครอน','Chiron'],['AC','ลัคนา','Ascendant'],['MC','กลางฟ้า','Midheaven'],['DC','จุดตรงข้ามลัคนา','Descendant'],['IC','ก้นฟ้า','IC'],['⊗','จุดโชคลาภ','Fortune'],['Vx','Vertex','Vertex']];
+var T = {c:['☌','#F3D46E','มุมกุมกัน (Conjunction)','พลังของสองดาวรวมเป็นก้อนเดียว เสริมกันจนแยกไม่ออก'],x:['⚹','#7FB8FF','มุมเปิดโอกาส (Sextile)','สองพลังช่วยกันได้เมื่อคุณลงมือใช้ เป็นโอกาสที่ต้องหยิบเอง'],q:['□','#FF8A4C','มุมท้าทาย (Square)','สองพลังดึงกันจนอึดอัด แต่เป็นแรงผลักให้เติบโตเมื่อหาทางลงได้'],t:['△','#4FD1A5','มุมส่งเสริม (Trine)','สองพลังไหลเข้ากันง่ายเป็นธรรมชาติ เป็นพรสวรรค์ที่ใช้ได้โดยไม่ต้องพยายาม'],o:['☍','#FF6B6B','มุมตรงข้าม (Opposition)','สองพลังอยู่คนละฝั่ง ต้องหาจุดสมดุล มักเห็นผ่านความสัมพันธ์กับคนอื่น']};
+var PA = [[0,4,'q',0,59,'a'],[0,5,'q',8,20,'s'],[0,6,'q',3,57,'a'],[0,7,'o',2,12,'a'],[0,8,'o',9,59,'s'],[0,9,'t',4,54,'s'],[1,2,'x',4,48,'a'],[1,6,'c',7,8,'s'],[1,7,'q',8,53,'s'],[1,8,'t',8,54,'a'],[2,5,'q',5,45,'s'],[2,8,'o',4,5,'s'],[3,5,'t',0,3,'s'],[3,9,'q',3,29,'s'],[4,6,'o',2,57,'a'],[4,7,'q',1,12,'a'],[5,8,'q',1,39,'s'],[6,7,'q',1,45,'s']];
+var OA = [[13,4,'t',0,27,'s'],[13,6,'x',2,30,'a'],[13,9,'q',6,21,'s'],[15,1,'t',9,38,'a'],[15,4,'x',0,27,'s'],[15,6,'t',2,30,'a'],[15,9,'q',6,21,'s'],[14,0,'t',5,12,'s'],[14,7,'x',3,0,'s'],[14,10,'t',4,58,'s'],[16,0,'x',5,12,'s'],[16,7,'t',3,0,'s'],[10,0,'c',0,13,'a'],[10,4,'q',0,45,'s'],[10,6,'q',3,43,'s'],[10,7,'o',1,58,'s'],[10,9,'t',5,8,'a'],[10,11,'t',6,5,'a'],[11,0,'t',5,51,'s'],[11,3,'q',2,32,'s'],[11,9,'c',0,56,'a'],[12,1,'o',3,50,'a'],[12,2,'t',0,57,'a'],[12,3,'q',6,39,'a'],[17,1,'c',9,14,'s'],[17,3,'q',1,15,'a'],[17,8,'t',0,20,'s'],[17,9,'o',4,44,'a'],[17,11,'o',3,47,'a'],[17,12,'o',5,24,'s'],[17,18,'x',3,2,'s'],[18,1,'t',1,12,'s'],[18,2,'x',3,35,'a'],[18,12,'x',2,37,'a']];
+var list = (tab === 0 ? PA : OA).slice();
+function mx(a){ var L = a[0] < 2 || a[1] < 2; return a[2] === 'x' ? (L ? 5.5 : 4) : (L ? 10 : 7); }
+list.forEach(function(a){ a.n = a[3] + a[4] / 60; a.mx = mx(a); a.p = 1 - a.n / a.mx; });
+list.sort(function(x, y){ return y.p - x.p; });
+function g(i){ return P[i][0].length > 1 ? P[i][0] : P[i][0] + V; }
+var TB = {c:'rgba(243,212,110,.14)',x:'rgba(127,184,255,.14)',q:'rgba(255,138,76,.14)',t:'rgba(79,209,165,.14)',o:'rgba(255,107,107,.14)'};
+var TD = {c:'rgba(243,212,110,.35)',x:'rgba(127,184,255,.35)',q:'rgba(255,138,76,.35)',t:'rgba(79,209,165,.35)',o:'rgba(255,107,107,.35)'};
+var TS = {c:'กุมกัน',x:'เปิดโอกาส',q:'ท้าทาย',t:'ส่งเสริม',o:'ตรงข้าม'};
+var TW = {c:'กุม',x:'โยค',q:'ฉาก',t:'ตรีโกณ',o:'เล็ง'};
+var TIERS = [[.85,'มีอิทธิพลมาก','#F3D46E','rgba(243,212,110,.08)'],[.6,'มีอิทธิพล','#B9A6FF','rgba(185,166,255,.08)'],[.3,'ปานกลาง','#7FB8FF','rgba(127,184,255,.07)'],[-1,'เบา','#9AA1B5','rgba(255,255,255,.04)']];
+function tier(p){ for (var k = 0; k < TIERS.length; k++) if (p >= TIERS[k][0]) return k; return 3; }
+var cnt = [0,0,0,0]; list.forEach(function(a){ cnt[tier(a.p)]++; });
+var last = -1;
+function fo(a){ return a[3] + '°' + (a[4] < 10 ? '0' : '') + a[4] + '′'; }
+var rows = list.map(function(a, i){
+var t = T[a[2]]; var on = i === sel; var tr = tier(a.p); var head = tr !== last; last = tr;
+var lv = Math.max(1, Math.ceil(a.p * 5)); var bars = [];
+for (var b = 0; b < 5; b++) bars.push(b < lv ? '▮' : '▯');
+var top3 = i < 3;
+return { k: i + 1, g1: g(a[0]), n1: P[a[0]][1], e1: P[a[0]][2], g2: g(a[1]), n2: P[a[1]][1], e2: P[a[1]][2], s: t[0] + V, c: t[1], cb: TB[a[2]], cd: TD[a[2]],
+tn: TS[a[2]],
+as: a[5] === 'a' ? 'เข้าใกล้' : 'ห่างออก', ap: a[5] === 'a' ? 'M5 12h14M13 6l6 6-6 6' : 'M19 12H5M11 6l-6 6 6 6',
+b1: bars.join(''), o: fo(a), pct: Math.round(a.p * 100) + '%', max: a.mx + '°', mx: (a[5] === 'a' ? 50 - (1 - a.p) * 46 : 50 + (1 - a.p) * 46).toFixed(1) + '%', why: 'มุมนี้จะนับว่าเกิดขึ้นเมื่อดาวสองดวงห่างจากองศาพอดีไม่เกิน ' + a.mx + '° (' + (a[0] < 2 || a[1] < 2 ? 'มีอาทิตย์หรือจันทร์ จึงได้ระยะกว้างกว่า' : 'ดาวทั่วไป') + ') มุมนี้ห่าง ' + fo(a) + ' จึงมีอิทธิพล ' + Math.round(a.p * 100) + '%', gap: 'ห่างจากมุมพอดี ' + fo(a) + ' จากที่นับได้สูงสุด ' + a.mx + '°',
+rb: top3 ? 'linear-gradient(135deg,#8A5CFF,#1FA587)' : 'rgba(255,255,255,.07)', rc: top3 ? '#FFFFFF' : '#C9CEDC',
+tr: tr,
+open: on, st: on ? 'background:rgba(255,255,255,.05)' : '',
+mean: P[a[0]][1] + ' กับ ' + P[a[1]][1] + ' ทำ' + t[2] + ' — ' + t[3] + (a.n < 1 ? ' มุมนี้แน่นเกือบพอดี จึงรู้สึกได้ชัดมาก' : '') + (a[5] === 'a' ? ' (กำลังเข้าใกล้: พลังยังเพิ่มขึ้น)' : ' (กำลังห่างออก: พลังคลายลงแล้ว)'),
+pick: function(){ self.setState({ sel: on ? -1 : i }); }, jump: function(){ var o = Object.assign({}, op); o[tr] = true; self.setState({ sel: i, op: o }); } };
+});
+var SUB = ['orb แคบมาก รู้สึกได้ชัดที่สุด','มีผลชัดในชีวิตประจำวัน','มีผลเป็นพื้นหลัง','อ่อน แต่ยังนับเป็นมุม'];
+var groups = TIERS.map(function(T2, k){ var on = !!op[k]; return { t: T2[1], c: T2[2], bg: on ? T2[3] : 'transparent', bd: on ? 'rgba(255,255,255,.20)' : 'rgba(255,255,255,.10)', sub: SUB[k], n: cnt[k] + ' มุม', open: on, rot: on ? 'transform:rotate(180deg)' : '', rows: rows.filter(function(r){ return r.tr === k; }), toggle: function(){ var o = Object.assign({}, op); o[k] = !o[k]; self.setState({ op: o }); } }; }).filter(function(g2){ return g2.rows.length; });
+var top = rows.slice(0, 3).map(function(r, i){ var a = list[i]; return { k: r.k, g1: r.g1, g2: r.g2, s: r.s, c: r.c, n1: r.n1, n2: r.n2, tw: TW[a[2]], o: r.o, pick: r.jump, bg: i === 0 ? 'linear-gradient(160deg,rgba(138,92,255,.35),rgba(31,165,135,.18))' : 'rgba(255,255,255,.05)', bd: i === 0 ? 'rgba(170,160,255,.45)' : 'rgba(255,255,255,.10)' }; });
+return {
+groups: groups, top: top, isP: tab === 0, isO: tab === 1, t0: tab === 0 ? 'seg on' : 'seg', t1: tab === 1 ? 'seg on' : 'seg',
+setP: function(){ self.setState({ tab: 0, sel: -1, op: {} }); }, setO: function(){ self.setState({ tab: 1, sel: -1, op: {} }); },
+tabHint: tab === 0 ? 'มุมระหว่างดาว 10 ดวง (Planet aspects)' : 'มุมที่เกี่ยวกับราหู ลิลิธ ไครอน จุดโชคลาภ Vertex และแกนชาร์ต ASC DSC MC IC (Other aspects)'
+};
+}
+}
+</script>
+</body>
+</html>

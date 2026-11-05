@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>หาฤกษ์</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.lbl{font-size:12px;color:#9AA1B5}
+.card{border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10)}
+.seg{flex:1;height:40px;border:none;border-radius:12px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif;white-space:nowrap}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.tr{display:flex;flex-direction:column;gap:10px;width:100%;padding:14px;box-sizing:border-box;border:none;border-top:1px solid rgba(255,255,255,.07);background:transparent;color:#F2F4FA;font-family:inherit;text-align:left}
+.gl{width:34px;height:34px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(255,255,255,.14)}
+.ai{width:30px;height:30px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+.chip{height:22px;padding:0 8px;border-radius:7px;display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.hr{display:grid;grid-template-columns:26px minmax(0,1fr) auto 44px;align-items:center;gap:8px;min-height:40px;border-top:1px solid rgba(255,255,255,.06);font-size:13.5px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:64px;color:#4A4E5C;text-decoration:none;font-size:12px;white-space:nowrap}
+.ht{display:flex;flex-direction:column;gap:4px;min-height:74px;padding:8px;box-sizing:border-box;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+summary::-webkit-details-marker{display:none}
+.chv svg{transition:transform .2s}.chv[data-o="true"] svg{transform:rotate(180deg)}
+</style>
+</helmet>
+<div style="width:390px;min-height:2600px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 85% -40px,rgba(220,227,245,.24),transparent 70%),radial-gradient(460px 380px at -10% 380px,rgba(59,107,255,.28),transparent 70%),radial-gradient(500px 420px at 90% 1300px,rgba(138,92,255,.22),transparent 70%),#06070D">
+
+<div style="padding:54px 12px 0;display:flex;align-items:center">
+<a href="Forecast.dc.html" style="height:44px;padding:0 8px;display:flex;align-items:center;gap:4px;font-size:15px;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>ดูดวงล่วงหน้า</a>
+</div>
+
+<div style="padding:4px 20px 140px;display:flex;flex-direction:column;gap:20px">
+<div style="position:relative;padding-right:40px;display:flex;flex-direction:column;gap:2px"><span class="lbl">4 พ.ย. – 3 ธ.ค. 2569</span><h1 style="margin:0;font-size:26px;font-weight:600;line-height:1.3">หาฤกษ์</h1><span style="font-size:13px;color:#9AA1B5">(Electional astrology)</span><details style="margin-right:-40px"><summary aria-label="หน้านี้คืออะไร" style="list-style:none;position:absolute;right:0;top:18px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(200,210,255,.35);background:rgba(255,255,255,.06);color:#D6DEFF;display:flex;align-items:center;justify-content:center;font:600 15px 'IBM Plex Sans Thai Looped',sans-serif;cursor:pointer">?</summary><div data-intro style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:18px;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(200,210,255,.16);font-size:13.5px;line-height:1.6"><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">คืออะไร</span><span style="flex:1;min-width:0;color:#E6E9F2">ตัวช่วยหาวันและช่วงเวลาที่ดาวเป็นใจ สำหรับเรื่องที่คุณจะเริ่ม</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ใช้ดู</span><span style="flex:1;min-width:0;color:#E6E9F2">เลือกเรื่องที่จะทำ แล้วดูวันที่คะแนนดีที่สุดใน 30 วันข้างหน้า พร้อมเหตุผล</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ทำไมสำคัญ</span><span style="flex:1;min-width:0;color:#E6E9F2">โหราศาสตร์เชื่อว่าจังหวะเริ่มต้นส่งผลต่อเรื่องนั้นต่อไป เลือกวันดีช่วยเพิ่มโอกาสให้ราบรื่น</span></div></div></details></div>
+
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-size:15px;font-weight:600">จะทำเรื่องอะไร</span>
+<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px">
+<sc-for list="{{goals}}" as="g" hint-placeholder-count="5"><button onClick="{{g.pick}}" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 2px;border-radius:14px;border:1px solid {{g.bd}};background:{{g.bg}};color:#F2F4FA;font:500 11px 'IBM Plex Sans Thai Looped',sans-serif;line-height:1.3;text-align:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{g.i}}"/></svg>{{g.t}}</button></sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:15px;font-weight:600">3 วันที่ดีที่สุด · {{gName}}</span>
+<sc-for list="{{top}}" as="t" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:20px;background:{{t.bg}};border:1px solid {{t.bd}}">
+<div style="display:flex;align-items:center;gap:12px"><span style="flex:none;width:46px;height:46px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,7,13,.45);line-height:1.1"><b style="font-size:17px">{{t.d}}</b><span style="font-size:10px;color:#C9CEDC">{{t.m}}</span></span><span style="flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.4"><span style="font-size:14.5px;font-weight:600">{{t.wd}} · {{t.lv}}</span><span class="lbl">ช่วงเวลาแนะนำ {{t.win}}</span></span><span style="flex:none;display:flex;flex-direction:column;align-items:center;line-height:1.1"><span style="font-size:20px;font-weight:700;color:{{t.sc}}">{{t.s}}</span><span style="font-size:10.5px;color:#C9CEDC">คะแนน/100</span></span></div>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{t.why}}" as="w" hint-placeholder-count="3"><span class="chip" style="background:{{w.b}};color:{{w.c}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="{{w.ic}}"/></svg>{{w.t}}</span></sc-for></div>
+</div>
+</sc-for>
+</div>
+
+<div class="card" style="padding:14px 12px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px"><span style="font-size:15px;font-weight:600">คะแนนทุกวัน · พ.ย. – ธ.ค. 2569</span><span class="lbl">แตะวันเพื่อดูเหตุผล</span></div>
+<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;font-size:11px;color:#9AA1B5;text-align:center"><span>อา</span><span>จ</span><span>อ</span><span>พ</span><span>พฤ</span><span>ศ</span><span>ส</span></div>
+<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px">
+<sc-for list="{{cells}}" as="c" hint-placeholder-count="30"><button onClick="{{c.pick}}" style="visibility:{{c.vis}};height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:12px;border:1.5px solid {{c.bd}};background:{{c.bg}};color:#F2F4FA;font:600 13px 'IBM Plex Sans Thai Looped',sans-serif"><span>{{c.d}}<span style="font-size:9px;font-weight:500;color:#C9CEDC">{{c.mo}}</span></span><span style="font-size:10px;font-weight:500;color:#E6E9F2;opacity:.85">{{c.s}}</span></button></sc-for>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:#C9CEDC;padding:0 4px"><span style="display:flex;align-items:center;gap:5px"><i style="width:12px;height:12px;border-radius:3px;background:rgba(124,224,167,.45)"></i>ดีมาก 70+</span><span style="display:flex;align-items:center;gap:5px"><i style="width:12px;height:12px;border-radius:3px;background:rgba(255,210,122,.35)"></i>พอใช้ 50–69</span><span style="display:flex;align-items:center;gap:5px"><i style="width:12px;height:12px;border-radius:3px;background:rgba(255,107,107,.30)"></i>ควรเลี่ยง ต่ำกว่า 50</span></div>
+<div style="display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:14px;background:rgba(255,255,255,.04)">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:14px;font-weight:600">{{selT}}</span><span style="font-size:16px;font-weight:700;color:{{selC}}">{{selS}} คะแนน</span></div>
+<span class="lbl">ดวงจันทร์ในราศี{{selMs}} · {{selPh}} · ช่วงเวลาแนะนำ {{selWin}}</span>
+<sc-for list="{{selWhy}}" as="w" hint-placeholder-count="4"><span style="font-size:13px;line-height:1.55;color:#DCE0EA"><b style="color:{{w.c}};display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="{{w.ic}}"/></svg>{{w.k}}</b> {{w.l}}</span></sc-for>
+</div>
+</div>
+<span class="lbl">คะแนนคิดจากตำแหน่งดาวช่วง 08:00–20:00 น.: ข้างขึ้นข้างแรม · มุมที่ดวงจันทร์ทำกับดาว · ดาวพุธ/ศุกร์ถอยหลัง · ราศีของดวงจันทร์ที่เข้ากับเรื่องนั้น · ช่วงจันทร์ว่าง · ยังไม่รวมเรือนในชาร์ตคุณและลัคนาของเวลาเริ่ม · เกณฑ์ตั้งขึ้นเอง ไม่ใช่ของ astro-seek</span>
+</div>
+
+<nav aria-label="แท็บหลัก" style="position:absolute;left:0;right:0;bottom:0;height:91px;padding:0 6px 26px;box-sizing:border-box;border-radius:32px 32px 0 0;background:linear-gradient(180deg,#1C1D24,#000000);box-shadow:0 -8px 30px rgba(0,0,0,.30);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;border-top:1px solid rgba(255,255,255,.10)">
+<a href="Main.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><path d="M12 3v5M12 16v5M3 12h5M16 12h5"></path></svg>ชาร์ตของฉัน</a>
+<a href="People.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg>บุคคล</a>
+<a href="Today.dc.html" class="tab" style="position:relative;color:#C9CEDC;font-weight:500"><span style="position:absolute;top:-44px;left:50%;margin-left:-44px;width:88px;height:88px;border-radius:999px;background:#0A0B10;display:flex;align-items:center;justify-content:center"><span style="width:72px;height:72px;border-radius:999px;background:radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21);display:flex;align-items:center;justify-content:center;color:#B9A6FF"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span></span>วันนี้</a>
+<a href="Forecast.dc.html" class="tab" aria-current="page" style="color:#B9A6FF;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"></path></svg>ดวงล่วงหน้า</a>
+<a href="Settings.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"></path></svg>ตั้งค่า</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2600}}'>
+class Component extends DCLogic {
+renderVals() {
+var self=this; var st=this.state||{}; var G=st.g||'start';
+var D=[[4,11,"กันย์",299,1,1,[[13.0,"อาทิตย์","ฉาก60"],[14.0,"พุธ","ฉาก60"]]],[5,11,"กันย์",311,1,1,[]],[6,11,"ตุลย์",323,1,1,[[14.5,"เสาร์","เล็ง"]]],[7,11,"ตุลย์",335,1,1,[[14.5,"อังคาร","ฉาก60"],[18.0,"ศุกร์","กุม"]]],[8,11,"พิจิก",347,1,1,[[12.0,"พลูโต","ฉาก"]]],[9,11,"พิจิก",358,1,1,[[14.5,"อาทิตย์","กุม"]]],[10,11,"พิจิก",10,1,1,[[19.5,"เนปจูน","ตรีโกณ"]]],[11,11,"ธนู",21,1,1,[[9.0,"เสาร์","ตรีโกณ"]]],[12,11,"ธนู",32,1,1,[[13.5,"ศุกร์","ฉาก60"],[16.0,"อังคาร","ตรีโกณ"],[18.5,"พฤหัสบดี","ตรีโกณ"]]],[13,11,"มังกร",43,1,1,[[14.0,"พุธ","ฉาก60"]]],[14,11,"มังกร",54,0,0,[]],[15,11,"มังกร",64,0,0,[]],[16,11,"กุมภ์",75,0,0,[[10.0,"เสาร์","ฉาก60"]]],[17,11,"กุมภ์",86,0,0,[[15.0,"ศุกร์","ตรีโกณ"],[19.0,"อาทิตย์","ฉาก"]]],[18,11,"มีน",97,0,0,[[12.5,"ยูเรนัส","ฉาก"],[18.0,"พุธ","ตรีโกณ"]]],[19,11,"มีน",109,0,0,[]],[20,11,"มีน",121,0,0,[[9.0,"อาทิตย์","ตรีโกณ"],[16.5,"เนปจูน","กุม"],[19.0,"พลูโต","ฉาก60"]]],[21,11,"เมษ",133,0,0,[]],[22,11,"เมษ",146,0,0,[[11.0,"พฤหัสบดี","ตรีโกณ"],[15.0,"อังคาร","ตรีโกณ"]]],[23,11,"พฤษภ",160,0,0,[[12.5,"พุธ","เล็ง"]]],[24,11,"พฤษภ",173,0,0,[[12.5,"พฤหัสบดี","ฉาก"],[17.5,"อังคาร","ฉาก"]]],[25,11,"เมถุน",187,0,0,[]],[26,11,"เมถุน",202,0,0,[[11.0,"ศุกร์","ตรีโกณ"],[12.5,"พฤหัสบดี","ฉาก60"],[18.5,"อังคาร","ฉาก60"]]],[27,11,"กรกฎ",216,0,0,[]],[28,11,"กรกฎ",229,0,0,[[13.0,"ศุกร์","ฉาก"]]],[29,11,"สิงห์",243,0,0,[]],[30,11,"สิงห์",256,0,0,[[16.0,"พฤหัสบดี","กุม"],[17.5,"ศุกร์","ฉาก60"]]],[1,12,"กันย์",269,0,0,[[13.5,"อาทิตย์","ฉาก"]]],[2,12,"กันย์",281,0,0,[[16.5,"พุธ","ฉาก60"]]],[3,12,"ตุลย์",293,0,0,[[9.5,"ยูเรนัส","ตรีโกณ"],[10.0,"พลูโต","ตรีโกณ"],[18.0,"เสาร์","เล็ง"]]]];
+var VOC={"11-1":["04:59","11:18"],"11-3":["07:10","15:28"],"11-4":["13:57","24:00"],"11-5":["00:00","21:38"],"11-7":["20:19","24:00"],"11-8":["00:00","05:40"],"11-10":["06:25","15:36"],"11-12":["18:29","24:00"],"11-13":["00:00","03:27"],"11-15":["01:55","16:24"],"11-17":["21:25","24:00"],"11-18":["00:00","04:19"],"11-20":["08:46","12:52"],"11-22":["14:38","17:10"],"11-24":["17:09","18:10"],"11-26":["12:23","17:51"],"11-28":["12:40","18:21"],"11-30":["17:10","21:13"],"12-2":["16:10","24:00"],"12-3":["00:00","03:04"],"12-5":["05:40","11:35"],"12-7":["16:07","22:07"],"12-10":["04:06","10:09"],"12-11":["02:12","24:00"],"12-12":["00:00","23:06"],"12-15":["05:39","11:36"],"12-17":["12:42","21:34"],"12-19":["23:39","24:00"],"12-20":["00:00","03:30"],"12-22":["00:26","05:27"],"12-24":["00:01","04:58"],"12-25":["07:09","24:00"],"12-26":["00:00","04:12"],"12-27":["23:38","24:00"],"12-28":["00:00","05:13"],"12-29":["17:17","24:00"],"12-30":["00:00","09:27"],"1-1":["10:27","17:16"]};
+var GO={start:['M5 21V4h11l-2 4 2 4H5','เริ่มงาน เปิดตัว','เริ่มงานหรือเปิดตัว',['เมษ','สิงห์','ธนู','มังกร']],contract:['M4 20h4L19 9l-4-4L4 16zM14 6l4 4','เซ็นสัญญา','เซ็นสัญญา',['พฤษภ','กันย์','มังกร']],love:['M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z','ความรัก นัดเดท','ความรัก',['พฤษภ','กรกฎ','ตุลย์','มีน']],move:['M4 11l8-7 8 7M6 10v10h12V10M10 20v-5h4v5','ย้ายบ้าน ซื้อของใหญ่','ย้ายบ้านหรือซื้อของ',['พฤษภ','กรกฎ','มังกร']],travel:['M2 16l20-8-6 12-3-5zM13 15l3-7','เดินทาง','เดินทาง',['เมถุน','ธนู']]};
+var GOOD={'ตรีโกณ':1,'ฉาก60':1,'กุม':1}, HARD={'ฉาก':1,'เล็ง':1};
+var WDN=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+function pad(h){ var H=Math.floor(h), M=Math.round((h-H)*60); return (H<10?'0':'')+H+':'+(M<10?'0':'')+M; }
+function score(x){ var s=50, why=[], best=null, el=x[3], g=GO[G];
+ if (el<12||el>348){ s-=15; why.push([-1,'ช่วงจันทร์ดับ','พลังยังไม่ชัด ไม่เหมาะเริ่มเรื่องใหม่']); }
+ else if (el<180){ s+=12; why.push([1,'ข้างขึ้น','พลังกำลังเพิ่ม เหมาะเริ่มต้นและขยาย']); }
+ else { s-=8; why.push([-1,'ข้างแรม','พลังลดลง เหมาะปิดงานมากกว่าเริ่ม']); }
+ x[6].forEach(function(a){ var p=a[1], t=a[2];
+  if (GOOD[t] && (p==='ศุกร์'||p==='พฤหัสบดี')){ s+=12; why.push([1,'จันทร์'+t+p+' '+pad(a[0])+' น.','ดาวให้คุณหนุน เรื่องราบรื่น มีคนช่วย']); if(!best||a[0]) best=a[0]; }
+  else if (GOOD[t] && (p==='อาทิตย์'||p==='พุธ')){ s+=5; why.push([1,'จันทร์'+t+p,'สื่อสารและตัดสินใจคล่อง']); if(!best) best=a[0]; }
+  else if (HARD[t] && (p==='เสาร์'||p==='อังคาร'||p==='พลูโต'||p==='ยูเรนัส')){ s-=12; why.push([-1,'จันทร์'+t+p+' '+pad(a[0])+' น.','มีแรงต้าน ล่าช้า หรือขัดแย้ง']); } });
+ if (x[4] && (G==='contract'||G==='travel'||G==='start')){ s-= G==='start'?10:28; why.push([-1,'พุธถอยหลัง','เอกสารและการสื่อสารผิดพลาดง่าย']); }
+ if (x[5] && (G==='love'||G==='move')){ s-=28; why.push([-1,'ศุกร์ถอยหลัง','ความรักและการเงินควรรอให้ชัดก่อน']); }
+ if (g[3].indexOf(x[2])>=0){ s+=8; why.push([1,'จันทร์ในราศี'+x[2],'ราศีที่เข้ากับเรื่องนี้']); }
+ var v = VOC[x[1]+'-'+x[0]] || null; var win;
+ if (v && v[0]<'20:00' && v[1]>'08:00'){ s-=6; why.push([-1,'จันทร์ว่าง '+v[0]+'–'+v[1]+' น.','เลี่ยงเริ่มในช่วงนี้']);
+   win = v[0]>'12:00' ? '08:00–'+v[0]+' น.' : (v[1]<'18:00' ? v[1]+'–20:00 น.' : 'ไม่มีช่วงที่ดี'); }
+ else win = best ? pad(Math.max(8,best-2))+'–'+pad(Math.min(20,best+0.5))+' น.' : '08:00–20:00 น.';
+ s=Math.max(5,Math.min(98,s)); return { s:s, why:why, win:win }; }
+function col(s){ return s>=70?['rgba(124,224,167,.30)','#9FEAC0']:s>=50?['rgba(255,210,122,.20)','#FFD27A']:['rgba(255,107,107,.18)','#FF9A9A']; }
+function wd(x){ var dt=new Date(Date.UTC(2026,x[1]-1,x[0])); return WDN[dt.getUTCDay()]; }
+function mn(x){ return x[1]===11?'พ.ย.':'ธ.ค.'; }
+var R=D.map(function(x,i){ var r=score(x); r.x=x; r.i=i; return r; });
+var sel=st.s===undefined?0:st.s;
+var top=R.slice().sort(function(a,b){return b.s-a.s;}).slice(0,3).map(function(r){ var c=col(r.s); return { d:r.x[0], m:mn(r.x), wd:'วัน'+wd(r.x), lv:r.s>=70?'ดีมาก':'พอใช้', win:r.win, s:r.s, sc:c[1], bg:c[0].replace(/\.\d+\)$/,',.10)').replace(/,,/,','), bd:c[1]+'66', why:r.why.slice(0,4).map(function(w){ return { t:w[1], ic:w[0]>0?'M5 12l5 5L20 7':'M6 6l12 12M18 6L6 18', b:w[0]>0?'rgba(124,224,167,.14)':'rgba(255,107,107,.14)', c:w[0]>0?'#9FEAC0':'#FF9A9A' }; }) }; });
+var cells=[0,1,2].map(function(){ return { vis:'hidden', d:'', mo:'', s:'', bg:'transparent', bd:'transparent', pick:function(){} }; }).concat(R.map(function(r,i){ var c=col(r.s); return { vis:'visible', mo: r.x[1]===12&&r.x[0]===1?' ธ.ค.':'', d:r.x[0], s:r.s, bg:c[0], bd:i===sel?'#F2F4FA':'transparent', pick:function(){ self.setState({s:i}); } }; }));
+var S=R[sel], el=S.x[3];
+return { goals:Object.keys(GO).map(function(k){ var on=k===G; return { i:GO[k][0], t:GO[k][1], bd:on?'#B9A6FF':'rgba(255,255,255,.10)', bg:on?'rgba(185,166,255,.20)':'rgba(255,255,255,.03)', pick:function(){ self.setState({g:k}); } }; }),
+gName:GO[G][2], top:top, cells:cells,
+selT:'วัน'+wd(S.x)+'ที่ '+S.x[0]+' '+mn(S.x), selS:S.s, selC:col(S.s)[1], selMs:S.x[2], selPh:(el<12||el>348)?'จันทร์ดับ':el<180?'ข้างขึ้น':'ข้างแรม', selWin:S.win,
+selWhy:S.why.map(function(w){ return { k:w[1], ic:w[0]>0?'M5 12l5 5L20 7':'M6 6l12 12M18 6L6 18', l:'· '+w[2], c:w[0]>0?'#9FEAC0':'#FF9A9A' }; }) };
+}
+}
+</script>
+</body>
+</html>

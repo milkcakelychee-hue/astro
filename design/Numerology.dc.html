@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>เลขศาสตร์</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.lbl{font-size:12px;color:#9AA1B5}
+.card{border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10)}
+.seg{flex:1;height:40px;border:none;border-radius:12px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif;white-space:nowrap}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.tr{display:flex;flex-direction:column;gap:10px;width:100%;padding:14px;box-sizing:border-box;border:none;border-top:1px solid rgba(255,255,255,.07);background:transparent;color:#F2F4FA;font-family:inherit;text-align:left}
+.gl{width:34px;height:34px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(255,255,255,.14)}
+.ai{width:30px;height:30px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+.chip{height:22px;padding:0 8px;border-radius:7px;display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.hr{display:grid;grid-template-columns:26px minmax(0,1fr) auto 44px;align-items:center;gap:8px;min-height:40px;border-top:1px solid rgba(255,255,255,.06);font-size:13.5px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:64px;color:#4A4E5C;text-decoration:none;font-size:12px;white-space:nowrap}
+.ht{display:flex;flex-direction:column;gap:4px;min-height:74px;padding:8px;box-sizing:border-box;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+summary::-webkit-details-marker{display:none}
+.chv svg{transition:transform .2s}.chv[data-o="true"] svg{transform:rotate(180deg)}
+</style>
+</helmet>
+<div style="width:390px;min-height:2300px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 85% -40px,rgba(220,227,245,.24),transparent 70%),radial-gradient(460px 380px at -10% 380px,rgba(59,107,255,.28),transparent 70%),radial-gradient(500px 420px at 90% 1300px,rgba(138,92,255,.22),transparent 70%),#06070D">
+
+<div style="padding:54px 12px 0;display:flex;align-items:center">
+<a href="Forecast.dc.html" style="height:44px;padding:0 8px;display:flex;align-items:center;gap:4px;font-size:15px;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>ดูดวงล่วงหน้า</a>
+</div>
+
+<div style="padding:4px 20px 140px;display:flex;flex-direction:column;gap:20px">
+<div style="position:relative;padding-right:40px;display:flex;flex-direction:column;gap:2px"><span class="lbl">ตัวอย่าง · 5 ส.ค. 2542</span><h1 style="margin:0;font-size:26px;font-weight:600;line-height:1.3">เลขศาสตร์</h1><span style="font-size:13px;color:#9AA1B5">(Numerology)</span><details style="margin-right:-40px"><summary aria-label="หน้านี้คืออะไร" style="list-style:none;position:absolute;right:0;top:18px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(200,210,255,.35);background:rgba(255,255,255,.06);color:#D6DEFF;display:flex;align-items:center;justify-content:center;font:600 15px 'IBM Plex Sans Thai Looped',sans-serif;cursor:pointer">?</summary><div data-intro style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:18px;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(200,210,255,.16);font-size:13.5px;line-height:1.6"><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">คืออะไร</span><span style="flex:1;min-width:0;color:#E6E9F2">ศาสตร์ตัวเลขที่ลดวันเกิดและชื่อให้เหลือเลขหลักเดียว แต่ละเลขมีความหมายของตัวเอง</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ใช้ดู</span><span style="flex:1;min-width:0;color:#E6E9F2">ดูแก่นนิสัยจากวันเกิด (Life Path) และธีมของปีนี้ เดือนนี้ (ปีส่วนตัว)</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ทำไมสำคัญ</span><span style="flex:1;min-width:0;color:#E6E9F2">เป็นมุมมองเสริมที่คำนวณง่าย ใช้คู่กับชาร์ตดาวเพื่อดูจังหวะชีวิตเป็นรอบ 9 ปี</span></div></div></details></div>
+
+<div style="display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:24px;background:linear-gradient(140deg,rgba(40,50,70,.95),rgba(91,167,255,.22) 60%,rgba(138,92,255,.25));border:1px solid rgba(180,200,255,.30)">
+<span style="font-size:12px;color:#D6DEFF">เลขชีวิต (Life Path)</span>
+<div style="display:flex;align-items:center;gap:16px"><span style="flex:none;width:76px;height:76px;border-radius:22px;background:rgba(6,7,13,.45);display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:700;color:#B5D6FF">5</span><span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:19px;font-weight:600">นักสำรวจ</span><span style="font-size:13px;line-height:1.55;color:#E6E9F2">รักอิสระ ชอบเปลี่ยนแปลง เรียนรู้จากประสบการณ์จริง ปรับตัวเก่ง แต่เบื่อง่ายถ้าถูกจำกัด</span></span></div>
+<div style="display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:12px;background:rgba(6,7,13,.35);font-size:12.5px;line-height:1.6;color:#C9CEDC"><span>วิธีคิด: วัน 5 · เดือน 8 · ปี 1999 → 1+9+9+9 = 28 → 2+8 = 10 → 1</span><span>5 + 8 + 1 = 14 → 1+4 = <b style="color:#B5D6FF">5</b></span></div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<sc-for list="{{core}}" as="c" hint-placeholder-count="4"><div class="card" style="padding:14px;display:flex;flex-direction:column;gap:4px"><span class="lbl">{{c.t}}</span><span style="display:flex;align-items:baseline;gap:8px"><b style="font-size:28px;color:{{c.col}}">{{c.n}}</b><span style="font-size:13px;font-weight:600">{{c.k}}</span></span><span style="font-size:12px;line-height:1.5;color:#C9CEDC">{{c.d}}</span></div></sc-for>
+</div>
+
+<div class="card" style="padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">รอบ 9 ปีของคุณ</span><span class="lbl">ปีส่วนตัววนจาก 1 ถึง 9 แล้วเริ่มใหม่ · แตะปีเพื่ออ่าน</span></div>
+<div style="display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:4px">
+<sc-for list="{{yrs}}" as="y" hint-placeholder-count="9"><button onClick="{{y.pick}}" style="height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:0;border-radius:10px;border:1.5px solid {{y.bd}};background:{{y.bg}};color:#F2F4FA;font:700 16px 'IBM Plex Sans Thai Looped',sans-serif"><span>{{y.n}}</span><span style="font-size:9px;font-weight:500;color:#C9CEDC">{{y.y}}</span></button></sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;padding:12px;border-radius:14px;background:rgba(255,255,255,.04)"><span style="font-size:14px;font-weight:600">{{yT}}</span><span style="font-size:13px;line-height:1.6;color:#DCE0EA">{{yD}}</span></div>
+</div>
+
+<div class="card" style="padding:16px;display:flex;flex-direction:column;gap:10px">
+<span style="font-size:15px;font-weight:600">เลขจากชื่อ (เลขศาสตร์ไทย)</span>
+<div style="padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);font-size:15px">ตัวอย่าง</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{nm}}" as="x" hint-placeholder-count="3"><span style="display:flex;flex-direction:column;align-items:center;min-width:40px;padding:6px 4px;border-radius:10px;background:rgba(255,255,255,.05)"><span style="font-size:16px">{{x.c}}</span><b style="font-size:12px;color:#B5D6FF">{{x.v}}</b></span></sc-for><span style="display:flex;align-items:center;padding:0 6px;font-size:15px;color:#9AA1B5">=</span><span style="display:flex;align-items:center;font-size:22px;font-weight:700;color:#B5D6FF">10</span></div>
+<span style="font-size:13px;line-height:1.6;color:#DCE0EA"><b>ผลรวม 10</b> · เลขแห่งการเริ่มต้นและความเป็นผู้นำ มีคนสนับสนุน แต่ควรระวังความใจร้อน</span>
+<span class="lbl">ใส่ชื่อ-นามสกุลจริงได้ในแอปจริง · ค่าตัวอักษรใช้ตารางเลขศาสตร์ไทยที่ใช้กันทั่วไป ซึ่งแต่ละสำนักอาจต่างกันเล็กน้อย</span>
+</div>
+<span class="lbl">เลขชีวิตและปีส่วนตัวคิดแบบพีทาโกรัส (Pythagorean) · ข้อความความหมายเป็นตัวอย่าง รอดึงจากคลังคำอธิบาย · astro-seek ไม่มีเลขศาสตร์ไทยให้เทียบ</span>
+</div>
+
+<nav aria-label="แท็บหลัก" style="position:absolute;left:0;right:0;bottom:0;height:91px;padding:0 6px 26px;box-sizing:border-box;border-radius:32px 32px 0 0;background:linear-gradient(180deg,#1C1D24,#000000);box-shadow:0 -8px 30px rgba(0,0,0,.30);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;border-top:1px solid rgba(255,255,255,.10)">
+<a href="Main.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><path d="M12 3v5M12 16v5M3 12h5M16 12h5"></path></svg>ชาร์ตของฉัน</a>
+<a href="People.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg>บุคคล</a>
+<a href="Today.dc.html" class="tab" style="position:relative;color:#C9CEDC;font-weight:500"><span style="position:absolute;top:-44px;left:50%;margin-left:-44px;width:88px;height:88px;border-radius:999px;background:#0A0B10;display:flex;align-items:center;justify-content:center"><span style="width:72px;height:72px;border-radius:999px;background:radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21);display:flex;align-items:center;justify-content:center;color:#B9A6FF"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span></span>วันนี้</a>
+<a href="Forecast.dc.html" class="tab" aria-current="page" style="color:#B9A6FF;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"></path></svg>ดวงล่วงหน้า</a>
+<a href="Settings.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"></path></svg>ตั้งค่า</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2300}}'>
+class Component extends DCLogic {
+renderVals() {
+var self=this; var st=this.state||{}; var CUR=4; var sel=st.y===undefined?CUR:st.y;
+var M={1:['เริ่มต้น','ปีเริ่มรอบใหม่ เหมาะตั้งเป้าหมาย เริ่มงานหรือโปรเจกต์ใหม่'],2:['ร่วมมือ','ปีของความสัมพันธ์และความอดทน ค่อยๆ สร้าง ทำงานกับคนอื่น'],3:['สร้างสรรค์','ปีสนุก สังคมกว้าง สื่อสารและแสดงออกได้ดี'],4:['วางรากฐาน','ปีทำงานหนัก จัดระบบ สร้างความมั่นคง'],5:['เปลี่ยนแปลง','ปีแห่งความเปลี่ยนแปลง เดินทาง ลองสิ่งใหม่ ยืดหยุ่นไว้'],6:['ครอบครัว','ปีของความรับผิดชอบ บ้าน ครอบครัว และการดูแลคนอื่น'],7:['ทบทวน','ปีเรียนรู้ภายใน พักคิด ศึกษาเชิงลึก'],8:['ผลลัพธ์','ปีเก็บเกี่ยว งาน เงิน และอำนาจเด่นขึ้น'],9:['ปิดรอบ','ปีปล่อยวาง จบสิ่งเก่า เตรียมเริ่มรอบใหม่']};
+var Y=[[2565,1],[2566,2],[2567,3],[2568,4],[2569,5],[2570,6],[2571,7],[2572,8],[2573,9]];
+var yrs=Y.map(function(y,i){ var on=i===sel; return { n:y[1], y:String(y[0]).slice(2), bd:on?'#F2F4FA':'transparent', bg:i===CUR?'rgba(91,167,255,.35)':i<CUR?'rgba(255,255,255,.04)':'rgba(255,255,255,.08)', pick:function(){ self.setState({y:i}); } }; });
+var s=Y[sel];
+return { core:[{t:'เลขวันเกิด',n:5,k:'ปรับตัวเก่ง',d:'คล่องแคล่ว สนใจหลายเรื่อง',col:'#B5D6FF'},{t:'ปีส่วนตัว 2569',n:5,k:M[5][0],d:'ธีมปีนี้: ลองสิ่งใหม่ ยืดหยุ่น',col:'#FFD27A'},{t:'เดือนส่วนตัว พ.ย.',n:7,k:M[7][0],d:'เดือนนี้เหมาะพักคิด ทบทวน',col:'#9FEAC0'},{t:'ปีหน้า 2570',n:6,k:M[6][0],d:'บ้าน ครอบครัว ความรับผิดชอบ',col:'#FF9EC7'}],
+yrs:yrs, yT:'ปี '+s[0]+' · ปีส่วนตัว '+s[1]+' '+M[s[1]][0]+(sel===CUR?' (ปีนี้)':''), yD:M[s[1]][1],
+nm:[{c:'บ',v:2},{c:'ล',v:6},{c:'ู',v:2}] };
+}
+}
+</script>
+</body>
+</html>

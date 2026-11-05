@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ดวงรอบปี</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.lbl{font-size:12px;color:#9AA1B5}
+.card{border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10)}
+.seg{flex:1;height:40px;border:none;border-radius:12px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif;white-space:nowrap}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.tr{display:flex;flex-direction:column;gap:10px;width:100%;padding:14px;box-sizing:border-box;border:none;border-top:1px solid rgba(255,255,255,.07);background:transparent;color:#F2F4FA;font-family:inherit;text-align:left}
+.gl{width:34px;height:34px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(255,255,255,.14)}
+.ai{width:30px;height:30px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+.chip{height:22px;padding:0 8px;border-radius:7px;display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.hr{display:grid;grid-template-columns:26px minmax(0,1fr) auto 44px;align-items:center;gap:8px;min-height:40px;border-top:1px solid rgba(255,255,255,.06);font-size:13.5px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:64px;color:#4A4E5C;text-decoration:none;font-size:12px;white-space:nowrap}
+.ht{display:flex;flex-direction:column;gap:4px;min-height:74px;padding:8px;box-sizing:border-box;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+summary::-webkit-details-marker{display:none}
+</style>
+</helmet>
+<div style="width:390px;min-height:2300px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 85% -40px,rgba(255,122,89,.30),transparent 70%),radial-gradient(460px 380px at -10% 380px,rgba(138,92,255,.30),transparent 70%),radial-gradient(500px 420px at 90% 1400px,rgba(31,165,135,.22),transparent 70%),#06070D">
+
+<div style="padding:54px 12px 0;display:flex;align-items:center">
+<a href="Forecast.dc.html" style="height:44px;padding:0 8px;display:flex;align-items:center;gap:4px;font-size:15px;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>ดูดวงล่วงหน้า</a>
+</div>
+
+<div style="padding:8px 20px 140px;display:flex;flex-direction:column;gap:18px">
+<div style="position:relative;padding-right:40px;display:flex;flex-direction:column;gap:2px"><span class="lbl">ชาร์ตของ ตัวอย่าง</span><h1 style="margin:0;font-size:26px;font-weight:600;line-height:1.3">ดวงรอบปีนับจากวันเกิด</h1><span style="font-size:13px;color:#9AA1B5">(Solar Return)</span><span style="font-size:13px;color:#C9CEDC;line-height:1.6;margin-top:4px">ชาร์ตของวินาทีที่ดวงอาทิตย์กลับมาตำแหน่งเดียวกับตอนเกิด ใช้ดูธีมของ 1 ปีนับจากวันเกิดถึงวันเกิดครั้งถัดไป</span><details style="margin-right:-40px"><summary aria-label="หน้านี้คืออะไร" style="list-style:none;position:absolute;right:0;top:18px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(200,210,255,.35);background:rgba(255,255,255,.06);color:#D6DEFF;display:flex;align-items:center;justify-content:center;font:600 15px 'IBM Plex Sans Thai Looped',sans-serif;cursor:pointer">?</summary><div data-intro style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:18px;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(200,210,255,.16);font-size:13.5px;line-height:1.6"><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">คืออะไร</span><span style="flex:1;min-width:0;color:#E6E9F2">ชาร์ตที่ตั้งขึ้นตอนดวงอาทิตย์กลับมาตำแหน่งเดิมทุกวันเกิด</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ใช้ดู</span><span style="flex:1;min-width:0;color:#E6E9F2">ดูธีมใหญ่ของปีนับจากวันเกิดนี้ถึงวันเกิดหน้า</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ทำไมสำคัญ</span><span style="flex:1;min-width:0;color:#E6E9F2">บอกว่าปีนี้พลังไปลงด้านไหน และมุมเด่นจะส่งผลเรื่องอะไร</span></div></div></details></div>
+
+<div role="tablist" aria-label="ปี" style="display:flex;gap:4px;padding:4px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10)">
+<button role="tab" class="{{c0}}" onClick="{{s0}}">ปีนี้ · อายุ 27</button>
+<button role="tab" class="{{c1}}" onClick="{{s1}}">ปีหน้า · อายุ 28</button>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;padding:18px;border-radius:24px;background:linear-gradient(140deg,rgba(255,122,89,.30),rgba(138,92,255,.32) 55%,rgba(59,107,255,.25));border:1px solid rgba(255,180,150,.35)">
+<div style="display:flex;align-items:center;gap:12px"><span style="width:52px;height:52px;flex:none;border-radius:16px;background:rgba(6,7,13,.45);display:flex;align-items:center;justify-content:center;font-size:26px;color:#F3D46E">☉&#xFE0E;</span><div style="display:flex;flex-direction:column;line-height:1.35"><span style="font-size:12px;color:#FFD9C9">{{range}}</span><span style="font-size:18px;font-weight:600">{{theme}}</span></div></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+<sc-for list="{{keys}}" as="k" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:3px;padding:10px;border-radius:14px;background:rgba(6,7,13,.40);line-height:1.3"><span style="font-size:11px;color:#C9CEDC">{{k.l}}</span><span style="font-size:15px;font-weight:600">{{k.v}}</span><span style="font-size:11px;color:#D6CEFF">{{k.s}}</span></div></sc-for>
+</div>
+<p style="margin:0;font-size:14px;line-height:1.6;color:#E6E9F2">{{sum}}</p>
+<span class="lbl" style="color:#C9CEDC">{{exact}}</span>
+</div>
+
+<div class="card" style="padding:14px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:15px;font-weight:600">ดาวในแต่ละเรือนของปีนี้</span><span class="lbl">แตะเรือนเพื่ออ่าน</span></div>
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px">
+<sc-for list="{{houses}}" as="h" hint-placeholder-count="12"><button class="ht" onClick="{{h.pick}}" aria-pressed="{{h.on}}" style="{{h.st}};color:#F2F4FA;font-family:inherit;text-align:left"><span style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:700;color:{{h.nc}}">{{h.n}}</span><span style="font-size:9.5px;color:#9AA1B5">{{h.z}}</span></span><span style="font-size:15px;letter-spacing:1px;line-height:1.2;color:#F3D46E">{{h.g}}</span></button></sc-for>
+</div>
+<div style="padding:12px;border-radius:14px;background:rgba(6,7,13,.45);border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:4px">
+<span style="font-size:14px;font-weight:600">{{hT}}</span>
+<span style="font-size:13px;line-height:1.6;color:#DCE0EA">{{hD}}</span>
+</div>
+</div>
+
+<div class="card" style="padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">มุมเด่นในชาร์ตปีนี้</span><span class="lbl">เรียงจากแน่นที่สุด (orb 3°) · แตะเพื่ออ่านว่าส่งผลเรื่องอะไร</span></div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 10px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.04);font-size:12px;line-height:1.5;gap:6px 12px;color:#C9CEDC"><span><b style="color:#F3D46E">☌&#xFE0E; กุม</b> (Conjunction) รวมพลัง</span><span><b style="color:#7FB8FF">⚹&#xFE0E; โยค</b> (Sextile) เปิดโอกาส</span><span><b style="color:#FFB08A">□&#xFE0E; ฉาก</b> (Square) ขัดกัน</span><span><b style="color:#7FE3C0">△&#xFE0E; ตรีโกณ</b> (Trine) ไหลลื่น</span><span><b style="color:#FF8A8A">☍&#xFE0E; เล็ง</b> (Opposition) ต้องสมดุล</span></div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{asp}}" as="a" hint-placeholder-count="5">
+<button onClick="{{a.pick}}" aria-expanded="{{a.open}}" style="display:flex;flex-direction:column;gap:10px;width:100%;padding:12px 14px;box-sizing:border-box;border-radius:16px;background:{{a.bg}};border:1px solid {{a.bd}};color:#F2F4FA;font-family:inherit;text-align:left">
+<span style="display:flex;align-items:center;gap:12px;width:100%">
+<span style="flex:none;display:flex;align-items:center;gap:4px;padding:6px 10px;border-radius:12px;background:rgba(6,7,13,.45)"><span style="font-size:16px;width:20px;text-align:center">{{a.g1}}</span><span style="font-size:15px;font-weight:700;color:{{a.c}}">{{a.s}}</span><span style="font-size:16px;width:20px;text-align:center">{{a.g2}}</span></span>
+<span style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:0"><span style="font-size:14.5px;font-weight:600;line-height:1.35">{{a.t}}</span><span style="font-size:12px;color:#9AA1B5">{{a.m}} · {{a.o}}</span></span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9CEDC" stroke-width="2" aria-hidden="true" style="flex:none;{{a.rot}}"><path d="m6 9 6 6 6-6"/></svg>
+</span>
+<span style="font-size:13px;line-height:1.6;color:#DCE0EA">{{a.sum}}</span>
+<sc-if value="{{a.open}}" hint-placeholder-val="{{ false }}">
+<span style="display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:14px;background:rgba(6,7,13,.45);border:1px solid rgba(255,255,255,.08)">
+<span style="font-size:12px;color:{{a.c}}">{{a.tyl}}</span>
+<span style="display:flex;gap:8px;font-size:13px;line-height:1.6"><span style="flex:none;color:#9AA1B5;width:78px">ส่งผลเรื่อง</span><span style="color:#F2F4FA">{{a.area}}</span></span>
+<span style="display:flex;gap:8px;font-size:13px;line-height:1.6"><span style="flex:none;color:#9AA1B5;width:78px">ควรทำ</span><span style="color:#F2F4FA">{{a.tip}}</span></span>
+</span>
+</sc-if>
+</button>
+</sc-for>
+</div>
+</div>
+<span class="lbl">คำนวณที่สถานที่เกิด (เพชรบุรี) · Placidus · เวลาเป็นเวลาไทย · ตำแหน่งดาวคำนวณแบบเดียวกับ astro-seek</span>
+</div>
+
+<nav aria-label="แท็บหลัก" style="position:absolute;left:0;right:0;bottom:0;height:91px;padding:0 6px 26px;box-sizing:border-box;border-radius:32px 32px 0 0;background:linear-gradient(180deg,#1C1D24,#000000);box-shadow:0 -8px 30px rgba(0,0,0,.30);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;border-top:1px solid rgba(255,255,255,.10)">
+<a href="Main.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><path d="M12 3v5M12 16v5M3 12h5M16 12h5"></path></svg>ชาร์ตของฉัน</a>
+<a href="People.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg>บุคคล</a>
+<a href="Today.dc.html" class="tab" style="position:relative;color:#C9CEDC;font-weight:500"><span style="position:absolute;top:-44px;left:50%;margin-left:-44px;width:88px;height:88px;border-radius:999px;background:#0A0B10;display:flex;align-items:center;justify-content:center"><span style="width:72px;height:72px;border-radius:999px;background:radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21);display:flex;align-items:center;justify-content:center;color:#B9A6FF"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span></span>วันนี้</a>
+<a href="Forecast.dc.html" class="tab" aria-current="page" style="color:#B9A6FF;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"></path></svg>ดวงล่วงหน้า</a>
+<a href="Settings.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"></path></svg>ตั้งค่า</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2300}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this; var st = this.state || {}; var V = '\uFE0E';
+var yi = st.yi || 0; var as = st.as === undefined ? -1 : st.as; var XP = [[["ความฝันกับการเปลี่ยนแปลงลึก ๆ ช่วยกันเงียบ ๆ ปีนี้เหมาะปล่อยความเชื่อเก่าที่ไม่ใช่", "จิตใจ ความเชื่อ แรงบันดาลใจ", "ลองฝึกสมาธิ เขียนบันทึก หรือทำงานศิลปะ จะเห็นตัวเองชัดขึ้น"], ["ความคิดกับบุคลิกไปด้วยกันดี พูดอะไรคนฟัง สื่อสารแล้วดูน่าเชื่อถือ", "การพูด การนำเสนอ การเจรจา", "ปีนี้เหมาะสมัครงาน สัมภาษณ์ หรือเปิดตัวสิ่งใหม่"], ["ไอเดียใหม่กับแรงบันดาลใจไหลเข้ามาเรื่อย ๆ เป็นพื้นหลังของทั้งปี", "ความคิดสร้างสรรค์ เทคโนโลยี สังคมออนไลน์", "จดไอเดียไว้ แล้วเลือกอันที่ทำได้จริงมาลงมือ"], ["การเปลี่ยนแปลงเกิดขึ้นแบบลื่นไหล ไม่ฝืน ถ้าอยากเปลี่ยนอะไรครั้งใหญ่ ปีนี้ทำได้ง่าย", "นิสัย วิถีชีวิต เป้าหมายระยะยาว", "ใช้จังหวะนี้เลิกสิ่งที่ฉุดรั้ง หรือเริ่มนิสัยใหม่"], ["แรงขับพุ่งตรงไปที่งานและเป้าหมาย ทำงานหนัก อยากเห็นผลเร็ว เป็นปีที่ลุยเรื่องอาชีพ", "อาชีพ ตำแหน่ง ชื่อเสียง", "ตั้งเป้าให้ชัดแล้วลุย แต่ระวังชนกับหัวหน้าหรือเพื่อนร่วมงาน"], ["ความกล้ากับภาพลักษณ์ขัดกัน อาจดูแรงหรือใจร้อนกว่าที่ตั้งใจ", "บุคลิก ความสัมพันธ์กับคนรอบตัว สุขภาพกาย", "ออกกำลังกายเพื่อระบายพลัง และนับหนึ่งถึงสิบก่อนตอบโต้"], ["ความตั้งใจกับวินัยไปทางเดียวกัน สิ่งที่สร้างปีนี้จะมั่นคงและอยู่ได้นาน", "ความรับผิดชอบ การวางแผน ความสำเร็จระยะยาว", "เหมาะเริ่มโปรเจกต์ใหญ่ที่ต้องใช้ความอดทน"], ["ความรักกับความต้องการขัดกัน อาจมีแรงดึงดูดแรงหรือทะเลาะเรื่องเล็ก ๆ", "ความรัก ความสัมพันธ์ การใช้เงินตามอารมณ์", "คุยกันตรง ๆ เมื่อไม่พอใจ อย่าเก็บจนระเบิด"], ["โอกาสแบบไม่คาดคิดเข้ามาเป็นระยะ ถ้าคว้าไว้จะได้ประสบการณ์ใหม่", "โอกาส การเดินทาง งานใหม่", "เปิดใจกับข้อเสนอที่ไม่คุ้น แต่เช็กรายละเอียดก่อนตอบรับ"]], [["ความคิดถูกท้าทายด้วยเรื่องลึก ๆ อาจหมกมุ่นหรือเถียงเพื่อเอาชนะ แต่คิดได้ลึกมาก", "การสื่อสาร การเจรจา ความคิดหมกมุ่น", "ฟังให้จบก่อนตอบ และอย่าพยายามโน้มน้าวทุกคน"], ["ตัวตนกับแรงขับช่วยกัน มีพลังลงมือ กล้าเริ่มสิ่งใหม่", "การลงมือ การแข่งขัน สุขภาพ", "ตั้งเป้าที่ท้าทายแล้วลงมือทันที"], ["ความคิดกับจินตนาการไหลเข้ากัน เขียน เล่าเรื่อง หรือออกแบบได้ดีเป็นพิเศษ", "งานสร้างสรรค์ การเขียน การเรียนรู้", "ใช้ปีนี้เรียนสิ่งที่เกี่ยวกับศิลปะหรือจิตวิญญาณ"], ["ความฝันกับการเปลี่ยนแปลงลึกช่วยกันเงียบ ๆ เป็นพื้นหลังของทั้งปี", "จิตใจ ความเชื่อ", "ให้เวลากับตัวเองได้ทบทวนสิ่งที่สำคัญจริง"], ["ความรักแบบไม่คาดคิด อาจเจอคนหรือรสนิยมใหม่ที่แปลกไปจากเดิม", "ความรัก เพื่อนใหม่ รสนิยม", "ลองสิ่งใหม่ในความสัมพันธ์ แต่ไม่ต้องรีบผูกมัด"], ["เสน่ห์กับความกล้าเข้ากัน กล้าเข้าหาคนที่ชอบ ดึงดูดคนได้ง่าย", "ความรัก การเข้าสังคม ความคิดสร้างสรรค์", "เหมาะเริ่มความสัมพันธ์หรืองานที่ต้องใช้เสน่ห์"], ["ตัวตนกับความรักรวมเป็นหนึ่ง ปีนี้มีเสน่ห์ คนรอบตัวเอ็นดู", "ความรัก ความงาม เงิน ความสุขส่วนตัว", "ดูแลตัวเองและใช้เวลากับสิ่งที่ทำให้มีความสุข"], ["ไอเดียใหม่กับแรงบันดาลใจเป็นพื้นหลังของปี", "ความคิดสร้างสรรค์ เทคโนโลยี", "เปิดรับมุมมองใหม่ ๆ"], ["ตัวตนกับบุคลิกไปทางเดียวกัน มั่นใจ คนเห็นตัวจริงของคุณได้ง่าย", "ภาพลักษณ์ ความมั่นใจ การเริ่มต้นใหม่", "ปีนี้เหมาะแสดงตัวตน เปิดตัวงาน หรือเปลี่ยนลุค"]]]; var hs = st.hs === undefined ? -1 : st.hs;
+var G = {S:'☉',M:'☽',m:'☿',V:'♀',a:'♂',J:'♃',s:'♄',U:'♅',N:'♆',P:'♇'};
+var NM = {S:'อาทิตย์',M:'จันทร์',m:'พุธ',V:'ศุกร์',a:'อังคาร',J:'พฤหัสบดี',s:'เสาร์',U:'ยูเรนัส',N:'เนปจูน',P:'พลูโต',A:'ลัคนา',C:'กลางฟ้า'};
+var HT = ['','ตัวตน ภาพลักษณ์','เงิน คุณค่าในตัวเอง','การสื่อสาร คนใกล้ตัว','บ้าน ครอบครัว','ความรัก ความสนุก','งานประจำวัน สุขภาพ','คู่ครอง หุ้นส่วน','ความลึกซึ้ง เงินร่วม','การเรียน การเดินทาง','งาน ชื่อเสียง','เพื่อน สังคม ความฝัน','จิตใต้สำนึก การพัก'];
+var AS = {c:['☌','#F3D46E','rgba(243,212,110,.16)','กุม','Conjunction 0°','รวมพลังเป็นก้อนเดียว'],x:['⚹','#7FB8FF','rgba(127,184,255,.16)','โยค','Sextile 60°','เปิดโอกาส ใช้ได้ดีถ้าลงมือ'],q:['□','#FFB08A','rgba(255,138,76,.16)','ฉาก','Square 90°','ขัดกัน ผลักให้แก้ปัญหา'],t:['△','#7FE3C0','rgba(79,209,165,.16)','ตรีโกณ','Trine 120°','ไหลลื่น เป็นพรสวรรค์'],o:['☍','#FF8A8A','rgba(255,107,107,.16)','เล็ง','Opposition 180°','ต้องหาจุดสมดุล']};
+var Y = [
+{ range:'5 ส.ค. 2569 – 5 ส.ค. 2570', exact:'ดวงอาทิตย์กลับที่เดิม 5 ส.ค. 2569 เวลา 09:01 น.', theme:'ปีแห่งเพื่อน เครือข่าย และความฝันระยะยาว',
+keys:[['ลัคนาปีนี้','กันย์ 23°','ละเอียด จัดระเบียบ'],['ดวงอาทิตย์','เรือน 11','เพื่อน สังคม'],['ดวงจันทร์','เมษ · เรือน 8','อารมณ์เร็ว ลึก']],
+sum:'ลัคนาปีราศีกันย์ทำให้ปีนี้อยากจัดชีวิตให้เป็นระบบ ดวงอาทิตย์อยู่เรือน 11 พลังหลักไปที่กลุ่มเพื่อนและเป้าหมายใหญ่ ส่วนอังคารกุมกลางฟ้าในเรือน 10 ผลักเรื่องงานให้เดินเร็ว',
+pl:{S:11,M:8,m:10,V:1,a:10,J:11,s:7,U:9,N:7,P:5}, cusp:['กันย์','ตุลย์','พิจิก','ธนู','มังกร','กุมภ์','มีน','เมษ','พฤษภ','เมถุน','กรกฎ','สิงห์'],
+asp:[['N','x','P',7],['m','x','A',19],['U','x','N',56],['U','t','P',64],['a','c','C',88],['a','q','A',115],['S','t','s',119],['V','q','a',146],['J','x','U',164]] },
+{ range:'5 ส.ค. 2570 – 5 ส.ค. 2571', exact:'ดวงอาทิตย์กลับที่เดิม 5 ส.ค. 2570 เวลา 14:45 น.', theme:'ปีแห่งการลงลึก เงินร่วม และความสัมพันธ์จริงจัง',
+keys:[['ลัคนาปีนี้','ธนู 15°','มองไกล อยากขยาย'],['ดวงอาทิตย์','เรือน 8','ความลึกซึ้ง เงินร่วม'],['ดวงจันทร์','กันย์ · เรือน 10','ทุ่มให้งาน']],
+sum:'ลัคนาปีราศีธนูทำให้อยากออกไปเรียนรู้และขยายขอบเขต ดวงอาทิตย์ ศุกร์ และพุธรวมกันที่เรือน 8 เป็นปีที่ความสัมพันธ์และเรื่องเงินร่วมเข้มข้นขึ้น ดวงจันทร์และอังคารอยู่เรือน 10 ใจผูกกับงานมาก',
+pl:{S:8,M:10,m:8,V:8,a:10,J:9,s:5,U:6,N:4,P:2}, cusp:['ธนู','มังกร','กุมภ์','มีน','เมษ','พฤษภ','เมถุน','กรกฎ','สิงห์','กันย์','ตุลย์','พิจิก'],
+asp:[['m','o','P',5],['S','x','a',14],['m','t','N',35],['N','x','P',41],['V','x','U',95],['V','x','a',97],['S','c','V',111],['U','x','N',167],['S','t','A',169]] }
+][yi];
+var houses = [];
+for (var n = 1; n <= 12; n++) (function(n){ var g = Object.keys(Y.pl).filter(function(k){ return Y.pl[k] === n; }); var on = hs === n;
+houses.push({ n: n, z: Y.cusp[n - 1], g: g.map(function(k){ return G[k] + V; }).join(' '), on: on, nc: g.length ? '#F2F4FA' : '#6B7080',
+st: on ? 'border-color:#B9A6FF;background:rgba(185,166,255,.20)' : g.length >= 2 ? 'background:rgba(255,180,150,.10);border-color:rgba(255,180,150,.30)' : '',
+pick: function(){ self.setState({ hs: on ? -1 : n }); } }); })(n);
+var pick = hs > 0 ? hs : Object.keys(Y.pl).reduce(function(best, k){ var n = Y.pl[k]; var c = Object.keys(Y.pl).filter(function(x){ return Y.pl[x] === n; }).length; return c > best[1] ? [n, c] : best; }, [0, 0])[0];
+var inH = Object.keys(Y.pl).filter(function(k){ return Y.pl[k] === pick; });
+return {
+range: Y.range, exact: Y.exact, theme: Y.theme, sum: Y.sum,
+keys: Y.keys.map(function(k){ return { l: k[0], v: k[1], s: k[2] }; }),
+houses: houses,
+hT: 'เรือน ' + pick + ' · ' + HT[pick] + (hs > 0 ? '' : ' (เรือนที่ดาวเยอะที่สุด)'),
+hD: inH.length ? 'มี' + inH.map(function(k){ return NM[k]; }).join(' ') + 'อยู่ในเรือนนี้ ปีนี้เรื่อง' + HT[pick] + 'จะได้รับพลังจากดาวเหล่านี้โดยตรง' : 'ไม่มีดาวในเรือนนี้ เรื่องนี้ดำเนินไปตามปกติ ดูจากเจ้าเรือนแทน',
+asp: Y.asp.map(function(a, ai){ var xp = XP[yi][ai]; var on = as === ai; var A = AS[a[1]]; function g(k){ return k === 'A' ? 'AC' : k === 'C' ? 'MC' : G[k] + V; } return { g1: g(a[0]), g2: g(a[2]), s: A[0] + V, c: A[1], b: A[2], t: NM[a[0]] + ' ' + A[3] + ' ' + NM[a[2]], ty: A[3] + ' (' + A[4] + ') = ' + A[5], m: a[3] < 30 ? 'แน่นมาก รู้สึกได้ทั้งปี' : a[3] < 90 ? 'ชัดเจน' : 'เป็นพื้นหลัง', o: Math.floor(a[3] / 60) + '°' + ('0' + (a[3] % 60)).slice(-2) + '′', sum: xp[0], area: xp[1], tip: xp[2], tyl: A[3] + ' (' + A[4] + ') · ' + A[5], open: on, bd: on ? 'rgba(185,166,255,.55)' : 'rgba(255,255,255,.08)', bg: on ? 'rgba(185,166,255,.08)' : 'rgba(255,255,255,.04)', rot: on ? 'transform:rotate(180deg)' : '', pick: function(){ self.setState({ as: on ? -1 : ai }); } }; }),
+c0: yi === 0 ? 'seg on' : 'seg', c1: yi === 1 ? 'seg on' : 'seg',
+s0: function(){ self.setState({ yi: 0, hs: -1, as: -1 }); }, s1: function(){ self.setState({ yi: 1, hs: -1, as: -1 }); }
+};
+}
+}
+</script>
+</body>
+</html>

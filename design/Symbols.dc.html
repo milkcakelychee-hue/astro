@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ความหมายสัญลักษณ์</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.lbl{font-size:12px;color:#9AA1B5}
+.card{border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10)}
+.seg{flex:1;height:40px;border:none;border-radius:12px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif;white-space:nowrap}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.tr{display:flex;flex-direction:column;gap:10px;width:100%;padding:14px;box-sizing:border-box;border:none;border-top:1px solid rgba(255,255,255,.07);background:transparent;color:#F2F4FA;font-family:inherit;text-align:left}
+.gl{width:34px;height:34px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(255,255,255,.14)}
+.ai{width:30px;height:30px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+.chip{height:22px;padding:0 8px;border-radius:7px;display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.hr{display:grid;grid-template-columns:26px minmax(0,1fr) auto 44px;align-items:center;gap:8px;min-height:40px;border-top:1px solid rgba(255,255,255,.06);font-size:13.5px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:64px;color:#4A4E5C;text-decoration:none;font-size:12px;white-space:nowrap}
+.ht{display:flex;flex-direction:column;gap:4px;min-height:74px;padding:8px;box-sizing:border-box;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+summary::-webkit-details-marker{display:none}
+.chv svg{transition:transform .2s}.chv[data-o="true"] svg{transform:rotate(180deg)}
+</style>
+</helmet>
+<div style="width:390px;min-height:2400px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 85% -40px,rgba(220,227,245,.24),transparent 70%),radial-gradient(460px 380px at -10% 380px,rgba(59,107,255,.28),transparent 70%),radial-gradient(500px 420px at 90% 1300px,rgba(138,92,255,.22),transparent 70%),#06070D">
+
+<div style="padding:54px 12px 0;display:flex;align-items:center">
+<a href="Settings.dc.html" style="height:44px;padding:0 8px;display:flex;align-items:center;gap:4px;font-size:15px;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>ตั้งค่า</a>
+</div>
+
+<div style="padding:4px 20px 140px;display:flex;flex-direction:column;gap:18px">
+<div style="position:relative;padding-right:40px;display:flex;flex-direction:column;gap:2px"><span class="lbl">คู่มือ</span><h1 style="margin:0;font-size:26px;font-weight:600;line-height:1.3">ความหมายสัญลักษณ์</h1><span style="font-size:13px;color:#9AA1B5">(Symbols)</span><details style="margin-right:-40px"><summary aria-label="หน้านี้คืออะไร" style="list-style:none;position:absolute;right:0;top:18px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(200,210,255,.35);background:rgba(255,255,255,.06);color:#D6DEFF;display:flex;align-items:center;justify-content:center;font:600 15px 'IBM Plex Sans Thai Looped',sans-serif;cursor:pointer">?</summary><div data-intro style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:18px;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(200,210,255,.16);font-size:13.5px;line-height:1.6"><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">คืออะไร</span><span style="flex:1;min-width:0;color:#E6E9F2">รวมสัญลักษณ์ทุกตัวที่ใช้ในแอป: ดาว ราศี มุมดาว และเรือน</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ใช้ดู</span><span style="flex:1;min-width:0;color:#E6E9F2">เมื่อเห็นสัญลักษณ์ในหน้าไหนแล้วไม่แน่ใจว่าคืออะไร</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ทำไมสำคัญ</span><span style="flex:1;min-width:0;color:#E6E9F2">อ่านชาร์ตได้เร็วขึ้น ไม่ต้องจำเองทั้งหมด</span></div></div></details></div>
+<div role="tablist" style="display:flex;gap:4px;padding:4px;border-radius:14px;background:rgba(255,255,255,.07)"><sc-for list="{{tabs}}" as="t" hint-placeholder-count="4"><button role="tab" class="{{t.cls}}" onClick="{{t.pick}}">{{t.l}}</button></sc-for></div>
+<span style="font-size:13px;line-height:1.6;color:#C9CEDC">{{note}}</span>
+<div class="card" style="padding:4px 16px">
+<sc-for list="{{items}}" as="x" hint-placeholder-count="12">
+<div style="display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:center;padding:12px 0;border-top:1px solid rgba(255,255,255,.06)">
+<span style="width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:22px;color:{{x.c}}">{{x.g}}</span>
+<span style="display:flex;flex-direction:column;gap:2px;line-height:1.45;min-width:0"><span style="font-size:14px;font-weight:600">{{x.n}} <span style="font-weight:400;color:#9AA1B5;font-size:12.5px">{{x.e}}</span></span><span class="lbl">{{x.s}}</span><span style="font-size:13px;color:#DCE0EA">{{x.d}}</span></span>
+</div>
+</sc-for>
+</div>
+<span class="lbl">ข้อความความหมายเป็นตัวอย่าง รอดึงจากคลังคำอธิบาย</span>
+</div>
+
+<nav aria-label="แท็บหลัก" style="position:absolute;left:0;right:0;bottom:0;height:91px;padding:0 6px 26px;box-sizing:border-box;border-radius:32px 32px 0 0;background:linear-gradient(180deg,#1C1D24,#000000);box-shadow:0 -8px 30px rgba(0,0,0,.30);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;border-top:1px solid rgba(255,255,255,.10)">
+<a href="Main.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><path d="M12 3v5M12 16v5M3 12h5M16 12h5"></path></svg>ชาร์ตของฉัน</a>
+<a href="People.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg>บุคคล</a>
+<a href="Today.dc.html" class="tab" style="position:relative;color:#C9CEDC;font-weight:500"><span style="position:absolute;top:-44px;left:50%;margin-left:-44px;width:88px;height:88px;border-radius:999px;background:#0A0B10;display:flex;align-items:center;justify-content:center"><span style="width:72px;height:72px;border-radius:999px;background:radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21);display:flex;align-items:center;justify-content:center;color:#B9A6FF"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span></span>วันนี้</a>
+<a href="Forecast.dc.html" class="tab" aria-current="page" style="color:#B9A6FF;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"></path></svg>ดวงล่วงหน้า</a>
+<a href="Settings.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"></path></svg>ตั้งค่า</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2400}}'>
+class Component extends DCLogic {
+renderVals() {
+var self=this; var st=this.state||{}; var T=st.t||'p'; var V='\uFE0E';
+var D={p:['ดาวคือ "ใคร" หรือ "พลังอะไร" ในชีวิต',[['☉','ดวงอาทิตย์','Sun','#FFC46B','ตัวตน · พลังชีวิต','เป้าหมาย ความภูมิใจ สิ่งที่อยากเป็น'],['☽','ดวงจันทร์','Moon','#DCE3F5','อารมณ์ · ความรู้สึก','ความต้องการลึกๆ นิสัยเวลาอยู่กับตัวเอง'],['☿','ดาวพุธ','Mercury','#B5D6FF','ความคิด · การสื่อสาร','วิธีพูด เขียน เรียนรู้ และตัดสินใจ'],['♀','ดาวศุกร์','Venus','#FF8FB1','ความรัก · คุณค่า','สิ่งที่ชอบ ความสัมพันธ์ เงิน ความงาม'],['♂','ดาวอังคาร','Mars','#FF7A59','แรงขับ · การลงมือ','ความกล้า ความโกรธ วิธีแข่งขัน'],['♃','ดาวพฤหัสบดี','Jupiter','#FFC46B','โอกาส · การขยาย','โชค ความเชื่อ การเติบโต'],['♄','ดาวเสาร์','Saturn','#D6B87A','ความรับผิดชอบ · บทเรียน','กฎเกณฑ์ ความอดทน ความมั่นคงระยะยาว'],['♅','ดาวยูเรนัส','Uranus','#5BD1FF','อิสรภาพ · ความเปลี่ยนแปลง','เรื่องไม่คาดคิด ความแปลกใหม่'],['♆','ดาวเนปจูน','Neptune','#7FB8FF','ความฝัน · จินตนาการ','ศรัทธา แรงบันดาลใจ และความสับสน'],['♇','ดาวพลูโต','Pluto','#C98BFF','อำนาจ · การเปลี่ยนแปลงลึก','การเกิดใหม่ การปล่อยสิ่งเก่า'],['☊','จุดโหนดเหนือ','North Node','#B9A6FF','ทิศทางที่ควรเติบโต','บทเรียนและเส้นทางของชีวิตนี้'],['⚷','ไครอน','Chiron','#7FE0A7','บาดแผล · การเยียวยา','จุดเจ็บที่กลายเป็นพลังช่วยคนอื่น'],['⚸','ลิลิธ','Black Moon Lilith','#C9CEDC','ด้านที่ถูกเก็บซ่อน','ความต้องการดิบ สิ่งที่ไม่ยอมประนีประนอม']]],
+s:['ราศีคือ "แบบไหน" ที่พลังของดาวแสดงออก',[['♈','เมษ','Aries','#FF7A59','ไฟ · 21 มี.ค.–19 เม.ย.','กล้า ใจร้อน ชอบเริ่มก่อน'],['♉','พฤษภ','Taurus','#9FEAC0','ดิน · 20 เม.ย.–20 พ.ค.','มั่นคง อดทน รักความสบาย'],['♊','เมถุน','Gemini','#B5D6FF','ลม · 21 พ.ค.–20 มิ.ย.','ช่างคุย อยากรู้ ปรับตัวไว'],['♋','กรกฎ','Cancer','#7FB8FF','น้ำ · 21 มิ.ย.–22 ก.ค.','อ่อนไหว ห่วงใย รักบ้าน'],['♌','สิงห์','Leo','#FF7A59','ไฟ · 23 ก.ค.–22 ส.ค.','มั่นใจ ใจกว้าง ชอบเป็นจุดสนใจ'],['♍','กันย์','Virgo','#9FEAC0','ดิน · 23 ส.ค.–22 ก.ย.','ละเอียด ช่างวิเคราะห์ ชอบช่วยเหลือ'],['♎','ตุลย์','Libra','#B5D6FF','ลม · 23 ก.ย.–22 ต.ค.','รักความยุติธรรม ประนีประนอม'],['♏','พิจิก','Scorpio','#7FB8FF','น้ำ · 23 ต.ค.–21 พ.ย.','ลึกซึ้ง เข้มข้น ไม่ยอมแพ้'],['♐','ธนู','Sagittarius','#FF7A59','ไฟ · 22 พ.ย.–21 ธ.ค.','รักอิสระ มองโลกกว้าง'],['♑','มังกร','Capricorn','#9FEAC0','ดิน · 22 ธ.ค.–19 ม.ค.','มุ่งมั่น รับผิดชอบ มองระยะยาว'],['♒','กุมภ์','Aquarius','#B5D6FF','ลม · 20 ม.ค.–18 ก.พ.','คิดต่าง รักเพื่อน เพื่อส่วนรวม'],['♓','มีน','Pisces','#7FB8FF','น้ำ · 19 ก.พ.–20 มี.ค.','เห็นอกเห็นใจ จินตนาการสูง']]],
+a:['มุมคือ "ความสัมพันธ์" ระหว่างดาวสองดวง',[['☌','กุม','Conjunction 0°','#FFD27A','รวมพลัง','สองพลังผสานเป็นหนึ่ง ทั้งดีและท้าทายขึ้นกับดาว'],['⚹','โยค','Sextile 60°','#9FEAC0','โอกาส','ช่วยกันง่ายๆ ต้องลงมือถึงจะได้ผล'],['□','ฉาก','Square 90°','#FF9A9A','แรงเสียดทาน','ขัดกันจนต้องลงมือแก้ เป็นแรงผลักให้โต'],['△','ตรีโกณ','Trine 120°','#9FEAC0','ไหลลื่น','เข้ากันโดยธรรมชาติ เป็นพรสวรรค์'],['☍','เล็ง','Opposition 180°','#FF9A9A','ดึงกันสองฝั่ง','ต้องหาสมดุลระหว่างสองเรื่อง']]],
+h:['เรือนคือ "เรื่องไหน" ของชีวิตที่พลังไปลง',[['1','เรือน 1','Ascendant','#F2F4FA','ตัวตน','บุคลิก ภาพลักษณ์ ร่างกาย'],['2','เรือน 2','','#F2F4FA','เงินและคุณค่า','รายได้ ทรัพย์สิน ความมั่นใจในตัวเอง'],['3','เรือน 3','','#F2F4FA','การสื่อสาร','พี่น้อง การเรียน การเดินทางใกล้'],['4','เรือน 4','IC','#F2F4FA','บ้านและรากฐาน','ครอบครัว ที่อยู่ ความมั่นคงภายใน'],['5','เรือน 5','','#F2F4FA','ความรักและความสนุก','งานสร้างสรรค์ ลูก งานอดิเรก'],['6','เรือน 6','','#F2F4FA','งานประจำและสุขภาพ','กิจวัตร การดูแลตัวเอง'],['7','เรือน 7','Descendant','#F2F4FA','คู่ครองและหุ้นส่วน','ความสัมพันธ์แบบหนึ่งต่อหนึ่ง'],['8','เรือน 8','','#F2F4FA','สิ่งที่แบ่งปัน','เงินร่วม ความลึกซึ้ง การเปลี่ยนแปลง'],['9','เรือน 9','','#F2F4FA','โลกกว้าง','การเรียนสูง การเดินทางไกล ความเชื่อ'],['10','เรือน 10','MC','#F2F4FA','อาชีพและชื่อเสียง','เป้าหมาย สถานะในสังคม'],['11','เรือน 11','','#F2F4FA','เพื่อนและเครือข่าย','กลุ่ม ความหวัง อนาคต'],['12','เรือน 12','','#F2F4FA','โลกภายใน','การพักฟื้น สิ่งที่ซ่อน การปล่อยวาง']]]};
+var TB=[['p','ดาว'],['s','ราศี'],['a','มุม'],['h','เรือน']];
+return { tabs:TB.map(function(t){ return { l:t[1], cls:'seg'+(t[0]===T?' on':''), pick:function(){ self.setState({t:t[0]}); } }; }), note:D[T][0],
+items:D[T][1].map(function(x){ return { g:(T==='h'?x[0]:x[0]+V), n:x[1], e:x[2]?'('+x[2]+')':'', c:x[3], s:x[4], d:x[5] }; }) };
+}
+}
+</script>
+</body>
+</html>

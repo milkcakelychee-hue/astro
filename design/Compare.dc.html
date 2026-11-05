@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>เปรียบเทียบ</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);border-radius:20px}
+.lbl{font-size:12px;color:#9AA1B5}
+.h2{margin:0;font-size:18px;font-weight:600}
+.help{width:28px;height:28px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:transparent;color:#C9CEDC;font:600 13px 'IBM Plex Sans Thai Looped',sans-serif;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.seg{flex:1;height:40px;border:none;border-radius:12px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif;padding:0 4px}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.cat{display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10)}
+.ch{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600}
+.ic{width:36px;height:36px;flex:none;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.pill{font-size:12px;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.08);color:#DCE0EA}
+.more{align-self:flex-start;border:none;background:transparent;color:#7FB8FF;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif;min-height:36px;padding:0;display:flex;align-items:center;gap:4px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:64px;color:#4A4E5C;text-decoration:none;font-size:12px;white-space:nowrap}
+</style>
+</helmet>
+<div style="width:390px;min-height:3000px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 15% -40px,rgba(138,92,255,.45),transparent 70%),radial-gradient(520px 420px at 95% 80px,rgba(31,165,135,.38),transparent 70%),radial-gradient(500px 420px at 50% 900px,rgba(59,107,255,.22),transparent 70%),#06070D;--ground2:#0C0E18;--ring:rgba(255,255,255,.03);--core:rgba(90,110,255,.10);--line:rgba(255,255,255,.16);--line2:rgba(255,255,255,.30);--fg:#F2F4FA;--muted:#9AA1B5;--accent:#7FB8FF;--fire:#FF7A59;--earth:#8FD47A;--air:#F3D46E;--water:#6FB2FF;--opp:#FF6B6B;--sq:#FF8A4C;--trine:#4FD1A5;--sext:#7FB8FF">
+
+<div style="padding:54px 12px 0;display:flex;align-items:center;justify-content:space-between">
+<a href="People.dc.html" style="height:44px;padding:0 8px;display:flex;align-items:center;gap:4px;font-size:15px;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>บุคคล</a>
+<span style="font-size:17px;font-weight:600">เปรียบเทียบ</span>
+<span style="width:72px"></span>
+</div>
+
+<div style="padding:14px 20px 140px;display:flex;flex-direction:column;gap:22px">
+
+<div class="card" style="padding:16px;display:grid;grid-template-columns:minmax(0,1fr) 48px minmax(0,1fr);align-items:center;gap:8px;background:linear-gradient(120deg,rgba(138,92,255,.22),rgba(31,165,135,.20))">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center">
+<span style="width:56px;height:56px;border-radius:999px;background:linear-gradient(135deg,#8A5CFF,#3B6BFF);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:600;box-shadow:0 0 0 3px rgba(201,184,255,.5)">{{aI}}</span>
+<span style="font-size:15px;font-weight:600">{{aN}}</span><span class="lbl">{{aS}}</span><span style="font-size:11px;color:#C9B8FF">วงใน</span>
+</div>
+<button onClick="{{swap}}" aria-label="สลับคน" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(6,7,13,.5);color:#F2F4FA;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7h12l-3-3M17 17H5l3 3"/></svg></button>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center">
+<span style="width:56px;height:56px;border-radius:999px;background:linear-gradient(135deg,#1FA587,#3B6BFF);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:600;box-shadow:0 0 0 3px rgba(111,224,192,.5)">{{bI}}</span>
+<span style="font-size:15px;font-weight:600">{{bN}}</span><span class="lbl">{{bS}}</span><span style="font-size:11px;color:#6FE0C0">วงนอก</span>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-size:13px;font-weight:600;color:#C9CEDC">มุมมองการเปรียบเทียบ</span>
+<div role="group" aria-label="มุมมองการเปรียบเทียบ" style="display:flex;gap:4px;padding:4px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10)">
+<button class="{{m0}}" onClick="{{setSyn}}">วงซ้อนกัน</button>
+<button class="{{m1}}" onClick="{{setComp}}">ชาร์ตความสัมพันธ์</button>
+</div>
+<span class="lbl">{{modeHint}}</span>
+<sc-if value="{{isComp}}" hint-placeholder-val="{{ false }}">
+<div role="group" aria-label="วิธีคำนวณชาร์ตความสัมพันธ์" style="display:flex;gap:4px;padding:3px;border-radius:12px;background:rgba(255,255,255,.05);align-self:flex-start;width:220px">
+<button class="{{c0}}" style="height:32px" onClick="{{setC0}}">Composite</button>
+<button class="{{c1}}" style="height:32px" onClick="{{setC1}}">Davison</button>
+</div>
+</sc-if>
+</div>
+
+<div class="card" style="padding:14px;display:flex;flex-direction:column;gap:10px;background:rgba(12,14,24,.55)">
+<sc-if value="{{isSyn}}" hint-placeholder-val="{{ true }}">
+<div><svg viewBox="0 0 340 340" width="100%" role="img" aria-label="วงซ้อน: ตัวอย่าง (วงใน) กับคนที่เลือก (วงนอก)" style="display:block"><circle cx="170" cy="170" r="166" style="fill:var(--ring);stroke:var(--line)"/><circle cx="170" cy="170" r="142" style="fill:var(--ground2);stroke:var(--line)"/><circle cx="170" cy="170" r="70" style="fill:var(--core);stroke:var(--line)"/><line x1="10.3" y1="215.3" x2="33.4" y2="208.8" style="stroke:var(--line)"/><text x="37.8" y="249.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--fire)">♈&#xFE0E;</text><line x1="54.4" y1="289.1" x2="71.1" y2="271.9" style="stroke:var(--line)"/><text x="95.0" y="304.5" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--earth)">♉&#xFE0E;</text><line x1="129.4" y1="331.0" x2="135.3" y2="307.7" style="stroke:var(--line)"/><text x="172.3" y="324.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--air)">♊&#xFE0E;</text><line x1="215.3" y1="329.7" x2="208.8" y2="306.6" style="stroke:var(--line)"/><text x="249.0" y="302.2" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--water)">♋&#xFE0E;</text><line x1="289.1" y1="285.6" x2="271.9" y2="268.9" style="stroke:var(--line)"/><text x="304.5" y="245.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--fire)">♌&#xFE0E;</text><line x1="331.0" y1="210.6" x2="307.7" y2="204.7" style="stroke:var(--line)"/><text x="324.0" y="167.7" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--earth)">♍&#xFE0E;</text><line x1="329.7" y1="124.7" x2="306.6" y2="131.2" style="stroke:var(--line)"/><text x="302.2" y="91.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--air)">♎&#xFE0E;</text><line x1="285.6" y1="50.9" x2="268.9" y2="68.1" style="stroke:var(--line)"/><text x="245.0" y="35.5" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--water)">♏&#xFE0E;</text><line x1="210.6" y1="9.0" x2="204.7" y2="32.3" style="stroke:var(--line)"/><text x="167.7" y="16.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--fire)">♐&#xFE0E;</text><line x1="124.7" y1="10.3" x2="131.2" y2="33.4" style="stroke:var(--line)"/><text x="91.0" y="37.8" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--earth)">♑&#xFE0E;</text><line x1="50.9" y1="54.4" x2="68.1" y2="71.1" style="stroke:var(--line)"/><text x="35.5" y="95.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--air)">♒&#xFE0E;</text><line x1="9.0" y1="129.4" x2="32.3" y2="135.3" style="stroke:var(--line)"/><text x="16.0" y="172.3" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--water)">♓&#xFE0E;</text><circle cx="170" cy="170" r="112" style="fill:none;stroke:var(--line)" stroke-dasharray="2 3"/><line x1="229.7" y1="206.5" x2="110.5" y2="133.2" style="stroke:var(--opp)" stroke-width="1"/><line x1="145.7" y1="235.6" x2="234.0" y2="198.4" style="stroke:var(--sq)" stroke-width="1"/><line x1="219.0" y1="220.0" x2="119.9" y2="121.2" style="stroke:var(--opp)" stroke-width="1"/><line x1="239.0" y1="182.0" x2="196.4" y2="234.8" style="stroke:var(--sext)" stroke-width="1"/><line x1="239.0" y1="182.0" x2="181.0" y2="100.9" style="stroke:var(--sq)" stroke-width="1"/><line x1="205.5" y1="109.7" x2="110.5" y2="133.2" style="stroke:var(--sq)" stroke-width="1"/><line x1="125.2" y1="223.8" x2="196.4" y2="234.8" style="stroke:var(--sext)" stroke-width="1"/><line x1="125.2" y1="223.8" x2="114.4" y2="127.5" style="stroke:var(--sq)" stroke-width="1"/><line x1="137.7" y1="232.1" x2="234.0" y2="198.4" style="stroke:var(--sq)" stroke-width="1"/><line x1="117.5" y1="123.7" x2="181.0" y2="100.9" style="stroke:var(--sext)" stroke-width="1"/><line x1="177.8" y1="100.4" x2="106.0" y2="198.4" style="stroke:var(--trine)" stroke-width="1"/><line x1="177.8" y1="100.4" x2="114.4" y2="127.5" style="stroke:var(--sext)" stroke-width="1"/><text x="53.9" y="221.6" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#6FE0C0">☿&#xFE0E;</text><text x="67.7" y="245.3" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#6FE0C0">☉&#xFE0E;</text><text x="122.1" y="287.6" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#6FE0C0">♀&#xFE0E;</text><text x="217.9" y="287.6" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#6FE0C0">♃&#xFE0E;</text><text x="286.1" y="221.6" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#6FE0C0">☽&#xFE0E;</text><text x="190.0" y="44.6" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#6FE0C0">♇&#xFE0E;</text><text x="79.0" y="81.4" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#6FE0C0">♆&#xFE0E;</text><text x="66.3" y="96.7" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#6FE0C0">♅&#xFE0E;</text><text x="56.1" y="113.8" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#6FE0C0">♂&#xFE0E;</text><text x="47.1" y="137.9" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#6FE0C0">♄&#xFE0E;</text><text x="109.2" y="243.0" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#C9B8FF">♃&#xFE0E;</text><text x="126.1" y="254.3" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#C9B8FF">♄&#xFE0E;</text><text x="139.9" y="260.1" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#C9B8FF">☽&#xFE0E;</text><text x="236.5" y="237.8" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#C9B8FF">☿&#xFE0E;</text><text x="251.0" y="219.6" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#C9B8FF">☉&#xFE0E;</text><text x="263.6" y="186.3" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#C9B8FF">♀&#xFE0E;</text><text x="218.2" y="88.1" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#C9B8FF">♂&#xFE0E;</text><text x="180.5" y="75.6" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#C9B8FF">♇&#xFE0E;</text><text x="98.8" y="107.1" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#C9B8FF">♆&#xFE0E;</text><text x="87.1" y="123.6" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:#C9B8FF">♅&#xFE0E;</text></svg></div>
+</sc-if>
+<sc-if value="{{isComp}}" hint-placeholder-val="{{ false }}">
+<div><svg viewBox="0 0 340 340" width="100%" role="img" aria-label="ชาร์ตความสัมพันธ์ (Composite)" style="display:block"><circle cx="170" cy="170" r="166" style="fill:var(--ring);stroke:var(--line)"/><circle cx="170" cy="170" r="142" style="fill:var(--ground2);stroke:var(--line)"/><circle cx="170" cy="170" r="70" style="fill:var(--core);stroke:var(--line)"/><line x1="10.3" y1="215.3" x2="33.4" y2="208.8" style="stroke:var(--line)"/><text x="37.8" y="249.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--fire)">♈&#xFE0E;</text><line x1="54.4" y1="289.1" x2="71.1" y2="271.9" style="stroke:var(--line)"/><text x="95.0" y="304.5" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--earth)">♉&#xFE0E;</text><line x1="129.4" y1="331.0" x2="135.3" y2="307.7" style="stroke:var(--line)"/><text x="172.3" y="324.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--air)">♊&#xFE0E;</text><line x1="215.3" y1="329.7" x2="208.8" y2="306.6" style="stroke:var(--line)"/><text x="249.0" y="302.2" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--water)">♋&#xFE0E;</text><line x1="289.1" y1="285.6" x2="271.9" y2="268.9" style="stroke:var(--line)"/><text x="304.5" y="245.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--fire)">♌&#xFE0E;</text><line x1="331.0" y1="210.6" x2="307.7" y2="204.7" style="stroke:var(--line)"/><text x="324.0" y="167.7" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--earth)">♍&#xFE0E;</text><line x1="329.7" y1="124.7" x2="306.6" y2="131.2" style="stroke:var(--line)"/><text x="302.2" y="91.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--air)">♎&#xFE0E;</text><line x1="285.6" y1="50.9" x2="268.9" y2="68.1" style="stroke:var(--line)"/><text x="245.0" y="35.5" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--water)">♏&#xFE0E;</text><line x1="210.6" y1="9.0" x2="204.7" y2="32.3" style="stroke:var(--line)"/><text x="167.7" y="16.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--fire)">♐&#xFE0E;</text><line x1="124.7" y1="10.3" x2="131.2" y2="33.4" style="stroke:var(--line)"/><text x="91.0" y="37.8" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--earth)">♑&#xFE0E;</text><line x1="50.9" y1="54.4" x2="68.1" y2="71.1" style="stroke:var(--line)"/><text x="35.5" y="95.0" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--air)">♒&#xFE0E;</text><line x1="9.0" y1="129.4" x2="32.3" y2="135.3" style="stroke:var(--line)"/><text x="16.0" y="172.3" text-anchor="middle" dominant-baseline="central" font-size="12" style="fill:var(--water)">♓&#xFE0E;</text><text x="64.9" y="216.6" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:var(--fg)">♄&#xFE0E;</text><text x="148.5" y="283.0" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:var(--fg)">☿&#xFE0E;</text><text x="168.4" y="285.0" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:var(--fg)">♃&#xFE0E;</text><text x="188.4" y="283.5" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:var(--fg)">☉&#xFE0E;</text><text x="214.7" y="276.0" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:var(--fg)">☽&#xFE0E;</text><text x="232.4" y="266.6" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:var(--fg)">♀&#xFE0E;</text><text x="185.4" y="56.0" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:var(--fg)">♇&#xFE0E;</text><text x="142.4" y="58.4" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:var(--fg)">♂&#xFE0E;</text><text x="85.7" y="91.8" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:var(--fg)">♆&#xFE0E;</text><text x="73.4" y="107.6" text-anchor="middle" dominant-baseline="central" font-size="13" style="fill:var(--fg)">♅&#xFE0E;</text></svg></div>
+</sc-if>
+<sc-if value="{{isSyn}}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;justify-content:center;gap:16px;font-size:12px;color:#C9CEDC"><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:999px;background:#C9B8FF"></span>{{aN}} (วงใน)</span><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:999px;background:#6FE0C0"></span>{{bN}} (วงนอก)</span></div>
+</sc-if>
+<p style="margin:0;text-align:center;font-size:12px;color:#9AA1B5">แตะเส้นเพื่อดูว่าดาวของสองคนคุยกันอย่างไร</p>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2 class="h2">ภาพรวมความสัมพันธ์</h2><button class="help" aria-label="อ่านส่วนนี้อย่างไร">?</button></div>
+<span class="lbl">อธิบายเป็นเรื่อง ๆ ไม่ใช้คะแนน % เพราะความสัมพันธ์ไม่ได้วัดด้วยตัวเลขเดียว</span>
+
+<div class="cat">
+<div class="ch"><span class="ic" style="background:rgba(255,122,160,.16);color:#FF8FB1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 20s-7-4.4-7-9.5A4 4 0 0 1 12 8a4 4 0 0 1 7 2.5C19 15.6 12 20 12 20z"/></svg></span>ความรัก</div>
+<p style="margin:0;font-size:14px;line-height:1.7;color:#DCE0EA">ดึงดูดกันทันทีที่เจอ จันทร์ของคุณอยู่ตรงกับศุกร์ของเขา ทำให้รู้สึกอบอุ่นและสบายใจเวลาอยู่ด้วยกัน</p>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><span class="pill"><b style="color:#F3D46E">☌&#xFE0E;</b> จันทร์ ↔ ศุกร์</span><span class="pill"><b style="color:#7FB8FF">⚹&#xFE0E;</b> ศุกร์ ↔ พฤหัสบดี</span></div>
+<sc-if value="{{o0}}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:14px;line-height:1.7;color:#C9CEDC">ศุกร์ของคุณยังทำมุมท้าทายกับพลูโตของเขา ความรักจึงเข้มข้นและลึก แต่อาจมีความหึงหวงหรืออยากครอบครองปนอยู่</p></sc-if>
+<button class="more" onClick="{{t0}}">{{l0}}</button>
+</div>
+
+<div class="cat">
+<div class="ch"><span class="ic" style="background:rgba(127,184,255,.16);color:#7FB8FF"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></span>การสื่อสาร</div>
+<p style="margin:0;font-size:14px;line-height:1.7;color:#DCE0EA">คุยกันได้ลึก แต่บางครั้งเข้าใจกันคนละแบบ ควรพูดให้ชัดและถามย้ำเมื่อไม่แน่ใจ</p>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><span class="pill"><b style="color:#FF6B6B">☍&#xFE0E;</b> พุธ ↔ เนปจูน</span><span class="pill"><b style="color:#4FD1A5">△&#xFE0E;</b> พลูโต ↔ พุธ</span></div>
+</div>
+
+<div class="cat">
+<div class="ch"><span class="ic" style="background:rgba(111,224,192,.16);color:#6FE0C0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></span>อารมณ์</div>
+<p style="margin:0;font-size:14px;line-height:1.7;color:#DCE0EA">จังหวะอารมณ์ไม่ตรงกันนัก คนหนึ่งต้องการเวลาเงียบ อีกคนอยากระบายทันที เคารพจังหวะของกันและกันจะช่วยได้มาก</p>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><span class="pill"><b style="color:#FF8A4C">□&#xFE0E;</b> จันทร์ ↔ จันทร์</span><span class="pill"><b style="color:#FF8A4C">□&#xFE0E;</b> เสาร์ ↔ จันทร์</span></div>
+</div>
+
+<div class="cat">
+<div class="ch"><span class="ic" style="background:rgba(255,138,76,.16);color:#FF8A4C"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>ความขัดแย้ง</div>
+<p style="margin:0;font-size:14px;line-height:1.7;color:#DCE0EA">อาทิตย์ของคุณตรงข้ามอังคารของเขาแทบพอดี ทำให้มีพลังดึงดูดสูง แต่ก็ปะทะกันง่ายเมื่อต่างคนต่างอยากนำ</p>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><span class="pill"><b style="color:#FF6B6B">☍&#xFE0E;</b> อาทิตย์ ↔ อังคาร</span><span class="pill"><b style="color:#FF8A4C">□&#xFE0E;</b> อังคาร ↔ อังคาร</span></div>
+</div>
+
+<div class="cat">
+<div class="ch"><span class="ic" style="background:rgba(243,212,110,.16);color:#F3D46E"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg></span>ระยะยาว</div>
+<p style="margin:0;font-size:14px;line-height:1.7;color:#DCE0EA">พฤหัสบดีของทั้งคู่ส่งเสริมกัน มีเป้าหมายชีวิตไปทางเดียวกัน ถ้าผ่านช่วงปรับตัวเรื่องอารมณ์ได้ จะเป็นความสัมพันธ์ที่มั่นคง</p>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><span class="pill"><b style="color:#7FB8FF">⚹&#xFE0E;</b> พฤหัสบดี ↔ พฤหัสบดี</span></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2 class="h2">มุมระหว่างสองชาร์ต</h2><span class="lbl">แน่นที่สุดก่อน</span></div>
+<div class="card" style="padding:4px 14px">
+<sc-for list="{{asp}}" as="x" hint-placeholder-count="8">
+<div style="display:flex;flex-direction:column;gap:6px;padding:12px 0;border-top:1px solid rgba(255,255,255,.06)">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr) 44px;align-items:center;gap:4px">
+<span style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600;color:#C9B8FF">{{x.a}}</span><span class="lbl">ของ {{x.an}}</span></span>
+<span style="text-align:center;color:{{x.c}};font-weight:700;font-size:17px">{{x.s}}</span>
+<span style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600;color:#6FE0C0">{{x.b}}</span><span class="lbl">ของ {{x.bn}}</span></span>
+<span class="lbl" style="text-align:right">{{x.o}}</span>
+</div>
+<span style="font-size:12px;color:{{x.c}}">{{x.tn}}</span>
+<span style="font-size:13px;line-height:1.6;color:#DCE0EA">{{x.m}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<nav aria-label="แท็บหลัก" style="position:absolute;left:0;right:0;bottom:0;height:91px;padding:0 6px 26px;box-sizing:border-box;border-radius:32px 32px 0 0;background:linear-gradient(180deg,#1C1D24,#000000);box-shadow:0 -8px 30px rgba(0,0,0,.30);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;border-top:1px solid rgba(255,255,255,.10)">
+<a href="Main.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v5M12 16v5M3 12h5M16 12h5"/></svg>ชาร์ตของฉัน</a>
+<a href="People.dc.html" class="tab" aria-current="page" style="color:#B9A6FF;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 6 4.8"/></svg>บุคคล</a>
+<a href="Today.dc.html" class="tab" style="position:relative;color:#C9CEDC;font-weight:500"><span style="position:absolute;top:-44px;left:50%;margin-left:-44px;width:88px;height:88px;border-radius:999px;background:#0A0B10;display:flex;align-items:center;justify-content:center"><span style="width:72px;height:72px;border-radius:999px;background:radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21);display:flex;align-items:center;justify-content:center;color:#B9A6FF"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></span>วันนี้</a>
+<a href="#" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/></svg>ดวงล่วงหน้า</a>
+<a href="#" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>ตั้งค่า</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3000}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this; var st = this.state || {}; var V = '︎';
+var comp = !!st.comp; var c = st.c || 0; var sw = !!st.sw;
+var A = ['ต','ตัวอย่าง','☉ สิงห์ · ☽ พฤษภ · AC มีน'], B = ['ม','คนที่ 2','31 พ.ค. 2543 · ☉ เมถุน · ☽ พฤษภ · AC ตุลย์'];
+var L = sw ? B : A, R = sw ? A : B;
+var K = {c:['☌','#F3D46E','มุมกุมกัน (Conjunction)'],x:['⚹','#7FB8FF','มุมเปิดโอกาส (Sextile)'],q:['□','#FF8A4C','มุมท้าทาย (Square)'],t:['△','#4FD1A5','มุมส่งเสริม (Trine)'],o:['☍','#FF6B6B','มุมตรงข้าม (Opposition)']};
+var X = [['☽ จันทร์','c','♃ พฤหัสบดี','0°28′','อารมณ์ของ A ได้รับความใจกว้างจาก B อยู่ด้วยแล้วรู้สึกปลอดภัยและได้รับการสนับสนุน'],
+['♇ พลูโต','o','♀ ศุกร์','0°41′','A กระตุ้นด้านความรักของ B อย่างเข้มข้น ดึงดูดแรง แต่ระวังความหวงและการควบคุม'],
+['☽ จันทร์','c','♄ เสาร์','0°45′','B ทำให้อารมณ์ของ A มั่นคงขึ้น แต่บางครั้ง A อาจรู้สึกว่า B เย็นชาหรือเข้มงวด'],
+['☉ อาทิตย์','t','♇ พลูโต','1°07′','ตัวตนของ A กับพลังเปลี่ยนแปลงของ B ไหลไปด้วยกัน ช่วยให้กันและกันเติบโตลึกซึ้ง'],
+['♇ พลูโต','x','♆ เนปจูน','1°21′','มุมรุ่นของคนวัยใกล้กัน มองความฝันและอุดมคติคล้ายกัน'],
+['♃ พฤหัสบดี','q','♆ เนปจูน','2°04′','ความหวังของ A กับจินตนาการของ B อาจพาให้คาดหวังเกินจริง ควรคุยเป้าหมายให้ชัด'],
+['♇ พลูโต','o','☉ อาทิตย์','2°20′','A มีอิทธิพลต่อตัวตนของ B มาก อาจรู้สึกถูกท้าทายให้เปลี่ยนตัวเอง'],
+['☉ อาทิตย์','x','☉ อาทิตย์','2°34′','นิสัยพื้นฐานเข้ากันง่าย ส่งเสริมกันโดยธรรมชาติ เป็นเพื่อนกันได้ดี']];
+return {
+aI: L[0], aN: L[1], aS: L[2], bI: R[0], bN: R[1], bS: R[2],
+swap: function(){ self.setState({ sw: !sw }); },
+isComp: comp, isSyn: !comp, m0: comp ? 'seg' : 'seg on', m1: comp ? 'seg on' : 'seg',
+setSyn: function(){ self.setState({ comp: false }); }, setComp: function(){ self.setState({ comp: true }); },
+c0: c === 0 ? 'seg on' : 'seg', c1: c === 1 ? 'seg on' : 'seg',
+setC0: function(){ self.setState({ c: 0 }); }, setC1: function(){ self.setState({ c: 1 }); },
+modeHint: comp ? (c === 0 ? 'Composite: จุดกึ่งกลางของดาวแต่ละคู่ รวมเป็นชาร์ตเดียวของ "ความสัมพันธ์"' : 'Davison: ชาร์ตของวันเวลาและสถานที่กึ่งกลางระหว่างสองคน') : 'วางชาร์ตสองคนซ้อนกัน ดูว่าดาวของใครไปกระทบดาวของใคร',
+o0: !!st.o0, l0: st.o0 ? 'ย่อ' : 'อ่านแบบละเอียด', t0: function(){ self.setState({ o0: !st.o0 }); },
+asp: X.map(function(x){ var a = sw ? x[2] : x[0], b = sw ? x[0] : x[2]; return { a: a, b: b, an: L[1], bn: R[1], s: K[x[1]][0] + V, c: K[x[1]][1], tn: K[x[1]][2], o: x[3], m: x[4].replace(/\bA\b/g, sw ? R[1] : L[1]).replace(/\bB\b/g, sw ? L[1] : R[1]) }; })
+};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ตารางตำแหน่งดาว</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.lbl{font-size:12px;color:#9AA1B5}
+.card{border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10)}
+.seg{flex:1;height:40px;border:none;border-radius:12px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif;white-space:nowrap}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.tr{display:flex;flex-direction:column;gap:10px;width:100%;padding:14px;box-sizing:border-box;border:none;border-top:1px solid rgba(255,255,255,.07);background:transparent;color:#F2F4FA;font-family:inherit;text-align:left}
+.gl{width:34px;height:34px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(255,255,255,.14)}
+.ai{width:30px;height:30px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+.chip{height:22px;padding:0 8px;border-radius:7px;display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.hr{display:grid;grid-template-columns:26px minmax(0,1fr) auto 44px;align-items:center;gap:8px;min-height:40px;border-top:1px solid rgba(255,255,255,.06);font-size:13.5px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:64px;color:#4A4E5C;text-decoration:none;font-size:12px;white-space:nowrap}
+.ht{display:flex;flex-direction:column;gap:4px;min-height:74px;padding:8px;box-sizing:border-box;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+summary::-webkit-details-marker{display:none}
+.chv svg{transition:transform .2s}.chv[data-o="true"] svg{transform:rotate(180deg)}
+</style>
+</helmet>
+<div style="width:390px;min-height:2900px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 85% -40px,rgba(220,227,245,.24),transparent 70%),radial-gradient(460px 380px at -10% 380px,rgba(59,107,255,.28),transparent 70%),radial-gradient(500px 420px at 90% 1300px,rgba(138,92,255,.22),transparent 70%),#06070D">
+
+<div style="padding:54px 12px 0;display:flex;align-items:center">
+<a href="Forecast.dc.html" style="height:44px;padding:0 8px;display:flex;align-items:center;gap:4px;font-size:15px;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>ดูดวงล่วงหน้า</a>
+</div>
+
+<div style="padding:4px 20px 140px;display:flex;flex-direction:column;gap:20px">
+<div style="position:relative;padding-right:40px;display:flex;flex-direction:column;gap:2px"><span class="lbl">พฤศจิกายน 2569 · เวลา 07:00 น. (00:00 UT)</span><h1 style="margin:0;font-size:26px;font-weight:600;line-height:1.3">ตารางตำแหน่งดาว</h1><span style="font-size:13px;color:#9AA1B5">(Ephemeris)</span><details style="margin-right:-40px"><summary aria-label="หน้านี้คืออะไร" style="list-style:none;position:absolute;right:0;top:18px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(200,210,255,.35);background:rgba(255,255,255,.06);color:#D6DEFF;display:flex;align-items:center;justify-content:center;font:600 15px 'IBM Plex Sans Thai Looped',sans-serif;cursor:pointer">?</summary><div data-intro style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:18px;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(200,210,255,.16);font-size:13.5px;line-height:1.6"><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">คืออะไร</span><span style="flex:1;min-width:0;color:#E6E9F2">ตารางตำแหน่งดาวทุกดวงรายวัน บอกราศี องศา และดาวที่เดินถอยหลัง</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ใช้ดู</span><span style="flex:1;min-width:0;color:#E6E9F2">เช็กว่าวันไหนดาวอยู่ตรงไหน ตกเรือนใดของคุณ และดาวย้ายราศีหรือเปลี่ยนทิศเมื่อไร</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ทำไมสำคัญ</span><span style="flex:1;min-width:0;color:#E6E9F2">เป็นข้อมูลดิบที่ทุกหน้าดูดวงล่วงหน้าใช้คำนวณ เหมาะกับคนที่อยากตรวจหรือดูละเอียดเอง</span></div></div></details></div>
+
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:15px;font-weight:600">เลือกวัน</span><span class="lbl">เลื่อนซ้ายขวา</span></div>
+<div style="display:flex;gap:6px;overflow-x:auto;margin:0 -20px;padding:2px 20px 6px;scrollbar-width:none">
+<sc-for list="{{days}}" as="d" hint-placeholder-count="30"><button onClick="{{d.pick}}" style="flex:none;width:44px;height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:14px;border:1px solid {{d.bd}};background:{{d.bg}};color:#F2F4FA;font:500 11px 'IBM Plex Sans Thai Looped',sans-serif"><span style="color:#9AA1B5">{{d.w}}</span><b style="font-size:16px">{{d.n}}</b><span style="width:5px;height:5px;border-radius:50%;background:{{d.ev}}"></span></button></sc-for>
+</div>
+</div>
+
+<div class="card" style="padding:6px 16px 10px">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 8px"><span style="font-size:15px;font-weight:600">{{selT}}</span><span class="lbl">เรือน = ในชาร์ตคุณ</span></div>
+<sc-for list="{{pl}}" as="p" hint-placeholder-count="11">
+<div style="display:grid;grid-template-columns:30px minmax(0,1fr) auto 52px;align-items:center;gap:8px;min-height:42px;border-top:1px solid rgba(255,255,255,.06);font-size:13.5px">
+<span class="gl" style="width:28px;height:28px;font-size:14px;color:{{p.c}}">{{p.g}}</span>
+<span style="min-width:0">{{p.n}}</span>
+<span style="display:flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums"><span style="color:#C9CEDC">{{p.sg}}</span><b>{{p.dg}}</b><sc-if value="{{p.r}}" hint-placeholder-val="{{ false }}"><span style="color:#FF8A4C;font-weight:700;font-size:11px">R</span></sc-if></span>
+<span style="text-align:right;color:#9AA1B5;font-size:12px">เรือน {{p.h}}</span>
+</div>
+</sc-for>
+</div>
+
+<div class="card" style="padding:16px;display:flex;flex-direction:column;gap:4px">
+<span style="font-size:15px;font-weight:600;padding-bottom:6px">เหตุการณ์เดือนนี้</span>
+<sc-for list="{{evs}}" as="e" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:62px minmax(0,1fr);gap:10px;align-items:center;min-height:44px;border-top:1px solid rgba(255,255,255,.06)">
+<span style="display:flex;flex-direction:column;line-height:1.3"><b style="font-size:13px">{{e.d}}</b><span class="lbl">{{e.t}}</span></span>
+<span style="display:flex;flex-direction:column;line-height:1.4"><span style="font-size:13.5px;font-weight:600">{{e.n}}</span><span class="lbl">{{e.s}}</span></span>
+</div>
+</sc-for>
+</div>
+
+<div class="card" style="padding:14px 0 10px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:0 16px"><span style="font-size:15px;font-weight:600">ตารางทั้งเดือน</span><span class="lbl">เลื่อนซ้ายขวา</span></div>
+<div style="overflow-x:auto">
+<div style="display:grid;grid-template-columns:34px repeat(11,64px);width:max-content;font-size:11px;font-variant-numeric:tabular-nums;white-space:nowrap">
+<span style="position:sticky;left:0;background:#15161D;padding:6px 8px;color:#9AA1B5">วัน</span><sc-for list="{{hd}}" as="h" hint-placeholder-count="11"><span style="padding:6px 8px;color:{{h.c}};font-size:13px;font-weight:600">{{h.g}}</span></sc-for>
+</div>
+<sc-for list="{{tb}}" as="t" hint-placeholder-count="30"><div style="display:grid;grid-template-columns:34px repeat(11,64px);width:max-content;font-size:11px;font-variant-numeric:tabular-nums;white-space:nowrap;background:{{t.bg}}"><span style="position:sticky;left:0;background:#15161D;padding:5px 8px;color:{{t.dc}};font-weight:600">{{t.d}}</span><sc-for list="{{t.c}}" as="x" hint-placeholder-count="11"><span style="padding:5px 8px;color:{{x.col}};border-left:1px solid rgba(255,255,255,.05)">{{x.v}}</span></sc-for></div></sc-for>
+</div>
+<span class="lbl" style="padding:0 16px">สีส้ม = ถอยหลัง · พื้นม่วง = วันนี้</span>
+</div>
+<span class="lbl">คำนวณด้วย Swiss Ephemeris ตำแหน่งตอน 00:00 UT (07:00 น. เวลาไทย) ตัดเศษเป็นนาที · โหนดแบบ Mean · ตรวจกับ astro-seek แล้ว: 325 จาก 330 ช่องตรง อีก 5 ช่องเป็นดวงจันทร์ต่างกัน 1 ลิปดา</span>
+</div>
+
+<nav aria-label="แท็บหลัก" style="position:absolute;left:0;right:0;bottom:0;height:91px;padding:0 6px 26px;box-sizing:border-box;border-radius:32px 32px 0 0;background:linear-gradient(180deg,#1C1D24,#000000);box-shadow:0 -8px 30px rgba(0,0,0,.30);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;border-top:1px solid rgba(255,255,255,.10)">
+<a href="Main.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><path d="M12 3v5M12 16v5M3 12h5M16 12h5"></path></svg>ชาร์ตของฉัน</a>
+<a href="People.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg>บุคคล</a>
+<a href="Today.dc.html" class="tab" style="position:relative;color:#C9CEDC;font-weight:500"><span style="position:absolute;top:-44px;left:50%;margin-left:-44px;width:88px;height:88px;border-radius:999px;background:#0A0B10;display:flex;align-items:center;justify-content:center"><span style="width:72px;height:72px;border-radius:999px;background:radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21);display:flex;align-items:center;justify-content:center;color:#B9A6FF"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span></span>วันนี้</a>
+<a href="Forecast.dc.html" class="tab" aria-current="page" style="color:#B9A6FF;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"></path></svg>ดวงล่วงหน้า</a>
+<a href="Settings.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"></path></svg>ตั้งค่า</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2900}}'>
+class Component extends DCLogic {
+renderVals() {
+var self=this; var st=this.state||{}; var TODAY=4; var sel=st.d||TODAY;
+var R=[[[7,8,34,0,8],[3,27,28,0,5],[7,16,39,1,8],[6,26,14,1,8],[4,18,37,0,6],[4,24,19,0,6],[0,9,17,1,1],[2,4,40,1,3],[0,2,5,1,1],[10,3,7,0,11],[10,26,4,1,12]],[[7,9,34,0,8],[4,11,28,0,5],[7,15,30,1,8],[6,25,45,1,8],[4,19,7,0,6],[4,24,26,0,6],[0,9,13,1,1],[2,4,38,1,3],[0,2,3,1,1],[10,3,8,0,11],[10,26,1,1,12]],[[7,10,34,0,8],[4,25,12,0,6],[7,14,15,1,8],[6,25,18,1,8],[4,19,37,0,6],[4,24,33,0,6],[0,9,9,1,1],[2,4,36,1,3],[0,2,2,1,1],[10,3,8,0,11],[10,25,58,1,12]],[[7,11,34,0,8],[5,8,42,0,6],[7,12,57,1,8],[6,24,53,1,8],[4,20,7,0,6],[4,24,40,0,6],[0,9,6,1,1],[2,4,33,1,3],[0,2,1,1,1],[10,3,9,0,11],[10,25,54,1,12]],[[7,12,34,0,8],[5,21,59,0,7],[7,11,39,1,8],[6,24,31,1,8],[4,20,36,0,6],[4,24,47,0,6],[0,9,2,1,1],[2,4,31,1,3],[0,2,0,1,1],[10,3,9,0,11],[10,25,51,1,12]],[[7,13,35,0,8],[6,5,4,0,7],[7,10,22,1,8],[6,24,10,1,8],[4,21,5,0,6],[4,24,54,0,6],[0,8,59,1,1],[2,4,29,1,3],[0,1,59,1,1],[10,3,10,0,11],[10,25,48,1,12]],[[7,14,35,0,8],[6,17,58,0,7],[7,9,10,1,8],[6,23,52,1,8],[4,21,34,0,6],[4,25,0,0,6],[0,8,55,1,1],[2,4,27,1,3],[0,1,57,1,1],[10,3,10,0,11],[10,25,45,1,12]],[[7,15,35,0,8],[7,0,42,0,8],[7,8,4,1,8],[6,23,36,1,8],[4,22,3,0,6],[4,25,6,0,6],[0,8,52,1,1],[2,4,24,1,3],[0,1,56,1,1],[10,3,11,0,11],[10,25,42,1,12]],[[7,16,35,0,8],[7,13,14,0,8],[7,7,6,1,8],[6,23,22,1,8],[4,22,32,0,6],[4,25,13,0,6],[0,8,49,1,1],[2,4,22,1,3],[0,1,55,1,1],[10,3,12,0,11],[10,25,38,1,12]],[[7,17,36,0,8],[7,25,36,0,9],[7,6,19,1,8],[6,23,11,1,8],[4,23,0,0,6],[4,25,19,0,6],[0,8,46,1,1],[2,4,19,1,3],[0,1,54,1,1],[10,3,12,0,11],[10,25,35,1,12]],[[7,18,36,0,8],[8,7,48,0,9],[7,5,42,1,8],[6,23,2,1,8],[4,23,29,0,6],[4,25,25,0,6],[0,8,43,1,1],[2,4,17,1,3],[0,1,53,1,1],[10,3,13,0,11],[10,25,32,1,12]],[[7,19,36,0,8],[8,19,50,0,10],[7,5,17,1,8],[6,22,56,1,8],[4,23,56,0,6],[4,25,30,0,6],[0,8,40,1,1],[2,4,15,1,3],[0,1,52,1,1],[10,3,14,0,11],[10,25,29,1,12]],[[7,20,37,0,8],[9,1,45,0,10],[7,5,4,1,8],[6,22,53,1,8],[4,24,24,0,6],[4,25,36,0,6],[0,8,37,1,1],[2,4,12,1,3],[0,1,51,1,1],[10,3,15,0,11],[10,25,26,1,12]],[[7,21,37,0,9],[9,13,34,0,10],[7,5,2,0,8],[6,22,51,1,8],[4,24,52,0,6],[4,25,41,0,6],[0,8,34,1,1],[2,4,10,1,3],[0,1,50,1,1],[10,3,15,0,11],[10,25,23,1,12]],[[7,22,37,0,9],[9,25,22,0,11],[7,5,11,0,8],[6,22,52,0,8],[4,25,19,0,6],[4,25,46,0,6],[0,8,31,1,1],[2,4,7,1,3],[0,1,49,1,1],[10,3,16,0,11],[10,25,19,1,12]],[[7,23,38,0,9],[10,7,12,0,11],[7,5,31,0,8],[6,22,56,0,8],[4,25,46,0,6],[4,25,52,0,6],[0,8,29,1,1],[2,4,5,1,3],[0,1,48,1,1],[10,3,17,0,11],[10,25,16,1,12]],[[7,24,38,0,9],[10,19,10,0,12],[7,5,59,0,8],[6,23,2,0,8],[4,26,12,0,6],[4,25,56,0,6],[0,8,26,1,1],[2,4,2,1,3],[0,1,48,1,1],[10,3,18,0,11],[10,25,13,1,12]],[[7,25,39,0,9],[11,1,22,0,12],[7,6,37,0,8],[6,23,10,0,8],[4,26,39,0,6],[4,26,1,0,6],[0,8,24,1,1],[2,4,0,1,3],[0,1,47,1,1],[10,3,19,0,11],[10,25,10,1,12]],[[7,26,39,0,9],[11,13,52,0,12],[7,7,22,0,8],[6,23,20,0,8],[4,27,5,0,6],[4,26,6,0,6],[0,8,21,1,1],[2,3,57,1,3],[0,1,46,1,1],[10,3,20,0,11],[10,25,7,1,12]],[[7,27,40,0,9],[11,26,46,0,1],[7,8,14,0,8],[6,23,33,0,8],[4,27,31,0,6],[4,26,10,0,6],[0,8,19,1,1],[2,3,55,1,3],[0,1,45,1,1],[10,3,21,0,11],[10,25,4,1,12]],[[7,28,40,0,9],[0,10,8,0,1],[7,9,11,0,8],[6,23,48,0,8],[4,27,56,0,6],[4,26,14,0,6],[0,8,17,1,1],[2,3,52,1,3],[0,1,44,1,1],[10,3,22,0,11],[10,25,0,1,12]],[[7,29,41,0,9],[0,23,59,0,2],[7,10,14,0,8],[6,24,5,0,8],[4,28,22,0,6],[4,26,18,0,6],[0,8,15,1,1],[2,3,50,1,3],[0,1,44,1,1],[10,3,23,0,11],[10,24,57,1,12]],[[8,0,41,0,9],[1,8,18,0,2],[7,11,22,0,8],[6,24,23,0,8],[4,28,47,0,6],[4,26,22,0,6],[0,8,13,1,1],[2,3,47,1,3],[0,1,43,1,1],[10,3,24,0,11],[10,24,54,1,12]],[[8,1,42,0,9],[1,23,2,0,3],[7,12,33,0,8],[6,24,44,0,8],[4,29,11,0,6],[4,26,26,0,6],[0,8,11,1,1],[2,3,45,1,3],[0,1,42,1,1],[10,3,25,0,11],[10,24,51,1,12]],[[8,2,43,0,9],[2,8,3,0,3],[7,13,47,0,8],[6,25,7,0,8],[4,29,36,0,6],[4,26,30,0,6],[0,8,9,1,1],[2,3,42,1,3],[0,1,42,1,1],[10,3,26,0,11],[10,24,48,1,12]],[[8,3,43,0,9],[2,23,10,0,4],[7,15,5,0,8],[6,25,31,0,8],[5,0,0,0,6],[4,26,33,0,6],[0,8,8,1,1],[2,3,40,1,3],[0,1,41,1,1],[10,3,27,0,11],[10,24,44,1,12]],[[8,4,44,0,9],[3,8,13,0,4],[7,16,25,0,8],[6,25,58,0,8],[5,0,24,0,6],[4,26,36,0,6],[0,8,6,1,1],[2,3,37,1,3],[0,1,41,1,1],[10,3,28,0,11],[10,24,41,1,12]],[[8,5,45,0,9],[3,23,5,0,5],[7,17,47,0,8],[6,26,26,0,8],[5,0,47,0,6],[4,26,39,0,6],[0,8,5,1,1],[2,3,35,1,3],[0,1,40,1,1],[10,3,29,0,11],[10,24,38,1,12]],[[8,6,45,0,9],[4,7,37,0,5],[7,19,11,0,8],[6,26,55,0,8],[5,1,10,0,6],[4,26,42,0,6],[0,8,3,1,1],[2,3,32,1,3],[0,1,40,1,1],[10,3,31,0,11],[10,24,35,1,12]],[[8,7,46,0,9],[4,21,47,0,6],[7,20,36,0,8],[6,27,27,0,8],[5,1,33,0,6],[4,26,44,0,6],[0,8,2,1,1],[2,3,30,1,3],[0,1,39,1,1],[10,3,32,0,11],[10,24,32,1,12]]];
+var PL=[['☉','ดวงอาทิตย์','#FFC46B'],['☽','ดวงจันทร์','#DCE3F5'],['☿','พุธ','#B5D6FF'],['♀','ศุกร์','#FF8FB1'],['♂','อังคาร','#FF7A59'],['♃','พฤหัสบดี','#FFC46B'],['♄','เสาร์','#D6B87A'],['♅','ยูเรนัส','#5BD1FF'],['♆','เนปจูน','#7FB8FF'],['♇','พลูโต','#C98BFF'],['☊','โหนดเหนือ','#B9A6FF']];
+var SN=['เมษ','พฤษภ','เมถุน','กรกฎ','สิงห์','กันย์','ตุลย์','พิจิก','ธนู','มังกร','กุมภ์','มีน'];
+var SG=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+var WD=['อา','จ','อ','พ','พฤ','ศ','ส']; var V='︎';
+var EV=[[13,'22:53','พุธกลับมาเดินหน้า','ในราศีพิจิก เรือน 8 ของคุณ'],[14,'07:27','ศุกร์กลับมาเดินหน้า','ในราศีตุลย์ เรือน 8 ของคุณ'],[22,'14:23','ดวงอาทิตย์ย้ายเข้าราศีธนู','เริ่มฤดูธนู · เข้าเรือน 9 ของคุณ'],[26,'06:37','อังคารย้ายเข้าราศีกันย์','เข้าเรือน 6 ของคุณ']];
+function pad(n){ return (n<10?'0':'')+n; }
+var days=[]; for (var d=1; d<=30; d++) (function(d){ var on=d===sel, ev=EV.some(function(e){return e[0]===d;}); days.push({ n:d, w:WD[(d-1)%7], bd:on?'#B9A6FF':d===TODAY?'rgba(185,166,255,.45)':'rgba(255,255,255,.08)', bg:on?'rgba(185,166,255,.22)':'rgba(255,255,255,.03)', ev:ev?'#FFB08A':'transparent', pick:function(){ self.setState({d:d}); } }); })(d);
+var r=R[sel-1];
+var pl=PL.map(function(p,i){ var x=r[i]; return { g:p[0]+V, n:p[1], c:p[2], sg:SN[x[0]], dg:x[1]+'°'+pad(x[2])+'′', r:!!x[3], h:x[4] }; });
+var tb=R.map(function(x,k){ var d=k+1; return { d:d, dc:d===TODAY?'#D6CEFF':'#C9CEDC', bg:d===TODAY?'rgba(185,166,255,.14)':(k%2?'rgba(255,255,255,.02)':'transparent'), c:x.map(function(y){ return { v:SG[y[0]]+V+' '+y[1]+'°'+pad(y[2]), col:y[3]?'#FF9A66':'#E6E9F2' }; }) }; });
+return { days:days, selT:'วัน'+['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'][(sel-1)%7]+'ที่ '+sel+' พ.ย. 2569'+(sel===TODAY?' · วันนี้':''), pl:pl,
+evs:EV.map(function(e){ return { d:e[0]+' พ.ย.', t:e[1]+' น.', n:e[2], s:e[3] }; }), hd:PL.map(function(p){ return { g:p[0]+V, c:p[2] }; }), tb:tb };
+}
+}
+</script>
+</body>
+</html>

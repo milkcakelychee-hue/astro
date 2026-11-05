@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ตั้งค่า</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.lbl{font-size:12px;color:#9AA1B5}
+.sec{display:flex;flex-direction:column;gap:8px}
+.sh{font-size:13px;font-weight:600;color:#C9CEDC;padding:0 4px;display:flex;align-items:center;gap:8px}
+.box{border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 16px;box-sizing:border-box;width:100%;border:none;background:transparent;color:#F2F4FA;font:15px 'IBM Plex Sans Thai Looped',sans-serif;text-align:left}
+.row+.row{border-top:1px solid rgba(255,255,255,.07)}
+.ri{width:32px;height:32px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.rv{font-size:14px;color:#9AA1B5;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.seg{flex:1;height:36px;border:none;border-radius:10px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.badge{font-size:11px;padding:2px 8px;border-radius:999px;background:rgba(79,209,165,.16);color:#7FE3C0}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:64px;color:#4A4E5C;text-decoration:none;font-size:12px;white-space:nowrap}
+</style>
+</helmet>
+<div style="width:390px;min-height:1780px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 85% -40px,rgba(59,107,255,.40),transparent 70%),radial-gradient(460px 380px at -10% 360px,rgba(138,92,255,.28),transparent 70%),#06070D">
+
+<div style="padding:62px 20px 140px;display:flex;flex-direction:column;gap:24px">
+<h1 style="margin:0;font-size:28px;font-weight:600">ตั้งค่า</h1>
+
+<div style="display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(79,209,165,.20),rgba(59,107,255,.16));border:1px solid rgba(79,209,165,.35)">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7FE3C0" stroke-width="1.9" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.2 8 9 4.6-.8 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:600">{{matchTitle}}</span><span style="font-size:12px;color:#C9CEDC;line-height:1.5">{{matchSub}}</span></div>
+</div>
+
+<div class="sec">
+<span class="sh">ระบบการคำนวณ</span>
+<div class="box">
+<button class="row"><span class="ri" style="background:rgba(127,184,255,.16);color:#7FB8FF"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 11 12 4l8 7v9H4z"/></svg></span><span style="flex:1;display:flex;flex-direction:column"><span>ระบบเรือน</span><span class="lbl">วิธีแบ่งชาร์ตเป็น 12 เรือน</span></span><span class="rv">Placidus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></button>
+<div class="row"><span class="ri" style="background:rgba(185,166,255,.16);color:#B9A6FF"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></span><span style="flex:1;display:flex;flex-direction:column"><span>ระบบการวางราศี</span><span class="lbl">ใช้แบบเดียวทั้งแอป</span></span><span class="rv">แบบสากล (Tropical)</span></div>
+<button class="row"><span class="ri" style="background:rgba(243,212,110,.16);color:#F3D46E;font-size:16px">☊&#xFE0E;</span><span style="flex:1;display:flex;flex-direction:column"><span>ราหู / เกตุ</span><span class="lbl">ตำแหน่งจริง หรือค่าเฉลี่ย</span></span><span class="rv">ค่าเฉลี่ย (Mean) <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></button>
+</div>
+</div>
+
+<div class="sec">
+<span class="sh">ดาวและจุดที่แสดงในชาร์ต</span>
+<div class="box">
+<sc-for list="{{pts}}" as="p" hint-placeholder-count="6">
+<div class="row"><span style="width:28px;font-size:17px;color:#DCE0EA">{{p.g}}</span><span style="flex:1;display:flex;flex-direction:column"><span>{{p.n}}</span><span class="lbl">{{p.d}}</span></span>
+<button role="switch" aria-checked="{{p.on}}" aria-label="{{p.n}}" onClick="{{p.t}}" style="width:52px;height:32px;border-radius:999px;border:none;padding:3px;background:{{p.bg}};display:flex;justify-content:{{p.j}}"><span style="width:26px;height:26px;border-radius:999px;background:#FFFFFF"></span></button></div>
+</sc-for>
+</div>
+</div>
+
+<div class="sec">
+<span class="sh">การแสดงผล</span>
+<div class="box">
+<div class="row" style="flex-direction:column;align-items:stretch;gap:10px">
+<span>ธีม</span>
+<div role="group" aria-label="ธีม" style="display:flex;gap:4px;padding:3px;border-radius:12px;background:rgba(255,255,255,.07)"><button class="{{t0}}" onClick="{{th0}}">ตามเครื่อง</button><button class="{{t1}}" onClick="{{th1}}">สว่าง</button><button class="{{t2}}" onClick="{{th2}}">มืด</button></div>
+</div>
+</div>
+</div>
+
+<div class="sec">
+<span class="sh">คู่มือ</span>
+<div class="box">
+<a href="Symbols.dc.html" class="row" style="text-decoration:none"><span class="ri" style="background:rgba(243,212,110,.16);color:#F3D46E;font-size:16px">♀&#xFE0E;</span><span style="flex:1;display:flex;flex-direction:column"><span>ความหมายสัญลักษณ์</span><span class="lbl">ดาว ราศี มุมดาว และเรือน</span></span><span class="rv"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></a>
+</div>
+</div>
+
+<div class="sec">
+<span class="sh">ข้อมูลของฉัน</span>
+<div class="box">
+<button class="row"><span class="ri" style="background:rgba(127,184,255,.16);color:#7FB8FF"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></span><span style="flex:1;display:flex;flex-direction:column"><span>สำรองข้อมูล</span><span class="lbl">บันทึกทุกคนและโน้ตเป็นไฟล์ JSON</span></span></button>
+<button class="row"><span class="ri" style="background:rgba(111,224,192,.16);color:#6FE0C0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21V9M7 14l5-5 5 5M5 3h14"/></svg></span><span style="flex:1;display:flex;flex-direction:column"><span>นำเข้าข้อมูล</span><span class="lbl">จากไฟล์ JSON ที่สำรองไว้</span></span></button>
+</div>
+<span class="lbl" style="padding:0 4px">ข้อมูลทั้งหมดเก็บในเครื่องนี้ ไม่มีบัญชีและไม่ส่งขึ้นเน็ต ควรสำรองไว้ก่อนเปลี่ยนเครื่องหรือล้าง Safari</span>
+</div>
+
+<div class="sec">
+<span class="sh">เกี่ยวกับแอป</span>
+<div class="box">
+<div class="row"><span style="flex:1">ช่วงปีที่คำนวณได้</span><span class="rv">พ.ศ. 2538 เป็นต้นไป</span></div>
+<div class="row"><span style="flex:1">เครื่องคำนวณ</span><span class="rv">Swiss Ephemeris · ออฟไลน์</span></div>
+<div class="row"><span style="flex:1">เวอร์ชัน</span><span class="rv">[เวอร์ชัน]</span></div>
+</div>
+</div>
+</div>
+
+<nav aria-label="แท็บหลัก" style="position:absolute;left:0;right:0;bottom:0;height:91px;padding:0 6px 26px;box-sizing:border-box;border-radius:32px 32px 0 0;background:linear-gradient(180deg,#1C1D24,#000000);box-shadow:0 -8px 30px rgba(0,0,0,.30);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;border-top:1px solid rgba(255,255,255,.10)">
+<a href="Main.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v5M12 16v5M3 12h5M16 12h5"/></svg>ชาร์ตของฉัน</a>
+<a href="People.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 6 4.8"/></svg>บุคคล</a>
+<a href="Today.dc.html" class="tab" style="position:relative;color:#C9CEDC;font-weight:500"><span style="position:absolute;top:-44px;left:50%;margin-left:-44px;width:88px;height:88px;border-radius:999px;background:#0A0B10;display:flex;align-items:center;justify-content:center"><span style="width:72px;height:72px;border-radius:999px;background:radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21);display:flex;align-items:center;justify-content:center;color:#B9A6FF"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></span>วันนี้</a>
+<a href="Forecast.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/></svg>ดวงล่วงหน้า</a>
+<a href="#" class="tab" aria-current="page" style="color:#B9A6FF;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>ตั้งค่า</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1780}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this; var st = this.state || {}; var V = '︎';
+var sid = !!st.sid; var orbStd = st.orbStd === undefined ? true : st.orbStd; var th = st.th || 0;
+var off = st.off || {};
+var O = [['☌','กุมกัน','#F3D46E',10],['☍','ตรงข้าม','#FF6B6B',10],['□','ท้าทาย','#FF8A4C',8],['△','ส่งเสริม','#4FD1A5',8],['⚹','เปิดโอกาส','#7FB8FF',6]];
+var P = [['⚸','ลิลิธ','จุดดวงจันทร์ดำ · ค่าเฉลี่ย (Mean)'],['⚷','ไครอน','บาดแผลและการเยียวยา'],['⚳','ดาวเคราะห์น้อย 4 ดวง','Ceres, Pallas, Juno, Vesta'],['⊗','จุดโชคลาภ','Part of Fortune'],['☋','เกตุ','จุดตรงข้ามราหู'],['Vx','Vertex','จุดพบเจอที่ถูกกำหนด']];
+var defOff = {2:true,3:true,5:true};
+var custom = !orbStd || sid;
+return {
+sid: sid, z0: sid ? 'seg' : 'seg on', z1: sid ? 'seg on' : 'seg',
+setTrop: function(){ self.setState({ sid: false }); }, setSid: function(){ self.setState({ sid: true }); },
+matchTitle: 'ตั้งค่าตรงกับ astro-seek',
+matchSub: 'ระบบเรือน ราศี และระยะห่างของมุมดาว (Orb) ใช้ค่าเดียวกับเว็บทุกอย่าง ผลจึงตรงกัน',
+orbStd: orbStd, swBg: orbStd ? '#4FD1A5' : 'rgba(255,255,255,.18)', swJ: orbStd ? 'flex-end' : 'flex-start',
+toggleOrb: function(){ self.setState({ orbStd: !orbStd }); },
+orbs: O.map(function(o){ return { s: o[0] + V, n: o[1], c: o[2], v: o[3], op: orbStd ? '.45' : '1' }; }),
+pts: P.map(function(p, i){ var on = off[i] === undefined ? !defOff[i] : !off[i]; return { g: p[0].length > 1 ? p[0] : p[0] + V, n: p[1], d: p[2], on: on, bg: on ? '#4FD1A5' : 'rgba(255,255,255,.18)', j: on ? 'flex-end' : 'flex-start', t: function(){ var n = Object.assign({}, off); n[i] = on; self.setState({ off: n }); } }; }),
+t0: th === 0 ? 'seg on' : 'seg', t1: th === 1 ? 'seg on' : 'seg', t2: th === 2 ? 'seg on' : 'seg',
+th0: function(){ self.setState({ th: 0 }); }, th1: function(){ self.setState({ th: 1 }); }, th2: function(){ self.setState({ th: 2 }); }
+};
+}
+}
+</script>
+</body>
+</html>

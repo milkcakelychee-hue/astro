@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ดาวถอยหลัง</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.lbl{font-size:12px;color:#9AA1B5}
+.card{border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10)}
+.seg{flex:1;height:40px;border:none;border-radius:12px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif;white-space:nowrap}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.tr{display:flex;flex-direction:column;gap:10px;width:100%;padding:14px;box-sizing:border-box;border:none;border-top:1px solid rgba(255,255,255,.07);background:transparent;color:#F2F4FA;font-family:inherit;text-align:left}
+.gl{width:34px;height:34px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(255,255,255,.14)}
+.ai{width:30px;height:30px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+.chip{height:22px;padding:0 8px;border-radius:7px;display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.hr{display:grid;grid-template-columns:26px minmax(0,1fr) auto 44px;align-items:center;gap:8px;min-height:40px;border-top:1px solid rgba(255,255,255,.06);font-size:13.5px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:64px;color:#4A4E5C;text-decoration:none;font-size:12px;white-space:nowrap}
+.ht{display:flex;flex-direction:column;gap:4px;min-height:74px;padding:8px;box-sizing:border-box;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+summary::-webkit-details-marker{display:none}
+</style>
+</helmet>
+<div style="width:390px;min-height:2500px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 85% -40px,rgba(255,138,76,.28),transparent 70%),radial-gradient(460px 380px at -10% 380px,rgba(138,92,255,.30),transparent 70%),radial-gradient(500px 420px at 90% 1400px,rgba(59,107,255,.22),transparent 70%),#06070D">
+
+<div style="padding:54px 12px 0;display:flex;align-items:center">
+<a href="Forecast.dc.html" style="height:44px;padding:0 8px;display:flex;align-items:center;gap:4px;font-size:15px;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>ดูดวงล่วงหน้า</a>
+</div>
+
+<div style="padding:8px 20px 140px;display:flex;flex-direction:column;gap:18px">
+<div style="position:relative;padding-right:40px;display:flex;flex-direction:column;gap:2px"><span class="lbl">3 พ.ย. 2569</span><h1 style="margin:0;font-size:26px;font-weight:600;line-height:1.3">ช่วงดาวถอยหลัง</h1><span style="font-size:13px;color:#9AA1B5">(Retrograde · Shadow)</span><span style="font-size:13px;color:#C9CEDC;line-height:1.6;margin-top:4px">บางช่วงดาวดูเหมือนเดินถอยหลังเมื่อมองจากโลก เรื่องของดาวนั้นจะช้าลง ย้อนกลับมาให้ทบทวน ช่วงเงา (Shadow) คือช่วงก่อนและหลังที่ดาวเดินผ่านองศาเดิม</span><details style="margin-right:-40px"><summary aria-label="หน้านี้คืออะไร" style="list-style:none;position:absolute;right:0;top:18px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(200,210,255,.35);background:rgba(255,255,255,.06);color:#D6DEFF;display:flex;align-items:center;justify-content:center;font:600 15px 'IBM Plex Sans Thai Looped',sans-serif;cursor:pointer">?</summary><div data-intro style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:18px;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(200,210,255,.16);font-size:13.5px;line-height:1.6"><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">คืออะไร</span><span style="flex:1;min-width:0;color:#E6E9F2">ช่วงที่ดาวดูเหมือนเดินถอยหลัง รวมช่วงเงาก่อนและหลัง</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ใช้ดู</span><span style="flex:1;min-width:0;color:#E6E9F2">ดูว่าช่วงไหนควรทบทวน แก้ไข ทำซ้ำ มากกว่าเริ่มใหม่</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ทำไมสำคัญ</span><span style="flex:1;min-width:0;color:#E6E9F2">เรื่องที่ดาวนั้นดูแลมักช้าหรือต้องย้อนกลับไปทำ ถ้ารู้ล่วงหน้าจะวางแผนได้</span></div></div></details></div>
+
+<div style="display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:24px;background:linear-gradient(140deg,rgba(255,138,76,.30),rgba(138,92,255,.30) 60%,rgba(59,107,255,.22));border:1px solid rgba(255,170,130,.35)">
+<span style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:#FFD0BA"><span>ตอนนี้ถอยหลังอยู่ 5 ดวง</span><span style="font-weight:400;color:#C9CEDC">แตะดาวเพื่อดู</span></span>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{nowR}}" as="n" hint-placeholder-count="5"><button onClick="{{n.pick}}" aria-pressed="{{n.on}}" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 10px;border-radius:10px;border:1.5px solid {{n.bd}};background:{{n.bg}};color:#F2F4FA;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif"><b style="color:{{n.c}};font-size:15px">{{n.g}}</b>{{n.n}}<span style="color:#FF8A4C;font-weight:700;font-size:11px">R</span></button></sc-for></div>
+<div style="display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:14px;background:rgba(6,7,13,.40)">
+<span style="font-size:15px;font-weight:600">{{rT}}</span>
+<span style="font-size:13px;color:#C9CEDC;line-height:1.55">{{rS}}</span>
+<span style="font-size:13px;color:#E6E9F2;line-height:1.55">{{rD}}</span>
+</div>
+</div>
+
+<div class="card" style="padding:14px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:15px;font-weight:600">ภาพรวม</span><span class="lbl">แตะแท่งเพื่ออ่าน</span></div>
+<div role="tablist" style="display:flex;gap:4px;padding:4px;border-radius:14px;background:rgba(255,255,255,.07)">
+<sc-for list="{{ranges}}" as="g" hint-placeholder-count="3"><button role="tab" class="{{g.cls}}" onClick="{{g.pick}}" style="height:34px">{{g.l}}</button></sc-for>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between">
+<button onClick="{{prev}}" aria-label="ช่วงก่อน" style="width:36px;height:36px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#F2F4FA;opacity:{{pOp}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+<span style="font-size:14px;font-weight:600">{{win}}</span>
+<button onClick="{{next}}" aria-label="ช่วงถัดไป" style="width:36px;height:36px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#F2F4FA;opacity:{{nOp}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+</div>
+<div style="display:grid;grid-template-columns:58px minmax(0,1fr);gap:8px 6px;align-items:center">
+<span></span><div style="position:relative;height:14px"><sc-for list="{{ticks}}" as="t" hint-placeholder-count="6"><span style="position:absolute;left:{{t.x}};transform:translateX(-50%);font-size:9.5px;color:#9AA1B5;white-space:nowrap">{{t.l}}</span></sc-for></div>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
+<span style="display:flex;align-items:center;gap:5px;font-size:12px"><b style="color:{{r.c}};font-size:14px;width:16px;text-align:center">{{r.g}}</b>{{r.n}}</span>
+<div style="position:relative;height:44px;border-radius:10px;background:rgba(255,255,255,.035);overflow:hidden">
+<span style="position:absolute;left:{{nowX}};top:0;bottom:0;width:2px;background:#B9A6FF;opacity:{{nowO}}"></span>
+<sc-for list="{{r.cy}}" as="y" hint-placeholder-count="1">
+<button onClick="{{y.pick}}" aria-pressed="{{y.on}}" style="position:absolute;top:4px;bottom:4px;left:{{y.l}};width:{{y.w}};min-width:14px;padding:0;border:none;border-radius:8px;overflow:hidden;background:transparent;box-shadow:{{y.sh}};cursor:pointer">
+<span style="position:absolute;top:13px;height:6px;left:0;width:{{y.a}};background:rgba(255,176,138,.55);border-radius:4px 0 0 4px"></span>
+<span style="position:absolute;top:9px;height:14px;left:{{y.a}};width:{{y.b}};background:#FF8A4C;border-radius:4px"></span>
+<span style="position:absolute;top:13px;height:6px;left:{{y.ab}};right:0;background:rgba(127,227,192,.55);border-radius:0 4px 4px 0"></span>
+<span style="position:absolute;left:2px;right:2px;bottom:1px;font-size:9.5px;line-height:1.1;text-align:center;color:{{y.tc}};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{y.tag}}</span>
+</button>
+</sc-for>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:#C9CEDC"><span style="display:flex;align-items:center;gap:6px"><i style="width:16px;height:6px;border-radius:4px;background:rgba(255,176,138,.7)"></i>เงาก่อน</span><span style="display:flex;align-items:center;gap:6px"><i style="width:16px;height:12px;border-radius:4px;background:#FF8A4C"></i>ถอยหลัง (R)</span><span style="display:flex;align-items:center;gap:6px"><i style="width:16px;height:6px;border-radius:4px;background:rgba(127,227,192,.7)"></i>เงาหลัง</span><span style="display:flex;align-items:center;gap:6px"><i style="width:2px;height:12px;background:#B9A6FF"></i>วันนี้</span></div>
+</div>
+
+<sc-if value="{{hasSel}}" hint-placeholder-val="{{ true }}">
+<div class="card" style="padding:16px;display:flex;flex-direction:column;gap:12px;border-color:rgba(255,138,76,.35)">
+<div style="display:flex;align-items:center;gap:12px"><span style="width:44px;height:44px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:{{sc}};background:rgba(6,7,13,.45);border:1px solid rgba(255,255,255,.12)">{{sg}}</span><div style="display:flex;flex-direction:column;line-height:1.35;flex:1;min-width:0"><span style="font-size:17px;font-weight:600">{{st}}</span><span class="lbl">{{sw}}</span></div></div>
+<div style="display:flex;align-items:center;gap:8px"><span style="flex:none;height:26px;padding:0 10px;border-radius:8px;display:inline-flex;align-items:center;white-space:nowrap;font-size:12px;font-weight:600;color:{{stC}};background:{{stB}}">{{stT}}</span><span class="lbl" style="margin-left:auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{cyN}}</span>
+<button onClick="{{cPrev}}" aria-label="รอบก่อน" style="width:32px;height:32px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#F2F4FA;opacity:{{cpOp}}">‹</button><button onClick="{{cNext}}" aria-label="รอบถัดไป" style="width:32px;height:32px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#F2F4FA;opacity:{{cnOp}}">›</button></div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{phases}}" as="p" hint-placeholder-count="3">
+<div style="display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px">
+<div style="display:flex;flex-direction:column;align-items:center"><span style="width:12px;height:12px;margin-top:4px;border-radius:50%;background:{{p.c}};box-shadow:{{p.glow}}"></span><span style="flex:1;width:2px;background:rgba(255,255,255,.12);display:{{p.ln}}"></span></div>
+<div style="display:flex;flex-direction:column;gap:2px;padding-bottom:14px"><span style="font-size:14px;font-weight:600;color:{{p.c}}">{{p.t}} <span style="font-size:11px;font-weight:600;color:#06070D;background:{{p.c}};border-radius:6px;padding:1px 6px;display:{{p.nowD}}">ตอนนี้</span></span><span style="font-size:12.5px;color:#F2F4FA">{{p.d}}</span><span style="font-size:12.5px;line-height:1.55;color:#C9CEDC">{{p.m}}</span></div>
+</div>
+</sc-for>
+</div>
+<div style="padding:12px;border-radius:14px;background:rgba(6,7,13,.45);display:flex;flex-direction:column;gap:4px"><span style="font-size:12px;color:#9AA1B5">ตกในชาร์ตของคุณ</span><span style="font-size:13.5px;line-height:1.6">{{sh}}</span></div>
+</div>
+</sc-if>
+
+<span class="lbl">คำนวณจากตำแหน่งดาวจริง เวลาไทย · ข้อความอธิบายในดีไซน์เป็นตัวอย่าง ตอนทำจริงดึงจากคลังคำอธิบาย และต้องเทียบกับ astro-seek</span>
+</div>
+
+<nav aria-label="แท็บหลัก" style="position:absolute;left:0;right:0;bottom:0;height:91px;padding:0 6px 26px;box-sizing:border-box;border-radius:32px 32px 0 0;background:linear-gradient(180deg,#1C1D24,#000000);box-shadow:0 -8px 30px rgba(0,0,0,.30);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;border-top:1px solid rgba(255,255,255,.10)">
+<a href="Main.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><path d="M12 3v5M12 16v5M3 12h5M16 12h5"></path></svg>ชาร์ตของฉัน</a>
+<a href="People.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg>บุคคล</a>
+<a href="Today.dc.html" class="tab" style="position:relative;color:#C9CEDC;font-weight:500"><span style="position:absolute;top:-44px;left:50%;margin-left:-44px;width:88px;height:88px;border-radius:999px;background:#0A0B10;display:flex;align-items:center;justify-content:center"><span style="width:72px;height:72px;border-radius:999px;background:radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21);display:flex;align-items:center;justify-content:center;color:#B9A6FF"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span></span>วันนี้</a>
+<a href="Forecast.dc.html" class="tab" aria-current="page" style="color:#B9A6FF;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"></path></svg>ดวงล่วงหน้า</a>
+<a href="Settings.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"></path></svg>ตั้งค่า</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2500}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this; var st = this.state || {}; var V = '\uFE0E'; var rp = st.rp || 'm';
+var sel = st.sel === undefined ? 0 : st.sel;
+var HT = ['','ตัวตน ภาพลักษณ์','เงิน คุณค่าในตัวเอง','การสื่อสาร คนใกล้ตัว','บ้าน ครอบครัว','ความรัก ความสนุก','งานประจำวัน สุขภาพ','คู่ครอง หุ้นส่วน','ความลึกซึ้ง เงินร่วม','การเรียน การเดินทาง','งาน ชื่อเสียง','เพื่อน สังคม ความฝัน','จิตใต้สำนึก การพัก'];
+var TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+function fd(s){ var p = s.split('-'); return (+p[2]) + ' ' + TH[+p[1] - 1] + ' ' + (+p[0] + 543 - 2500); }
+var P = {m:['☿','พุธ','#B5D6FF','การสื่อสาร เอกสาร การเดินทาง เทคโนโลยี','ทบทวนแผน แก้งานเก่า ติดต่อคนเก่า ตรวจเอกสารก่อนเซ็น'],V:['♀','ศุกร์','#FF8FB1','ความรัก เงิน ความงาม','คนรักเก่าอาจกลับมา ทบทวนว่าให้ค่ากับอะไร ชะลอการซื้อของแพงหรือทำศัลยกรรม'],a:['♂','อังคาร','#FF7A59','แรงขับ การลงมือ ความโกรธ','พลังช้าลง ทำงานที่ค้างให้เสร็จ ระวังความโกรธเก่าปะทุ'],J:['♃','พฤหัสบดี','#F3D46E','โอกาส ความเชื่อ การเติบโต','ทบทวนเป้าหมายและความเชื่อ โอกาสเก่ากลับมาให้คิดใหม่'],s:['♄','เสาร์','#8FD47A','ความรับผิดชอบ กฎเกณฑ์ โครงสร้าง','ทบทวนภาระและพันธะ ปรับโครงสร้างชีวิตที่ไม่แข็งแรง'],U:['♅','ยูเรนัส','#7FB8FF','อิสรภาพ ความเปลี่ยนแปลง','ความเปลี่ยนแปลงเกิดข้างในก่อน ทบทวนว่าอยากเป็นอิสระจากอะไร'],N:['♆','เนปจูน','#6FE0C0','ความฝัน จิตวิญญาณ','ภาพลวงค่อย ๆ ชัดขึ้น เห็นความจริงในเรื่องที่เคยมองไม่ชัด'],P:['♇','พลูโต','#FF8FB1','อำนาจ การเปลี่ยนลึก','ทบทวนเรื่องอำนาจและการควบคุม ปล่อยสิ่งที่ไม่ใช่']};
+// [planet, pre, R, D, post, R deg, D deg, houses]
+var L = [
+['m','2026-10-04','2026-10-24','2026-11-13','2026-11-30','พิจิก 20°','พิจิก 5°','8–9'],
+['V','2026-08-31','2026-10-03','2026-11-14','2026-12-16','พิจิก 8°','ตุลย์ 22°','8'],
+['s','2026-04-20','2026-07-27','2026-12-11','2027-03-15','เมษ 14°','เมษ 7°','1'],
+['N','2026-03-16','2026-07-07','2026-12-13','2027-04-03','เมษ 4°','เมษ 1°','1'],
+['U','2026-05-25','2026-09-11','2027-02-08','2027-05-26','เมถุน 5°','เมถุน 1°','3'],
+['P','2026-01-12','2026-05-06','2026-10-16','2027-02-07','กุมภ์ 5°','กุมภ์ 3°','11'],
+['J','2026-09-17','2026-12-13','2027-04-13','2027-07-11','สิงห์ 27°','สิงห์ 16°','6'],
+['a','2026-11-05','2027-01-10','2027-04-01','2027-06-08','กันย์ 10°','สิงห์ 20°','6'],
+['m','2027-01-26','2027-02-10','2027-03-03','2027-03-24','มีน 5°','กุมภ์ 20°','12'],
+['m','2027-05-26','2027-06-11','2027-07-05','2027-07-19','กรกฎ 6°','เมถุน 27°','4'],
+['m','2027-09-17','2027-10-07','2027-10-28','2027-11-13','พิจิก 4°','ตุลย์ 19°','7–8'],
+['s','2027-05-05','2027-08-10','2027-12-24','2028-03-27','เมษ 27°','เมษ 21°','2'],
+['N','2027-03-19','2027-07-10','2027-12-15','2028-04-04','เมษ 6°','เมษ 3°','1'],
+['U','2027-05-30','2027-09-15','2028-02-13','2028-05-30','เมถุน 9°','เมถุน 5°','3'],
+['P','2027-01-14','2027-05-08','2027-10-18','2028-02-09','กุมภ์ 7°','กุมภ์ 4°','11']
+];
+var NOW = new Date(2026, 10, 3).getTime();
+function ts(s){ var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]).getTime(); }
+var rg = st.rg || 6; var off = st.off || 0;
+var ws = new Date(2026, 10 + off * rg, 1), we = new Date(2026, 10 + off * rg + rg, 1);
+var W0 = ws.getTime(), W1 = we.getTime(); var maxOff = Math.floor(14 / rg) - (14 % rg ? 0 : 1);
+function x(t){ return (t - W0) / (W1 - W0); }
+function cl(v){ return Math.max(0, Math.min(1, v)); }
+function status(r){ var a = ts(r[1]), b = ts(r[2]), c = ts(r[3]), d = ts(r[4]);
+if (NOW < a) { var m = Math.round((a - NOW) / (30.4 * 864e5)); return ['อีก ' + (m < 1 ? '<1' : m) + ' เดือน','#C9CEDC','rgba(255,255,255,.08)',-1,'อีก ' + (m < 1 ? '<1' : m) + ' ด.']; }
+if (NOW < b) return ['ตอนนี้: เงาก่อน','#FFB08A','rgba(255,176,138,.18)',0,'เงาก่อน'];
+if (NOW < c) return ['กำลังถอยหลัง','#06070D','#FF8A4C',1,'ถอยหลัง'];
+if (NOW < d) return ['ตอนนี้: เงาหลัง','#7FE3C0','rgba(127,227,192,.18)',2,'เงาหลัง'];
+return ['ผ่านไปแล้ว','#9AA1B5','rgba(255,255,255,.06)',3,'ผ่านแล้ว']; }
+var order = ['m','V','a','J','s','U','N','P'];
+var rows = order.map(function(k){ var p = P[k]; var cy = [];
+L.forEach(function(r, i){ if (r[0] !== k) return; var a = ts(r[1]), b = ts(r[2]), c = ts(r[3]), d = ts(r[4]); if (d < W0 || a > W1) return;
+var L0 = cl(x(a)), L1 = cl(x(d)), w = L1 - L0; if (w <= 0) return;
+function rel(t){ return Math.max(0, Math.min(100, (cl(x(t)) - L0) / w * 100)); }
+var on = i === sel; var stt = status(r);
+cy.push({ l: (L0 * 100) + '%', w: (w * 100) + '%', a: rel(b) + '%', b: (rel(c) - rel(b)) + '%', ab: rel(c) + '%', sh: on ? '0 0 0 2px #F2F4FA,0 0 12px rgba(255,255,255,.4)' : 'none', on: on, tag: w > 0.16 ? stt[4] : '', tc: stt[3] >= 0 && stt[3] < 3 ? '#F2F4FA' : '#9AA1B5', pick: function(){ self.setState({ sel: i }); } }); });
+return { g: p[0] + V, n: p[1], c: p[2], cy: cy }; });
+var MN = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+var ticks = []; for (var mi = 0; mi < rg; mi += (rg === 12 ? 2 : 1)) { var dt = new Date(2026, 10 + off * rg + mi, 1); ticks.push({ x: (x(dt.getTime()) * 100 + (rg === 12 ? 0 : 50 / rg)) + '%', l: MN[dt.getMonth()] + (dt.getMonth() === 0 || mi === 0 ? ' ' + String(dt.getFullYear() + 543).slice(2) : '') }); }
+var S = L[sel]; var p = P[S[0]]; var hs = S[7].split('–').map(Number); var sst = status(S);
+var same = L.map(function(r, i){ return i; }).filter(function(i){ return L[i][0] === S[0]; }); var pos = same.indexOf(sel);
+var nowPh = sst[3];
+var lists = [['กำลังเกิดตอนนี้', function(s){ return s[3] >= 0 && s[3] <= 2; }], ['กำลังจะมา', function(s){ return s[3] === -1; }]].map(function(g){
+var items = L.map(function(r, i){ return { r: r, i: i, s: status(r) }; }).filter(function(o){ return g[1](o.s); }).sort(function(a, b){ return ts(a.r[2]) - ts(b.r[2]); }).map(function(o){ var q = P[o.r[0]]; return { g: q[0] + V, c: q[2], n: q[1], d: fd(o.r[2]) + ' – ' + fd(o.r[3]) + ' · เรือน ' + o.r[7], tag: o.s[0], tc: o.s[1], tb: o.s[2], bd: o.i === sel ? 'rgba(255,255,255,.5)' : 'rgba(255,255,255,.08)', pick: function(){ self.setState({ sel: o.i }); } }; });
+return { t: g[0] + ' · ' + items.length, items: items }; });
+var TM=['','ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+function thd(d){ var x=d.split('-'); return (+x[2])+' '+TM[+x[1]]+' '+String(+x[0]+543).slice(2); }
+var rc = L.filter(function(c){ return c[0]===rp && c[2]<='2026-11-04' && c[3]>='2026-11-04'; })[0];
+var rdays = Math.round((Date.parse(rc[3]) - Date.parse('2026-11-04'))/864e5);return {
+nowR: ['m','V','s','N','U'].map(function(k){ var q = P[k], on = k===rp; return { g: q[0] + V, n: q[1], c: q[2], on: on, bd: on ? '#FFB08A' : 'transparent', bg: on ? 'rgba(255,176,138,.18)' : 'rgba(6,7,13,.45)', pick: function(){ self.setState({ rp: k }); } }; }),
+rT: P[rp][0] + V + ' ' + P[rp][1] + 'ถอยหลังในราศี' + rc[5].split(' ')[0], rS: 'กลับมาเดินหน้า ' + thd(rc[3]) + ' (อีก ' + rdays + ' วัน) · ตกเรือน ' + rc[7] + ' ของคุณ: เรื่อง' + P[rp][3], rD: P[rp][4],
+ranges: [[3,'3 เดือน'],[6,'6 เดือน'],[12,'1 ปี']].map(function(g){ 
+return { l: g[1], cls: rg === g[0] ? 'seg on' : 'seg', pick: function(){ self.setState({ rg: g[0], off: 0 }); } }; }),
+win: MN[ws.getMonth()] + ' ' + (ws.getFullYear() + 543 - 2500) + ' – ' + MN[new Date(W1 - 864e5).getMonth()] + ' ' + (new Date(W1 - 864e5).getFullYear() + 543 - 2500),
+prev: function(){ if (off > 0) self.setState({ off: off - 1 }); }, next: function(){ if (off < maxOff) self.setState({ off: off + 1 }); }, pOp: off > 0 ? 1 : .35, nOp: off < maxOff ? 1 : .35,
+ticks: ticks, nowX: (x(NOW) * 100) + '%', nowO: NOW >= W0 && NOW < W1 ? .9 : 0, rows: rows, hasSel: !!S,
+sg: p[0] + V, sc: p[2], st: p[1] + 'ถอยหลัง ' + fd(S[2]) + ' – ' + fd(S[3]), sw: 'จาก ' + S[5] + ' ย้อนไปถึง ' + S[6] + ' · เรื่อง' + p[3],
+stT: sst[0], stC: sst[1], stB: sst[2], cyN: 'รอบที่ ' + (pos + 1) + ' จาก ' + same.length + ' ของ' + p[1],
+cPrev: function(){ if (pos > 0) self.setState({ sel: same[pos - 1] }); }, cNext: function(){ if (pos < same.length - 1) self.setState({ sel: same[pos + 1] }); }, cpOp: pos > 0 ? 1 : .35, cnOp: pos < same.length - 1 ? 1 : .35,
+phases: [
+{ t: 'ช่วงเงาก่อนถอยหลัง', d: fd(S[1]) + ' – ' + fd(S[2]), m: 'เรื่องที่จะต้องทบทวนเริ่มโผล่ให้เห็น สังเกตไว้แต่ยังไม่ต้องรีบตัดสินใจ', c: '#FFB08A', ln: 'block', nowD: nowPh === 0 ? 'inline' : 'none', glow: nowPh === 0 ? '0 0 10px #FFB08A' : 'none' },
+{ t: 'ถอยหลัง (R)', d: fd(S[2]) + ' – ' + fd(S[3]), m: p[4], c: '#FF8A4C', ln: 'block', nowD: nowPh === 1 ? 'inline' : 'none', glow: nowPh === 1 ? '0 0 10px #FF8A4C' : 'none' },
+{ t: 'ช่วงเงาหลังเดินหน้า', d: fd(S[3]) + ' – ' + fd(S[4]), m: 'เรื่องค่อย ๆ คลี่คลาย เมื่อดาวผ่านองศาเดิมแล้ว (' + S[5] + ') ค่อยเริ่มเรื่องใหม่เต็มที่', c: '#7FE3C0', ln: 'none', nowD: nowPh === 2 ? 'inline' : 'none', glow: nowPh === 2 ? '0 0 10px #7FE3C0' : 'none' }],
+sh: 'ตกเรือน ' + S[7] + ' ของคุณ · ' + hs.map(function(h){ return HT[h]; }).join(' / ') + ' — ช่วงนี้เรื่องเหล่านี้จะย้อนกลับมาให้ทบทวน'
+};
+}
+}
+</script>
+</body>
+</html>

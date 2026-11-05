@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>จันทร์ดับ จันทร์เต็ม</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#7FB8FF}a:hover{color:#B5D6FF}
+.lbl{font-size:12px;color:#9AA1B5}
+.card{border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10)}
+.seg{flex:1;height:40px;border:none;border-radius:12px;background:transparent;color:#C9CEDC;font:500 13px 'IBM Plex Sans Thai Looped',sans-serif;white-space:nowrap}
+.seg.on{background:#F2F4FA;color:#06070D;font-weight:600}
+.tr{display:flex;flex-direction:column;gap:10px;width:100%;padding:14px;box-sizing:border-box;border:none;border-top:1px solid rgba(255,255,255,.07);background:transparent;color:#F2F4FA;font-family:inherit;text-align:left}
+.gl{width:34px;height:34px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(255,255,255,.14)}
+.ai{width:30px;height:30px;flex:none;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+.chip{height:22px;padding:0 8px;border-radius:7px;display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.hr{display:grid;grid-template-columns:26px minmax(0,1fr) auto 44px;align-items:center;gap:8px;min-height:40px;border-top:1px solid rgba(255,255,255,.06);font-size:13.5px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:64px;color:#4A4E5C;text-decoration:none;font-size:12px;white-space:nowrap}
+summary::-webkit-details-marker{display:none}
+.chv svg{transition:transform .2s}.chv[data-o="true"] svg{transform:rotate(180deg)}
+</style>
+</helmet>
+<div style="width:390px;min-height:2300px;box-sizing:border-box;position:relative;overflow:hidden;font-family:'IBM Plex Sans Thai Looped',sans-serif;color:#F2F4FA;background:radial-gradient(520px 420px at 85% -40px,rgba(220,227,245,.22),transparent 70%),radial-gradient(460px 380px at -10% 380px,rgba(138,92,255,.32),transparent 70%),radial-gradient(500px 420px at 90% 1400px,rgba(59,107,255,.22),transparent 70%),#06070D">
+
+<div style="padding:54px 12px 0;display:flex;align-items:center">
+<a href="Forecast.dc.html" style="height:44px;padding:0 8px;display:flex;align-items:center;gap:4px;font-size:15px;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>ดูดวงล่วงหน้า</a>
+</div>
+
+<div style="padding:8px 20px 140px;display:flex;flex-direction:column;gap:18px">
+<div style="position:relative;padding-right:40px;display:flex;flex-direction:column;gap:2px"><span class="lbl">ชาร์ตของ ตัวอย่าง · พ.ย. 2569 – ก.ค. 2570</span><h1 style="margin:0;font-size:26px;font-weight:600;line-height:1.3">จันทร์ดับ จันทร์เต็ม</h1><span style="font-size:13px;color:#9AA1B5">(Lunations · Eclipses)</span><span style="font-size:13px;color:#C9CEDC;line-height:1.6;margin-top:4px">ดวงจันทร์ตกเรือนไหนของคุณ บอกว่าเรื่องไหนในชีวิตกำลังเริ่มต้น (จันทร์ดับ) หรือเห็นผล (จันทร์เต็ม)</span><details style="margin-right:-40px"><summary aria-label="หน้านี้คืออะไร" style="list-style:none;position:absolute;right:0;top:18px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(200,210,255,.35);background:rgba(255,255,255,.06);color:#D6DEFF;display:flex;align-items:center;justify-content:center;font:600 15px 'IBM Plex Sans Thai Looped',sans-serif;cursor:pointer">?</summary><div data-intro style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:18px;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(200,210,255,.16);font-size:13.5px;line-height:1.6"><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">คืออะไร</span><span style="flex:1;min-width:0;color:#E6E9F2">วันจันทร์ดับ (เริ่มต้น) และจันทร์เต็ม (ผลลัพธ์) ที่ตกลงในเรือนต่างๆ ของชาร์ตเรา</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ใช้ดู</span><span style="flex:1;min-width:0;color:#E6E9F2">ตั้งเป้าตอนจันทร์ดับ และสรุปผลหรือปล่อยวางตอนจันทร์เต็ม</span></div><div style="display:flex;gap:10px"><span style="flex:none;width:78px;color:#9AA1B5">ทำไมสำคัญ</span><span style="flex:1;min-width:0;color:#E6E9F2">บอกว่าเรื่องชีวิตด้านไหนถูกกระตุ้นในแต่ละรอบเดือน</span></div></div></details></div>
+
+<div style="display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:24px;background:linear-gradient(140deg,rgba(40,44,70,.9),rgba(138,92,255,.30) 60%,rgba(59,107,255,.25));border:1px solid rgba(200,205,255,.30)">
+<span style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#D6CEFF"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>ครั้งถัดไป · อีก 8 วัน</span>
+<div style="display:flex;align-items:center;gap:14px">
+<span style="width:60px;height:60px;flex:none;border-radius:999px;background:radial-gradient(circle at 35% 35%,#1A1C26,#06070D);border:2px solid rgba(220,227,245,.55);box-shadow:0 0 24px rgba(185,166,255,.35)"></span>
+<div style="display:flex;flex-direction:column;line-height:1.35"><span style="font-size:19px;font-weight:600">จันทร์ดับในราศีพิจิก</span><span style="font-size:13px;color:#C9CEDC">9 พ.ย. 69 · 14:02 น. · 16°53′</span><span style="font-size:13px;color:#D6CEFF;margin-top:2px">ตกเรือน 8 ของคุณ · ความลึกซึ้ง เงินร่วม</span></div>
+</div>
+<p style="margin:0;font-size:14px;line-height:1.6;color:#E6E9F2">ตั้งต้นเรื่องเงินร่วม หนี้ หรือความสัมพันธ์ที่ลึกซึ้ง จันทร์ดับครั้งนี้เล็งเสาร์เดิมพอดี (0°12′) อาจรู้สึกหนัก แต่เหมาะวางแผนการเงินจริงจัง</p>
+<span style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip" style="color:#FF8A8A;background:rgba(255,107,107,.16)">☍&#xFE0E; เสาร์เดิม 0°12′</span><span class="chip" style="color:#FFB08A;background:rgba(255,138,76,.16)">□&#xFE0E; ยูเรนัสเดิม 2°00′</span><span class="chip" style="color:#7FE3C0;background:rgba(79,209,165,.16)">△&#xFE0E; ลัคนา 2°42′</span></span>
+</div>
+
+<div class="card" style="padding:14px 14px 12px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:15px;font-weight:600">เรือนที่ถูกกระตุ้นช่วงนี้</span><span class="lbl">18 ครั้ง ใน 9 เดือน</span></div>
+<div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px">
+<sc-for list="{{hs}}" as="h" hint-placeholder-count="12"><button onClick="{{h.pick}}" aria-pressed="{{h.on}}" style="display:flex;flex-direction:column;align-items:center;gap:2px;height:56px;justify-content:center;border-radius:12px;border:1px solid {{h.bd}};background:{{h.bg}};color:#F2F4FA;font-family:inherit"><span style="font-size:15px;font-weight:700">{{h.n}}</span><span style="font-size:10px;color:#C9CEDC;line-height:1">{{h.c}}</span></button></sc-for>
+</div>
+<sc-if value="{{hOn}}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:14px;background:rgba(6,7,13,.45);border:1px solid rgba(185,166,255,.35)">
+<span style="font-size:15px;font-weight:600">เรือน {{hf}} · {{hName}}</span>
+<span style="font-size:13px;line-height:1.6;color:#DCE0EA">{{hDesc}}</span>
+<span class="lbl">ช่วงที่เรือนนี้ถูกกระตุ้น · แตะเพื่อดูรายละเอียด</span>
+<div style="display:flex;flex-direction:column;gap:6px"><sc-for list="{{hItems}}" as="x" hint-placeholder-count="2"><button onClick="{{x.pick}}" style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 10px;border-radius:12px;border:1px solid {{x.bd}};background:rgba(255,255,255,.04);color:#F2F4FA;font-family:inherit;text-align:left"><span style="flex:none;display:block;width:22px;height:22px;box-sizing:border-box;border-radius:50%;{{x.icon}}"></span><span style="flex:1;font-size:13.5px">{{x.t}}</span><span class="lbl">{{x.d}}</span></button></sc-for></div>
+<sc-if value="{{hasPick}}" hint-placeholder-val="{{ false }}"><div style="padding:10px 12px;border-radius:12px;background:rgba(185,166,255,.10);font-size:13px;line-height:1.6;color:#DCE0EA"><b style="color:#F2F4FA">{{pkT}}</b><br>{{pkAsp}}<br>{{pkDo}}</div></sc-if>
+</div>
+</sc-if>
+<span class="lbl">{{hHint}}</span>
+</div>
+
+<div role="tablist" aria-label="มุมมอง" style="display:flex;gap:4px;padding:4px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10)">
+<button role="tab" class="{{v0}}" onClick="{{sv0}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;vertical-align:-2px;margin-right:4px"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>รายการ</button>
+<button role="tab" class="{{v1}}" onClick="{{sv1}}">▦ ปฏิทิน</button>
+</div>
+
+<sc-if value="{{isCal}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="padding:14px 12px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<button onClick="{{prevM}}" aria-label="เดือนก่อน" style="width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#F2F4FA;opacity:{{pOp}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+<span style="font-size:17px;font-weight:600">{{calT}}</span>
+<button onClick="{{nextM}}" aria-label="เดือนถัดไป" style="width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#F2F4FA;opacity:{{nOp}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));font-size:11px;color:#9AA1B5;text-align:center"><span>อา</span><span>จ</span><span>อ</span><span>พ</span><span>พฤ</span><span>ศ</span><span>ส</span></div>
+<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px">
+<sc-for list="{{cells}}" as="c" hint-placeholder-count="35"><button onClick="{{c.pick}}" style="display:flex;flex-direction:column;align-items:center;gap:3px;height:56px;padding-top:6px;box-sizing:border-box;border-radius:12px;border:1px solid {{c.bd}};background:{{c.bg}};color:{{c.fc}};font:500 13px 'IBM Plex Sans Thai Looped',sans-serif;visibility:{{c.vis}}"><span>{{c.d}}</span><span style="flex:none;display:block;width:16px;height:16px;min-width:16px;min-height:16px;box-sizing:border-box;border-radius:50%;{{c.icon}}"></span><span style="font-size:9px;color:#D6CEFF;line-height:1">{{c.h}}</span></button></sc-for>
+</div>
+<span class="lbl">● จันทร์ดับ · ○ จันทร์เต็ม · ขอบแดง = คราส · ตัวเลขใต้ไอคอน = เรือนที่ตก</span>
+<sc-if value="{{calSel}}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:14px;background:rgba(6,7,13,.45);border:1px solid rgba(185,166,255,.35)">
+<span style="font-size:15px;font-weight:600">{{pkT}}</span>
+<span class="lbl">{{pkW}}</span>
+<span style="font-size:13px;color:#D6CEFF">{{pkH}}</span>
+<span style="font-size:13px;line-height:1.6;color:#DCE0EA">{{pkAsp}}</span>
+<span style="font-size:13px;line-height:1.6;color:#DCE0EA">{{pkDo}}</span>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{isList}}" hint-placeholder-val="{{ true }}">
+<div role="tablist" aria-label="ประเภท" style="display:flex;gap:4px;padding:4px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10)">
+<button role="tab" class="{{c0}}" onClick="{{s0}}">ทั้งหมด</button>
+<button role="tab" class="{{c1}}" onClick="{{s1}}">● จันทร์ดับ</button>
+<button role="tab" class="{{c2}}" onClick="{{s2}}">○ จันทร์เต็ม</button>
+<button role="tab" class="{{c3}}" onClick="{{s3}}">คราส</button>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{months}}" as="m" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-size:13px;font-weight:600;color:#C9CEDC;padding-left:2px">{{m.t}}</span>
+<sc-for list="{{m.items}}" as="r" hint-placeholder-count="2">
+<button onClick="{{r.pick}}" aria-expanded="{{r.open}}" style="display:flex;flex-direction:column;gap:10px;width:100%;padding:14px;box-sizing:border-box;border-radius:18px;border:1px solid {{r.bd}};background:{{r.bg}};color:#F2F4FA;font-family:inherit;text-align:left">
+<span style="display:flex;align-items:center;gap:12px;width:100%">
+<span style="flex:none;display:block;width:40px;height:40px;box-sizing:border-box;border-radius:50%;{{r.icon}}"></span>
+<span style="display:flex;flex-direction:column;flex:1;min-width:0;line-height:1.35"><span style="font-size:15px;font-weight:600">{{r.t}}</span><span class="lbl">{{r.when}}</span></span>
+<span style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span style="width:44px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:rgba(185,166,255,.18);color:#D6CEFF">เรือน {{r.h}}</span><sc-if value="{{r.ecl}}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;color:#FF8A8A;font-weight:600">{{r.eclT}}</span></sc-if></span>
+</span>
+<span style="font-size:13px;color:#C9CEDC">{{r.topic}}</span>
+<sc-if value="{{r.open}}" hint-placeholder-val="{{ false }}">
+<span style="display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:14px;background:rgba(6,7,13,.45);border:1px solid rgba(255,255,255,.08)">
+<span style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{r.asp}}" as="a" hint-placeholder-count="2"><span class="chip" style="color:{{a.c}};background:{{a.b}}">{{a.t}}</span></sc-for><sc-if value="{{r.noAsp}}" hint-placeholder-val="{{ false }}"><span class="lbl">ไม่ทำมุมกับดาวเกิด (orb 3°)</span></sc-if></span>
+<span style="font-size:13px;line-height:1.65;color:#DCE0EA"><b style="color:#F2F4FA">{{r.doT}}</b> {{r.do}}</span>
+</span>
+</sc-if>
+<span class="chv" data-o="{{r.open}}" style="align-self:center;margin:2px auto 0;width:max-content;display:flex;align-items:center;gap:4px;font-size:11px;color:#9AA1B5;line-height:1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<span class="lbl">คำนวณจากตำแหน่งดวงอาทิตย์และดวงจันทร์จริง · เวลาเป็นเวลาไทย · มุมกับดาวเกิดใช้ orb 3° · คราสนับเมื่ออยู่ใกล้ราหู/เกตุ</span>
+</div>
+
+<nav aria-label="แท็บหลัก" style="position:absolute;left:0;right:0;bottom:0;height:91px;padding:0 6px 26px;box-sizing:border-box;border-radius:32px 32px 0 0;background:linear-gradient(180deg,#1C1D24,#000000);box-shadow:0 -8px 30px rgba(0,0,0,.30);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;border-top:1px solid rgba(255,255,255,.10)">
+<a href="Main.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><path d="M12 3v5M12 16v5M3 12h5M16 12h5"></path></svg>ชาร์ตของฉัน</a>
+<a href="People.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17" cy="9" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg>บุคคล</a>
+<a href="Today.dc.html" class="tab" style="position:relative;color:#C9CEDC;font-weight:500"><span style="position:absolute;top:-44px;left:50%;margin-left:-44px;width:88px;height:88px;border-radius:999px;background:#0A0B10;display:flex;align-items:center;justify-content:center"><span style="width:72px;height:72px;border-radius:999px;background:radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21);display:flex;align-items:center;justify-content:center;color:#B9A6FF"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span></span>วันนี้</a>
+<a href="Forecast.dc.html" class="tab" aria-current="page" style="color:#B9A6FF;font-weight:700"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"></path></svg>ดวงล่วงหน้า</a>
+<a href="Settings.dc.html" class="tab" style="color:#C9CEDC"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"></path></svg>ตั้งค่า</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2300}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this; var st = this.state || {}; var V = '\uFE0E';
+var tab = st.tab || 0; var sel = st.sel === undefined ? -1 : st.sel; var hf = st.hf || 0; var view = st.view || 0; var mi = st.mi || 0;
+var HD = ['','เริ่มต้นใหม่กับภาพลักษณ์ ร่างกาย และวิธีวางตัว','ทบทวนรายได้ การใช้เงิน และความมั่นใจในคุณค่าตัวเอง','เรื่องการเรียน การสื่อสาร พี่น้อง และการเดินทางใกล้ ๆ ถูกกระตุ้น','บ้าน ครอบครัว และความรู้สึกปลอดภัยกลายเป็นเรื่องหลัก','ความรัก ความสนุก งานสร้างสรรค์ และเรื่องลูก','กิจวัตร งานประจำ และสุขภาพ เหมาะปรับนิสัยใหม่','คู่ครอง หุ้นส่วน และคนสำคัญในชีวิต','ความใกล้ชิด เงินร่วม หนี้ และการปล่อยวาง','การเรียนต่อ การเดินทางไกล ความเชื่อ','งาน ชื่อเสียง เป้าหมายอาชีพ','เพื่อน เครือข่าย และความฝันระยะยาว','การพัก การอยู่กับตัวเอง และเรื่องที่ซ่อนอยู่ในใจ'];
+var HT = ['','ตัวตน ภาพลักษณ์','เงิน คุณค่าในตัวเอง','การสื่อสาร คนใกล้ตัว','บ้าน ครอบครัว','ความรัก ความสนุก','งานประจำวัน สุขภาพ','คู่ครอง หุ้นส่วน','ความลึกซึ้ง เงินร่วม','การเรียน การเดินทาง','งาน ชื่อเสียง','เพื่อน สังคม ความฝัน','จิตใต้สำนึก การพัก'];
+var NP = {S:'อาทิตย์',M:'จันทร์',m:'พุธ',V:'ศุกร์',a:'อังคาร',J:'พฤหัสบดี',s:'เสาร์',U:'ยูเรนัส',N:'เนปจูน',P:'พลูโต',A:'ลัคนา',C:'กลางฟ้า'};
+var AS = {c:['☌','#F3D46E','rgba(243,212,110,.16)'],q:['□','#FFB08A','rgba(255,138,76,.16)'],t:['△','#7FE3C0','rgba(79,209,165,.16)'],o:['☍','#FF8A8A','rgba(255,107,107,.16)']};
+var TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+var THF = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+var L = [
+['n','2026-11-09','14:02','พิจิก','16°53′',8,['os0.2','qU2.0','tA2.7'],''],
+['f','2026-11-24','21:53','เมถุน','2°20′',3,['qV2.0','tN0.4'],''],
+['n','2026-12-09','07:51','ธนู','16°56′',9,['qA2.8','cC1.0'],''],
+['f','2026-12-24','08:28','กรกฎ','2°13′',4,[],''],
+['n','2027-01-08','03:24','มังกร','17°18′',11,['ts0.6'],''],
+['f','2027-01-22','19:17','สิงห์','2°14′',5,['qJ2.1','oN0.5'],''],
+['n','2027-02-06','22:56','กุมภ์','17°37′',12,['qs1.0','cU2.7'],'สุริยุปราคาวงแหวน'],
+['f','2027-02-21','06:23','กันย์','2°05′',6,['cV2.2','tJ2.3'],'จันทรุปราคาเงามัว'],
+['n','2027-03-08','16:29','มีน','17°34′',1,['qC0.3'],''],
+['f','2027-03-22','17:43','ตุลย์','1°35′',7,['tN1.1'],''],
+['n','2027-04-07','06:51','เมษ','16°57′',1,['tC1.0'],''],
+['f','2027-04-21','05:27','พิจิก','0°36′',8,['qm2.0','qN2.1'],''],
+['n','2027-05-06','17:58','พฤษภ','15°42′',2,['oa2.0','cs0.9','qU0.8'],''],
+['f','2027-05-20','17:59','พิจิก','29°13′',9,['tm0.6'],''],
+['n','2027-06-05','02:40','เมถุน','13°58′',3,['tU0.9','qA0.2'],''],
+['f','2027-06-19','07:44','ธนู','27°33′',10,[],''],
+['n','2027-07-04','10:02','กรกฎ','11°57′',4,['ta1.7','tA2.2'],''],
+['f','2027-07-18','22:44','มังกร','25°48′',11,['tM2.0','om2.8'],'จันทรุปราคาเงามัว']
+];
+function deg(v){ var d = Math.floor(v), m = Math.round((v - d) * 60); return d + '°' + ('0' + m).slice(-2) + '′'; }
+var cnt = {}; L.forEach(function(r){ cnt[r[5]] = (cnt[r[5]] || 0) + 1; });
+var items = L.map(function(r, i){ return { r: r, i: i }; }).filter(function(x){ var r = x.r; return (tab === 0 || (tab === 1 && r[0] === 'n') || (tab === 2 && r[0] === 'f') || (tab === 3 && r[7])) && (!hf || r[5] === hf); });
+var months = [], last = '';
+items.forEach(function(x){
+var r = x.r, i = x.i, on = i === sel, nw = r[0] === 'n'; var p = r[1].split('-'); var key = p[0] + p[1];
+if (key !== last) { months.push({ t: THF[+p[1] - 1] + ' ' + (+p[0] + 543), items: [] }); last = key; }
+var asp = r[6].map(function(a){ var A = AS[a[0]]; return { t: A[0] + V + ' ' + NP[a[1]] + 'เดิม ' + deg(parseFloat(a.slice(2))), c: A[1], b: A[2] }; });
+months[months.length - 1].items.push({
+t: (nw ? 'จันทร์ดับ' : 'จันทร์เต็มดวง') + 'ในราศี' + r[3], when: (+p[2]) + ' ' + TH[+p[1] - 1] + ' ' + (+p[0] + 543 - 2500) + ' · ' + r[2] + ' น. · ' + r[4],
+h: r[5], topic: 'เรือน ' + r[5] + ' · ' + HT[r[5]], ecl: !!r[7], eclT: r[7],
+icon: nw ? 'background:radial-gradient(circle at 35% 35%,#1A1C26,#06070D);border:2px solid ' + (r[7] ? '#FF8A8A' : 'rgba(220,227,245,.45)') : 'background:radial-gradient(circle at 35% 35%,#FFFFFF,#C9CEDC 70%);box-shadow:0 0 16px ' + (r[7] ? 'rgba(255,107,107,.7)' : 'rgba(220,227,245,.45)'),
+bd: on ? 'rgba(185,166,255,.55)' : r[7] ? 'rgba(255,107,107,.35)' : 'rgba(255,255,255,.10)', bg: on ? 'rgba(185,166,255,.08)' : 'rgba(255,255,255,.05)',
+asp: asp, noAsp: !asp.length, doT: nw ? 'ควรทำ:' : 'ช่วงนี้:',
+do: nw ? 'ตั้งเจตนาหรือเริ่มเรื่องใหม่ด้าน' + HT[r[5]] + ' ภายใน 3 วันหลังจันทร์ดับ' : 'เรื่อง' + HT[r[5]] + 'มาถึงจุดเห็นผล อารมณ์ขึ้นสูง เหมาะสรุป ปล่อยวาง หรือฉลอง',
+open: on, pick: function(){ self.setState({ sel: on ? -1 : i }); } });
+});
+
+function pk(i){ var r = L[i]; var nw = r[0] === 'n'; var p = r[1].split('-');
+var asp = r[6].map(function(a){ var A = AS[a[0]]; return A[0] + V + ' ' + NP[a[1]] + 'เดิม ' + deg(parseFloat(a.slice(2))); }).join(' · ');
+return { t: (nw ? 'จันทร์ดับ' : 'จันทร์เต็มดวง') + 'ในราศี' + r[3] + (r[7] ? ' · ' + r[7] : ''), w: (+p[2]) + ' ' + TH[+p[1] - 1] + ' ' + (+p[0] + 543 - 2500) + ' · ' + r[2] + ' น. · ' + r[4], h: 'ตกเรือน ' + r[5] + ' · ' + HT[r[5]], asp: asp ? 'มุมกับดาวเกิด: ' + asp : 'ไม่ทำมุมกับดาวเกิด (orb 3°)', d: (nw ? 'ควรทำ: ตั้งเจตนาหรือเริ่มเรื่องใหม่ด้าน' : 'ช่วงนี้: เรื่อง') + HT[r[5]] + (nw ? ' ภายใน 3 วัน' : 'มาถึงจุดเห็นผล เหมาะสรุปหรือปล่อยวาง') }; }
+var MONTHS = [[2026,10],[2026,11],[2027,0],[2027,1],[2027,2],[2027,3],[2027,4],[2027,5],[2027,6]];
+var ym = MONTHS[mi]; var first = new Date(ym[0], ym[1], 1).getDay(); var nd = new Date(ym[0], ym[1] + 1, 0).getDate();
+var cells = []; for (var k = 0; k < first; k++) cells.push({ d: '', vis: 'hidden', icon: '', h: '', bd: 'transparent', bg: 'transparent', fc: '#fff', pick: function(){} });
+for (var d = 1; d <= nd; d++) (function(d){ var key = ym[0] + '-' + ('0' + (ym[1] + 1)).slice(-2) + '-' + ('0' + d).slice(-2); var idx = -1; L.forEach(function(r, i){ if (r[1] === key) idx = i; });
+var r = idx >= 0 ? L[idx] : null; var on = idx >= 0 && idx === sel; var today = key === '2026-11-01';
+cells.push({ d: d, vis: 'visible', h: r ? 'เรือน ' + r[5] : '', fc: r ? '#F2F4FA' : '#9AA1B5',
+icon: !r ? '' : r[0] === 'n' ? 'background:#06070D;border:2px solid ' + (r[7] ? '#FF8A8A' : 'rgba(220,227,245,.6)') : 'background:radial-gradient(circle at 35% 35%,#FFF,#C9CEDC 70%);box-shadow:0 0 8px ' + (r[7] ? 'rgba(255,107,107,.8)' : 'rgba(220,227,245,.5)'),
+bd: on ? '#B9A6FF' : today ? 'rgba(185,166,255,.6)' : 'transparent', bg: on ? 'rgba(185,166,255,.25)' : r ? 'rgba(255,255,255,.05)' : 'transparent',
+pick: function(){ if (idx >= 0) self.setState({ sel: on ? -1 : idx }); } }); })(d);
+var P0 = sel >= 0 ? pk(sel) : null;
+var hItems = hf ? L.map(function(r, i){ return { r: r, i: i }; }).filter(function(x){ return x.r[5] === hf; }).map(function(x){ var r = x.r, p = r[1].split('-'); return { t: (r[0] === 'n' ? 'จันทร์ดับ' : 'จันทร์เต็ม') + 'ในราศี' + r[3], d: (+p[2]) + ' ' + TH[+p[1] - 1] + ' ' + (+p[0] + 543 - 2500), icon: r[0] === 'n' ? 'background:#06070D;border:2px solid rgba(220,227,245,.6)' : 'background:#E6E9F2', bd: x.i === sel ? '#B9A6FF' : 'rgba(255,255,255,.10)', pick: function(){ self.setState({ sel: x.i === sel ? -1 : x.i }); } }; }) : [];
+var hasPick = !!(hf && P0 && L[sel][5] === hf);
+return {
+months: months, isCal: view === 1, isList: view === 0, v0: view === 0 ? 'seg on' : 'seg', v1: view === 1 ? 'seg on' : 'seg', sv0: function(){ self.setState({ view: 0 }); }, sv1: function(){ self.setState({ view: 1 }); },
+cells: cells, calT: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'][ym[1]] + ' ' + (ym[0] + 543), pOp: mi > 0 ? 1 : .35, nOp: mi < MONTHS.length - 1 ? 1 : .35,
+prevM: function(){ if (mi > 0) self.setState({ mi: mi - 1, sel: -1 }); }, nextM: function(){ if (mi < MONTHS.length - 1) self.setState({ mi: mi + 1, sel: -1 }); },
+calSel: !!P0 && L[sel][1].slice(0, 7) === ym[0] + '-' + ('0' + (ym[1] + 1)).slice(-2), pkT: P0 ? P0.t : '', pkW: P0 ? P0.w : '', pkH: P0 ? P0.h : '', pkAsp: P0 ? P0.asp : '', pkDo: P0 ? P0.d : '',
+hOn: !!hf, hf: hf, hName: HT[hf] || '', hDesc: hf ? 'เมื่อจันทร์ดับหรือจันทร์เต็มตกเรือนนี้: ' + HD[hf] : '', hItems: hItems, hasPick: hasPick,
+hs: [1,2,3,4,5,6,7,8,9,10,11,12].map(function(n){ var c = cnt[n] || 0, on = hf === n; return { n: n, c: c ? c + ' ครั้ง' : '–', on: on, bd: on ? '#B9A6FF' : 'rgba(255,255,255,.10)', bg: on ? 'rgba(185,166,255,.25)' : c >= 2 ? 'rgba(185,166,255,.14)' : c ? 'rgba(255,255,255,.06)' : 'rgba(255,255,255,.02)', pick: function(){ self.setState({ hf: on ? 0 : n, sel: -1 }); } }; }),
+hHint: hf ? 'รายการด้านล่างกรองเฉพาะเรือน ' + hf + ' (แตะเลขเรือนอีกครั้งเพื่อดูทั้งหมด)' : 'แตะเลขเรือนเพื่อดูความหมายและช่วงที่ถูกกระตุ้น',
+c0: tab === 0 ? 'seg on' : 'seg', c1: tab === 1 ? 'seg on' : 'seg', c2: tab === 2 ? 'seg on' : 'seg', c3: tab === 3 ? 'seg on' : 'seg',
+s0: function(){ self.setState({ tab: 0, sel: -1 }); }, s1: function(){ self.setState({ tab: 1, sel: -1 }); }, s2: function(){ self.setState({ tab: 2, sel: -1 }); }, s3: function(){ self.setState({ tab: 3, sel: -1 }); }
+};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+﻿node_modules/
+dist/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+*.log
+.env
+
+# มีชื่อ/ข้อมูลส่วนตัว เก็บเฉพาะในเครื่อง ไม่ขึ้น repo สาธารณะ
+docs/06-interpretations-main-chart-sample.md
