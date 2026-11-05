@@ -13,6 +13,15 @@ export function DesignPreview() {
     <Page background={BG}>
       <BackLink href="#/settings" label="ตั้งค่า" />
       <div style={{ padding: '4px 20px 140px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+        {import.meta.env.DEV && (
+          // [dev] ลิงก์ไปหน้าที่ทำเสร็จแล้ว — ไม่แสดงในแอปจริง
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', padding: '12px', borderRadius: '14px', border: '1px dashed #FFB08A' }}>
+            <span style={{ width: '100%', fontSize: '12px', color: '#FFB08A' }}>[dev] หน้าที่ทำแล้ว</span>
+            {[['#/main', 'ชาร์ตของฉัน'], ['#/aspects', 'มุมดาวทั้งหมด'], ['#/add', 'เพิ่มคน'], ['#/add?me=1', 'เพิ่มคน (ฉัน)']].map(([h, t]) => (
+              <a href={h} style={{ padding: '6px 10px', borderRadius: '10px', background: 'rgba(255,255,255,.07)', fontSize: '13px', textDecoration: 'none' }}>{t}</a>
+            ))}
+          </div>
+        )}
         <PageTitle
           kicker="คู่มือสำหรับสร้างแอป"
           title="ระบบดีไซน์"
