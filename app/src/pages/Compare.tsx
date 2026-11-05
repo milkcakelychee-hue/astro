@@ -197,6 +197,7 @@ function CompareView({ A, B, lib, comp, dav }: Data) {
           {/* ผู้ใช้ขอ: แบ่งตามลักษณะมุม แต่ละกลุ่มโชว์ 2 อันแน่นสุด + ดูเพิ่ม · มุมรุ่น (ดาวช้า×ดาวช้า) พับไว้ท้ายสุด */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2">มุมระหว่างสองชาร์ต</h2><span class="lbl">แน่นที่สุดก่อน</span></div>
+            <span class="lbl">ตัวเลขขวา = ห่างจากมุมพอดี (Orb) ยิ่งน้อยยิ่งส่งผลชัด · แสดงเฉพาะไม่เกิน 3°</span>
             {GROUPS.map((g) => {
               const items = asp.map((x, i) => ({ x, i })).filter(({ x }) => groupOf(x) === g.k)
               if (!items.length) return null
