@@ -1,0 +1,11 @@
+// ฟอนต์ IBM Plex Sans Thai Looped (self-host ใช้ออฟไลน์ได้) น้ำหนัก 300–700 ชุดอักษรไทย + ละติน
+import '@fontsource/ibm-plex-sans-thai-looped/thai-300.css'
+import '@fontsource/ibm-plex-sans-thai-looped/thai-400.css'
+import '@fontsource/ibm-plex-sans-thai-looped/thai-500.css'
+import '@fontsource/ibm-plex-sans-thai-looped/thai-600.css'
+import '@fontsource/ibm-plex-sans-thai-looped/thai-700.css'
+import '@fontsource/ibm-plex-sans-thai-looped/latin-300.css'
+import '@fontsource/ibm-plex-sans-thai-looped/latin-400.css'
+import '@fontsource/ibm-plex-sans-thai-looped/latin-500.css'
+import '@fontsource/ibm-plex-sans-thai-looped/latin-600.css'
+import '@fontsource/ibm-plex-sans-thai-looped/latin-700.css'

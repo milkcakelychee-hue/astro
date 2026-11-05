@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# สร้างโดย scripts/copy-assets.mjs
+public/ephe
+public/wasm

@@ -1,104 +1,19 @@
-import { useState } from 'preact/hooks'
-import heroImg from './assets/hero.png'
-import preactLogo from './assets/preact.svg'
-import viteLogo from './assets/vite.svg'
-import './app.css'
+// ชั่วคราว: หน้าตรวจระบบ (wasm + ephemeris + คลัง) — จะแทนด้วยหน้าจริงตามดีไซน์ในขั้น E
+import { useEffect, useState } from 'preact/hooks'
+import { computeChart, floorMin } from './engine/chart.ts'
+import { getBrowserSwe } from './engine/ephe-browser.ts'
+import { loadLib, text } from './lib/interp.ts'
 
 export function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <section id="center">
-        <div class="hero">
-          <img src={heroImg} class="base" width="170" height="179" alt="" />
-          <img src={preactLogo} class="framework" alt="Preact logo" />
-          <img src={viteLogo} class="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/app.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          class="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div class="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg class="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img class="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://preactjs.com/" target="_blank">
-                <img class="button-icon" src={preactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg class="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div class="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+  const [msg, setMsg] = useState('กำลังโหลด…')
+  useEffect(() => {
+    Promise.all([getBrowserSwe(), loadLib()])
+      .then(([swe, lib]) => {
+        const ch = computeChart(swe, { y: 1999, mo: 8, d: 5, hh: 20, mi: 33, lat: 13 + 7 / 60, lon: 99 + 57 / 60 })
+        const m = floorMin(ch.pos.c.lon)
+        setMsg(`ok chiron=${Math.floor(m / 60)}°${m % 60} lib=${text(lib, 'aspect', 'Sqa')?.slice(0, 16)}`)
+      })
+      .catch((e: unknown) => setMsg('error ' + String(e)))
+  }, [])
+  return <div id="smoke" style={{ color: '#fff', padding: 16 }}>{msg}</div>
 }

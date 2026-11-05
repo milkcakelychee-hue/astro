@@ -40,9 +40,9 @@
 
 ## สถานะงาน
 - [x] 0 ติดตั้ง Node + (Python 3.13)
-- [~] 1 ตั้งโปรเจกต์ `app/` — สร้างแล้ว (Vite 8 + Preact + TS, ติดตั้ง swisseph-wasm, idb, vite-plugin-pwa, vitest) · **ยังไม่ได้ตั้งค่า**: PWA manifest/service worker, script `test` ของ vitest, self-host ฟอนต์, ลบหน้าตัวอย่างของ template
-- [ ] 2 engine + test
-- [ ] 3 คลังข้อความ
+- [x] 1 ตั้งโปรเจกต์ `app/` — A1–A3 เสร็จ: ฟอนต์ self-host (`@fontsource/ibm-plex-sans-thai-looped` ไทย+ละติน 300–700, `src/fonts.ts`) · PWA (vite-plugin-pwa, precache 24 ไฟล์ ~7.5 MB รวม ephe/wasm/คลัง) · `scripts/copy-assets.mjs` คัดลอก `engine/ephe` + `swisseph.wasm/.data` เข้า `public/` อัตโนมัติก่อน dev/build (gitignore) · `src/engine/ephe-browser.ts` โหลด ephe ในเบราว์เซอร์ · ทดสอบ `npm run build` + preview: คำนวณได้ และ**ใช้ออฟไลน์ได้** (หยุดเซิร์ฟเวอร์แล้วรีโหลดยังทำงาน) · `src/app.tsx` ตอนนี้เป็นหน้าตรวจระบบชั่วคราว · **ไอคอนแอปยังรอผู้ใช้** (ใช้ favicon.svg ชั่วคราว; iPhone ต้องมี PNG 180px)
+- [~] 2 engine + test — **B1–B5 ผ่าน** (`app/src/engine/`: swe, chart, aspects, dominants, places; `app/tests/engine.test.ts` 9 tests): 41 ชาร์ต + docs/02 ตรง 100% ยกเว้น Fortune orb 3 รายการที่ docs/01 บันทึกไว้แล้ว (205/208) · **เหลือ B6–B7** (เหตุการณ์/bisection, VOC, อุปราคา, SR/LR, Progressions, Solar Arc, PD, Synastry) ทำก่อนหน้าที่ต้องใช้
+- [x] 3 คลังข้อความ — `app/src/lib/interp.ts` (โหลด lazy แยก chunk, คีย์ aspect/transit/synastry/direction/sign/house, รหัสมุม engine→คลัง 0→c 6→x 4→q 3→t 8→o) · `tests/interp.test.ts` ผ่าน: 14 หมวดครบ, ทุกดาว/มุมของ 41 ชาร์ตหาข้อความเจอ · คลังไม่มีข้อความของ Fortune/Vertex/DSC/IC
 - [ ] 4 design tokens/คอมโพเนนต์
 - [ ] 5 หน้าต่าง ๆ (ยังไม่เริ่ม; ลำดับ: Main, Aspects, ChartLight, Sheet, Today, People, AddPerson, Compare, Forecast, Settings, Calendar, Timeline, Transit, Lunations, SolarReturn, LunarReturn, Growth, Retrograde, MoonPhases, Eclipses, VenusRose, Cycles, Ephemeris, Electional, Numerology, Symbols)
 
@@ -52,3 +52,4 @@
 
 - 5 พ.ย. 2569 (เครื่อง 1): ทำ repo สาธารณะ https://github.com/milkcakelychee-hue/astro — เปลี่ยนชื่อ 'บลู' เป็น 'ตัวอย่าง' ในดีไซน์/เอกสาร (วันเกิดตัวอย่างยังอยู่ เพราะเป็นข้อมูลทดสอบ) · `docs/06` ไม่ขึ้น repo (อยู่ใน .gitignore, เป็นตัวอย่างอ้างอิงเท่านั้น ไม่จำเป็นต่องาน) · สร้าง git ใหม่ ไม่มีประวัติเก่า · ผู้เขียน commit ใช้อีเมล noreply ของ GitHub
 - ทำงานอีกเครื่อง: `git clone https://github.com/milkcakelychee-hue/astro.git` แล้ว `cd astro/app && npm install` · ก่อนเลิกงาน commit+push ทุกครั้ง · เริ่มงานให้ `git pull` ก่อน · ห้ามใส่ข้อมูลส่วนตัวจริง/ไฟล์สำรอง JSON/โทเคนลง repo นี้ (เป็น Public)
+- 5 พ.ย. 2569 (เครื่อง 1): engine TS ตำแหน่ง/เรือน/Vertex/Fortune/มุม A-S/ดาวเด่น/ธาตุ/Signature/77 จังหวัด → `npm test` ผ่าน 9/9, `tsc -b` ผ่าน · ถัดไป: C (โหลดคลังข้อความ) → A2–A3 → D → E
