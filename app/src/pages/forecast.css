@@ -1,0 +1,13 @@
+/* หน้า "ดูดวงล่วงหน้า" — คลาสเฉพาะหน้าตาม design/Forecast.dc.html */
+.pg-forecast a { color: #7FB8FF; }
+.pg-forecast .lbl { font-size: 12px; color: #9AA1B5; }
+.pg-forecast .sh { display: flex; flex-direction: column; gap: 2px; }
+.pg-forecast .st { margin: 0; font-size: 18px; font-weight: 600; }
+.pg-forecast .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.pg-forecast .t { display: flex; flex-direction: column; gap: 10px; min-height: 132px; box-sizing: border-box; padding: 14px; border-radius: 18px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.05); color: #F2F4FA; text-decoration: none; }
+.pg-forecast .t:active { background: rgba(255,255,255,.08); }
+.pg-forecast .ti { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.pg-forecast .tn { font-size: 15px; font-weight: 600; line-height: 1.4; }
+.pg-forecast .tt { font-size: 11px; color: #9AA1B5; line-height: 1.4; }
+.pg-forecast .td { font-size: 12px; color: #C9CEDC; line-height: 1.55; margin-top: -4px; }
+.pg-forecast summary::-webkit-details-marker { display: none; }
