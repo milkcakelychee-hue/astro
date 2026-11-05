@@ -74,3 +74,26 @@ export async function saveNote(id: string, text: string): Promise<void> {
   if (text.trim()) await d.put('notes', { id, text })
   else await d.delete('notes', id)
 }
+
+/** สำรองข้อมูล: ทุกคน + โน้ต เป็น JSON */
+export async function exportAll(): Promise<string> {
+  const d = await db()
+  return JSON.stringify({ app: 'astro', v: 2, people: await d.getAll('people'), notes: await d.getAll('notes') }, null, 1)
+}
+/** นำเข้า: รวมกับข้อมูลเดิม (id ซ้ำ = แทนที่) · คืนจำนวนคนที่นำเข้า */
+export async function importAll(json: string): Promise<number> {
+  const o = JSON.parse(json) as { app?: string; people?: Person[]; notes?: { id: string; text: string }[] }
+  if (o.app !== 'astro' || !Array.isArray(o.people)) throw new Error('ไฟล์ไม่ใช่ข้อมูลสำรองของแอปนี้')
+  const d = await db()
+  const hasMe = (await listPeople()).some((p) => p.isMe)
+  const tx = d.transaction(['people', 'notes'], 'readwrite')
+  for (const p of o.people) {
+    if (typeof p.id !== 'string' || typeof p.name !== 'string') continue
+    // มีชาร์ตของฉันอยู่แล้ว และเป็นคนละ id → นำเข้าเป็นคนทั่วไป
+    if (p.isMe && hasMe && !(await tx.objectStore('people').get(p.id))) p.isMe = false
+    await tx.objectStore('people').put(p)
+  }
+  for (const n of o.notes ?? []) if (typeof n.id === 'string' && typeof n.text === 'string') await tx.objectStore('notes').put(n)
+  await tx.done
+  return o.people.length
+}

@@ -10,6 +10,7 @@ import {
   ASPECT_GLYPH, ELEMENT_COLOR, ELEMENT_EN, ELEMENT_LIGHT, ELEMENT_TH, MODALITY_EN, MODALITY_TH, PT_EN, PT_TH, SIGN_EN, SIGN_GLYPH, SIGN_TH,
   degMin, fmtDeg, fmtLatLon, glyph, hhmm, thaiDate,
 } from '../ui/astro-labels.ts'
+import { showPoint } from '../data/settings.ts'
 import { ChartWheel } from '../ui/ChartWheel.tsx'
 import { c, isLightTheme, setRenderLight } from '../ui/theme.ts'
 import { BackLink, Page } from '../ui/components.tsx'
@@ -84,7 +85,7 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
   const help = (aria: string) => <button class="help" aria-label={aria}>?</button>
 
   // ตารางดาว: ดาว 10 + โหนด ลิลิธ ไครอน + ลัคนา กลางฟ้า
-  const rowsPts: Pt[] = [...PLANETS, 'n', 'L', 'c', ...(known ? (['A', 'C'] as Pt[]) : [])]
+  const rowsPts: Pt[] = [...PLANETS, 'n', ...(['L', 'c'] as const).filter((p) => showPoint(p)), ...(known ? (['A', 'C'] as Pt[]) : [])]
   const rows = rowsPts.map((p) => {
     const lon = chart.pos[p].lon
     const s = signOf(lon)

@@ -1,10 +1,17 @@
 import preact from '@preact/preset-vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vitest/config'
+import { execSync } from 'node:child_process'
+import pkg from './package.json' with { type: 'json' }
+
+// เวอร์ชันที่แสดงในหน้าตั้งค่า = version ใน package.json + commit
+let commit = ''
+try { commit = execSync('git rev-parse --short HEAD').toString().trim() } catch { /* ไม่มี git */ }
 
 export default defineConfig({
   // GitHub Pages เสิร์ฟที่ /astro/ (ตั้ง BASE ใน workflow) · เครื่อง dev ใช้ /
   base: process.env.BASE ?? '/',
+  define: { __APP_VERSION__: JSON.stringify(pkg.version + (commit ? ' · ' + commit : '')) },
   plugins: [
     preact(),
     VitePWA({

@@ -1,0 +1,12 @@
+/* หน้า "ตั้งค่า" — คลาสเฉพาะหน้าตาม design/Settings.dc.html */
+.pg-settings a { color: #7FB8FF; }
+.pg-settings .lbl { font-size: 12px; color: #9AA1B5; }
+.pg-settings .sec { display: flex; flex-direction: column; gap: 8px; }
+.pg-settings .sh { font-size: 13px; font-weight: 600; color: #C9CEDC; padding: 0 4px; display: flex; align-items: center; gap: 8px; }
+.pg-settings .box { border-radius: 20px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.10); overflow: hidden; }
+.pg-settings .row { display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 10px 16px; box-sizing: border-box; width: 100%; border: none; background: transparent; color: #F2F4FA; font: 15px var(--font); text-align: left; }
+.pg-settings .row + .row { border-top: 1px solid rgba(255,255,255,.07); }
+.pg-settings .ri { width: 32px; height: 32px; flex: none; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+.pg-settings .rv { font-size: 14px; color: #9AA1B5; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.pg-settings .seg { flex: 1; height: 36px; border: none; border-radius: 10px; background: transparent; color: #C9CEDC; font: 500 13px var(--font); }
+.pg-settings .seg.on { background: #F2F4FA; color: #06070D; font-weight: 600; }
