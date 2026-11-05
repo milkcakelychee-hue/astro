@@ -34,6 +34,18 @@ const CATS: { t: string; ic: string; bg: string; c: string; pick: (x: SynAspect)
   { t: 'ระยะยาว', bg: 'rgba(243,212,110,.16)', c: '#F3D46E', ic: 's', pick: (x) => ['J', 's'].some((p) => p === x.a || p === x.b), icon: <><path d="M4 20V10l8-6 8 6v10" /><path d="M9 20v-6h6v6" /></> },
 ]
 
+const SLOW = new Set<Pt>(['U', 'N', 'P'])
+type GroupKey = 'harm' | 'tense' | 'conj' | 'gen'
+/** มุมรุ่น = ดาวช้าทั้งสองฝั่ง (คนอายุใกล้กันมักมีเหมือนกัน) */
+const groupOf = (x: SynAspect): GroupKey =>
+  SLOW.has(x.a) && SLOW.has(x.b) ? 'gen' : x.type === '0' ? 'conj' : x.type === '3' || x.type === '6' ? 'harm' : 'tense'
+const GROUPS: { k: GroupKey; t: string; sub: string; c: string }[] = [
+  { k: 'harm', t: 'ส่งเสริมกัน', sub: '△ ⚹', c: '#4FD1A5' },
+  { k: 'tense', t: 'ต้องปรับเข้าหากัน', sub: '□ ☍', c: '#FF8A4C' },
+  { k: 'conj', t: 'ผูกพันแน่น (กุมกัน)', sub: '☌', c: '#F3D46E' },
+  { k: 'gen', t: 'มุมรุ่น (ดาวช้า)', sub: 'คนวัยใกล้กันมักมีเหมือนกัน', c: '#9AA1B5' },
+]
+
 interface Side {
   p: Person
   chart: Chart
@@ -72,6 +84,7 @@ function CompareView({ A, B, lib, comp, dav }: Data) {
   const [cm, setCm] = useState<0 | 1>(0)
   const [open, setOpen] = useState<Record<number, boolean>>({})
   const [hl, setHl] = useState(-1)
+  const [openG, setOpenG] = useState<Record<string, boolean>>({})
   const L = sw ? B : A
   const R = sw ? A : B
   const asp = synastry(L.chart, R.chart)
@@ -101,7 +114,9 @@ function CompareView({ A, B, lib, comp, dav }: Data) {
   )
   const pick = (i: number) => {
     setHl(i)
-    document.getElementById('sx' + i)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    // มุมที่ซ่อนอยู่ในกลุ่ม → กางกลุ่มก่อนเลื่อนไป
+    setOpenG((o) => ({ ...o, [groupOf(asp[i]!)]: true }))
+    setTimeout(() => document.getElementById('sx' + i)?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 0)
   }
 
   return (
@@ -118,7 +133,7 @@ function CompareView({ A, B, lib, comp, dav }: Data) {
         <div style={{ padding: '14px 20px 140px', display: 'flex', flexDirection: 'column', gap: '22px' }}>
           <div class="card" style={{ padding: '16px', display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 48px minmax(0,1fr)', alignItems: 'center', gap: '8px', background: 'linear-gradient(120deg,rgba(138,92,255,.22),rgba(31,165,135,.20))' }}>
             {person(L, 'rgba(201,184,255,.5)', 'วงใน', '#C9B8FF')}
-            <button onClick={() => { setSw(!sw); setHl(-1); setOpen({}) }} aria-label="สลับคน" style={{ width: '44px', height: '44px', borderRadius: '999px', border: '1px solid rgba(255,255,255,.2)', background: 'rgba(6,7,13,.5)', color: '#F2F4FA', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+            <button onClick={() => { setSw(!sw); setHl(-1); setOpen({}); setOpenG({}) }} aria-label="สลับคน" style={{ width: '44px', height: '44px', borderRadius: '999px', border: '1px solid rgba(255,255,255,.2)', background: 'rgba(6,7,13,.5)', color: '#F2F4FA', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7h12l-3-3M17 17H5l3 3" /></svg>
             </button>
             {person(R, 'rgba(111,224,192,.5)', 'วงนอก', '#6FE0C0')}
@@ -179,22 +194,45 @@ function CompareView({ A, B, lib, comp, dav }: Data) {
             })}
           </div>
 
+          {/* ผู้ใช้ขอ: แบ่งตามลักษณะมุม แต่ละกลุ่มโชว์ 2 อันแน่นสุด + ดูเพิ่ม · มุมรุ่น (ดาวช้า×ดาวช้า) พับไว้ท้ายสุด */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2">มุมระหว่างสองชาร์ต</h2><span class="lbl">แน่นที่สุดก่อน</span></div>
-            <div class="card" style={{ padding: '4px 14px' }}>
-              {asp.map((x, i) => (
-                <div id={'sx' + i} style={{ display: 'flex', flexDirection: 'column', gap: '6px', padding: '12px 0', borderTop: i ? '1px solid rgba(255,255,255,.06)' : 'none', ...(i === hl ? { background: 'rgba(127,184,255,.10)', margin: '0 -14px', padding: '12px 14px' } : {}) }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 30px minmax(0,1fr) 44px', alignItems: 'center', gap: '4px' }}>
-                    <span style={{ display: 'flex', flexDirection: 'column' }}><span style={{ fontSize: '14px', fontWeight: 600, color: '#C9B8FF' }}>{glyph(x.a)} {NAME[x.a]}</span><span class="lbl">ของ {L.p.name}</span></span>
-                    <span style={{ textAlign: 'center', color: ASPECT_COLOR[x.type], fontWeight: 700, fontSize: '17px' }}>{ASPECT_GLYPH[x.type]}</span>
-                    <span style={{ display: 'flex', flexDirection: 'column' }}><span style={{ fontSize: '14px', fontWeight: 600, color: '#6FE0C0' }}>{glyph(x.b)} {NAME[x.b]}</span><span class="lbl">ของ {R.p.name}</span></span>
-                    <span class="lbl" style={{ textAlign: 'right' }}>{orbTxt(x.orb)}</span>
-                  </div>
-                  <span style={{ fontSize: '12px', color: ASPECT_COLOR[x.type] }}>{TN[x.type]}</span>
-                  {meaning(x) && <span style={{ fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA' }}>{meaning(x)}</span>}
+            {GROUPS.map((g) => {
+              const items = asp.map((x, i) => ({ x, i })).filter(({ x }) => groupOf(x) === g.k)
+              if (!items.length) return null
+              const isOpen = !!openG[g.k]
+              const shown = g.k === 'gen' ? (isOpen ? items : []) : isOpen ? items : items.slice(0, 2)
+              const more = items.length - (g.k === 'gen' ? 0 : 2)
+              return (
+                <div class="card" style={{ padding: '4px 14px' }}>
+                  {g.k === 'gen' ? (
+                    <button class="grp" onClick={() => setOpenG({ ...openG, gen: !isOpen })} aria-expanded={isOpen}>
+                      <span style={{ display: 'inline-block', transform: isOpen ? 'rotate(90deg)' : undefined, transition: 'transform .15s' }}>▸</span>
+                      <span style={{ flex: 1 }}>{g.t} · {items.length} มุม</span><span class="lbl">{g.sub}</span>
+                    </button>
+                  ) : (
+                    <div class="grp"><span style={{ width: '8px', height: '8px', borderRadius: '9px', background: g.c }} /><span style={{ flex: 1 }}>{g.t} · {items.length} มุม</span><span class="lbl">{g.sub}</span></div>
+                  )}
+                  {shown.map(({ x, i }) => (
+                    <div id={'sx' + i} style={{ display: 'flex', flexDirection: 'column', gap: '6px', padding: '12px 0', borderTop: '1px solid rgba(255,255,255,.06)', ...(i === hl ? { background: 'rgba(127,184,255,.10)', margin: '0 -14px', padding: '12px 14px' } : {}) }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 30px minmax(0,1fr) 44px', alignItems: 'center', gap: '4px' }}>
+                        <span style={{ display: 'flex', flexDirection: 'column' }}><span style={{ fontSize: '14px', fontWeight: 600, color: '#C9B8FF' }}>{glyph(x.a)} {NAME[x.a]}</span><span class="lbl">ของ {L.p.name}</span></span>
+                        <span style={{ textAlign: 'center', color: ASPECT_COLOR[x.type], fontWeight: 700, fontSize: '17px' }}>{ASPECT_GLYPH[x.type]}</span>
+                        <span style={{ display: 'flex', flexDirection: 'column' }}><span style={{ fontSize: '14px', fontWeight: 600, color: '#6FE0C0' }}>{glyph(x.b)} {NAME[x.b]}</span><span class="lbl">ของ {R.p.name}</span></span>
+                        <span class="lbl" style={{ textAlign: 'right' }}>{orbTxt(x.orb)}</span>
+                      </div>
+                      <span style={{ fontSize: '12px', color: ASPECT_COLOR[x.type] }}>{TN[x.type]}</span>
+                      {meaning(x) && <span style={{ fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA' }}>{meaning(x)}</span>}
+                    </div>
+                  ))}
+                  {g.k !== 'gen' && more > 0 && (
+                    <button class="more" style={{ borderTop: '1px solid rgba(255,255,255,.06)', width: '100%', minHeight: '44px' }} onClick={() => setOpenG({ ...openG, [g.k]: !isOpen })}>
+                      {isOpen ? 'ย่อ' : `ดูเพิ่ม ${more} มุม ›`}
+                    </button>
+                  )}
                 </div>
-              ))}
-            </div>
+              )
+            })}
           </div>
         </div>
       </div>

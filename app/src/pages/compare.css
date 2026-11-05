@@ -11,3 +11,4 @@
 .pg-compare .ic { width: 36px; height: 36px; flex: none; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
 .pg-compare .pill { font-size: 12px; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,.08); color: #DCE0EA; }
 .pg-compare .more { align-self: flex-start; border: none; background: transparent; color: #7FB8FF; font: 500 13px var(--font); min-height: 36px; padding: 0; display: flex; align-items: center; gap: 4px; cursor: pointer; }
+.pg-compare .grp { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; padding: 0; border: none; background: transparent; color: #F2F4FA; font: 600 14px var(--font); text-align: left; cursor: pointer; }
