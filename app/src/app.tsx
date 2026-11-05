@@ -1,5 +1,6 @@
 // ตัวนำทางแบบ hash (#/main, #/people …) — หน้าจริงเพิ่มทีละหน้าในขั้น E
 import { useEffect, useState } from 'preact/hooks'
+import { AddPerson } from './pages/AddPerson.tsx'
 import { DesignPreview } from './pages/DesignPreview.tsx'
 import { Main } from './pages/Main.tsx'
 
@@ -22,6 +23,8 @@ export function App() {
     case '':
     case 'main':
       return <Main />
+    case 'add':
+      return <AddPerson />
     case 'design':
       return <DesignPreview />
     default:

@@ -15,7 +15,9 @@ export interface Person {
   mi: number | null
   /** ชื่อจังหวัด (คีย์ภาษาอังกฤษในตาราง PROVINCES) */
   province: string
+  /** me | family | friend | lover | work */
   relation: string
+  note?: string
   /** ชาร์ตของฉัน */
   isMe: boolean
   createdAt: number

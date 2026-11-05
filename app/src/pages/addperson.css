@@ -1,0 +1,11 @@
+/* ตาม design/AddPerson.dc.html */
+.pg-add .lbl{font-size:12px;color:#9AA1B5}
+.pg-add .fl{font-size:14px;font-weight:600;color:#DCE0EA}
+.pg-add .in{box-sizing:border-box;width:100%;height:52px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#F2F4FA;font:16px var(--font);outline:none}
+.pg-add .in option{background:#06070D}
+.pg-add .sel{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239AA1B5' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
+.pg-add .rt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:72px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);font:500 14px var(--font);color:#C9CEDC;padding:0}
+.pg-add .rt.on{background:linear-gradient(135deg,rgba(138,92,255,.55),rgba(59,107,255,.45));border-color:rgba(180,170,255,.6);color:#FFFFFF;font-weight:600}
+.pg-add .rt:disabled{opacity:.4}
+.pg-add .group{display:flex;flex-direction:column;gap:14px;padding:16px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.pg-add .in.bad{border-color:rgba(255,107,107,.7)}

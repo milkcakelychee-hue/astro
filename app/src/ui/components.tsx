@@ -60,7 +60,7 @@ export function PageTitle(props: { kicker?: string; title: string; en?: string; 
       <details style={{ marginRight: '-40px' }}>
         <summary
           aria-label="หน้านี้คืออะไร"
-          style={{ listStyle: 'none', position: 'absolute', right: '0px', top: '18px', width: '30px', height: '30px', borderRadius: '50%', border: '1px solid rgba(200,210,255,.35)', background: 'rgba(255,255,255,.06)', color: '#D6DEFF', display: 'flex', alignItems: 'center', justifyContent: 'center', font: "600 15px var(--font)", cursor: 'pointer' }}
+          style={{ listStyle: 'none', position: 'absolute', right: '0px', top: props.kicker ? '22px' : '1px' /* กึ่งกลางกับ h1 (lbl 19 + gap 2 + h1 34/2 − 16) */, width: '30px', height: '30px', borderRadius: '50%', border: '1px solid rgba(200,210,255,.35)', background: 'rgba(255,255,255,.06)', color: '#D6DEFF', display: 'flex', alignItems: 'center', justifyContent: 'center', font: "600 15px var(--font)", cursor: 'pointer' }}
         >
           ?
         </summary>
