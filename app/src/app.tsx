@@ -8,9 +8,13 @@ import { Main } from './pages/Main.tsx'
 function useHash() {
   const [h, setH] = useState(location.hash)
   useEffect(() => {
+    let prev = location.hash.split('?')[0]
     const on = () => {
       setH(location.hash)
-      scrollTo(0, 0)
+      // เปลี่ยนแค่ query (เช่นเปิด Sheet) ไม่ต้องเลื่อนขึ้นบนสุด
+      const base = location.hash.split('?')[0]
+      if (base !== prev) scrollTo(0, 0)
+      prev = base
     }
     addEventListener('hashchange', on)
     return () => removeEventListener('hashchange', on)

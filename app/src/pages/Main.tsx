@@ -15,6 +15,8 @@ import { c, isLightTheme, setRenderLight } from '../ui/theme.ts'
 import { Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
 import { MainEmpty } from './MainEmpty.tsx'
+import { PlanetSheet } from './PlanetSheet.tsx'
+import { loadLib, type InterpLib } from '../lib/interp.ts'
 import './main.css'
 import './main-light.css'
 
@@ -61,6 +63,12 @@ function MainView({ person, chart, aspects, dom }: Data) {
   // โทนสว่างตาม design/ChartLight.dc.html
   const light = isLightTheme()
   setRenderLight(light)
+  // Sheet: #/main?p=<จุด> (แตะดาวในวงชาร์ต)
+  const sheetPt = (new URLSearchParams(location.hash.split('?')[1] ?? '').get('p') ?? '') as Pt
+  const [lib, setLib] = useState<InterpLib | null>(null)
+  useEffect(() => {
+    if (sheetPt && !lib) loadLib().then(setLib)
+  }, [sheetPt])
   const known = timeKnown(person)
   const prov = provinceByName(person.province)!
   const [tab, setTab] = useState('overview')
@@ -140,7 +148,7 @@ function MainView({ person, chart, aspects, dom }: Data) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2">วงชาร์ตเกิด <span class="lbl" style={{ fontWeight: 400 }}>(Birth Chart)</span></h2>{help('วงชาร์ตคืออะไร')}</div>
           <div class="card" style={{ padding: '14px 14px 12px', display: 'flex', flexDirection: 'column', gap: '10px', background: c('rgba(12,14,24,.55)') }}>
-            <ChartWheel chart={chart} aspects={aspects} showHouses={known} label={`วงชาร์ตเกิด ${label}`} />
+            <ChartWheel chart={chart} aspects={aspects} showHouses={known} label={`วงชาร์ตเกิด ${label}`} onPick={(p) => (location.hash = '#/main?p=' + p)} />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '6px 12px', fontSize: '12px', color: c('#C9CEDC') }}>
               {[[c('#4FD1A5'), 'ส่งเสริม (Trine 120°)'], [c('#7FB8FF'), 'เปิดโอกาส (Sextile 60°)'], [c('#FF8A4C'), 'ท้าทาย (Square 90°)'], [c('#FF6B6B'), 'ตรงข้าม (Opposition 180°)']].map(([c, t]) => (
                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><span style={{ width: '16px', height: '2px', background: c }} />{t}</span>
@@ -272,6 +280,9 @@ function MainView({ person, chart, aspects, dom }: Data) {
         </div>
         {/* ดาวที่ควรรู้จักก่อน + รูปแบบพิเศษ: รอข้อความหมวดใหม่จาก lib/gen2.py */}
       </div>
+      {sheetPt && chart.pos[sheetPt] && lib && (
+        <PlanetSheet pt={sheetPt} chart={chart} aspects={aspects} lib={lib} known={known} personId={person.id} onClose={() => (location.hash = '#/main')} />
+      )}
       <TabBar active="main" />
     </Page>
   )

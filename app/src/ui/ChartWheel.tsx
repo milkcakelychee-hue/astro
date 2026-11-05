@@ -46,7 +46,7 @@ function spread(lons: number[]): number[] {
   return out
 }
 
-export function ChartWheel(props: { chart: Chart; aspects: Aspect[]; label: string; showHouses: boolean }) {
+export function ChartWheel(props: { chart: Chart; aspects: Aspect[]; label: string; showHouses: boolean; onPick?: (p: Pt) => void }) {
   const { chart, aspects } = props
   const asc = chart.pos.A.lon
   const xy = (lon: number, r: number) => {
@@ -106,6 +106,8 @@ export function ChartWheel(props: { chart: Chart; aspects: Aspect[]; label: stri
           <>
             <line {...line(lons[i]!, R_IN, R_IN - 5)} style={{ stroke: 'var(--fg)' }} />
             <text x={f1(gx)} y={f1(gy)} {...txt} font-size={minor ? '12' : '14'} style={{ fill: minor ? 'var(--muted)' : 'var(--fg)' }}>{glyph(p)}</text>
+            {/* พื้นที่แตะ (มองไม่เห็น) → เปิด Sheet */}
+            {props.onPick && <circle cx={f1(gx)} cy={f1(gy)} r="11" fill="transparent" style={{ cursor: 'pointer' }} role="button" aria-label={'คำอธิบาย ' + p} onClick={() => props.onPick!(p)} />}
             <text x={f1(dx)} y={f1(dy)} {...txt} font-size="7.5" style={{ fill: 'var(--muted)' }}>{Math.floor(lons[i]! % 30)}°</text>
           </>
         )

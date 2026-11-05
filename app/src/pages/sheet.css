@@ -1,0 +1,7 @@
+/* ตาม design/Sheet.dc.html */
+.pg-sheet a{color:#7FB8FF}
+.pg-sheet .blk{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+.pg-sheet .bh{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600}
+.pg-sheet .bp{margin:0;font-size:14px;line-height:1.7;color:#DCE0EA}
+.pg-sheet .more{align-self:flex-start;border:none;background:transparent;color:#7FB8FF;font:500 13px var(--font);min-height:36px;padding:0;display:flex;align-items:center;gap:4px}
+.pg-sheet .chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;height:auto;padding:0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);font:500 13px var(--font);color:#DCE0EA}

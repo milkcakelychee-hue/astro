@@ -25,9 +25,11 @@ export interface Person {
 
 let dbP: Promise<IDBPDatabase> | null = null
 function db() {
-  dbP ??= openDB('astro', 1, {
-    upgrade(d) {
-      d.createObjectStore('people', { keyPath: 'id' })
+  dbP ??= openDB('astro', 2, {
+    upgrade(d, old) {
+      if (old < 1) d.createObjectStore('people', { keyPath: 'id' })
+      // v2: โน้ตส่วนตัวต่อจุดในชาร์ต (หน้า Sheet) — id = personId:จุด
+      if (old < 2) d.createObjectStore('notes', { keyPath: 'id' })
     },
   })
   return dbP
@@ -52,4 +54,13 @@ export function birthInput(p: Person): BirthInput {
   const prov = provinceByName(p.province)
   if (!prov) throw new Error('ไม่พบจังหวัด ' + p.province)
   return { y: p.y, mo: p.mo, d: p.d, hh: p.hh ?? 12, mi: p.mi ?? 0, lat: latOf(prov), lon: lonOf(prov) }
+}
+
+export async function getNote(id: string): Promise<string> {
+  return ((await (await db()).get('notes', id)) as { text: string } | undefined)?.text ?? ''
+}
+export async function saveNote(id: string, text: string): Promise<void> {
+  const d = await db()
+  if (text.trim()) await d.put('notes', { id, text })
+  else await d.delete('notes', id)
 }
