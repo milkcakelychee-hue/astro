@@ -1,7 +1,7 @@
 // หน้า "วันนี้": เทียบกับข้อมูลตัวอย่างใน design/Today.dc.html (31 ต.ค. 2569 10:00 น.) และ docs/08
 import { beforeAll, describe, expect, it } from 'vitest'
 import { SKY_PTS, bodyAt, dateOfJd, dignityOf, moonInfo, nextIngress, thaiParts } from '../src/engine/sky.ts'
-import { floorMin, type Pt } from '../src/engine/chart.ts'
+import { computeChart, floorMin, type Pt } from '../src/engine/chart.ts'
 import { getSwe } from './helpers.ts'
 import type { Swe } from '../src/engine/swe.ts'
 
@@ -69,5 +69,17 @@ describe('Today.dc.html 31 ต.ค. 2569 10:00', () => {
     const mi = moonInfo(swe, thaiJd(2026, 11, 5, 12, 0))
     expect(fmt(mi.voc!.start)).toBe('2569-11-4 13:57')
     expect(fmt(mi.voc!.end)).toBe('2569-11-5 21:38')
+  })
+  it('astro-seek Transits Tracker: ยูเรนัส□ศุกร์เดิม (ชาร์ตอ้างอิง) ตรงพอดี 3 ครั้ง ±2 นาที', () => {
+    const natal = computeChart(swe, { y: 1999, mo: 8, d: 5, hh: 20, mi: 33, lat: 13 + 7 / 60, lon: 99 + 57 / 60 })
+    const v = natal.aspectPos.V.lon
+    // เวลา UT จากเว็บ: 13 ก.ค. 2026 14:47 · 10 พ.ย. 2026 18:32 (R) · 1 พ.ค. 2027 19:48
+    for (const [y, mo, d, h, m] of [[2026, 7, 13, 14, 47], [2026, 11, 10, 18, 32], [2027, 5, 1, 19, 48]] as const) {
+      const jd = swe.julday(y, mo, d, h + m / 60)
+      const orb = (x: number) => { let dd = Math.abs(bodyAt(swe, x, 'U').lon - v) % 360; dd = Math.min(dd, 360 - dd); return Math.abs(dd - 90) }
+      // จุดต่ำสุดของ orb ต้องอยู่ภายใน ±2 นาทีจากเวลาเว็บ
+      expect(orb(jd)).toBeLessThan(orb(jd - 2 / 1440) + 1e-9)
+      expect(orb(jd)).toBeLessThan(orb(jd + 2 / 1440) + 1e-9)
+    }
   })
 })
