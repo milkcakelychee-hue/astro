@@ -34,7 +34,6 @@ export function AddPerson() {
   const [hh, setHh] = useState('')
   const [mi, setMi] = useState('')
   const [prov, setProv] = useState('')
-  const [note, setNote] = useState('')
 
   useEffect(() => {
     getMe().then((m) => {
@@ -67,7 +66,6 @@ export function AddPerson() {
       mi: unknown ? null : m,
       province: p.name,
       relation: rel,
-      note: note.trim() || undefined,
       isMe: rel === 'me',
       createdAt: Date.now(),
     })
@@ -175,11 +173,6 @@ export function AddPerson() {
                 <span style={{ fontSize: '15px', fontWeight: 600 }}>UTC+7 เวลาไทย</span>
               </div>
             </div>
-          </div>
-
-          <div class="group">
-            <label for="nt" class="fl">โน้ต <span class="lbl" style={{ fontWeight: 400 }}>(ไม่บังคับ)</span></label>
-            <textarea id="nt" rows={3} placeholder="เช่น ที่มาของเวลาเกิด สูติบัตร หรือแม่บอก" value={note} onInput={(e) => setNote(e.currentTarget.value)} style={{ boxSizing: 'border-box', width: '100%', padding: '12px 14px', borderRadius: '14px', border: '1px solid rgba(255,255,255,.14)', background: 'rgba(255,255,255,.06)', color: '#F2F4FA', font: '15px/1.6 var(--font)', resize: 'none' }} />
           </div>
 
           <button type="submit" aria-disabled={!ok} style={{ height: '56px', border: 'none', borderRadius: '16px', background: 'linear-gradient(135deg,#8A5CFF,#3B6BFF 55%,#1FA587)', color: '#FFFFFF', font: '600 17px var(--font)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', opacity: ok ? 1 : 0.45 }}>
