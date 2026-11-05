@@ -69,8 +69,7 @@ export function AddPerson() {
       isMe: rel === 'me',
       createdAt: Date.now(),
     })
-    // หน้าชาร์ตของคนอื่นยังไม่ได้ทำ — ตอนนี้ไปหน้าชาร์ตของฉัน
-    location.hash = '#/main'
+    location.hash = rel === 'me' ? '#/main' : '#/people'
   }
 
   const lab = (t: string) => <span class="lbl" style={{ display: 'block', marginBottom: '4px' }}>{t}</span>

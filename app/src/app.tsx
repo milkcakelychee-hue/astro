@@ -5,6 +5,7 @@ import { Aspects } from './pages/Aspects.tsx'
 import { DesignPreview } from './pages/DesignPreview.tsx'
 import { Main } from './pages/Main.tsx'
 import { Today } from './pages/Today.tsx'
+import { People } from './pages/People.tsx'
 
 function useHash() {
   const [h, setH] = useState(location.hash)
@@ -28,11 +29,14 @@ export function App() {
   switch (route) {
     case '':
     case 'main':
-      return <Main />
+      // key: สลับคน (?id=) ต้องโหลดใหม่
+      return <Main key={new URLSearchParams(location.hash.split('?')[1] ?? '').get('id') ?? 'me'} />
     case 'add':
       return <AddPerson />
     case 'aspects':
       return <Aspects />
+    case 'people':
+      return <People />
     case 'today':
       return <Today />
     case 'design':

@@ -5,7 +5,7 @@ import { computeChart, PLANETS, type Chart, type Pt } from '../engine/chart.ts'
 import { dominantElements, dominants, signature, signOf, elementOfSign, type Dominants } from '../engine/dominants.ts'
 import { getBrowserSwe } from '../engine/ephe-browser.ts'
 import { PROVINCE_TH, provinceByName } from '../engine/places.ts'
-import { birthInput, getMe, timeKnown, type Person } from '../data/people.ts'
+import { birthInput, getMe, getPerson, timeKnown, type Person } from '../data/people.ts'
 import {
   ASPECT_GLYPH, ELEMENT_COLOR, ELEMENT_EN, ELEMENT_LIGHT, ELEMENT_TH, MODALITY_EN, MODALITY_TH, PT_EN, PT_TH, SIGN_EN, SIGN_GLYPH, SIGN_TH,
   degMin, fmtDeg, fmtLatLon, glyph, hhmm, thaiDate,
@@ -41,7 +41,9 @@ export function Main() {
   const [data, setData] = useState<Data | null | 'none'>(null)
   const [err, setErr] = useState<string | null>(null)
   const load = () => {
-    getMe()
+    // #/main?id=<คน> = ชาร์ตของคนอื่น (แตะจากหน้าบุคคล)
+    const id = new URLSearchParams(location.hash.split('?')[1] ?? '').get('id')
+    ;(id ? getPerson(id) : getMe())
       .then(async (person) => {
         if (!person) return setData('none')
         const swe = await getBrowserSwe()
@@ -129,8 +131,8 @@ function MainView({ person, chart, aspects, dom }: Data) {
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           {/* ผู้ใช้ขอ: ปุ่ม ? ของหัวข้อหน้าชิดขวาสุดทุกหน้า (flex:1 ให้กล่องหัวข้อเต็มความกว้าง) */}
           <div style={{ flex: 1, position: 'relative', paddingRight: '40px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
-            <span class="lbl">{person.name}</span>
-            <h1 style={{ margin: 0, fontSize: '28px', fontWeight: 600 }}>ชาร์ตของฉัน</h1>
+            <span class="lbl">{person.isMe ? person.name : 'ชาร์ตของ'}</span>
+            <h1 style={{ margin: 0, fontSize: '28px', fontWeight: 600 }}>{person.isMe ? 'ชาร์ตของฉัน' : person.name}</h1>
             {/* ผู้ใช้ขอ: วันเกิดเป็นหัวข้อรองที่ใหญ่ขึ้น (เดิม 12px อยู่เหนือหัวข้อ) */}
             <span style={{ fontSize: '15px', fontWeight: 500, color: c('#DCE0EA'), marginTop: '2px' }}>{label.slice(person.name.length + 3)}</span>
             <span class="lbl">{fmtLatLon(prov.latDeg, prov.latMin, prov.lonDeg, prov.lonMin)}{known ? ' · ระบบเรือน Placidus' : ' · ไม่ทราบเวลาเกิด (ซ่อนลัคนาและเรือน)'}</span>
@@ -148,7 +150,7 @@ function MainView({ person, chart, aspects, dom }: Data) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2">วงชาร์ตเกิด <span class="lbl" style={{ fontWeight: 400 }}>(Birth Chart)</span></h2>{help('วงชาร์ตคืออะไร')}</div>
           <div class="card" style={{ padding: '14px 14px 12px', display: 'flex', flexDirection: 'column', gap: '10px', background: c('rgba(12,14,24,.55)') }}>
-            <ChartWheel chart={chart} aspects={aspects} showHouses={known} label={`วงชาร์ตเกิด ${label}`} onPick={(p) => (location.hash = '#/main?p=' + p)} />
+            <ChartWheel chart={chart} aspects={aspects} showHouses={known} label={`วงชาร์ตเกิด ${label}`} onPick={(p) => (location.hash = '#/main?' + (person.isMe ? '' : 'id=' + person.id + '&') + 'p=' + p)} />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '6px 12px', fontSize: '12px', color: c('#C9CEDC') }}>
               {[[c('#4FD1A5'), 'ส่งเสริม (Trine 120°)'], [c('#7FB8FF'), 'เปิดโอกาส (Sextile 60°)'], [c('#FF8A4C'), 'ท้าทาย (Square 90°)'], [c('#FF6B6B'), 'ตรงข้าม (Opposition 180°)']].map(([c, t]) => (
                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><span style={{ width: '16px', height: '2px', background: c }} />{t}</span>
@@ -281,7 +283,7 @@ function MainView({ person, chart, aspects, dom }: Data) {
         {/* ดาวที่ควรรู้จักก่อน + รูปแบบพิเศษ: รอข้อความหมวดใหม่จาก lib/gen2.py */}
       </div>
       {sheetPt && chart.pos[sheetPt] && lib && (
-        <PlanetSheet pt={sheetPt} chart={chart} aspects={aspects} lib={lib} known={known} personId={person.id} onClose={() => (location.hash = '#/main')} />
+        <PlanetSheet pt={sheetPt} chart={chart} aspects={aspects} lib={lib} known={known} personId={person.id} onClose={() => (location.hash = person.isMe ? '#/main' : '#/main?id=' + person.id)} />
       )}
       <TabBar active="main" />
     </Page>

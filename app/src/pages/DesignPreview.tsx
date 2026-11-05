@@ -19,7 +19,7 @@ export function DesignPreview() {
           // [dev] ลิงก์ไปหน้าที่ทำเสร็จแล้ว — ไม่แสดงในแอปจริง
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', padding: '12px', borderRadius: '14px', border: '1px dashed #FFB08A' }}>
             <span style={{ width: '100%', fontSize: '12px', color: '#FFB08A' }}>[dev] หน้าที่ทำแล้ว</span>
-            {[['#/main', 'ชาร์ตของฉัน'], ['#/aspects', 'มุมดาวทั้งหมด'], ['#/main?p=a', 'Sheet (อังคาร)'], ['#/add', 'เพิ่มคน'], ['#/add?me=1', 'เพิ่มคน (ฉัน)'], ['#/today', 'วันนี้'], ['#/today?at=2026-10-31T10:00', 'วันนี้ (31 ต.ค. 69 ตามดีไซน์)']].map(([h, t]) => (
+            {[['#/main', 'ชาร์ตของฉัน'], ['#/aspects', 'มุมดาวทั้งหมด'], ['#/main?p=a', 'Sheet (อังคาร)'], ['#/add', 'เพิ่มคน'], ['#/add?me=1', 'เพิ่มคน (ฉัน)'], ['#/today', 'วันนี้'], ['#/people', 'บุคคล'], ['#/today?at=2026-10-31T10:00', 'วันนี้ (31 ต.ค. 69 ตามดีไซน์)']].map(([h, t]) => (
               <a href={h} style={{ padding: '6px 10px', borderRadius: '10px', background: 'rgba(255,255,255,.07)', fontSize: '13px', textDecoration: 'none' }}>{t}</a>
             ))}
             <span style={{ width: '100%', fontSize: '12px', color: '#FFB08A' }}>[dev] ธีมหน้าชาร์ต (ก่อนมีหน้าตั้งค่า) · ตอนนี้: {theme}</span>
