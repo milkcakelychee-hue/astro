@@ -51,4 +51,23 @@ describe('Today.dc.html 31 ต.ค. 2569 10:00', () => {
     expect(dignityOf('m', 8)).toBe('detr')
     expect(dignityOf('U', 2)).toBe(null)
   })
+  it('astro-seek: Planetary Ingresses (UT+7) วันตรงทุกรายการ นาทีต่าง ≤1', () => {
+    const jd = thaiJd(2026, 10, 31, 10, 0)
+    // จาก astrology-planetary-overview-2026/2027/2028/2032 (เวลา UT แปลงเป็นไทย)
+    const exp: [Pt, number, string][] = [
+      ['S', 8, '2569-11-22 14:24'], ['a', 5, '2569-11-26 06:37'], ['V', 7, '2569-12-4 15:13'], ['m', 8, '2569-12-6 15:34'],
+      ['J', 5, '2570-7-26 11:49'], ['s', 1, '2571-4-13 10:40'], ['U', 3, '2575-8-4 01:21'],
+    ]
+    for (const [p, sign, when] of exp) {
+      const i = nextIngress(swe, jd, p, 8 * 366)!
+      expect(i.sign).toBe(sign)
+      const exJd = (() => { const [d, t] = when.split(' '); const [y, mo, dd] = d!.split('-').map(Number); const [h, m] = t!.split(':').map(Number); return thaiJd(y! - 543, mo!, dd!, h!, m!) })()
+      expect(Math.abs(i.jd - exJd) * 1440).toBeLessThan(2)
+    }
+  })
+  it('astro-seek: VOC 4 พ.ย. 06:57 UT – 5 พ.ย. 14:38 UT (Modern 10 ดาว, มุมหลัก)', () => {
+    const mi = moonInfo(swe, thaiJd(2026, 11, 5, 12, 0))
+    expect(fmt(mi.voc!.start)).toBe('2569-11-4 13:57')
+    expect(fmt(mi.voc!.end)).toBe('2569-11-5 21:38')
+  })
 })
