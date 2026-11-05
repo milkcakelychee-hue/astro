@@ -17,21 +17,24 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
-      // ไอคอนแอปยังรอผู้ใช้เลือก (ดู PROGRESS.md) — ตอนนี้ใช้ favicon.svg ชั่วคราว
+      // ไอคอนจากโฟลเดอร์ icon/ (ผู้ใช้เลือก) · ชื่อแอป Asstro
       manifest: {
-        name: 'ดวงของฉัน',
-        short_name: 'ดวง',
+        name: 'Asstro',
+        short_name: 'Asstro',
         lang: 'th',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#06070D',
         theme_color: '#06070D',
         start_url: '.',
-        icons: [{ src: 'favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }],
+        icons: [
+          { src: 'icons/asstro-appicon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: 'icons/asstro-appicon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+        ],
       },
       workbox: {
         // ใช้ออฟไลน์ได้ทั้งหมด: โค้ด ฟอนต์ คลังข้อความ wasm และ ephemeris
-        globPatterns: ['**/*.{js,css,html,svg,woff2,wasm,data,se1}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,woff2,wasm,data,se1}'],
         // สำเนา .wasm ที่ Vite emit เองไม่ได้ถูกใช้ (โมดูลโหลดจาก /wasm/)
         globIgnores: ['assets/swisseph-*.wasm'],
         maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
