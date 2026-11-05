@@ -51,3 +51,5 @@ export const fmtDeg = (lon: number) => {
 }
 /** 13°7′N 99°57′E */
 export const fmtLatLon = (latDeg: number, latMin: number, lonDeg: number, lonMin: number) => `${latDeg}°${latMin}′N ${lonDeg}°${lonMin}′E`
+/** หัวข้อสั้นของเรือน 1–12 (design/Transit, Lunations, LunarReturn) */
+export const HOUSE_TOPIC = ['', 'ตัวตน ภาพลักษณ์', 'เงิน คุณค่าในตัวเอง', 'การสื่อสาร คนใกล้ตัว', 'บ้าน ครอบครัว', 'ความรัก ความสนุก', 'งานประจำวัน สุขภาพ', 'คู่ครอง หุ้นส่วน', 'ความลึกซึ้ง เงินร่วม', 'การเรียน การเดินทาง', 'งาน ชื่อเสียง', 'เพื่อน สังคม ความฝัน', 'จิตใต้สำนึก การพัก']
