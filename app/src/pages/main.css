@@ -1,0 +1,13 @@
+/* สไตล์เฉพาะหน้า Main — คัดจาก <style> ของ design/Main.dc.html (scope ด้วย .pg-main) */
+.pg-main {
+  --ground2: #0C0E18; --ring: rgba(255,255,255,.03); --core: rgba(90,110,255,.10); --line: rgba(255,255,255,.16); --line2: rgba(255,255,255,.30);
+  --fg: #F2F4FA; --muted: #9AA1B5; --accent: #7FB8FF;
+}
+.pg-main .card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.10); border-radius: 20px; }
+.pg-main .sec { font-size: 13px; font-weight: 600; color: #C9CEDC; }
+.pg-main .help { width: 28px; height: 28px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); background: transparent; color: #C9CEDC; font: 600 13px var(--font); display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+.pg-main .seg { padding: 0 4px; white-space: normal; }
+.pg-main .tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 64px; border-radius: 16px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.04); color: #C9CEDC; font: 500 13px var(--font); }
+.pg-main .tile.on { background: linear-gradient(135deg,rgba(138,92,255,.55),rgba(59,107,255,.45)); border-color: rgba(180,170,255,.55); color: #FFFFFF; font-weight: 600; }
+.pg-main .h2 { margin: 0; font-size: 18px; font-weight: 600; }
+.pg-main .more { align-self: flex-start; border: none; background: transparent; color: #7FB8FF; font: 500 14px var(--font); display: flex; align-items: center; gap: 4px; min-height: 44px; padding: 0; }

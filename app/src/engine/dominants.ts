@@ -113,7 +113,9 @@ export function dominantElements(chart: Chart, dom: Dominants): ElementScore[] {
   return out
 }
 
-export type Signature = { ambiguous: true } | { ambiguous: false; sign: number; elementCount: number; modalityCount: number }
+export type Signature =
+  | { ambiguous: true }
+  | { ambiguous: false; sign: number; elementCount: number; modalityCount: number; /** นับรวมลัคนาเพราะเสมอกัน */ withAsc: boolean }
 
 /** Signature Sign: นับธาตุ+ลักษณะของดาว 10 ดวง; เสมอ → บวก ASC ทั้งสองฝั่ง; ยังเสมอ → Ambiguous */
 export function signature(chart: Chart): Signature {
@@ -136,7 +138,8 @@ export function signature(chart: Chart): Signature {
   let c = count(false)
   let le = lead(c.el)
   let lm = lead(c.mo)
-  if (le.idx.length > 1 || lm.idx.length > 1) {
+  const withAsc = le.idx.length > 1 || lm.idx.length > 1
+  if (withAsc) {
     c = count(true)
     le = lead(c.el)
     lm = lead(c.mo)
@@ -146,5 +149,5 @@ export function signature(chart: Chart): Signature {
   const m = lm.idx[0]!
   let sign = -1
   for (let s = 0; s < 12; s++) if (elementOfSign(s) === e && modalityOfSign(s) === m) sign = s
-  return { ambiguous: false, sign, elementCount: le.max, modalityCount: lm.max }
+  return { ambiguous: false, sign, elementCount: le.max, modalityCount: lm.max, withAsc }
 }

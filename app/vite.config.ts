@@ -3,6 +3,8 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
+  // GitHub Pages เสิร์ฟที่ /astro/ (ตั้ง BASE ใน workflow) · เครื่อง dev ใช้ /
+  base: process.env.BASE ?? '/',
   plugins: [
     preact(),
     VitePWA({
@@ -29,6 +31,8 @@ export default defineConfig({
       },
     }),
   ],
+  // dev: ให้เปิดไฟล์ดีไซน์ (../design) ผ่าน /@fs/ เพื่อเทียบภาพกับหน้าจริงได้
+  server: { fs: { allow: ['..'] } },
   optimizeDeps: { exclude: ['swisseph-wasm'] },
   test: { include: ['tests/**/*.test.ts'], environment: 'node', testTimeout: 60000, hookTimeout: 60000 },
 })
