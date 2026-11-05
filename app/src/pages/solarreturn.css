@@ -1,0 +1,7 @@
+/* หน้า "ดวงรอบปีนับจากวันเกิด" — คลาสเฉพาะหน้าตาม design/SolarReturn.dc.html */
+.pg-sr a { color: #7FB8FF; }
+.pg-sr .lbl { font-size: 12px; color: #9AA1B5; }
+.pg-sr .card { border-radius: 22px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.10); }
+.pg-sr .seg { flex: 1; height: 40px; border: none; border-radius: 12px; background: transparent; color: #C9CEDC; font: 500 13px var(--font); white-space: nowrap; }
+.pg-sr .seg.on { background: #F2F4FA; color: #06070D; font-weight: 600; }
+.pg-sr .ht { display: flex; flex-direction: column; gap: 4px; min-height: 74px; padding: 8px; box-sizing: border-box; border-radius: 14px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03); }
