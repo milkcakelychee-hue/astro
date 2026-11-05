@@ -2,6 +2,7 @@
 import { useState } from 'preact/hooks'
 import { BackLink, Card, Chevron, Chip, LevelBar, Page, PageTitle, PrimaryButton, Seg, Toggle } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
+import { getThemePref, setThemePref } from '../ui/theme.ts'
 
 const BG =
   'radial-gradient(520px 420px at 85% -40px,rgba(220,227,245,.24),transparent 70%),radial-gradient(460px 380px at -10% 380px,rgba(59,107,255,.28),transparent 70%),radial-gradient(500px 420px at 90% 1300px,rgba(138,92,255,.22),transparent 70%),#06070D'
@@ -9,6 +10,7 @@ const BG =
 export function DesignPreview() {
   const [seg, setSeg] = useState<'3' | '6' | '12'>('3')
   const [sel, setSel] = useState('งาน')
+  const [theme, setTheme] = useState(getThemePref())
   return (
     <Page background={BG}>
       <BackLink href="#/settings" label="ตั้งค่า" />
@@ -19,6 +21,10 @@ export function DesignPreview() {
             <span style={{ width: '100%', fontSize: '12px', color: '#FFB08A' }}>[dev] หน้าที่ทำแล้ว</span>
             {[['#/main', 'ชาร์ตของฉัน'], ['#/aspects', 'มุมดาวทั้งหมด'], ['#/add', 'เพิ่มคน'], ['#/add?me=1', 'เพิ่มคน (ฉัน)']].map(([h, t]) => (
               <a href={h} style={{ padding: '6px 10px', borderRadius: '10px', background: 'rgba(255,255,255,.07)', fontSize: '13px', textDecoration: 'none' }}>{t}</a>
+            ))}
+            <span style={{ width: '100%', fontSize: '12px', color: '#FFB08A' }}>[dev] ธีมหน้าชาร์ต (ก่อนมีหน้าตั้งค่า) · ตอนนี้: {theme}</span>
+            {(['system', 'light', 'dark'] as const).map((v) => (
+              <button onClick={() => { setThemePref(v); setTheme(v) }} style={{ padding: '6px 10px', borderRadius: '10px', border: 'none', background: theme === v ? '#F2F4FA' : 'rgba(255,255,255,.07)', color: theme === v ? '#06070D' : '#F2F4FA', font: '13px var(--font)' }}>{v === 'system' ? 'ตามเครื่อง' : v === 'light' ? 'สว่าง' : 'มืด'}</button>
             ))}
           </div>
         )}

@@ -3,6 +3,7 @@
 import type { Aspect } from '../engine/aspects.ts'
 import type { Chart, Pt } from '../engine/chart.ts'
 import { ASPECT_COLOR, ELEMENT_COLOR, glyph, SIGN_GLYPH } from './astro-labels.ts'
+import { c } from './theme.ts'
 
 const C = 170
 const R_OUT = 166
@@ -74,7 +75,7 @@ export function ChartWheel(props: { chart: Chart; aspects: Aspect[]; label: stri
         return (
           <>
             <line {...line(i * 30, R_OUT, R_IN)} style={{ stroke: 'var(--line)' }} />
-            <text x={f1(x)} y={f1(y)} {...txt} font-size="14" style={{ fill: ELEMENT_COLOR[i % 4] }}>{g}</text>
+            <text x={f1(x)} y={f1(y)} {...txt} font-size="14" style={{ fill: c(ELEMENT_COLOR[i % 4]) }}>{g}</text>
           </>
         )
       })}
@@ -95,7 +96,7 @@ export function ChartWheel(props: { chart: Chart; aspects: Aspect[]; label: stri
         .map((a) => {
           const [x1, y1] = xy(chart.aspectPos[a.a].lon, R_CORE)
           const [x2, y2] = xy(chart.aspectPos[a.b].lon, R_CORE)
-          return <line x1={f1(x1)} y1={f1(y1)} x2={f1(x2)} y2={f1(y2)} style={{ stroke: ASPECT_COLOR[a.type] }} stroke-width="1" />
+          return <line x1={f1(x1)} y1={f1(y1)} x2={f1(x2)} y2={f1(y2)} style={{ stroke: c(ASPECT_COLOR[a.type]) }} stroke-width="1" />
         })}
       {WHEEL_PTS.map((p, i) => {
         const minor = MINOR.has(p)

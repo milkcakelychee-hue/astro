@@ -11,13 +11,18 @@ import {
   degMin, fmtDeg, fmtLatLon, glyph, hhmm, thaiDate,
 } from '../ui/astro-labels.ts'
 import { ChartWheel } from '../ui/ChartWheel.tsx'
+import { c, isLightTheme, setRenderLight } from '../ui/theme.ts'
 import { Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
 import { MainEmpty } from './MainEmpty.tsx'
 import './main.css'
+import './main-light.css'
 
 const BG =
   'radial-gradient(520px 420px at 85% -40px,rgba(138,92,255,.45),transparent 70%),radial-gradient(460px 380px at -10% 200px,rgba(31,165,135,.38),transparent 70%),radial-gradient(500px 420px at 60% 640px,rgba(59,107,255,.28),transparent 70%),radial-gradient(500px 500px at 0% 1900px,rgba(138,92,255,.20),transparent 70%),#06070D'
+
+const BG_LIGHT =
+  'radial-gradient(520px 420px at 85% -40px,rgba(138,92,255,.22),transparent 70%),radial-gradient(460px 380px at -10% 200px,rgba(31,165,135,.18),transparent 70%),radial-gradient(500px 420px at 60% 640px,rgba(59,107,255,.14),transparent 70%),radial-gradient(500px 500px at 0% 1900px,rgba(138,92,255,.10),transparent 70%),#F3F4F8'
 
 const Chev = (p: { open?: boolean }) => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style={p.open ? { transform: 'rotate(180deg)' } : undefined}><path d="m6 9 6 6 6-6" /></svg>
@@ -46,13 +51,16 @@ export function Main() {
   }
   useEffect(load, [])
 
-  if (err) return <Page background={BG}><div style={{ padding: '62px 20px', color: '#FF9A9A' }}>{err}</div><TabBar active="main" /></Page>
+  if (err) return <Page background={BG}><div style={{ padding: '62px 20px', color: c('#FF9A9A') }}>{err}</div><TabBar active="main" /></Page>
   if (data === 'none') return <MainEmpty background={BG} onLoaded={load} />
   if (!data) return <Page background={BG}><TabBar active="main" /></Page>
   return <MainView {...data} />
 }
 
 function MainView({ person, chart, aspects, dom }: Data) {
+  // โทนสว่างตาม design/ChartLight.dc.html
+  const light = isLightTheme()
+  setRenderLight(light)
   const known = timeKnown(person)
   const prov = provinceByName(person.province)!
   const [tab, setTab] = useState('overview')
@@ -70,7 +78,7 @@ function MainView({ person, chart, aspects, dom }: Data) {
     const { deg, min } = degMin(lon)
     return {
       g: glyph(p), n: PT_TH[p], d: String(deg).padStart(2, '0') + '°', s: SIGN_GLYPH[s], m: String(min).padStart(2, '0') + '′',
-      h: known ? String(p === 'A' ? 1 : p === 'C' ? 10 : chart.house(lon)) : '–', r: chart.pos[p].speed < 0 ? 'R' : '', c: ELEMENT_COLOR[elementOfSign(s)],
+      h: known ? String(p === 'A' ? 1 : p === 'C' ? 10 : chart.house(lon)) : '–', r: chart.pos[p].speed < 0 ? 'R' : '', c: c(ELEMENT_COLOR[elementOfSign(s)]),
     }
   })
   const shownRows = o3 ? rows : rows.slice(0, 3)
@@ -93,9 +101,9 @@ function MainView({ person, chart, aspects, dom }: Data) {
   const tight = aspects.filter((a) => CHIP_PTS.has(a.a) && CHIP_PTS.has(a.b)).sort((x, y) => x.orb - y.orb).slice(0, 3)
 
   const big3: { p: Pt; color: string; role: string; en: string }[] = [
-    { p: 'S', color: '#F3D46E', role: 'ตัวตน', en: 'Sun' },
-    { p: 'M', color: '#DCE3F5', role: 'อารมณ์', en: 'Moon' },
-    ...(known ? [{ p: 'A' as Pt, color: '#7FB8FF', role: 'ภาพลักษณ์', en: 'ASC' }] : []),
+    { p: 'S', color: c('#F3D46E'), role: 'ตัวตน', en: 'Sun' },
+    { p: 'M', color: c('#DCE3F5'), role: 'อารมณ์', en: 'Moon' },
+    ...(known ? [{ p: 'A' as Pt, color: c('#7FB8FF'), role: 'ภาพลักษณ์', en: 'ASC' }] : []),
   ]
 
   const TILES: [string, string, preact.JSX.Element][] = [
@@ -108,21 +116,21 @@ function MainView({ person, chart, aspects, dom }: Data) {
   ]
 
   return (
-    <Page background={BG}>
-      <div class="pg-main" style={{ padding: '62px 20px 150px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <Page background={light ? BG_LIGHT : BG} light={light}>
+      <div class={light ? 'pg-main light' : 'pg-main'} style={{ padding: '62px 20px 150px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           {/* ผู้ใช้ขอ: ปุ่ม ? ของหัวข้อหน้าชิดขวาสุดทุกหน้า (flex:1 ให้กล่องหัวข้อเต็มความกว้าง) */}
           <div style={{ flex: 1, position: 'relative', paddingRight: '40px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
             <span class="lbl">{person.name}</span>
             <h1 style={{ margin: 0, fontSize: '28px', fontWeight: 600 }}>ชาร์ตของฉัน</h1>
             {/* ผู้ใช้ขอ: วันเกิดเป็นหัวข้อรองที่ใหญ่ขึ้น (เดิม 12px อยู่เหนือหัวข้อ) */}
-            <span style={{ fontSize: '15px', fontWeight: 500, color: '#DCE0EA', marginTop: '2px' }}>{label.slice(person.name.length + 3)}</span>
+            <span style={{ fontSize: '15px', fontWeight: 500, color: c('#DCE0EA'), marginTop: '2px' }}>{label.slice(person.name.length + 3)}</span>
             <span class="lbl">{fmtLatLon(prov.latDeg, prov.latMin, prov.lonDeg, prov.lonMin)}{known ? ' · ระบบเรือน Placidus' : ' · ไม่ทราบเวลาเกิด (ซ่อนลัคนาและเรือน)'}</span>
             <details style={{ marginRight: '-40px' }}>
-              <summary aria-label="หน้านี้คืออะไร" style={{ listStyle: 'none', position: 'absolute', right: 0, top: '28px' /* กึ่งกลางกับ h1 */, width: '30px', height: '30px', borderRadius: '50%', border: '1px solid rgba(200,210,255,.35)', background: 'rgba(255,255,255,.06)', color: '#D6DEFF', display: 'flex', alignItems: 'center', justifyContent: 'center', font: '600 15px var(--font)', cursor: 'pointer' }}>?</summary>
-              <div data-intro style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '14px 16px', borderRadius: '18px', marginTop: '10px', background: 'rgba(255,255,255,.05)', border: '1px solid rgba(200,210,255,.16)', fontSize: '13.5px', lineHeight: '1.6' }}>
+              <summary aria-label="หน้านี้คืออะไร" style={{ listStyle: 'none', position: 'absolute', right: 0, top: '28px' /* กึ่งกลางกับ h1 */, width: '30px', height: '30px', borderRadius: '50%', border: c('1px solid rgba(200,210,255,.35)'), background: c('rgba(255,255,255,.06)'), color: c('#D6DEFF'), display: 'flex', alignItems: 'center', justifyContent: 'center', font: '600 15px var(--font)', cursor: 'pointer' }}>?</summary>
+              <div data-intro style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '14px 16px', borderRadius: '18px', marginTop: '10px', background: c('rgba(255,255,255,.05)'), border: c('1px solid rgba(200,210,255,.16)'), fontSize: '13.5px', lineHeight: '1.6' }}>
                 {[['คืออะไร', 'ชาร์ตกำเนิด (Natal chart) คือภาพท้องฟ้าตอนที่เราเกิด'], ['ใช้ดู', 'ดูนิสัยพื้นฐาน จุดแข็ง จุดอ่อน และเรื่องชีวิตแต่ละด้าน'], ['ทำไมสำคัญ', 'เป็นฐานของการดูดวงทุกแบบ ทุกหน้าคำนวณเทียบกับชาร์ตนี้']].map(([k, v]) => (
-                  <div style={{ display: 'flex', gap: '10px' }}><span style={{ flex: 'none', width: '78px', color: '#9AA1B5' }}>{k}</span><span style={{ flex: 1, minWidth: 0, color: '#E6E9F2' }}>{v}</span></div>
+                  <div style={{ display: 'flex', gap: '10px' }}><span style={{ flex: 'none', width: '78px', color: c('#9AA1B5') }}>{k}</span><span style={{ flex: 1, minWidth: 0, color: c('#E6E9F2') }}>{v}</span></div>
                 ))}
               </div>
             </details>
@@ -131,14 +139,14 @@ function MainView({ person, chart, aspects, dom }: Data) {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2">วงชาร์ตเกิด <span class="lbl" style={{ fontWeight: 400 }}>(Birth Chart)</span></h2>{help('วงชาร์ตคืออะไร')}</div>
-          <div class="card" style={{ padding: '14px 14px 12px', display: 'flex', flexDirection: 'column', gap: '10px', background: 'rgba(12,14,24,.55)' }}>
+          <div class="card" style={{ padding: '14px 14px 12px', display: 'flex', flexDirection: 'column', gap: '10px', background: c('rgba(12,14,24,.55)') }}>
             <ChartWheel chart={chart} aspects={aspects} showHouses={known} label={`วงชาร์ตเกิด ${label}`} />
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '6px 12px', fontSize: '12px', color: '#C9CEDC' }}>
-              {[['#4FD1A5', 'ส่งเสริม (Trine 120°)'], ['#7FB8FF', 'เปิดโอกาส (Sextile 60°)'], ['#FF8A4C', 'ท้าทาย (Square 90°)'], ['#FF6B6B', 'ตรงข้าม (Opposition 180°)']].map(([c, t]) => (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '6px 12px', fontSize: '12px', color: c('#C9CEDC') }}>
+              {[[c('#4FD1A5'), 'ส่งเสริม (Trine 120°)'], [c('#7FB8FF'), 'เปิดโอกาส (Sextile 60°)'], [c('#FF8A4C'), 'ท้าทาย (Square 90°)'], [c('#FF6B6B'), 'ตรงข้าม (Opposition 180°)']].map(([c, t]) => (
                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><span style={{ width: '16px', height: '2px', background: c }} />{t}</span>
               ))}
             </div>
-            <p style={{ margin: 0, textAlign: 'center', fontSize: '12px', color: '#9AA1B5' }}>แตะดาว ราศี หรือเส้น เพื่อดูคำอธิบาย</p>
+            <p style={{ margin: 0, textAlign: 'center', fontSize: '12px', color: c('#9AA1B5') }}>แตะดาว ราศี หรือเส้น เพื่อดูคำอธิบาย</p>
           </div>
         </div>
 
@@ -153,9 +161,9 @@ function MainView({ person, chart, aspects, dom }: Data) {
                   {b.p === 'A'
                     ? <span style={{ fontSize: '15px', fontWeight: 700, lineHeight: '28px', color: b.color }}>AC</span>
                     : <span style={{ fontSize: '22px', lineHeight: '28px', color: b.color }}>{glyph(b.p)}</span>}
-                  <span style={{ fontSize: '13px', fontWeight: 600, lineHeight: '18px', color: '#C9CEDC' }}>{PT_TH[b.p]} <span style={{ fontWeight: 400, color: '#9AA1B5' }}>({b.en})</span></span>
+                  <span style={{ fontSize: '13px', fontWeight: 600, lineHeight: '18px', color: c('#C9CEDC') }}>{PT_TH[b.p]} <span style={{ fontWeight: 400, color: c('#9AA1B5') }}>({b.en})</span></span>
                   <span class="lbl" style={{ lineHeight: '18px' }}>{b.role}</span>
-                  <span style={{ fontSize: '16px', fontWeight: 600, lineHeight: '24px' }}>{SIGN_TH[s]} <span style={{ color: ELEMENT_COLOR[elementOfSign(s)] }}>{SIGN_GLYPH[s]}</span></span>
+                  <span style={{ fontSize: '16px', fontWeight: 600, lineHeight: '24px' }}>{SIGN_TH[s]} <span style={{ color: c(ELEMENT_COLOR[elementOfSign(s)]) }}>{SIGN_GLYPH[s]}</span></span>
                   <span class="lbl" style={{ lineHeight: '18px' }}>{fmtDeg(lon)}{known ? ` · เรือน ${b.p === 'A' ? 1 : chart.house(lon)}` : ''}</span>
                 </div>
               )
@@ -178,16 +186,16 @@ function MainView({ person, chart, aspects, dom }: Data) {
 
           <div class="card" style={{ padding: '14px 12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 4px' }}><span style={{ fontSize: '15px', fontWeight: 600 }}>ตำแหน่งดาวและจุดสำคัญ <span class="lbl" style={{ fontWeight: 400 }}>(Planets &amp; Points)</span></span>{help('อ่านตารางนี้อย่างไร')}</div>
-            <div style={{ display: 'grid', gridTemplateColumns: '26px minmax(0,1fr) 92px 36px', fontSize: '11px', color: '#9AA1B5', padding: '0 4px' }}><span /><span>ดาว/จุด</span><span>ตำแหน่ง</span><span style={{ textAlign: 'right' }}>เรือน</span></div>
+            <div style={{ display: 'grid', gridTemplateColumns: '26px minmax(0,1fr) 92px 36px', fontSize: '11px', color: c('#9AA1B5'), padding: '0 4px' }}><span /><span>ดาว/จุด</span><span>ตำแหน่ง</span><span style={{ textAlign: 'right' }}>เรือน</span></div>
             {shownRows.map((p) => (
-              <div style={{ display: 'grid', gridTemplateColumns: '26px minmax(0,1fr) 92px 36px', alignItems: 'center', minHeight: '34px', padding: '0 4px', borderTop: '1px solid rgba(255,255,255,.06)', fontSize: '14px' }}>
-                <span style={{ fontSize: '16px', color: '#F2F4FA' }}>{p.g}</span>
-                <span>{p.n} <span style={{ fontSize: '11px', color: '#FF8A4C' }}>{p.r}</span></span>
+              <div style={{ display: 'grid', gridTemplateColumns: '26px minmax(0,1fr) 92px 36px', alignItems: 'center', minHeight: '34px', padding: '0 4px', borderTop: c('1px solid rgba(255,255,255,.06)'), fontSize: '14px' }}>
+                <span style={{ fontSize: '16px', color: c('#F2F4FA') }}>{p.g}</span>
+                <span>{p.n} <span style={{ fontSize: '11px', color: c('#FF8A4C') }}>{p.r}</span></span>
                 <span style={{ fontVariantNumeric: 'tabular-nums' }}>{p.d} <span style={{ color: p.c }}>{p.s}</span> {p.m}</span>
-                <span style={{ textAlign: 'right', color: '#C9CEDC' }}>{p.h}</span>
+                <span style={{ textAlign: 'right', color: c('#C9CEDC') }}>{p.h}</span>
               </div>
             ))}
-            <button class="more" style={{ padding: '0 4px', alignSelf: 'stretch', justifyContent: 'center', borderTop: '1px solid rgba(255,255,255,.06)', borderRadius: 0 }} onClick={() => setO3(!o3)}>{o3 ? 'แสดงน้อยลง' : `แสดงทั้งหมด ${rows.length} จุด`} <Chev /></button>
+            <button class="more" style={{ padding: '0 4px', alignSelf: 'stretch', justifyContent: 'center', borderTop: c('1px solid rgba(255,255,255,.06)'), borderRadius: 0 }} onClick={() => setO3(!o3)}>{o3 ? 'แสดงน้อยลง' : `แสดงทั้งหมด ${rows.length} จุด`} <Chev /></button>
             <span class="lbl" style={{ padding: '0 4px' }}>R = ถอยหลัง (Retrograde) ดาวดูเหมือนเดินย้อนเมื่อมองจากโลก</span>
           </div>
 
@@ -197,9 +205,9 @@ function MainView({ person, chart, aspects, dom }: Data) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {el.map((e, i) => (
                 <div style={{ display: 'grid', gridTemplateColumns: '78px minmax(0,1fr) 78px', alignItems: 'center', gap: '10px' }}>
-                  <span style={{ fontSize: '13px', color: ELEMENT_COLOR[i], fontWeight: 600 }}>{ELEMENT_TH[i]} <span class="lbl" style={{ fontWeight: 400 }}>({ELEMENT_EN[i]})</span></span>
-                  <span style={{ height: '14px', borderRadius: '999px', background: 'rgba(255,255,255,.06)', overflow: 'hidden' }}><span style={{ display: 'block', width: `${(e.total / elMax) * 100}%`, height: '100%', borderRadius: '999px', background: `linear-gradient(90deg,${ELEMENT_COLOR[i]},${ELEMENT_LIGHT[i]})` }} /></span>
-                  <span style={{ fontSize: '13px', textAlign: 'right', color: '#C9CEDC' }}>{e.total} · {((e.total / elTotal) * 100).toFixed(2)}%</span>
+                  <span style={{ fontSize: '13px', color: c(ELEMENT_COLOR[i]), fontWeight: 600 }}>{ELEMENT_TH[i]} <span class="lbl" style={{ fontWeight: 400 }}>({ELEMENT_EN[i]})</span></span>
+                  <span style={{ height: '14px', borderRadius: '999px', background: c('rgba(255,255,255,.06)'), overflow: 'hidden' }}><span style={{ display: 'block', width: `${(e.total / elMax) * 100}%`, height: '100%', borderRadius: '999px', background: `linear-gradient(90deg,${c(ELEMENT_COLOR[i])},${c(ELEMENT_LIGHT[i])})` }} /></span>
+                  <span style={{ fontSize: '13px', textAlign: 'right', color: c('#C9CEDC') }}>{e.total} · {((e.total / elTotal) * 100).toFixed(2)}%</span>
                 </div>
               ))}
             </div>
@@ -207,12 +215,12 @@ function MainView({ person, chart, aspects, dom }: Data) {
             {!sig.ambiguous && (() => {
               const e = elementOfSign(sig.sign)
               const m = sig.sign % 3
-              const hex = ELEMENT_COLOR[e]!
+              const hex = c(ELEMENT_COLOR[e]!)
               const rgb = [1, 3, 5].map((k) => parseInt(hex.slice(k, k + 2), 16)).join(',')
               return (
-                <div style={{ display: 'flex', gap: '10px', alignItems: 'center', padding: '10px 12px', borderRadius: '12px', background: `rgba(${rgb},.10)`, border: `1px solid rgba(${rgb},.30)` }}>
+                <div style={{ display: 'flex', gap: '10px', alignItems: 'center', padding: '10px 12px', borderRadius: '12px', background: c(`rgba(${rgb},.10)`), border: c(`1px solid rgba(${rgb},.30)`) }}>
                   <span style={{ fontSize: '20px', color: hex }}>{SIGN_GLYPH[sig.sign]}</span>
-                  <span style={{ fontSize: '13px', lineHeight: '1.5', color: '#DCE0EA' }}><b>ราศีประจำชาร์ต <span style={{ fontWeight: 400, color: '#9AA1B5' }}>(Signature Sign)</span>: {SIGN_TH[sig.sign]} <span style={{ fontWeight: 400, color: '#9AA1B5' }}>({SIGN_EN[sig.sign]})</span></b><br />{sig.withAsc ? 'ดาว 10 ดวงกับลัคนา' : 'ดาว 10 ดวง'}อยู่ธาตุ{ELEMENT_TH[e]} {sig.elementCount} และลักษณะ{MODALITY_TH[m]} ({MODALITY_EN[m]}) {sig.modalityCount}</span>
+                  <span style={{ fontSize: '13px', lineHeight: '1.5', color: c('#DCE0EA') }}><b>ราศีประจำชาร์ต <span style={{ fontWeight: 400, color: c('#9AA1B5') }}>(Signature Sign)</span>: {SIGN_TH[sig.sign]} <span style={{ fontWeight: 400, color: c('#9AA1B5') }}>({SIGN_EN[sig.sign]})</span></b><br />{sig.withAsc ? 'ดาว 10 ดวงกับลัคนา' : 'ดาว 10 ดวง'}อยู่ธาตุ{ELEMENT_TH[e]} {sig.elementCount} และลักษณะ{MODALITY_TH[m]} ({MODALITY_EN[m]}) {sig.modalityCount}</span>
                 </div>
               )
             })()}
@@ -221,10 +229,10 @@ function MainView({ person, chart, aspects, dom }: Data) {
 
           <div class="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><span style={{ fontSize: '15px', fontWeight: 600 }}>ดาวเด่นในชาร์ต <span class="lbl" style={{ fontWeight: 400 }}>(Dominant Planets)</span></span>{help('ดาวเด่นคืออะไร')}</div>
-            <p style={{ margin: 0, fontSize: '13px', lineHeight: '1.6', color: '#C9CEDC' }}>ดาวแต่ละดวงได้คะแนนตามตำแหน่ง ราศี เรือน และมุมที่ทำ ดาวคะแนนสูงคือพลังที่คุณใช้บ่อยที่สุด</p>
-            <div style={{ display: 'flex', gap: '14px', alignItems: 'center', padding: '14px', borderRadius: '16px', background: 'linear-gradient(120deg,rgba(138,92,255,.30),rgba(31,165,135,.20))', border: '1px solid rgba(170,160,255,.35)' }}>
-              <span style={{ width: '52px', height: '52px', flex: 'none', borderRadius: '999px', background: 'rgba(6,7,13,.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', color: '#F3D46E' }}>{glyph(top.planet)}</span>
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}><span style={{ fontSize: '12px', color: '#D6CEFF' }}>อันดับ 1</span><span style={{ fontSize: '17px', fontWeight: 600 }}>{PT_TH[top.planet]} <span class="lbl" style={{ fontWeight: 400 }}>({PT_EN[top.planet]})</span></span><span style={{ fontSize: '13px', color: '#DCE0EA' }}>{top.total} คะแนน · {pct(top.total)}</span></div>
+            <p style={{ margin: 0, fontSize: '13px', lineHeight: '1.6', color: c('#C9CEDC') }}>ดาวแต่ละดวงได้คะแนนตามตำแหน่ง ราศี เรือน และมุมที่ทำ ดาวคะแนนสูงคือพลังที่คุณใช้บ่อยที่สุด</p>
+            <div style={{ display: 'flex', gap: '14px', alignItems: 'center', padding: '14px', borderRadius: '16px', background: c('linear-gradient(120deg,rgba(138,92,255,.30),rgba(31,165,135,.20))'), border: c('1px solid rgba(170,160,255,.35)') }}>
+              <span style={{ width: '52px', height: '52px', flex: 'none', borderRadius: '999px', background: c('rgba(6,7,13,.5)'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', color: c('#F3D46E') }}>{glyph(top.planet)}</span>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}><span style={{ fontSize: '12px', color: c('#D6CEFF') }}>อันดับ 1</span><span style={{ fontSize: '17px', fontWeight: 600 }}>{PT_TH[top.planet]} <span class="lbl" style={{ fontWeight: 400 }}>({PT_EN[top.planet]})</span></span><span style={{ fontSize: '13px', color: c('#DCE0EA') }}>{top.total} คะแนน · {pct(top.total)}</span></div>
             </div>
             {o4 && (
               <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -232,11 +240,11 @@ function MainView({ person, chart, aspects, dom }: Data) {
                   const parts = [d.sign, d.house, d.angle, d.ruler, d.aspects].map((v, i) => (v ? `${DL[i]} +${v}` : null)).filter(Boolean).join(' · ')
                   return (
                     <>
-                      <div style={{ display: 'grid', gridTemplateColumns: '22px 92px minmax(0,1fr) 72px', alignItems: 'center', gap: '8px', minHeight: '36px', borderTop: '1px solid rgba(255,255,255,.06)' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '22px 92px minmax(0,1fr) 72px', alignItems: 'center', gap: '8px', minHeight: '36px', borderTop: c('1px solid rgba(255,255,255,.06)') }}>
                         <span style={{ fontSize: '16px' }}>{glyph(d.planet)}</span>
                         <span style={{ fontSize: '13px' }}>{PT_TH[d.planet]} <span class="lbl">{PT_EN[d.planet]}</span></span>
-                        <span style={{ height: '8px', borderRadius: '999px', background: 'rgba(255,255,255,.06)', overflow: 'hidden' }}><span style={{ display: 'block', height: '100%', width: `${Math.round((d.total / top.total) * 100)}%`, borderRadius: '999px', background: 'linear-gradient(90deg,#8A5CFF,#6FE0C0)' }} /></span>
-                        <span style={{ fontSize: '12px', textAlign: 'right', color: '#C9CEDC', fontVariantNumeric: 'tabular-nums' }}>{d.total} · {pct(d.total)}</span>
+                        <span style={{ height: '8px', borderRadius: '999px', background: c('rgba(255,255,255,.06)'), overflow: 'hidden' }}><span style={{ display: 'block', height: '100%', width: `${Math.round((d.total / top.total) * 100)}%`, borderRadius: '999px', background: c('linear-gradient(90deg,#8A5CFF,#6FE0C0)') }} /></span>
+                        <span style={{ fontSize: '12px', textAlign: 'right', color: c('#C9CEDC'), fontVariantNumeric: 'tabular-nums' }}>{d.total} · {pct(d.total)}</span>
                       </div>
                       <span class="lbl" style={{ padding: '0 0 8px 30px', marginTop: '-6px' }}>{parts}</span>
                     </>
@@ -244,22 +252,22 @@ function MainView({ person, chart, aspects, dom }: Data) {
                 })}
               </div>
             )}
-            <button class="more" style={{ alignSelf: 'stretch', justifyContent: 'center', borderTop: '1px solid rgba(255,255,255,.06)', borderRadius: 0 }} onClick={() => setO4(!o4)}>{o4 ? 'ซ่อนอันดับอื่น' : 'ดูอันดับ 2–10'} <Chev open={o4} /></button>
+            <button class="more" style={{ alignSelf: 'stretch', justifyContent: 'center', borderTop: c('1px solid rgba(255,255,255,.06)'), borderRadius: 0 }} onClick={() => setO4(!o4)}>{o4 ? 'ซ่อนอันดับอื่น' : 'ดูอันดับ 2–10'} <Chev open={o4} /></button>
             <span class="lbl">รวม {dom.sum} คะแนน · คิดแบบ Modern ตรงกับ astro-seek · คะแนนมาจาก ราศี (Sign) · เรือน (House) · แกนชาร์ต (Angle) · เจ้าเรือน (Ruler) · มุม (Aspects)</span>
             {/* ย่อหน้าดาวเด่น 3 อันดับ: รอข้อความหมวดใหม่จาก lib/gen2.py */}
           </div>
 
-          <a href="#/aspects" class="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px', textDecoration: 'none', color: '#F2F4FA' }}>
+          <a href="#/aspects" class="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px', textDecoration: 'none', color: c('#F2F4FA') }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><span style={{ fontSize: '15px', fontWeight: 600 }}>มุมดาวทั้งหมด <span class="lbl" style={{ fontWeight: 400 }}>(Aspects)</span></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9AA1B5" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg></div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '8px' }}>
-              <div style={{ padding: '12px', borderRadius: '14px', background: 'rgba(255,255,255,.04)', display: 'flex', flexDirection: 'column', gap: '2px' }}><span style={{ fontSize: '24px', fontWeight: 600 }}>{planetAsp}</span><span class="lbl">มุมระหว่างดาว (Planet aspects)</span></div>
-              <div style={{ padding: '12px', borderRadius: '14px', background: 'rgba(255,255,255,.04)', display: 'flex', flexDirection: 'column', gap: '2px' }}><span style={{ fontSize: '24px', fontWeight: 600 }}>{aspects.length - planetAsp}</span><span class="lbl">มุมกับจุดอื่น (Other aspects)</span></div>
+              <div style={{ padding: '12px', borderRadius: '14px', background: c('rgba(255,255,255,.04)'), display: 'flex', flexDirection: 'column', gap: '2px' }}><span style={{ fontSize: '24px', fontWeight: 600 }}>{planetAsp}</span><span class="lbl">มุมระหว่างดาว (Planet aspects)</span></div>
+              <div style={{ padding: '12px', borderRadius: '14px', background: c('rgba(255,255,255,.04)'), display: 'flex', flexDirection: 'column', gap: '2px' }}><span style={{ fontSize: '24px', fontWeight: 600 }}>{aspects.length - planetAsp}</span><span class="lbl">มุมกับจุดอื่น (Other aspects)</span></div>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', fontSize: '12px' }}>
-              {tight.map((a) => <span style={{ padding: '3px 9px', borderRadius: '999px', background: 'rgba(185,166,255,.16)', color: '#E4DCFF' }}>{glyph(a.a)} {ASPECT_GLYPH[a.type]} {glyph(a.b)} {Math.floor(a.orb)}°</span>)}
-              <span style={{ padding: '3px 9px', borderRadius: '999px', background: 'rgba(255,255,255,.08)', color: '#C9CEDC' }}>+{aspects.length - tight.length}</span>
+              {tight.map((a) => <span style={{ padding: '3px 9px', borderRadius: '999px', background: c('rgba(185,166,255,.16)'), color: c('#E4DCFF') }}>{glyph(a.a)} {ASPECT_GLYPH[a.type]} {glyph(a.b)} {Math.floor(a.orb)}°</span>)}
+              <span style={{ padding: '3px 9px', borderRadius: '999px', background: c('rgba(255,255,255,.08)'), color: c('#C9CEDC') }}>+{aspects.length - tight.length}</span>
             </div>
-            <span style={{ fontSize: '14px', fontWeight: 500, color: '#7FB8FF' }}>ดูมุมทั้งหมดและความหมาย</span>
+            <span style={{ fontSize: '14px', fontWeight: 500, color: c('#7FB8FF') }}>ดูมุมทั้งหมดและความหมาย</span>
           </a>
         </div>
         {/* ดาวที่ควรรู้จักก่อน + รูปแบบพิเศษ: รอข้อความหมวดใหม่จาก lib/gen2.py */}

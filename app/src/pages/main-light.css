@@ -1,0 +1,12 @@
+/* สร้างอัตโนมัติจาก index.css + main.css ด้วยตาราง LIGHT_MAP ใน ui/theme.ts — โทนสว่างตาม design/ChartLight.dc.html */
+.pg-main.light { --bg: #FFFFFF; --card: rgba(255,255,255,.78); --card-border: rgba(18,19,26,.10); --text: #12131A; --text-2: #3A4050; --label: #5A6070; --body: #23262F; --accent: #5B3FD0; --info: #2F5BEA; --info-hover: #1C3FB0; }
+.pg-main.light .tr { border-top: 1px solid rgba(18,19,26,.07); }
+.pg-main.light .gl { border: 1px solid rgba(18,19,26,.14); }
+.pg-main.light .hr { border-top: 1px solid rgba(18,19,26,.06); }
+.pg-main.light .ht { border: 1px solid rgba(18,19,26,.08); background: rgba(18,19,26,.03); }
+.pg-main.light { --ground2: #FFFFFF; --ring: rgba(18,19,26,.03); --line: rgba(18,19,26,.16); --line2: rgba(18,19,26,.30); --fg: #12131A; --muted: #5A6070; --accent: #2F5BEA; }
+.pg-main.light .card { background: rgba(255,255,255,.78); border: 1px solid rgba(18,19,26,.10); }
+.pg-main.light .sec { color: #3A4050; }
+.pg-main.light .help { border: 1px solid rgba(18,19,26,.22); color: #3A4050; }
+.pg-main.light .tile { border: 1px solid rgba(18,19,26,.10); background: rgba(18,19,26,.04); color: #3A4050; }
+.pg-main.light .more { color: #2F5BEA; }
