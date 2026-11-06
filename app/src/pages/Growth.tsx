@@ -165,7 +165,7 @@ export function Growth() {
               <span style={{ fontSize: '12px', color: '#C8D3FF', fontWeight: 600 }}>ทิศทางปฐมภูมิ (Primary Directions)</span>
               <span style={{ fontSize: '17px', fontWeight: 600, lineHeight: 1.4 }}>ดาวหมุนตามโลกไปแตะลัคนาและกลางฟ้า</span>
               <p style={{ margin: 0, fontSize: '13.5px', lineHeight: 1.6, color: '#E6E9F2' }}>เมื่อดาวในชาร์ตเกิด (หรือจุดที่ทำมุมกับดาว) หมุนไปถึงลัคนาหรือกลางฟ้า จะเป็นปีที่เรื่องของดาวนั้นเด่นขึ้นมาในชีวิต วิธีนี้ไวต่อเวลาเกิดมาก เวลาเกิดคลาด 4 นาที = ปีคลาด ~1 ปี</p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '8px' }}>{mini('วิธีคำนวณ', 'Placidus semi-arc', 'แบบราศี (Zodiacal)')}{mini('กุญแจเวลา', 'Ptolemy', '1° = 1 ปี · ตรงกับ astro-seek')}</div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '8px' }}>{mini('วิธีคำนวณ', 'Placidus semi-arc', 'แบบราศี (Zodiacal)')}{mini('กุญแจเวลา', 'Ptolemy', '1° = 1 ปี')}</div>
               <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}><span style={{ height: '24px', padding: '0 9px', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', fontSize: '11.5px', fontWeight: 600, color: '#7FE3C0', background: 'rgba(79,209,165,.16)' }}>D = ตามทิศ (Direct)</span><span style={{ height: '24px', padding: '0 9px', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', fontSize: '11.5px', fontWeight: 600, color: '#B5D6FF', background: 'rgba(127,184,255,.16)' }}>C = สวนทิศ (Converse)</span></div>
               {!d.known && <span style={{ fontSize: '13px', color: '#FFD9A8' }}>ต้องมีเวลาเกิดจึงจะคำนวณวิธีนี้ได้</span>}
             </div>

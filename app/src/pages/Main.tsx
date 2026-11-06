@@ -202,7 +202,7 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2" style={{ fontSize: '24px' }}>ภาพรวม</h2><span class="lbl">ตรงกับ astro-seek</span></div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2" style={{ fontSize: '24px' }}>ภาพรวม</h2></div>
 
           <div class="card" style={{ padding: '14px 12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <HelpHead k="table" aria="อ่านตารางนี้อย่างไร" style={{ padding: '0 4px' }} head={<span style={{ fontSize: '15px', fontWeight: 600 }}>ตำแหน่งดาวและจุดสำคัญ <span class="lbl" style={{ fontWeight: 400 }}>(Planets &amp; Points)</span></span>} />
@@ -221,7 +221,6 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
 
           <div class="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <HelpHead k="elements" aria="ธาตุคืออะไร" head={<span style={{ fontSize: '15px', fontWeight: 600 }}>ธาตุในชาร์ต <span class="lbl" style={{ fontWeight: 400 }}>(Elements)</span></span>} />
-            <span class="lbl">คิดเป็นคะแนนแบบเดียวกับส่วน Dominants ของ astro-seek</span>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {el.map((e, i) => (
                 <div style={{ display: 'grid', gridTemplateColumns: '78px minmax(0,1fr) 78px', alignItems: 'center', gap: '10px' }}>
@@ -274,7 +273,7 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
               </div>
             )}
             <button class="more" style={{ alignSelf: 'stretch', justifyContent: 'center', borderTop: c('1px solid rgba(255,255,255,.06)'), borderRadius: 0 }} onClick={() => setO4(!o4)}>{o4 ? 'ซ่อนอันดับอื่น' : 'ดูอันดับ 2–10'} <Chev open={o4} /></button>
-            <span class="lbl">รวม {dom.sum} คะแนน · คิดแบบ Modern ตรงกับ astro-seek · คะแนนมาจาก ราศี (Sign) · เรือน (House) · แกนชาร์ต (Angle) · เจ้าเรือน (Ruler) · มุม (Aspects)</span>
+            <span class="lbl">รวม {dom.sum} คะแนน · คิดแบบ Modern · คะแนนมาจาก ราศี (Sign) · เรือน (House) · แกนชาร์ต (Angle) · เจ้าเรือน (Ruler) · มุม (Aspects)</span>
             {/* ย่อหน้าดาวเด่น 3 อันดับ: รอข้อความหมวดใหม่จาก lib/gen2.py */}
           </div>
 

@@ -129,7 +129,7 @@ export function Ephemeris() {
               </div>
             </>
           )}
-          <span class="lbl">คำนวณด้วย Swiss Ephemeris ตำแหน่งตอน 00:00 UT (07:00 น. เวลาไทย) ตัดเศษเป็นนาที · โหนดแบบ Mean · ตรวจกับ astro-seek แล้ว: 325 จาก 330 ช่องตรง อีก 5 ช่องเป็นดวงจันทร์ต่างกัน 1 ลิปดา</span>
+          <span class="lbl">คำนวณด้วย Swiss Ephemeris ตำแหน่งตอน 00:00 UT (07:00 น. เวลาไทย) ตัดเศษเป็นนาที · โหนดแบบ Mean</span>
         </div>
       </div>
       <TabBar active="forecast" />

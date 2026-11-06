@@ -202,7 +202,7 @@ export function Retrograde() {
             )
           })()}
 
-          <span class="lbl">คำนวณจากตำแหน่งดาวจริง เวลาไทย · จุดหยุดหาด้วยการแบ่งครึ่งช่วง ตรงกับ astro-seek</span>
+          <span class="lbl">คำนวณจากตำแหน่งดาวจริง เวลาไทย · จุดหยุดหาด้วยการแบ่งครึ่งช่วง</span>
         </div>
       </div>
       <TabBar active="forecast" />

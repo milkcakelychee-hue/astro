@@ -179,7 +179,7 @@ export function SolarReturn() {
               </div>
             </div>
           )}
-          <span class="lbl">คำนวณที่สถานที่เกิด{d ? ` (${d.prov})` : ''} · Placidus · เวลาเป็นเวลาไทย · ตำแหน่งดาวคำนวณแบบเดียวกับ astro-seek</span>
+          <span class="lbl">คำนวณที่สถานที่เกิด{d ? ` (${d.prov})` : ''} · Placidus · เวลาเป็นเวลาไทย</span>
         </div>
       </div>
       <TabBar active="forecast" />

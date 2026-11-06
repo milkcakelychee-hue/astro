@@ -153,7 +153,7 @@ export function Aspects() {
               )
             })}
           </div>
-          <span class="lbl">มุมและตัวเลข orb ตรงกับตาราง Aspects ของ astro-seek สำหรับชาร์ตนี้</span>
+          
         </div>
       </div>
     </Page>

@@ -223,7 +223,7 @@ export function Transit() {
               })}
             </div>
           )}
-          <span class="lbl">orb ทรานซิต: ดวงอาทิตย์ ดวงจันทร์ 3° · ดาวอื่น 2° · วันที่ตรงพอดีคิดตามเวลาไทย · ตำแหน่งดาวคำนวณแบบเดียวกับ astro-seek</span>
+          <span class="lbl">orb ทรานซิต: ดวงอาทิตย์ ดวงจันทร์ 3° · ดาวอื่น 2° · วันที่ตรงพอดีคิดตามเวลาไทย</span>
         </div>
       </div>
       <TabBar active="forecast" />

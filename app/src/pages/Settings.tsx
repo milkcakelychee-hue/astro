@@ -46,14 +46,6 @@ export function Settings() {
           )}
         </div>
 
-        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', padding: '14px 16px', borderRadius: '18px', background: 'linear-gradient(135deg,rgba(79,209,165,.20),rgba(59,107,255,.16))', border: '1px solid rgba(79,209,165,.35)' }}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7FE3C0" stroke-width="1.9" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.2 8 9 4.6-.8 8-4.5 8-9V6z" /><path d="m9 12 2 2 4-4" /></svg>
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
-            <span style={{ fontSize: '14px', fontWeight: 600 }}>ตั้งค่าตรงกับ astro-seek</span>
-            <span style={{ fontSize: '12px', color: '#C9CEDC', lineHeight: 1.5 }}>ระบบเรือน ราศี และระยะห่างของมุมดาว (Orb) ใช้ค่าเดียวกับเว็บทุกอย่าง ผลจึงตรงกัน</span>
-          </div>
-        </div>
-
         <div class="sec">
           <span class="sh">การแสดงผล</span>
           <div class="box">
