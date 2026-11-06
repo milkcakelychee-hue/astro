@@ -178,6 +178,14 @@ function CompareView({ A, B, lib, comp, dav }: Data) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <HelpHead k="relation" aria="อ่านส่วนนี้อย่างไร" head={<h2 class="h2">ภาพรวมความสัมพันธ์</h2>} />
             <span class="lbl">อธิบายเป็นเรื่อง ๆ ไม่ใช้คะแนน % เพราะความสัมพันธ์ไม่ได้วัดด้วยตัวเลขเดียว</span>
+            {/* ผู้ใช้ขอ: กล่องอธิบายอิโมจิระหว่างดาว */}
+            <div class="card" style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '12px', lineHeight: 1.6, color: '#C9CEDC', background: 'rgba(12,14,24,.55)' }}>
+              <span style={{ color: '#9AA1B5' }}>อิโมจิระหว่างดาวบอกอารมณ์ของมุม</span>
+              <div style={{ display: 'flex', gap: '8px' }}><span>🔥</span><span><b style={{ color: ASPECT_COLOR['0'] }}>☌</b> กุมกัน — ผูกพันแน่น เข้มข้น</span></div>
+              <div style={{ display: 'flex', gap: '8px' }}><span>❤️</span><span><b style={{ color: ASPECT_COLOR['3'] }}>△ ⚹</b> — ส่งเสริม เข้ากันง่าย</span></div>
+              <div style={{ display: 'flex', gap: '8px' }}><span>😢</span><span><b style={{ color: ASPECT_COLOR['4'] }}>□</b> ฉากชน — ต้องปรับเข้าหากัน</span></div>
+              <div style={{ display: 'flex', gap: '8px' }}><span>💔</span><span><b style={{ color: ASPECT_COLOR['8'] }}>☍</b> ตรงข้าม — ดึงดูดแต่ขัดแย้ง</span></div>
+            </div>
             {CATS.map((cat, ci) => {
               const xs = asp.filter(cat.pick)
               const first = xs[0] ? meaning(xs[0]) : null
