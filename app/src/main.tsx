@@ -2,8 +2,13 @@ import { render } from 'preact'
 import './fonts.ts'
 import './index.css'
 import { App } from './app.tsx'
+import { installLight } from './ui/light.ts'
+import { getThemePref, isLightTheme } from './ui/theme.ts'
 import { installLineBreakRules } from './ui/linebreak.ts'
 
+// ธีมสว่าง: ติดตั้งก่อน render ครั้งแรก · เปลี่ยนธีม = โหลดหน้าใหม่
+if (isLightTheme()) installLight()
+if (getThemePref() === 'system' && typeof matchMedia === 'function') matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => location.reload())
 render(<App />, document.getElementById('app')!)
 installLineBreakRules()
 

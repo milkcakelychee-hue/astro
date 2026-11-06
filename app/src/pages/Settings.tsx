@@ -17,7 +17,7 @@ const two = (a: string, b: string) => <span style={{ flex: 1, display: 'flex', f
 export function Settings() {
   const [th, setTh] = useState<ThemePref>(getThemePref())
   const [news, setNews] = useState(false)
-  const theme = (v: ThemePref) => { setThemePref(v); setTh(v) }
+  const theme = (v: ThemePref) => { setThemePref(v); setTh(v); location.reload() }
 
   return (
     <Page background={BG}>

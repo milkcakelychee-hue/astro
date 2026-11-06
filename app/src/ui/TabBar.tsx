@@ -1,3 +1,4 @@
+import { keepDark } from './light.ts'
 // แท็บหลัก 5 ช่อง — ตามดีไซน์ (โหมดมืด) · ตำแหน่งยึดกับขอบจอ (fixed) แทน absolute ของไฟล์ดีไซน์
 export type TabId = 'main' | 'people' | 'today' | 'forecast' | 'settings'
 
@@ -9,6 +10,15 @@ const ICON = {
 }
 
 export function TabBar(props: { active?: TabId }) {
+  // แถบแท็บล่างคงสีดำทั้งสองธีม (LightTheme)
+  keepDark(true)
+  try {
+    return tabBar(props)
+  } finally {
+    keepDark(false)
+  }
+}
+function tabBar(props: { active?: TabId }) {
   const st = (id: TabId) => (props.active === id ? { color: '#B9A6FF', fontWeight: 700 } : { color: '#C9CEDC' })
   const cur = (id: TabId) => (props.active === id ? 'page' : undefined)
   return (

@@ -11,6 +11,7 @@ import {
   degMin, fmtDeg, fmtLatLon, glyph, hhmm, thaiDate,
 } from '../ui/astro-labels.ts'
 import { ChartWheel } from '../ui/ChartWheel.tsx'
+import { keepDark } from '../ui/light.ts'
 import { c, isLightTheme, setRenderLight } from '../ui/theme.ts'
 import { BackLink, HelpHead, Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
@@ -64,7 +65,16 @@ export function Main(props: { tab?: 'main' | 'people' } = {}) {
   return <MainView {...data} navTab={tab} />
 }
 
-function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'main' | 'people' }) {
+// หน้าชาร์ตมีโทนสว่างของตัวเอง (ChartLight · c()) → ไม่ผ่านตัวแปลงสีทั้งแอป
+function MainView(props: Data & { navTab: 'main' | 'people' }) {
+  keepDark(true)
+  try {
+    return mainView(props)
+  } finally {
+    keepDark(false)
+  }
+}
+function mainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'main' | 'people' }) {
   const base = person.isMe ? '#/main' : '#/people?id=' + person.id
   // โทนสว่างตาม design/ChartLight.dc.html
   const light = isLightTheme()
