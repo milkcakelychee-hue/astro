@@ -14,6 +14,7 @@ import { Timeline } from './pages/Timeline.tsx'
 import { Transit } from './pages/Transit.tsx'
 import { Lunations } from './pages/Lunations.tsx'
 import { SolarReturn } from './pages/SolarReturn.tsx'
+import { Growth } from './pages/Growth.tsx'
 import { LunarReturn } from './pages/LunarReturn.tsx'
 import { ComingSoon } from './pages/ComingSoon.tsx'
 
@@ -56,6 +57,8 @@ export function App() {
       return <Calendar />
     case 'solar-return':
       return <SolarReturn />
+    case 'growth':
+      return <Growth />
     case 'lunar-return':
       return <LunarReturn />
     case 'lunations':
