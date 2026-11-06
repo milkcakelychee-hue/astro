@@ -15,8 +15,8 @@ export default defineConfig({
   plugins: [
     preact(),
     VitePWA({
-      registerType: 'autoUpdate',
-      injectRegister: false, // ลงทะเบียนเองใน main.tsx เพื่อเช็กอัปเดตทุก 1 นาที
+      registerType: 'prompt', // แอปคุมการรีเฟรชเองใน src/update.ts (ห้ามใช้ autoUpdate คู่กัน)
+      injectRegister: false, // ลงทะเบียนเองใน src/update.ts
       // ไอคอนจากโฟลเดอร์ icon/ (ผู้ใช้เลือก) · ชื่อแอป Asstro
       manifest: {
         name: 'Asstro',
