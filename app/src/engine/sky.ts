@@ -18,7 +18,7 @@ export const dateOfJd = (jd: number) => new Date((jd - 2440587.5) * 86400000)
 /** แยกส่วนวันที่/เวลาแบบเวลาไทย (UTC+7 คงที่) · นาทีปัดลง */
 export function thaiParts(d: Date) {
   const t = new Date(d.getTime() + 7 * 3600000)
-  return { y: t.getUTCFullYear(), mo: t.getUTCMonth() + 1, d: t.getUTCDate(), hh: t.getUTCHours(), mi: t.getUTCMinutes(), wd: t.getUTCDay() }
+  return { y: t.getUTCFullYear(), mo: t.getUTCMonth() + 1, d: t.getUTCDate(), hh: t.getUTCHours(), mi: t.getUTCMinutes(), s: t.getUTCSeconds(), wd: t.getUTCDay() }
 }
 
 export interface Body {

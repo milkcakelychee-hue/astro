@@ -28,3 +28,26 @@ export function srAspects(c: Chart, max = 9): SrAspect[] {
     .filter((s) => SR_PTS.includes(s.a) && SR_PTS.includes(s.b) && !(s.a === 'A' && s.b === 'C') && !(s.a === 'C' && s.b === 'A') && s.orb <= 3)
     .sort((x, y) => x.orb - y.orb).slice(0, max)
 }
+
+/** ดวงรอบเดือน (Lunar Return): JD ที่ดวงจันทร์กลับมาตำแหน่งเกิด n ครั้ง เริ่มจากครั้งล่าสุดที่ ≤ from */
+export function lunarReturnJds(swe: Swe, natal: Chart, from: number, n: number): number[] {
+  const m0 = natal.pos.M.lon
+  const f = (x: number) => mod(bodyAt(swe, x, 'M').lon - m0 + 180, 360) - 180
+  const out: number[] = []
+  let a = from - 28
+  let fa = f(a)
+  while (out.length < n + 2) {
+    const b = a + 0.5
+    const fb = f(b)
+    if (fa <= 0 && fb > 0) {
+      let lo = a, hi = b, flo = fa
+      for (let i = 0; i < 60 && hi - lo > 1e-8; i++) { const m = (lo + hi) / 2, fm = f(m); if (flo <= 0 === fm <= 0) { lo = m; flo = fm } else hi = m }
+      out.push((lo + hi) / 2)
+    }
+    a = b
+    fa = fb
+  }
+  // ตัดรอบที่เริ่มก่อนรอบปัจจุบัน
+  while (out.length > 1 && out[1]! <= from) out.shift()
+  return out.slice(0, n)
+}
