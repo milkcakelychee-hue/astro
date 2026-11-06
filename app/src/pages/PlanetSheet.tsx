@@ -11,7 +11,7 @@ const NAME: Partial<Record<Pt, string>> = {
   S: 'อาทิตย์', M: 'จันทร์', m: 'พุธ', V: 'ศุกร์', a: 'อังคาร', J: 'พฤหัสบดี', s: 'เสาร์', U: 'ยูเรนัส', N: 'เนปจูน', P: 'พลูโต',
   n: 'ราหู', L: 'ลิลิธ', c: 'ไครอน', A: 'ลัคนา', C: 'กลางฟ้า', D: 'จุดตรงข้ามลัคนา', I: 'ก้นฟ้า', F: 'จุดโชคลาภ', X: 'Vertex',
 }
-const EN: Partial<Record<Pt, string>> = { ...PT_EN, n: 'North Node', L: 'Lilith', c: 'Chiron' }
+const EN: Partial<Record<Pt, string>> = { ...PT_EN, n: 'North Node', L: 'Lilith', c: 'Chiron', A: 'Ascendant', C: 'Midheaven' }
 const GL: Partial<Record<Pt, string>> = { S: '☉', M: '☽', m: '☿', V: '♀', a: '♂', J: '♃', s: '♄', U: '♅', N: '♆', P: '♇', n: '☊', L: '⚸', c: '⚷' }
 const TS: Record<AspectType, string> = { '0': 'กุมกัน', '6': 'เปิดโอกาส', '4': 'ท้าทาย', '3': 'ส่งเสริม', '8': 'ตรงข้าม' }
 const TN: Record<AspectType, string> = { '0': 'มุมกุมกัน (Conjunction) 0°', '6': 'มุมเปิดโอกาส (Sextile) 60°', '4': 'มุมท้าทาย (Square) 90°', '3': 'มุมส่งเสริม (Trine) 120°', '8': 'มุมตรงข้าม (Opposition) 180°' }

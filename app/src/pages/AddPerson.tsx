@@ -154,11 +154,11 @@ export function AddPerson() {
           <div class="group">
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label for="pv" class="fl">จังหวัดที่เกิด</label>
-              <div style={{ position: 'relative' }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9AA1B5" stroke-width="2" aria-hidden="true" style={{ position: 'absolute', left: '14px', top: '17px' }}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-                <input id="pv" class={'in' + (prov.trim() && !p ? ' bad' : '')} list="pv-list" autocomplete="off" value={prov} onInput={(e) => setProv(e.currentTarget.value)} style={{ paddingLeft: '42px' }} />
-                <datalist id="pv-list">{[...BY_TH.keys()].sort((a, b) => a.localeCompare(b, 'th')).map((t) => <option value={t} />)}</datalist>
-              </div>
+              {/* ผู้ใช้ขอ: dropdown (iPhone ไม่รองรับ datalist) */}
+              <select id="pv" class="in sel" value={p ? prov : ''} onChange={(e) => setProv(e.currentTarget.value)}>
+                <option value="" disabled>เลือกจังหวัด</option>
+                {[...BY_TH.keys()].sort((a, b) => a.localeCompare(b, 'th')).map((t) => <option value={t}>{t}</option>)}
+              </select>
               <span class="lbl">เลือกได้เฉพาะ 77 จังหวัดในประเทศไทย</span>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '8px' }}>

@@ -14,6 +14,7 @@ import { Timeline } from './pages/Timeline.tsx'
 import { Transit } from './pages/Transit.tsx'
 import { Lunations } from './pages/Lunations.tsx'
 import { SolarReturn } from './pages/SolarReturn.tsx'
+import { ComingSoon } from './pages/ComingSoon.tsx'
 
 function useHash() {
   const [h, setH] = useState(location.hash)
@@ -70,6 +71,6 @@ export function App() {
       return <DesignPreview />
     default:
       // หน้าที่ยังไม่ได้ทำ
-      return <Main />
+      return <ComingSoon />
   }
 }

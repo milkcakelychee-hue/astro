@@ -75,6 +75,8 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
     if (sheetPt && !lib) loadLib().then(setLib)
   }, [sheetPt])
   const known = timeKnown(person)
+  // ผู้ใช้ขอ: แตะ Big Three / ดาวเด่น → เปิด Sheet อ่านเพิ่มเติม
+  const sheetHref = (p: Pt) => base + (person.isMe ? '?' : '&') + 'p=' + p
   const prov = provinceByName(person.province)!
   const [tab, setTab] = useState('overview')
   const [o3, setO3] = useState(false)
@@ -171,7 +173,7 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
               const lon = chart.pos[b.p].lon
               const s = signOf(lon)
               return (
-                <div class="card" style={{ padding: '14px 12px', display: 'grid', gridTemplateRows: '28px 18px 18px 24px 18px', gap: '2px' }}>
+                <a href={sheetHref(b.p)} class="card" style={{ padding: '14px 12px', display: 'grid', gridTemplateRows: '28px 18px 18px 24px 18px 20px', gap: '2px', textDecoration: 'none', color: c('#F2F4FA') }}>
                   {b.p === 'A'
                     ? <span style={{ fontSize: '15px', fontWeight: 700, lineHeight: '28px', color: b.color }}>AC</span>
                     : <span style={{ fontSize: '22px', lineHeight: '28px', color: b.color }}>{glyph(b.p)}</span>}
@@ -179,7 +181,8 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
                   <span class="lbl" style={{ lineHeight: '18px' }}>{b.role}</span>
                   <span style={{ fontSize: '16px', fontWeight: 600, lineHeight: '24px' }}>{SIGN_TH[s]} <span style={{ color: c(ELEMENT_COLOR[elementOfSign(s)]) }}>{SIGN_GLYPH[s]}</span></span>
                   <span class="lbl" style={{ lineHeight: '18px' }}>{fmtDeg(lon)}{known ? ` · เรือน ${b.p === 'A' ? 1 : chart.house(lon)}` : ''}</span>
-                </div>
+                  <span style={{ fontSize: '12px', lineHeight: '20px', color: c('#7FB8FF') }}>อ่านเพิ่ม ›</span>
+                </a>
               )
             })}
           </div>
@@ -244,22 +247,23 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
           <div class="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <HelpHead k="dominant" aria="ดาวเด่นคืออะไร" head={<span style={{ fontSize: '15px', fontWeight: 600 }}>ดาวเด่นในชาร์ต <span class="lbl" style={{ fontWeight: 400 }}>(Dominant Planets)</span></span>} />
             <p style={{ margin: 0, fontSize: '13px', lineHeight: '1.6', color: c('#C9CEDC') }}>ดาวแต่ละดวงได้คะแนนตามตำแหน่ง ราศี เรือน และมุมที่ทำ ดาวคะแนนสูงคือพลังที่คุณใช้บ่อยที่สุด</p>
-            <div style={{ display: 'flex', gap: '14px', alignItems: 'center', padding: '14px', borderRadius: '16px', background: c('linear-gradient(120deg,rgba(138,92,255,.30),rgba(31,165,135,.20))'), border: c('1px solid rgba(170,160,255,.35)') }}>
+            <a href={sheetHref(top.planet)} style={{ textDecoration: 'none', color: c('#F2F4FA'), display: 'flex', gap: '14px', alignItems: 'center', padding: '14px', borderRadius: '16px', background: c('linear-gradient(120deg,rgba(138,92,255,.30),rgba(31,165,135,.20))'), border: c('1px solid rgba(170,160,255,.35)') }}>
               <span style={{ width: '52px', height: '52px', flex: 'none', borderRadius: '999px', background: c('rgba(6,7,13,.5)'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', color: c('#F3D46E') }}>{glyph(top.planet)}</span>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}><span style={{ fontSize: '12px', color: c('#D6CEFF') }}>อันดับ 1</span><span style={{ fontSize: '17px', fontWeight: 600 }}>{PT_TH[top.planet]} <span class="lbl" style={{ fontWeight: 400 }}>({PT_EN[top.planet]})</span></span><span style={{ fontSize: '13px', color: c('#DCE0EA') }}>{top.total} คะแนน · {pct(top.total)}</span></div>
-            </div>
+              <span style={{ fontSize: '12px', color: c('#7FB8FF') }}>อ่านเพิ่ม ›</span>
+            </a>
             {o4 && (
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {ranked.slice(1).map((d) => {
                   const parts = [d.sign, d.house, d.angle, d.ruler, d.aspects].map((v, i) => (v ? `${DL[i]} +${v}` : null)).filter(Boolean).join(' · ')
                   return (
                     <>
-                      <div style={{ display: 'grid', gridTemplateColumns: '22px 92px minmax(0,1fr) 72px', alignItems: 'center', gap: '8px', minHeight: '36px', borderTop: c('1px solid rgba(255,255,255,.06)') }}>
+                      <a href={sheetHref(d.planet)} style={{ textDecoration: 'none', color: c('#F2F4FA'), display: 'grid', gridTemplateColumns: '22px 92px minmax(0,1fr) 72px', alignItems: 'center', gap: '8px', minHeight: '36px', borderTop: c('1px solid rgba(255,255,255,.06)') }}>
                         <span style={{ fontSize: '16px' }}>{glyph(d.planet)}</span>
                         <span style={{ fontSize: '13px' }}>{PT_TH[d.planet]} <span class="lbl">{PT_EN[d.planet]}</span></span>
                         <span style={{ height: '8px', borderRadius: '999px', background: c('rgba(255,255,255,.06)'), overflow: 'hidden' }}><span style={{ display: 'block', height: '100%', width: `${Math.round((d.total / top.total) * 100)}%`, borderRadius: '999px', background: c('linear-gradient(90deg,#8A5CFF,#6FE0C0)') }} /></span>
                         <span style={{ fontSize: '12px', textAlign: 'right', color: c('#C9CEDC'), fontVariantNumeric: 'tabular-nums' }}>{d.total} · {pct(d.total)}</span>
-                      </div>
+                      </a>
                       <span class="lbl" style={{ padding: '0 0 8px 30px', marginTop: '-6px' }}>{parts}</span>
                     </>
                   )
