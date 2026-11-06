@@ -4,11 +4,11 @@ import type { AspectType } from '../engine/aspects.ts'
 import { computeChart, type Chart, type Pt } from '../engine/chart.ts'
 import { signOf } from '../engine/dominants.ts'
 import { getBrowserSwe } from '../engine/ephe-browser.ts'
-import { composite, davison, synastry, type SynAspect } from '../engine/synastry.ts'
+import { synastry, type SynAspect } from '../engine/synastry.ts'
 import { REL_AVATAR, birthInput, getPerson, timeKnown, type Person } from '../data/people.ts'
 import { loadLib, splitTitle, synastryKey, text, type InterpLib } from '../lib/interp.ts'
 import { ASPECT_COLOR, ASPECT_GLYPH, SIGN_TH, glyph, thaiDate } from '../ui/astro-labels.ts'
-import { SingleWheel, SynastryWheel, WHEEL_VARS } from '../ui/CompareWheel.tsx'
+import { SynastryWheel, WHEEL_VARS } from '../ui/CompareWheel.tsx'
 import { HelpHead, Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
 import './compare.css'
@@ -54,8 +54,6 @@ interface Data {
   A: Side
   B: Side
   lib: InterpLib
-  comp: Chart
-  dav: Chart
 }
 
 export function Compare() {
@@ -70,7 +68,7 @@ export function Compare() {
       const ib = birthInput(pb)
       const ca = computeChart(swe, ia)
       const cb = computeChart(swe, ib)
-      setData({ A: { p: pa, chart: ca }, B: { p: pb, chart: cb }, lib, comp: composite(ca, cb), dav: davison(swe, ia, ib) })
+      setData({ A: { p: pa, chart: ca }, B: { p: pb, chart: cb }, lib })
     })().catch((e: unknown) => setErr(String(e)))
   }, [])
   if (err) return <Page background={BG}><div style={{ padding: '62px 20px', color: '#FF9A9A' }}>{err}</div><TabBar active="people" /></Page>
@@ -78,10 +76,8 @@ export function Compare() {
   return <CompareView {...data} />
 }
 
-function CompareView({ A, B, lib, comp, dav }: Data) {
+function CompareView({ A, B, lib }: Data) {
   const [sw, setSw] = useState(false)
-  const [mode, setMode] = useState<'syn' | 'comp'>('syn')
-  const [cm, setCm] = useState<0 | 1>(0)
   const [open, setOpen] = useState<Record<number, boolean>>({})
   const [hl, setHl] = useState(-1)
   const [openG, setOpenG] = useState<Record<string, boolean>>({})
@@ -141,37 +137,12 @@ function CompareView({ A, B, lib, comp, dav }: Data) {
             {person(R, 'rgba(111,224,192,.5)', 'วงนอก', '#6FE0C0')}
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <span style={{ fontSize: '13px', fontWeight: 600, color: '#C9CEDC' }}>มุมมองการเปรียบเทียบ</span>
-            <div role="group" aria-label="มุมมองการเปรียบเทียบ" style={{ display: 'flex', gap: '4px', padding: '4px', borderRadius: '16px', background: 'rgba(255,255,255,.07)', border: '1px solid rgba(255,255,255,.10)' }}>
-              <button class={mode === 'syn' ? 'seg on' : 'seg'} onClick={() => setMode('syn')}>วงซ้อนกัน</button>
-              <button class={mode === 'comp' ? 'seg on' : 'seg'} onClick={() => setMode('comp')}>ชาร์ตความสัมพันธ์</button>
-            </div>
-            <span class="lbl">
-              {mode === 'comp'
-                ? cm === 0 ? 'Composite: จุดกึ่งกลางของดาวแต่ละคู่ รวมเป็นชาร์ตเดียวของ "ความสัมพันธ์"' : 'Davison: ชาร์ตของวันเวลาและสถานที่กึ่งกลางระหว่างสองคน'
-                : 'วางชาร์ตสองคนซ้อนกัน ดูว่าดาวของใครไปกระทบดาวของใคร'}
-            </span>
-            {mode === 'comp' && (
-              <div role="group" aria-label="วิธีคำนวณชาร์ตความสัมพันธ์" style={{ display: 'flex', gap: '4px', padding: '3px', borderRadius: '12px', background: 'rgba(255,255,255,.05)', alignSelf: 'flex-start', width: '220px' }}>
-                <button class={cm === 0 ? 'seg on' : 'seg'} style={{ height: '32px' }} onClick={() => setCm(0)}>Composite</button>
-                <button class={cm === 1 ? 'seg on' : 'seg'} style={{ height: '32px' }} onClick={() => setCm(1)}>Davison</button>
-              </div>
-            )}
-          </div>
-
           <div class="card" style={{ padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px', background: 'rgba(12,14,24,.55)' }}>
-            {mode === 'syn' ? (
-              <>
                 <SynastryWheel inner={L.chart} outer={R.chart} asc={asc} aspects={asp} onPick={pick} label={`วงซ้อน: ${L.p.name} (วงใน) กับ ${R.p.name} (วงนอก)`} />
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', fontSize: '12px', color: '#C9CEDC' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><span style={{ width: '10px', height: '10px', borderRadius: '999px', background: '#C9B8FF' }} />{L.p.name} (วงใน)</span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><span style={{ width: '10px', height: '10px', borderRadius: '999px', background: '#6FE0C0' }} />{R.p.name} (วงนอก)</span>
                 </div>
-              </>
-            ) : (
-              <SingleWheel chart={cm === 0 ? comp : dav} asc={asc} label={`ชาร์ตความสัมพันธ์ (${cm === 0 ? 'Composite' : 'Davison'})`} />
-            )}
             <p style={{ margin: 0, textAlign: 'center', fontSize: '12px', color: '#9AA1B5' }}>แตะเส้นเพื่อดูว่าดาวของสองคนคุยกันอย่างไร</p>
           </div>
 

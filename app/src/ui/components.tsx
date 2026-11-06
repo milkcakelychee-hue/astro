@@ -5,7 +5,9 @@ import { useState } from 'preact/hooks'
 
 /** กรอบหน้า: พื้นหลังไล่เฉดของแต่ละหน้า (ส่งค่า background ตามไฟล์ดีไซน์ของหน้านั้น) */
 export function Page(props: { background: string; light?: boolean; children: ComponentChildren }) {
+  // พื้นหลังเต็มจอ (จอ iPhone กว้างกว่า 390px) · เนื้อหายังกว้างสุด 390px
   return (
+    <div style={{ minHeight: '100lvh', background: props.background }}>
     <div
       style={{
         width: '100%',
@@ -21,6 +23,7 @@ export function Page(props: { background: string; light?: boolean; children: Com
       }}
     >
       {props.children}
+    </div>
     </div>
   )
 }
