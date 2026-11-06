@@ -21,7 +21,7 @@
 | eclipse | `sun{เรือน}` `moon{เรือน}` `new{เรือน}` `full{เรือน}` `hit{ดาว}` `level1-3` | อุปราคา, จันทร์ดับจันทร์เต็ม |
 | moon | `new` … `waning_crescent`, `voc`, `sign{0-11}` | ปฏิทินดวงจันทร์, วันนี้ |
 | retrograde | `{ดาว}`, `pre`, `post` | ช่วงดาวถอยหลัง |
-| return | `sr_asc{ราศี}` `sr_sun{เรือน}` `lr_asc{ราศี}` `lr_moon{เรือน}` `pm_sign{ราศี}` `pm_house{เรือน}` | ดวงรอบปี, ดวงรอบเดือน, ตัวตนเติบโต |
+| return | `sr_asc{ราศี}` `sr_sun{เรือน}` `lr_asc{ราศี}` `lr_moon{เรือน}` `pm_sign{ราศี}` `pm_house{เรือน}` `ps_sign{ราศี}` (อาทิตย์โปรเกรส) | ดวงรอบปี, ดวงรอบเดือน, ตัวตนเติบโต |
 | direction | `{pr|sa|pd}{ดาว}{มุม}{ดาว}` | ตัวตนเติบโต (3 แท็บ) |
 | cycle | `{ดาว}_rule`, `{ดาว}_{return|sq1|opp|sq2}`, `venus_*` | รอบโคจรของดาวเคราะห์, วงโคจรดาวศุกร์ |
 | numerology | `life{n}` `year{n}` `month{n}` | เลขศาสตร์ |

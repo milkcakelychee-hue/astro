@@ -78,7 +78,7 @@ export function Growth() {
   const toEv = (e: GEvent, kind: 'pr' | 'sa'): Ev => {
     if (e.kind === 'ingress') {
       const t = `${NAME[e.a]}โปรเกรสเข้าราศี${SIGN_TH[e.sign!]}`
-      return { jd: e.jd, g1: glyph(e.a), g2: SIGN_GLYPH[e.sign!]!, k: 'i', t, d: e.a === 'M' && d ? body(d.lib, 'return', `pm_sign${e.sign}`)?.body ?? '' : '' }
+      return { jd: e.jd, g1: glyph(e.a), g2: SIGN_GLYPH[e.sign!]!, k: 'i', t, d: d && (e.a === 'M' || e.a === 'S') ? body(d.lib, 'return', `${e.a === 'M' ? 'pm' : 'ps'}_sign${e.sign}`)?.body ?? '' : '' }
     }
     const L = d ? body(d.lib, 'direction', `${kind}${e.a}${ASPECT_CODE[e.type!]}${e.b}`) : null
     const t = L?.title || `${NAME[e.a]} (${kind === 'pr' ? 'โปรเกรส' : 'Solar Arc'}) ${AS[e.type!][2]}${NAME[e.b!]}เดิม`
