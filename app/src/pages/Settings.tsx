@@ -3,6 +3,7 @@ import { useState } from 'preact/hooks'
 import { getThemePref, setThemePref, type ThemePref } from '../ui/theme.ts'
 import { Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
+import { CHANGELOG } from '../data/changelog.ts'
 import './settings.css'
 
 const BG = 'radial-gradient(520px 420px at 85% -40px,rgba(59,107,255,.40),transparent 70%),radial-gradient(460px 380px at -10% 360px,rgba(138,92,255,.28),transparent 70%),#06070D'
@@ -15,12 +16,35 @@ const two = (a: string, b: string) => <span style={{ flex: 1, display: 'flex', f
 
 export function Settings() {
   const [th, setTh] = useState<ThemePref>(getThemePref())
+  const [news, setNews] = useState(false)
   const theme = (v: ThemePref) => { setThemePref(v); setTh(v) }
 
   return (
     <Page background={BG}>
       <div class="pg-settings" style={{ padding: '62px 20px 140px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <h1 style={{ margin: 0, fontSize: '28px', fontWeight: 600 }}>ตั้งค่า</h1>
+
+        {/* ผู้ใช้ขอ: มีอะไรใหม่ ไว้บนสุด กดดูรายการฟีเจอร์ */}
+        <div style={{ borderRadius: '18px', background: 'linear-gradient(135deg,rgba(138,92,255,.28),rgba(59,107,255,.18))', border: '1px solid rgba(180,170,255,.35)', overflow: 'hidden' }}>
+          <button aria-expanded={news} onClick={() => setNews(!news)} style={{ width: '100%', display: 'flex', gap: '12px', alignItems: 'center', padding: '14px 16px', border: 'none', background: 'transparent', color: '#F2F4FA', font: 'inherit', textAlign: 'left' }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D6CEFF" stroke-width="1.8" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" /></svg>
+            <span style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <span style={{ fontSize: '14px', fontWeight: 600 }}>มีอะไรใหม่</span>
+              <span style={{ fontSize: '12px', color: '#C9CEDC' }}>อัปเดต {CHANGELOG[0]!.date} · {CHANGELOG[0]!.items.length} ฟีเจอร์ใหม่ · เวอร์ชัน {VERSION}</span>
+            </span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9CEDC" stroke-width="2" aria-hidden="true" style={{ transform: news ? 'rotate(180deg)' : undefined }}><path d="m6 9 6 6 6-6" /></svg>
+          </button>
+          {news && (
+            <div style={{ padding: '0 16px 14px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {CHANGELOG.map((g) => (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <span style={{ fontSize: '12px', fontWeight: 600, color: '#D6CEFF' }}>{g.date}</span>
+                  <ul style={{ margin: 0, paddingLeft: '18px', display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13.5px', lineHeight: 1.55, color: '#DCE0EA' }}>{g.items.map((t) => <li>{t}</li>)}</ul>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center', padding: '14px 16px', borderRadius: '18px', background: 'linear-gradient(135deg,rgba(79,209,165,.20),rgba(59,107,255,.16))', border: '1px solid rgba(79,209,165,.35)' }}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7FE3C0" stroke-width="1.9" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.2 8 9 4.6-.8 8-4.5 8-9V6z" /><path d="m9 12 2 2 4-4" /></svg>

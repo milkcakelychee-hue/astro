@@ -93,3 +93,4 @@
 - ทำแล้ว: ComingSoon, MainEmpty (+นำเข้าไฟล์สำรอง), EditPerson (โหมดแก้ไขของ AddPerson #/add?edit=id + ลบ), AddCategory (หมวดตั้งเอง IDB v3), TodayTransitSheet, Transit (ตัวกรองใหม่)
 - ตั้งค่า: ตัดระบบเรือน และราหู/เกตุ ออก (ผู้ใช้สั่ง)
 - เหลือ: LightTheme + ChartLight (ทำตอนท้ายตามกฎ) · ยังไม่มีปุ่ม "ส่งออกไฟล์สำรอง"
+- ทุกครั้งที่ deploy: เพิ่มฟีเจอร์ใหม่ใน app/src/data/changelog.ts (หน้าตั้งค่า > มีอะไรใหม่) · ไม่ใส่การปรับเล็กน้อย/ดีไซน์ (ผู้ใช้สั่ง 6 พ.ย. 2569)
