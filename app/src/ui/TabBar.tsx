@@ -1,4 +1,4 @@
-import { keepDark } from './light.ts'
+import { keepDark, lightOn } from './light.ts'
 // แท็บหลัก 5 ช่อง — ตามดีไซน์ (โหมดมืด) · ตำแหน่งยึดกับขอบจอ (fixed) แทน absolute ของไฟล์ดีไซน์
 export type TabId = 'main' | 'people' | 'today' | 'forecast' | 'settings'
 
@@ -18,8 +18,12 @@ export function TabBar(props: { active?: TabId }) {
     keepDark(false)
   }
 }
+// ผู้ใช้ขอ (6 พ.ย. 2569): โหมดสว่างให้แถบเมนูสว่างตามด้วย (แทนกฎ "คงสีดำ" ในดีไซน์ LightTheme)
+const DARK = { bg: 'linear-gradient(180deg,#1C1D24,#000000)', shadow: '0 -8px 30px rgba(0,0,0,.30)', line: 'rgba(255,255,255,.10)', on: '#B9A6FF', off: '#C9CEDC', ring: '#0A0B10', btn: 'radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21)', btnLine: 'transparent', icon: '#B9A6FF' }
+const LIGHT = { bg: 'linear-gradient(180deg,#FFFFFF,#ECEEF4)', shadow: '0 -8px 30px rgba(18,19,26,.08)', line: 'rgba(18,19,26,.10)', on: '#5B3FD0', off: '#5A6070', ring: '#F3F4F8', btn: 'radial-gradient(circle at 40% 30%,#FFFFFF,#E4E6EE)', btnLine: 'rgba(18,19,26,.10)', icon: '#5B3FD0' }
 function tabBar(props: { active?: TabId }) {
-  const st = (id: TabId) => (props.active === id ? { color: '#B9A6FF', fontWeight: 700 } : { color: '#C9CEDC' })
+  const T = lightOn() ? LIGHT : DARK
+  const st = (id: TabId) => (props.active === id ? { color: T.on, fontWeight: 700 } : { color: T.off })
   const cur = (id: TabId) => (props.active === id ? 'page' : undefined)
   return (
     <nav
@@ -29,9 +33,9 @@ function tabBar(props: { active?: TabId }) {
         // ดีไซน์: สูง 91 = 65 + เว้นล่าง 26 · บน iPhone ใช้ระยะ home indicator จริงถ้ามากกว่า 26
         height: 'calc(65px + max(26px, env(safe-area-inset-bottom)))',
         padding: '0 6px max(26px, env(safe-area-inset-bottom))',
-        boxSizing: 'border-box', borderRadius: '32px 32px 0 0', background: 'linear-gradient(180deg,#1C1D24,#000000)',
-        boxShadow: '0 -8px 30px rgba(0,0,0,.30)', display: 'grid', gridTemplateColumns: 'repeat(5,minmax(0,1fr))', alignItems: 'end',
-        borderTop: '1px solid rgba(255,255,255,.10)',
+        boxSizing: 'border-box', borderRadius: '32px 32px 0 0', background: T.bg,
+        boxShadow: T.shadow, display: 'grid', gridTemplateColumns: 'repeat(5,minmax(0,1fr))', alignItems: 'end',
+        borderTop: `1px solid ${T.line}`,
         // แยกเลเยอร์ให้ GPU — แถบไม่สั่นตอนหน้าเปลี่ยนความสูง (กาง/พับ)
         transform: 'translateZ(0)', willChange: 'transform',
       }}
@@ -39,8 +43,8 @@ function tabBar(props: { active?: TabId }) {
       <a href="#/main" class="tab" style={st('main')} aria-current={cur('main')}>{ICON.main}ชาร์ตของฉัน</a>
       <a href="#/people" class="tab" style={st('people')} aria-current={cur('people')}>{ICON.people}บุคคล</a>
       <a href="#/today" class="tab" style={{ position: 'relative', ...st('today'), fontWeight: props.active === 'today' ? 700 : 500 }} aria-current={cur('today')}>
-        <span style={{ position: 'absolute', top: '-44px', left: '50%', marginLeft: '-44px', width: '88px', height: '88px', borderRadius: '999px', background: '#0A0B10', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span style={{ width: '72px', height: '72px', borderRadius: '999px', background: 'radial-gradient(circle at 40% 30%,#3A3B44,#1A1B21)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#B9A6FF' }}>
+        <span style={{ position: 'absolute', top: '-44px', left: '50%', marginLeft: '-44px', width: '88px', height: '88px', borderRadius: '999px', background: T.ring, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span style={{ width: '72px', height: '72px', borderRadius: '999px', background: T.btn, border: `1px solid ${T.btnLine}`, boxSizing: 'border-box', display: 'flex', alignItems: 'center', justifyContent: 'center', color: T.icon }}>
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
           </span>
         </span>
