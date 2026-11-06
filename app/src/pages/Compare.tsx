@@ -101,8 +101,10 @@ function CompareView({ A, B, lib, comp, dav }: Data) {
     if (!t) return null
     return splitTitle(t).body.replace(/^แก่นเรื่อง: /, '').replace(/\bA\b/g, L.p.name).replace(/\bB\b/g, R.p.name).replace(/ของA/g, 'ของ' + L.p.name).replace(/ของB/g, 'ของ' + R.p.name)
   }
+  // ผู้ใช้ขอ: อิโมจิบอกอารมณ์ของมุม แทน ↔
+  const LOVE: Record<string, string> = { '0': '🔥', '6': '❤️', '3': '❤️', '4': '😢', '8': '💔' }
   const pill = (x: SynAspect) => (
-    <span class="pill"><b style={{ color: ASPECT_COLOR[x.type] }}>{ASPECT_GLYPH[x.type]}</b> {NAME[x.a]} ↔ {NAME[x.b]}</span>
+    <span class="pill"><b style={{ color: ASPECT_COLOR[x.type] }}>{ASPECT_GLYPH[x.type]}</b> {NAME[x.a]} {LOVE[x.type]} {NAME[x.b]}</span>
   )
   const person = (s: Side, ring: string, tag: string, tagC: string) => (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', textAlign: 'center' }}>

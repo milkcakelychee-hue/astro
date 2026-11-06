@@ -16,6 +16,7 @@ import { BackLink, HelpHead, Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
 import { MainEmpty } from './MainEmpty.tsx'
 import { PlanetSheet } from './PlanetSheet.tsx'
+import { CategorySheet, type Cat } from './CategorySheet.tsx'
 import { loadLib, type InterpLib } from '../lib/interp.ts'
 import './main.css'
 import './main-light.css'
@@ -69,16 +70,17 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
   const light = isLightTheme()
   setRenderLight(light)
   // Sheet: #/main?p=<จุด> (แตะดาวในวงชาร์ต)
-  const sheetPt = (new URLSearchParams(location.hash.split('?')[1] ?? '').get('p') ?? '') as Pt
+  const qs = new URLSearchParams(location.hash.split('?')[1] ?? '')
+  const sheetPt = (qs.get('p') ?? '') as Pt
+  const cat = (qs.get('cat') ?? '') as Cat | ''
   const [lib, setLib] = useState<InterpLib | null>(null)
   useEffect(() => {
-    if (sheetPt && !lib) loadLib().then(setLib)
-  }, [sheetPt])
+    if ((sheetPt || cat) && !lib) loadLib().then(setLib)
+  }, [sheetPt, cat])
   const known = timeKnown(person)
   // ผู้ใช้ขอ: แตะ Big Three / ดาวเด่น → เปิด Sheet อ่านเพิ่มเติม
   const sheetHref = (p: Pt) => base + (person.isMe ? '?' : '&') + 'p=' + p
   const prov = provinceByName(person.province)!
-  const [tab, setTab] = useState('overview')
   const [o3, setO3] = useState(false)
   const [o4, setO4] = useState(false)
 
@@ -121,12 +123,10 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
   ]
 
   const TILES: [string, string, preact.JSX.Element][] = [
-    ['overview', 'ภาพรวม', <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="3" /></svg>],
     ['planets', 'ดาว', <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4" /><ellipse cx="12" cy="12" rx="10" ry="4" /></svg>],
     ['houses', 'เรือน', <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 11 12 4l8 7v9H4z" /><path d="M10 20v-5h4v5" /></svg>],
     ['aspects', 'มุมดาว', <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="5" cy="18" r="2" /><circle cx="19" cy="18" r="2" /><circle cx="12" cy="5" r="2" /><path d="M6.5 16.5 11 6.8M13 6.8l4.5 9.7M7 18h10" /></svg>],
     ['stats', 'สถิติ', <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7" /></svg>],
-    ['advanced', 'ขั้นสูง', <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3v18M3 12h18" /><circle cx="12" cy="12" r="5" /></svg>],
   ]
 
   return (
@@ -191,15 +191,15 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <span class="sec">เลือกหมวดที่จะดู</span>
-          <div role="tablist" aria-label="หมวดชาร์ต" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,minmax(0,1fr))', gap: '8px' }}>
+          <div aria-label="หมวดชาร์ต" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,minmax(0,1fr))', gap: '8px' }}>
             {TILES.map(([id, name, icon]) => (
-              <button role="tab" aria-selected={tab === id} class={'tile' + (tab === id ? ' on' : '')} onClick={() => id === 'overview' && setTab(id)}>{icon}{name}</button>
+              <a href={base + (person.isMe ? '?' : '&') + 'cat=' + id} class="tile" style={{ textDecoration: 'none' }}>{icon}{name}</a>
             ))}
           </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2">สรุปชาร์ต</h2><span class="lbl">ตรงกับ astro-seek</span></div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h2 class="h2" style={{ fontSize: '24px' }}>ภาพรวม</h2><span class="lbl">ตรงกับ astro-seek</span></div>
 
           <div class="card" style={{ padding: '14px 12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <HelpHead k="table" aria="อ่านตารางนี้อย่างไร" style={{ padding: '0 4px' }} head={<span style={{ fontSize: '15px', fontWeight: 600 }}>ตำแหน่งดาวและจุดสำคัญ <span class="lbl" style={{ fontWeight: 400 }}>(Planets &amp; Points)</span></span>} />
@@ -258,9 +258,9 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
                   const parts = [d.sign, d.house, d.angle, d.ruler, d.aspects].map((v, i) => (v ? `${DL[i]} +${v}` : null)).filter(Boolean).join(' · ')
                   return (
                     <>
-                      <a href={sheetHref(d.planet)} style={{ textDecoration: 'none', color: c('#F2F4FA'), display: 'grid', gridTemplateColumns: '22px 92px minmax(0,1fr) 72px', alignItems: 'center', gap: '8px', minHeight: '36px', borderTop: c('1px solid rgba(255,255,255,.06)') }}>
+                      <a href={sheetHref(d.planet)} style={{ textDecoration: 'none', color: c('#F2F4FA'), display: 'grid', gridTemplateColumns: '22px 122px minmax(0,1fr) 72px', alignItems: 'center', gap: '8px', minHeight: '36px', borderTop: c('1px solid rgba(255,255,255,.06)') }}>
                         <span style={{ fontSize: '16px' }}>{glyph(d.planet)}</span>
-                        <span style={{ fontSize: '13px' }}>{PT_TH[d.planet]} <span class="lbl">{PT_EN[d.planet]}</span></span>
+                        <span style={{ fontSize: '13px', whiteSpace: 'nowrap' }}>{PT_TH[d.planet]} <span class="lbl">{PT_EN[d.planet]}</span></span>
                         <span style={{ height: '8px', borderRadius: '999px', background: c('rgba(255,255,255,.06)'), overflow: 'hidden' }}><span style={{ display: 'block', height: '100%', width: `${Math.round((d.total / top.total) * 100)}%`, borderRadius: '999px', background: c('linear-gradient(90deg,#8A5CFF,#6FE0C0)') }} /></span>
                         <span style={{ fontSize: '12px', textAlign: 'right', color: c('#C9CEDC'), fontVariantNumeric: 'tabular-nums' }}>{d.total} · {pct(d.total)}</span>
                       </a>
@@ -290,6 +290,9 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
         </div>
         {/* ดาวที่ควรรู้จักก่อน + รูปแบบพิเศษ: รอข้อความหมวดใหม่จาก lib/gen2.py */}
       </div>
+      {cat && !sheetPt && lib && (
+        <CategorySheet cat={cat} chart={chart} aspects={aspects} dom={dom} lib={lib} known={known} ptHref={sheetHref} onClose={() => (location.hash = base)} />
+      )}
       {sheetPt && chart.pos[sheetPt] && lib && (
         <PlanetSheet pt={sheetPt} chart={chart} aspects={aspects} lib={lib} known={known} personId={person.id} onClose={() => (location.hash = base)} />
       )}

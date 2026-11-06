@@ -48,6 +48,9 @@ interface Data { name: string; now: number; nowD: Date; natal: Chart; known: boo
 export function Transit() {
   const [d, setD] = useState<Data | null>(null)
   const [sel, setSel] = useState('')
+  // ผู้ใช้ขอ: กล่องนับกดเพื่อกรองรายการตามลักษณะมุม (-1 = ทั้งหมด)
+  const [nf, setNf] = useState(-1)
+  const natOf = (r: TransitRow) => (r.type === '3' || r.type === '6' ? 0 : r.type === '0' ? 2 : 1)
   useEffect(() => {
     ;(async () => {
       const me = await getMe()
@@ -118,10 +121,14 @@ export function Transit() {
             )
           })()}
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,minmax(0,1fr))', gap: '8px' }}>
-            {([[cnt[0], 'ส่งเสริม', '#7FE3C0'], [cnt[1], 'ท้าทาย', '#FFB08A'], [cnt[2], 'กุมกัน', '#F3D46E']] as const).map(([x, l, c]) => (
-              <div class="card" style={{ padding: '10px 6px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', borderRadius: '16px' }}><span style={{ fontSize: '22px', fontWeight: 700, color: c }}>{d ? x : '–'}</span><span class="lbl">{l}</span></div>
-            ))}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {d && <span style={{ fontSize: '15px', fontWeight: 600 }}>ช่วงนี้มีแรงหนุน {cnt[0]} เรื่อง · แรงกดดัน {cnt[1]} เรื่อง{cnt[2] ? ` · พลังเข้มข้น ${cnt[2]} เรื่อง` : ''}</span>}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,minmax(0,1fr))', gap: '8px' }}>
+              {([[cnt[0], '💚 ส่งเสริม', '#7FE3C0'], [cnt[1], '⚡ ท้าทาย', '#FFB08A'], [cnt[2], '🔥 กุมกัน', '#F3D46E']] as const).map(([x, l, c], i) => (
+                <button class="card" aria-pressed={nf === i} onClick={() => setNf(nf === i ? -1 : i)} style={{ padding: '10px 6px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', borderRadius: '16px', color: '#F2F4FA', font: 'inherit', ...(nf === i ? { borderColor: c, background: 'rgba(255,255,255,.10)', boxShadow: `0 0 12px ${c}55` } : {}) }}><span style={{ fontSize: '22px', fontWeight: 700, color: c }}>{d ? x : '–'}</span><span class="lbl" style={nf === i ? { color: c } : undefined}>{l}</span></button>
+              ))}
+            </div>
+            <span class="lbl">{nf < 0 ? 'แตะกล่องเพื่อดูเฉพาะมุมแบบนั้น' : 'กำลังกรองอยู่ · แตะอีกครั้งเพื่อดูทั้งหมด'}</span>
           </div>
 
           <div class="card" style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -139,7 +146,7 @@ export function Transit() {
           {d && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {GT.map(([gt, gc, gbd, gd], k) => {
-                const rows = d.rows.filter((r) => grpOf(r) === k).sort((x, y) => x.f - y.f)
+                const rows = d.rows.filter((r) => grpOf(r) === k && (nf < 0 || natOf(r) === nf)).sort((x, y) => x.f - y.f)
                 if (!rows.length) return null
                 return (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

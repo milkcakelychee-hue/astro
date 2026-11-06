@@ -53,3 +53,6 @@ export const fmtDeg = (lon: number) => {
 export const fmtLatLon = (latDeg: number, latMin: number, lonDeg: number, lonMin: number) => `${latDeg}°${latMin}′N ${lonDeg}°${lonMin}′E`
 /** หัวข้อสั้นของเรือน 1–12 (design/Transit, Lunations, LunarReturn) */
 export const HOUSE_TOPIC = ['', 'ตัวตน ภาพลักษณ์', 'เงิน คุณค่าในตัวเอง', 'การสื่อสาร คนใกล้ตัว', 'บ้าน ครอบครัว', 'ความรัก ความสนุก', 'งานประจำวัน สุขภาพ', 'คู่ครอง หุ้นส่วน', 'ความลึกซึ้ง เงินร่วม', 'การเรียน การเดินทาง', 'งาน ชื่อเสียง', 'เพื่อน สังคม ความฝัน', 'จิตใต้สำนึก การพัก']
+/** คำเรียกมุมแบบเข้าใจง่าย (ใช้ในแผ่นหมวดและอิโมจิ) */
+export const ASPECT_MOOD: Record<AspectType, string> = { '0': 'กุมกับ', '6': 'ส่งเสริม', '3': 'ส่งเสริม', '4': 'ท้าทาย', '8': 'ท้าทาย' }
+export const ASPECT_EMOJI: Record<AspectType, string> = { '0': '🔥', '6': '❤️', '3': '❤️', '4': '⚡', '8': '⚡' }
