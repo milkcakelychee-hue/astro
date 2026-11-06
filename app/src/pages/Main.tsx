@@ -144,6 +144,7 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
             {/* ผู้ใช้ขอ: วันเกิดเป็นหัวข้อรองที่ใหญ่ขึ้น (เดิม 12px อยู่เหนือหัวข้อ) */}
             <span style={{ fontSize: '15px', fontWeight: 500, color: c('#DCE0EA'), marginTop: '2px' }}>{label.slice(person.name.length + 3)}</span>
             <span class="lbl">{fmtLatLon(prov.latDeg, prov.latMin, prov.lonDeg, prov.lonMin)}{known ? ' · ระบบเรือน Placidus' : ' · ไม่ทราบเวลาเกิด (ซ่อนลัคนาและเรือน)'}</span>
+            <a href={'#/add?edit=' + person.id} style={{ fontSize: '13px', color: c('#7FB8FF'), textDecoration: 'none', marginTop: '2px', alignSelf: 'flex-start' }}>แก้ไขข้อมูล ›</a>
             <details style={{ marginRight: '-40px' }}>
               <summary aria-label="หน้านี้คืออะไร" style={{ listStyle: 'none', position: 'absolute', right: 0, top: '28px' /* กึ่งกลางกับ h1 */, width: '30px', height: '30px', borderRadius: '50%', border: c('1px solid rgba(200,210,255,.35)'), background: c('rgba(255,255,255,.06)'), color: c('#D6DEFF'), display: 'flex', alignItems: 'center', justifyContent: 'center', font: '600 15px var(--font)', cursor: 'pointer' }}>?</summary>
               <div data-intro style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '14px 16px', borderRadius: '18px', marginTop: '10px', background: c('rgba(255,255,255,.05)'), border: c('1px solid rgba(200,210,255,.16)'), fontSize: '13.5px', lineHeight: '1.6' }}>

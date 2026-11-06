@@ -21,6 +21,7 @@ export interface Person {
   /** ชาร์ตของฉัน */
   isMe: boolean
   createdAt: number
+  updatedAt?: number
 }
 
 let dbP: Promise<IDBPDatabase> | null = null

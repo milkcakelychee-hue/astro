@@ -42,7 +42,7 @@ export function App() {
       // key: สลับคน (?id=) ต้องโหลดใหม่
       return <Main key={new URLSearchParams(location.hash.split('?')[1] ?? '').get('id') ?? 'me'} />
     case 'add':
-      return <AddPerson />
+      return <AddPerson key={location.hash} />
     case 'aspects':
       return <Aspects />
     case 'people': {

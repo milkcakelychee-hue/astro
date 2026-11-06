@@ -1,7 +1,10 @@
 // หน้า "เพิ่มคน" — ตาม design/AddPerson.dc.html
 import { useEffect, useState } from 'preact/hooks'
 import { PROVINCES, PROVINCE_TH } from '../engine/places.ts'
-import { getMe, savePerson } from '../data/people.ts'
+import { computeChart } from '../engine/chart.ts'
+import { getBrowserSwe } from '../engine/ephe-browser.ts'
+import { SIGN_TH } from '../ui/astro-labels.ts'
+import { birthInput, timeKnown, deletePerson, getMe, getPerson, savePerson, type Person } from '../data/people.ts'
 import { Page } from '../ui/components.tsx'
 import './addperson.css'
 
@@ -20,9 +23,17 @@ const RELS: { key: string; label: string; icon: preact.ComponentChildren }[] = [
   { key: 'work', label: 'ที่ทำงาน', icon: ic(<><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18" /></>) },
 ]
 
+const MS = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+const thaiD = (t: number) => { const x = new Date(t); return `${x.getDate()} ${MS[x.getMonth()]} ${x.getFullYear() + 543}` }
 const num = (s: string, max: number) => (/^\d{1,2}$/.test(s) && +s <= max ? +s : null)
 
+// แก้ไขข้อมูลคน (new-screens/EditPerson.dc.html): #/add?edit=<id> ใช้ฟอร์มเดียวกัน
 export function AddPerson() {
+  const editId = new URLSearchParams(location.hash.split('?')[1] ?? '').get('edit')
+  const [orig, setOrig] = useState<Person | null>(null)
+  const [note, setNote] = useState('')
+  const [askDel, setAskDel] = useState(false)
+  const [sum, setSum] = useState('')
   const forMe = location.hash.includes('me=1')
   const [hasMe, setHasMe] = useState(false)
   const [name, setName] = useState('')
@@ -36,9 +47,20 @@ export function AddPerson() {
   const [prov, setProv] = useState('')
 
   useEffect(() => {
+    if (editId) getPerson(editId).then((x) => {
+      if (!x) return
+      setOrig(x); setName(x.name); setRel(x.relation); setD(x.d); setMo(x.mo); setY(x.y)
+      setUnknown(x.hh === null); setHh(x.hh === null ? '' : String(x.hh).padStart(2, '0')); setMi(x.mi === null ? '' : String(x.mi).padStart(2, '0'))
+      setProv(PROVINCE_TH[x.province] ?? ''); setNote(x.note ?? '')
+      getBrowserSwe().then((swe) => {
+        const c = computeChart(swe, birthInput(x))
+        const sg = (p: 'S' | 'M' | 'A') => SIGN_TH[Math.floor(c.pos[p].lon / 30)]
+        setSum(`☉ ${sg('S')} · ☽ ${sg('M')}${timeKnown(x) ? ` · AC ${sg('A')}` : ''}`)
+      })
+    })
     getMe().then((m) => {
       // มี "ฉัน" ได้คนเดียว
-      if (m) {
+      if (m && m.id !== editId) {
         setHasMe(true)
         setRel((r) => (r === 'me' ? 'friend' : r))
       }
@@ -53,11 +75,18 @@ export function AddPerson() {
   const h = num(hh, 23)
   const m = num(mi, 59)
   const ok = name.trim() !== '' && d > 0 && d <= days && mo > 0 && y > 0 && !!p && (unknown || (h !== null && m !== null))
-  const back = forMe ? '#/main' : '#/people'
+  const viewHref = (x: { id: string; isMe: boolean }) => (x.isMe ? '#/main' : '#/people?id=' + x.id)
+  const back = orig ? viewHref(orig) : forMe ? '#/main' : '#/people'
 
   async function submit(e: Event) {
     e.preventDefault()
     if (!ok || !p) return
+    if (orig) {
+      const np = { ...orig, name: name.trim(), y, mo, d, hh: unknown ? null : h, mi: unknown ? null : m, province: p.name, relation: rel, isMe: rel === 'me', note: note.trim() || undefined, updatedAt: Date.now() }
+      await savePerson(np)
+      location.hash = viewHref(np)
+      return
+    }
     await savePerson({
       id: crypto.randomUUID(),
       name: name.trim(),
@@ -80,11 +109,17 @@ export function AddPerson() {
           <a href={back} style={{ height: '44px', padding: '0 10px', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '15px', textDecoration: 'none' }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6" /></svg>ยกเลิก
           </a>
-          <h1 style={{ margin: 0, fontSize: '17px', fontWeight: 600 }}>เพิ่มคน</h1>
-          <span style={{ width: '80px' }} />
+          <h1 style={{ margin: 0, fontSize: '17px', fontWeight: 600 }}>{orig ? 'แก้ไขข้อมูล' : 'เพิ่มคน'}</h1>
+          {orig ? <button type="submit" form="pf" aria-disabled={!ok} style={{ height: '44px', padding: '0 12px', border: 'none', background: 'transparent', color: ok ? '#7FB8FF' : '#5A6075', font: '600 15px var(--font)' }}>บันทึก</button> : <span style={{ width: '80px' }} />}
         </div>
 
-        <form style={{ padding: '8px 20px 40px', display: 'flex', flexDirection: 'column', gap: '18px' }} onSubmit={submit}>
+        <form id="pf" style={{ padding: '8px 20px 40px', display: 'flex', flexDirection: 'column', gap: '18px' }} onSubmit={submit}>
+          {orig && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 16px', borderRadius: '20px', background: 'linear-gradient(135deg,rgba(138,92,255,.30),rgba(59,107,255,.20))', border: '1px solid rgba(180,170,255,.35)' }}>
+              <span style={{ width: '52px', height: '52px', borderRadius: '999px', background: 'rgba(6,7,13,.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', fontWeight: 600 }}>{orig.name.slice(0, 1)}</span>
+              <span style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}><span style={{ fontSize: '17px', fontWeight: 600 }}>{orig.name}</span><span style={{ fontSize: '12.5px', color: '#D6DEFF' }}>{sum}</span></span>
+            </div>
+          )}
           <div class="group">
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label for="nm" class="fl">ชื่อ</label>
@@ -173,11 +208,33 @@ export function AddPerson() {
             </div>
           </div>
 
-          <button type="submit" aria-disabled={!ok} style={{ height: '56px', border: 'none', borderRadius: '16px', background: 'linear-gradient(135deg,#8A5CFF,#3B6BFF 55%,#1FA587)', color: '#FFFFFF', font: '600 17px var(--font)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', opacity: ok ? 1 : 0.45 }}>
+          {orig && (
+            <>
+              <div style={{ display: 'flex', gap: '10px', padding: '12px 14px', borderRadius: '14px', background: 'rgba(243,212,110,.08)', border: '1px solid rgba(243,212,110,.30)', fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA' }}><span style={{ flex: 'none', color: '#F3D46E' }}>!</span><span>ถ้าแก้วัน เวลา หรือจังหวัด ชาร์ตและคำอธิบายทั้งหมดของคนนี้จะคำนวณใหม่ โน้ตที่จดไว้ยังอยู่</span></div>
+              <div class="group"><label for="nt" class="fl">โน้ต</label><textarea id="nt" rows={2} value={note} onInput={(e) => setNote(e.currentTarget.value)} style={{ boxSizing: 'border-box', width: '100%', padding: '12px 14px', borderRadius: '14px', border: '1px solid rgba(255,255,255,.14)', background: 'rgba(255,255,255,.06)', color: '#F2F4FA', font: '15px/1.6 var(--font)', resize: 'none' }} /></div>
+              <button type="button" onClick={() => setAskDel(true)} style={{ height: '52px', borderRadius: '16px', font: '600 16px var(--font)', width: '100%', background: 'rgba(255,107,107,.10)', border: '1px solid rgba(255,107,107,.40)', color: '#FF9A9A' }}>ลบคนนี้</button>
+              {orig.updatedAt && <span class="lbl" style={{ textAlign: 'center' }}>แก้ไขล่าสุด {thaiD(orig.updatedAt)}</span>}
+            </>
+          )}
+          {!orig && <button type="submit" aria-disabled={!ok} style={{ height: '56px', border: 'none', borderRadius: '16px', background: 'linear-gradient(135deg,#8A5CFF,#3B6BFF 55%,#1FA587)', color: '#FFFFFF', font: '600 17px var(--font)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', opacity: ok ? 1 : 0.45 }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>บันทึกและดูชาร์ต
-          </button>
-          <span class="lbl" style={{ textAlign: 'center' }}>ข้อมูลเก็บในเครื่องนี้เท่านั้น</span>
+          </button>}
+          {!orig && <span class="lbl" style={{ textAlign: 'center' }}>ข้อมูลเก็บในเครื่องนี้เท่านั้น</span>}
         </form>
+        {orig && askDel && (
+          <>
+            <div onClick={() => setAskDel(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(3,4,8,.70)', zIndex: 5 }} />
+            <div role="alertdialog" aria-label="ยืนยันการลบ" style={{ position: 'fixed', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: 'calc(min(390px,100vw) - 48px)', boxSizing: 'border-box', zIndex: 6, padding: '22px 20px 18px', borderRadius: '24px', background: '#151827', border: '1px solid rgba(255,107,107,.35)', boxShadow: '0 20px 50px rgba(0,0,0,.5)', display: 'flex', flexDirection: 'column', gap: '12px', textAlign: 'center' }}>
+              <span style={{ alignSelf: 'center', width: '52px', height: '52px', borderRadius: '999px', background: 'rgba(255,107,107,.14)', color: '#FF9A9A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" /></svg></span>
+              <span style={{ fontSize: '18px', fontWeight: 600 }}>ลบ "{orig.name}" ใช่ไหม</span>
+              <span style={{ fontSize: '13.5px', lineHeight: 1.6, color: '#C9CEDC' }}>ข้อมูลเกิด ชาร์ต โน้ต และการเปรียบเทียบดวงกับคนนี้จะหายถาวร กู้คืนไม่ได้ ยกเว้นจากไฟล์สำรอง</span>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginTop: '4px' }}>
+                <button type="button" onClick={() => setAskDel(false)} style={{ height: '48px', border: 'none', borderRadius: '16px', font: '600 16px var(--font)', background: 'rgba(255,255,255,.08)', color: '#F2F4FA' }}>ยกเลิก</button>
+                <button type="button" onClick={async () => { await deletePerson(orig.id); location.hash = orig.isMe ? '#/main' : '#/people' }} style={{ height: '48px', border: 'none', borderRadius: '16px', font: '600 16px var(--font)', background: '#FF6B6B', color: '#fff' }}>ลบ</button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </Page>
   )
