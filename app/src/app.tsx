@@ -18,6 +18,7 @@ import { Cycles } from './pages/Cycles.tsx'
 import { VenusRose } from './pages/VenusRose.tsx'
 import { Eclipses } from './pages/Eclipses.tsx'
 import { MoonPhases } from './pages/MoonPhases.tsx'
+import { Symbols } from './pages/Symbols.tsx'
 import { Numerology } from './pages/Numerology.tsx'
 import { Electional } from './pages/Electional.tsx'
 import { Ephemeris } from './pages/Ephemeris.tsx'
@@ -73,6 +74,8 @@ export function App() {
       return <Eclipses />
     case 'moon-phases':
       return <MoonPhases />
+    case 'symbols':
+      return <Symbols />
     case 'numerology':
       return <Numerology />
     case 'electional':
