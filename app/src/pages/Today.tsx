@@ -14,6 +14,7 @@ import { loadLib, signKey, splitTitle, text, transitKey, type InterpLib } from '
 import { ASPECT_COLOR, ASPECT_GLYPH, ELEMENT_COLOR, SIGN_GLYPH, SIGN_TH, fmtDeg, glyph, hhmm } from '../ui/astro-labels.ts'
 import { HelpHead, Page, SECTION_HELP } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
+import { TransitSheet } from './TransitSheet.tsx'
 import './today.css'
 
 const BG =
@@ -162,6 +163,7 @@ function signLib(lib: InterpLib, p: Pt, sign: number): { dgDesc: string | null; 
 
 function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
   const [sel, setSel] = useState(-1)
+  const [ts, setTs] = useState<Transit | null>(null)
   const tp = thaiParts(now)
   const moonRow = rows.find((r) => r.p === 'M')!
   const ms = moonRow.sign
@@ -257,7 +259,7 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
                   const line = transitLine(lib, t)
                   const om = Math.floor(t.orb * 60)
                   return (
-                    <button class="tr" style={i ? { borderTop: '1px solid rgba(255,255,255,.06)' } : undefined}>
+                    <button class="tr" onClick={() => setTs(t)} style={i ? { borderTop: '1px solid rgba(255,255,255,.06)' } : undefined}>
                       <span style={{ width: '40px', height: '40px', flex: 'none', borderRadius: '12px', background: col + '26', color: col, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}>{ASPECT_GLYPH[t.type]}</span>
                       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3px' }}>
                         <span style={{ fontSize: '15px', fontWeight: 600 }}>{NAME[t.t]}{t.retro ? ' (ถอยหลัง)' : ''} {VERB[t.type]} {NAME[t.n]}ของคุณ</span>
@@ -346,6 +348,7 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
           <span class="lbl">ประ และ นิจ คือ "ดาวเสีย" ใช้กับดาว 7 ดวงแบบดั้งเดิมเท่านั้น</span>
         </div>
       </div>
+      {ts && <TransitSheet tr={ts} jd={jd} lib={lib} dur={durationChip(jd, ts.endsJd).t} onClose={() => setTs(null)} />}
       <TabBar active="today" />
     </Page>
   )
