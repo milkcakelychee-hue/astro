@@ -16,7 +16,7 @@ import { BackLink, HelpHead, Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
 import { MainEmpty } from './MainEmpty.tsx'
 import { PlanetSheet } from './PlanetSheet.tsx'
-import { CategorySheet, type Cat } from './CategorySheet.tsx'
+import { CategorySheet, CAT_TITLE, type Cat } from './CategorySheet.tsx'
 import { loadLib, type InterpLib } from '../lib/interp.ts'
 import './main.css'
 import './main-light.css'
@@ -80,6 +80,8 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
   const known = timeKnown(person)
   // ผู้ใช้ขอ: แตะ Big Three / ดาวเด่น → เปิด Sheet อ่านเพิ่มเติม
   const sheetHref = (p: Pt) => base + (person.isMe ? '?' : '&') + 'p=' + p
+  // จากแผ่นหมวด: จำหมวดไว้ใน hash เพื่อกด < กลับมาที่เดิม
+  const catHref = (k: string) => base + (person.isMe ? '?' : '&') + 'cat=' + k
   const prov = provinceByName(person.province)!
   const [o3, setO3] = useState(false)
   const [o4, setO4] = useState(false)
@@ -291,10 +293,10 @@ function MainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
         {/* ดาวที่ควรรู้จักก่อน + รูปแบบพิเศษ: รอข้อความหมวดใหม่จาก lib/gen2.py */}
       </div>
       {cat && !sheetPt && lib && (
-        <CategorySheet cat={cat} chart={chart} aspects={aspects} dom={dom} lib={lib} known={known} ptHref={sheetHref} onClose={() => (location.hash = base)} />
+        <CategorySheet cat={cat} chart={chart} aspects={aspects} dom={dom} lib={lib} known={known} ptHref={(p) => catHref(cat) + '&p=' + p} onClose={() => (location.hash = base)} />
       )}
       {sheetPt && chart.pos[sheetPt] && lib && (
-        <PlanetSheet pt={sheetPt} chart={chart} aspects={aspects} lib={lib} known={known} personId={person.id} onClose={() => (location.hash = base)} />
+        <PlanetSheet pt={sheetPt} chart={chart} aspects={aspects} lib={lib} known={known} personId={person.id} onClose={() => (location.hash = base)} {...(cat ? { onBack: () => (location.hash = catHref(cat)), backLabel: CAT_TITLE[cat] + 'ในชาร์ต' } : {})} />
       )}
       <TabBar active={navTab} />
     </Page>

@@ -20,7 +20,7 @@ const ord = (n: number) => n + (n === 1 ? 'st' : n === 2 ? 'nd' : n === 3 ? 'rd'
 const V = '︎'
 
 /** แยกส่วนของข้อความคลัง (รูปแบบจาก lib/gen.py) */
-function parseSign(t: string | null) {
+export function parseSign(t: string | null) {
   if (!t) return null
   const body = splitTitle(t).body
   const [head = '', ...rest] = body.split(' จุดเด่น: ')
@@ -32,14 +32,21 @@ function parseSign(t: string | null) {
   const dignity = extra.find((x) => /\((Domicile|Exaltation|Detriment|Fall)\)/.test(x)) ?? null
   return { head, style, strong, weak, extra: extra.filter((x) => x !== dignity), dignity }
 }
-function parseHouse(t: string | null) {
+export function parseHouse(t: string | null) {
   if (!t) return null
   const body = splitTitle(t).body
   const m = /^พลังเรื่อง(.*) ไปลงที่เรื่อง(.*) — (.*)$/.exec(body)
   return m ? { topic: m[1]!, area: m[2]!, desc: m[3]!, body } : { topic: '', area: '', desc: body, body }
 }
+/** มุม: "แก่นเรื่อง: X — Y ด้านดี: Z · ระวัง: W" */
+export function parseAspect(t: string | null) {
+  if (!t) return null
+  const body = splitTitle(t).body.replace(/^แก่นเรื่อง: /, '')
+  const m = /^(.*?) — (.*?) ด้านดี: (.*?) · ระวัง: (.*)$/.exec(body)
+  return m ? { theme: m[1]!, how: m[2]!, good: m[3]!, warn: m[4]! } : { theme: body, how: '', good: '', warn: '' }
+}
 
-export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; lib: InterpLib; known: boolean; personId: string; onClose: () => void }) {
+export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; lib: InterpLib; known: boolean; personId: string; onClose: () => void; onBack?: () => void; backLabel?: string }) {
   const { pt, chart, lib, known } = props
   const pos = chart.pos[pt]
   const s = signOf(pos.lon)
@@ -86,6 +93,11 @@ export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; li
       <section role="dialog" aria-label={`คำอธิบาย ${title}`} style={{ position: 'absolute', left: 0, right: 0, margin: '0 auto', maxWidth: '390px', top: '96px', bottom: 0, overflowY: 'auto', borderRadius: '28px 28px 0 0', background: 'linear-gradient(180deg,#151827 0%,#0C0E18 240px)', borderTop: '1px solid rgba(180,170,255,.30)', boxShadow: '0 -20px 60px rgba(0,0,0,.5)', display: 'flex', flexDirection: 'column', color: '#F2F4FA', fontFamily: 'var(--font)' }}>
         <div style={{ display: 'flex', justifyContent: 'center', padding: '10px 0 4px' }}><span style={{ width: '40px', height: '5px', borderRadius: '999px', background: 'rgba(255,255,255,.28)' }} /></div>
         <div style={{ padding: '8px 20px 40px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {props.onBack && (
+            <button onClick={props.onBack} style={{ alignSelf: 'flex-start', height: '36px', padding: '0 12px 0 6px', borderRadius: '999px', border: '1px solid rgba(255,255,255,.14)', background: 'rgba(255,255,255,.06)', color: '#7FB8FF', font: '500 13px var(--font)', display: 'flex', alignItems: 'center', gap: '2px' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 6-6 6 6 6" /></svg>{props.backLabel}
+            </button>
+          )}
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
             <span style={{ width: '48px', height: '48px', flex: 'none', borderRadius: '999px', background: 'radial-gradient(circle at 35% 30%,rgba(255,122,89,.45),rgba(255,122,89,.10))', border: '1px solid rgba(255,122,89,.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', color: '#FF9C80' }}>{GL[pt]}{V}</span>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
