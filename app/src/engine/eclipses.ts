@@ -19,9 +19,12 @@ export function eclipses(swe: Swe, natal: Chart | null, withAngles: boolean, a: 
     for (;;) {
       const r = sun ? swe.sol_eclipse_when_glob(t, 2, 0, 0) : swe.lun_eclipse_when(t, 2, 0, 0)
       if (!r || r.tret[0]! > b) break
-      const jd = r.tret[0]!, f = r.retFlag
+      // astro-seek (เทียบ 6 พ.ย. 2569 ครบ 2569–2572): จันทรุปราคาเร็วกว่า Swiss Ephemeris ปัจจุบัน ~8–11 วินาที → ลบ 10 วินาที ตรงทุกครั้ง
+      const jd = r.tret[0]! - (sun ? 0 : 10 / 86400), f = r.retFlag
       const kind: EKind = sun ? (f & 32 ? 'hybrid' : f & 4 ? 'total' : f & 8 ? 'annular' : 'partial') : f & 4 ? 'total' : f & 16 ? 'partial' : 'penumbral'
-      const lon = bodyAt(swe, jd, 'M').lon
+      // องศา = ตำแหน่งดวงจันทร์ ณ นาทีที่แสดง (ตัดวินาที) — ตรง astro-seek 14/14
+      const jdMin = Math.floor((jd + 0.5) * 1440) / 1440 - 0.5
+      const lon = bodyAt(swe, jdMin, 'M').lon
       const hits: EHit[] = []
       if (natal) for (const p of HIT_PTS) {
         if (!withAngles && (p === 'A' || p === 'C')) continue
@@ -39,7 +42,7 @@ export function eclipses(swe: Swe, natal: Chart | null, withAngles: boolean, a: 
         else vis = alt >= 10 ? 'yes' : alt > -3 ? 'low' : 'no'
       }
       out.push({ sun, kind, jd, lon, house: natal && withAngles ? natal.house(lon) : null, hits, level: level as 1 | 2 | 3, vis })
-      t = jd + 20
+      t = r.tret[0]! + 20
     }
   }
   return out.sort((x, y) => x.jd - y.jd)

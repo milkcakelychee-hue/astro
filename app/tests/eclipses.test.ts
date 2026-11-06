@@ -23,7 +23,7 @@ const E = [
 it('ตรงกับดีไซน์', () => {
   const nat = computeChart(swe, INP)
   const ecl = eclipses(swe, nat, true, swe.julday(2026, 8, 1, 0), swe.julday(2029, 1, 1, 0))
-  // เวลา/องศาต่างได้ ≤1 นาที/ลิปดา (จันทรุปราคาช้ากว่าเว็บ ~10 วินาที — docs/09)
+  // ตรง astro-seek ทุกตัว (เวลา + องศา)
   const toMin = (s: string) => { const [d, t] = s.split(' '); const [h, m] = t!.split(':').map(Number); return Date.parse(d!.replace(/-(\d)(?!\d)/g, '-0$1')) / 6e4 + h! * 60 + m! }
   const deg = (s: string) => { const m = /(\S+) (\d+)°(\d+)′/.exec(s)!; return SG.indexOf(m[1]!) * 1800 + +m[2]! * 60 + +m[3]! }
   const got = ecl.map((e) => {
@@ -32,8 +32,8 @@ it('ตรงกับดีไซน์', () => {
   })
   expect(got.length).toBe(E.length)
   got.forEach((g, i) => {
-    expect(Math.abs(toMin(g[2] as string) - toMin(E[i]![2] as string))).toBeLessThanOrEqual(1)
-    expect(Math.abs(deg(g[3] as string) - deg(E[i]![3] as string))).toBeLessThanOrEqual(2)
+    expect(g[2]).toBe(E[i]![2])
+    expect(g[3]).toBe(E[i]![3])
     expect(g[4]).toBe(E[i]![4])
   })
   expect(got.map((g) => g[5])).toEqual(E.map((e) => e[5]))
