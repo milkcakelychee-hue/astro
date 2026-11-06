@@ -51,6 +51,9 @@ export function Transit() {
   // ผู้ใช้ขอ: กล่องนับกดเพื่อกรองรายการตามลักษณะมุม (-1 = ทั้งหมด)
   const [nf, setNf] = useState(-1)
   const natOf = (r: TransitRow) => (r.type === '3' || r.type === '6' ? 0 : r.type === '0' ? 2 : 1)
+  const [spd, setSpd] = useState<'all' | 'slow' | 'fast'>('all')
+  const FAST = 'SMmVa'
+  const pass = (r: TransitRow) => (nf < 0 || natOf(r) === nf) && (spd === 'all' || (spd === 'fast') === FAST.includes(r.t))
   useEffect(() => {
     ;(async () => {
       const me = await getMe()
@@ -121,14 +124,20 @@ export function Transit() {
             )
           })()}
 
+          {/* ตัวกรอง — ตาม new-screens/Transit.dc.html */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {d && <span style={{ fontSize: '15px', fontWeight: 600 }}>ช่วงนี้มีแรงหนุน {cnt[0]} เรื่อง · แรงกดดัน {cnt[1]} เรื่อง{cnt[2] ? ` · พลังเข้มข้น ${cnt[2]} เรื่อง` : ''}</span>}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}><span style={{ fontSize: '15px', fontWeight: 600 }}>ตอนนี้มี {d ? d.rows.length : '–'} มุมที่มีผล</span><span class="lbl">แตะเพื่อกรอง</span></div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,minmax(0,1fr))', gap: '8px' }}>
-              {([[cnt[0], '💚 ส่งเสริม', '#7FE3C0'], [cnt[1], '⚡ ท้าทาย', '#FFB08A'], [cnt[2], '🔥 กุมกัน', '#F3D46E']] as const).map(([x, l, c], i) => (
-                <button class="card" aria-pressed={nf === i} onClick={() => setNf(nf === i ? -1 : i)} style={{ padding: '10px 6px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', borderRadius: '16px', color: '#F2F4FA', font: 'inherit', ...(nf === i ? { borderColor: c, background: 'rgba(255,255,255,.10)', boxShadow: `0 0 12px ${c}55` } : {}) }}><span style={{ fontSize: '22px', fontWeight: 700, color: c }}>{d ? x : '–'}</span><span class="lbl" style={nf === i ? { color: c } : undefined}>{l}</span></button>
+              {([[cnt[0], 'ส่งเสริม', '#7FE3C0'], [cnt[1], 'ท้าทาย', '#FFB08A'], [cnt[2], 'กุมกัน', '#F3D46E']] as const).map(([x, l, c], i) => (
+                <button aria-pressed={nf === i} onClick={() => setNf(nf === i ? -1 : i)} style={{ padding: '10px 6px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', borderRadius: '16px', border: `1.5px solid ${nf === i ? c : 'rgba(255,255,255,.10)'}`, background: nf === i ? 'rgba(255,255,255,.10)' : 'rgba(255,255,255,.05)', color: '#F2F4FA', fontFamily: 'inherit' }}><span style={{ fontSize: '22px', fontWeight: 700, color: c }}>{d ? x : '–'}</span><span class="lbl">{l}</span></button>
               ))}
             </div>
-            <span class="lbl">{nf < 0 ? 'แตะกล่องเพื่อดูเฉพาะมุมแบบนั้น' : 'กำลังกรองอยู่ · แตะอีกครั้งเพื่อดูทั้งหมด'}</span>
+            <div role="tablist" style={{ display: 'flex', gap: '4px', padding: '4px', borderRadius: '14px', background: 'rgba(255,255,255,.07)' }}>
+              {([['all', 'ทุกดาว'], ['slow', 'ดาวช้า · ผลนาน'], ['fast', 'ดาวเร็ว · ผลสั้น']] as const).map(([k, l]) => <button role="tab" aria-selected={spd === k} class={spd === k ? 'seg on' : 'seg'} onClick={() => setSpd(k)} style={{ height: '34px' }}>{l}</button>)}
+            </div>
+            {d && (nf >= 0 || spd !== 'all') && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12.5px', color: '#C9CEDC' }}><span>แสดง {d.rows.filter(pass).length} จาก {d.rows.length} มุม</span><button onClick={() => { setNf(-1); setSpd('all') }} style={{ border: 'none', background: 'transparent', color: '#7FB8FF', font: '500 12.5px var(--font)', padding: '6px 0' }}>ล้างตัวกรอง</button></div>
+            )}
           </div>
 
           <div class="card" style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -146,7 +155,7 @@ export function Transit() {
           {d && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {GT.map(([gt, gc, gbd, gd], k) => {
-                const rows = d.rows.filter((r) => grpOf(r) === k && (nf < 0 || natOf(r) === nf)).sort((x, y) => x.f - y.f)
+                const rows = d.rows.filter((r) => grpOf(r) === k && pass(r)).sort((x, y) => x.f - y.f)
                 if (!rows.length) return null
                 return (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

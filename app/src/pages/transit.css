@@ -9,3 +9,5 @@
 .pg-tr .hr { display: grid; grid-template-columns: 26px minmax(0,1fr) auto 44px; align-items: center; gap: 8px; min-height: 40px; border-top: 1px solid rgba(255,255,255,.06); font-size: 13.5px; }
 .pg-tr .chv svg { transition: transform .2s; }
 .pg-tr .chv[data-o="true"] svg { transform: rotate(180deg); }
+.pg-tr .seg { flex: 1; height: 40px; border: none; border-radius: 12px; background: transparent; color: #C9CEDC; font: 500 13px var(--font); white-space: nowrap; }
+.pg-tr .seg.on { background: #F2F4FA; color: #06070D; font-weight: 600; }
