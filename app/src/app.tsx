@@ -18,6 +18,7 @@ import { Cycles } from './pages/Cycles.tsx'
 import { VenusRose } from './pages/VenusRose.tsx'
 import { Eclipses } from './pages/Eclipses.tsx'
 import { MoonPhases } from './pages/MoonPhases.tsx'
+import { Ephemeris } from './pages/Ephemeris.tsx'
 import { Retrograde } from './pages/Retrograde.tsx'
 import { Growth } from './pages/Growth.tsx'
 import { LunarReturn } from './pages/LunarReturn.tsx'
@@ -70,6 +71,8 @@ export function App() {
       return <Eclipses />
     case 'moon-phases':
       return <MoonPhases />
+    case 'ephemeris':
+      return <Ephemeris />
     case 'retrograde':
       return <Retrograde />
     case 'growth':
