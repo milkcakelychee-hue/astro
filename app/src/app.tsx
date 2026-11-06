@@ -14,6 +14,7 @@ import { Timeline } from './pages/Timeline.tsx'
 import { Transit } from './pages/Transit.tsx'
 import { Lunations } from './pages/Lunations.tsx'
 import { SolarReturn } from './pages/SolarReturn.tsx'
+import { VenusRose } from './pages/VenusRose.tsx'
 import { Eclipses } from './pages/Eclipses.tsx'
 import { MoonPhases } from './pages/MoonPhases.tsx'
 import { Retrograde } from './pages/Retrograde.tsx'
@@ -60,6 +61,8 @@ export function App() {
       return <Calendar />
     case 'solar-return':
       return <SolarReturn />
+    case 'venus-rose':
+      return <VenusRose />
     case 'eclipses':
       return <Eclipses />
     case 'moon-phases':
