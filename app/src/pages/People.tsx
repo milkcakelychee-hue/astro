@@ -4,7 +4,7 @@ import { computeChart } from '../engine/chart.ts'
 import { signOf } from '../engine/dominants.ts'
 import { getBrowserSwe } from '../engine/ephe-browser.ts'
 import { PROVINCE_TH } from '../engine/places.ts'
-import { REL_AVATAR, REL_LABEL, birthInput, listPeople, timeKnown, type Person } from '../data/people.ts'
+import { birthInput, listCats, listPeople, relAvatar, relLabel, type RelCat, timeKnown, type Person } from '../data/people.ts'
 import { SIGN_TH, hhmm, thaiDate } from '../ui/astro-labels.ts'
 import { Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
@@ -28,6 +28,8 @@ interface Row {
 export function People() {
   const [rows, setRows] = useState<Row[] | null>(null)
   const [err, setErr] = useState<string | null>(null)
+  const [cats, setCats] = useState<RelCat[]>([])
+  useEffect(() => { listCats().then(setCats) }, [])
   useEffect(() => {
     ;(async () => {
       const [people, swe] = await Promise.all([listPeople(), getBrowserSwe()])
@@ -123,13 +125,13 @@ export function People() {
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
                   </span>
                 )}
-                <span style={{ width: '48px', height: '48px', flex: 'none', borderRadius: '999px', background: REL_AVATAR[rel(r.p)] ?? REL_AVATAR.friend, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', fontWeight: 600, color: '#FFFFFF' }}>
+                <span style={{ width: '48px', height: '48px', flex: 'none', borderRadius: '999px', background: relAvatar(rel(r.p), cats), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', fontWeight: 600, color: '#FFFFFF' }}>
                   {initial(r.p.name)}
                 </span>
                 <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '4px' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
                     <span style={{ fontSize: '16px', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.p.name}</span>
-                    <span style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '999px', background: 'rgba(255,255,255,.10)', color: '#C9CEDC', whiteSpace: 'nowrap' }}>ความสัมพันธ์: {REL_LABEL[rel(r.p)] ?? r.p.relation}</span>
+                    <span style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '999px', background: 'rgba(255,255,255,.10)', color: '#C9CEDC', whiteSpace: 'nowrap' }}>ความสัมพันธ์: {relLabel(rel(r.p), cats)}</span>
                   </span>
                   <span style={{ display: 'flex', gap: '10px', fontSize: '13px', color: '#C9CEDC' }}>
                     <span>☉︎ {r.sun}</span><span>☽︎ {r.moon}</span><span>AC {r.ac}</span>

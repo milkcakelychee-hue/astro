@@ -4,7 +4,8 @@ import { PROVINCES, PROVINCE_TH } from '../engine/places.ts'
 import { computeChart } from '../engine/chart.ts'
 import { getBrowserSwe } from '../engine/ephe-browser.ts'
 import { SIGN_TH } from '../ui/astro-labels.ts'
-import { birthInput, timeKnown, deletePerson, getMe, getPerson, savePerson, type Person } from '../data/people.ts'
+import { CAT_COLORS, birthInput, listCats, listPeople, timeKnown, deletePerson, getMe, getPerson, savePerson, type Person, type RelCat } from '../data/people.ts'
+import { CategoryEditor, catIcon } from './CategoryEditor.tsx'
 import { Page } from '../ui/components.tsx'
 import './addperson.css'
 
@@ -34,6 +35,20 @@ export function AddPerson() {
   const [note, setNote] = useState('')
   const [askDel, setAskDel] = useState(false)
   const [sum, setSum] = useState('')
+  const [cats, setCats] = useState<RelCat[]>([])
+  const [counts, setCounts] = useState<Record<string, number>>({})
+  const [catOpen, setCatOpen] = useState(false)
+  const [catInit, setCatInit] = useState<RelCat | null>(null)
+  // กดค้างที่หมวดที่ตั้งเอง → แก้ไข/ลบ
+  let pressT = 0
+  const pressStart = (c: RelCat) => { pressT = window.setTimeout(() => { setCatInit(c); setCatOpen(true) }, 550) }
+  const pressEnd = () => clearTimeout(pressT)
+  const loadCats = async () => {
+    setCats(await listCats())
+    const n: Record<string, number> = {}
+    for (const x of await listPeople()) if (x.relation.startsWith('c:')) n[x.relation.slice(2)] = (n[x.relation.slice(2)] ?? 0) + 1
+    setCounts(n)
+  }
   const forMe = location.hash.includes('me=1')
   const [hasMe, setHasMe] = useState(false)
   const [name, setName] = useState('')
@@ -47,6 +62,7 @@ export function AddPerson() {
   const [prov, setProv] = useState('')
 
   useEffect(() => {
+    loadCats()
     if (editId) getPerson(editId).then((x) => {
       if (!x) return
       setOrig(x); setName(x.name); setRel(x.relation); setD(x.d); setMo(x.mo); setY(x.y)
@@ -133,8 +149,11 @@ export function AddPerson() {
                     {r.icon}{r.label}
                   </button>
                 ))}
-                {/* TODO: หมวดที่เพิ่มเอง — รอออกแบบตัวเลือกไอคอน/เมนูแก้ไข */}
-                <button type="button" class="rt" style={{ borderStyle: 'dashed', color: '#7FB8FF', borderColor: 'rgba(127,184,255,.5)' }}>
+                {cats.map((c) => {
+                  const k = 'c:' + c.id
+                  return <button type="button" role="radio" aria-checked={rel === k} class={rel === k ? 'rt on' : 'rt'} onClick={() => setRel(k)} onPointerDown={() => pressStart(c)} onPointerUp={pressEnd} onPointerLeave={pressEnd} onContextMenu={(e) => e.preventDefault()} style={rel === k ? undefined : { color: CAT_COLORS[c.color] }}>{catIcon(c)}{c.name}</button>
+                })}
+                <button type="button" class="rt" onClick={() => { setCatInit(null); setCatOpen(true) }} style={{ borderStyle: 'dashed', color: '#7FB8FF', borderColor: 'rgba(127,184,255,.5)' }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>เพิ่มหมวด
                 </button>
               </div>
@@ -221,6 +240,7 @@ export function AddPerson() {
           </button>}
           {!orig && <span class="lbl" style={{ textAlign: 'center' }}>ข้อมูลเก็บในเครื่องนี้เท่านั้น</span>}
         </form>
+        {catOpen && <CategoryEditor initial={catInit} cats={cats} counts={counts} onClose={() => setCatOpen(false)} onSaved={async (c) => { await loadCats(); if (c) setRel('c:' + c.id); else if (rel.startsWith('c:')) setRel('none'); setCatOpen(false) }} />}
         {orig && askDel && (
           <>
             <div onClick={() => setAskDel(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(3,4,8,.70)', zIndex: 5 }} />
