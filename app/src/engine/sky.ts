@@ -131,10 +131,11 @@ export function moonInfo(swe: Swe, jd: number): MoonInfo {
 }
 
 /** มุมหลักสุดท้ายของดวงจันทร์ก่อนย้ายราศี → ช่วง VOC (ค้นตั้งแต่จันทร์เข้าราศีนี้) */
-export function vocBefore(swe: Swe, jdNow: number, jdIngress: number): { start: number; end: number } | null {
+export function vocBefore(swe: Swe, jdNow: number, jdIngress: number): { start: number; end: number; p: Pt; type: AspectType } | null {
   const from = prevIngress(swe, jdNow, 'M', 3) ?? jdNow - 3
   const step = 1 / 24
   let last: number | null = null
+  let lp: Pt = 'S', lt: AspectType = '0'
   for (const p of VOC_PTS) {
     for (const t of TYPES) {
       const ang = ANGLE_DEG[t]
@@ -148,7 +149,7 @@ export function vocBefore(swe: Swe, jdNow: number, jdIngress: number): { start: 
           // ข้ามศูนย์ (ไม่ใช่กระโดด ±180)
           if (fa <= 0 !== fb <= 0 && Math.abs(fa - fb) < 90) {
             const hit = bisect(f, a, b)
-            if (last === null || hit > last) last = hit
+            if (last === null || hit > last) { last = hit; lp = p; lt = t }
           }
           a = b
           fa = fb
@@ -157,7 +158,7 @@ export function vocBefore(swe: Swe, jdNow: number, jdIngress: number): { start: 
       }
     }
   }
-  return last === null ? null : { start: last, end: jdIngress }
+  return last === null ? null : { start: last, end: jdIngress, p: lp, type: lt }
 }
 
 // ---------- ศักดิ์ของดาว (ดาว 7 ดวงแบบดั้งเดิม) ----------
