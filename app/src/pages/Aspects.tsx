@@ -1,10 +1,11 @@
 // หน้า "มุมดาวทั้งหมด" — ตาม design/Aspects.dc.html
+import { AspectParts } from '../ui/AspectParts.tsx'
 import { useEffect, useState } from 'preact/hooks'
 import { allowedOrb, aspectsOf, type Aspect, type AspectType } from '../engine/aspects.ts'
 import { PLANETS, type Pt } from '../engine/chart.ts'
 import { getBrowserSwe } from '../engine/ephe-browser.ts'
 import { birthInput, getMe, timeKnown, type Person } from '../data/people.ts'
-import { aspectKey, loadLib, splitTitle, text, type InterpLib } from '../lib/interp.ts'
+import { aspectKey, loadLib, text, type InterpLib } from '../lib/interp.ts'
 import { ASPECT_COLOR, ASPECT_GLYPH, PT_EN, glyph, hhmm, thaiDate, V } from '../ui/astro-labels.ts'
 import { Page } from '../ui/components.tsx'
 import './aspects.css'
@@ -75,7 +76,7 @@ export function Aspects() {
       const max = allowedOrb(a.a, a.b, a.type)
       const p = 1 - a.orbMin / 60 / max
       const t = text(lib, 'aspect', aspectKey(a.a, a.b, a.type))
-      return { a, max, p, tier: tierOf(p), mean: t ? splitTitle(t).body : null }
+      return { a, max, p, tier: tierOf(p), mean: t }
     })
     .sort((x, y) => y.p - x.p)
 
@@ -204,7 +205,7 @@ function AspRow({ r, i, open, onPick }: { r: Row; i: number; open: boolean; onPi
             <span style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#9AA1B5' }}><span>ระดับอิทธิพล <b style={{ color: '#F2F4FA' }}>{pct}</b></span><span>ห่าง {fo(a.orbMin)} จากที่นับได้ {r.max}°</span></span>
           </span>
           <span style={{ fontSize: '11.5px', lineHeight: 1.5, color: '#9AA1B5' }}>มุมนี้จะนับว่าเกิดขึ้นเมื่อดาวสองดวงห่างจากองศาพอดีไม่เกิน {r.max}° ({lum ? 'มีอาทิตย์หรือจันทร์ จึงได้ระยะกว้างกว่า' : 'ดาวทั่วไป'}) มุมนี้ห่าง {fo(a.orbMin)} จึงมีอิทธิพล {pct}</span>
-          {r.mean && <span style={{ fontSize: '13px', lineHeight: 1.65, color: '#DCE0EA' }}>{r.mean}</span>}
+          {r.mean && <AspectParts text={r.mean} />}
         </span>
       )}
     </button>

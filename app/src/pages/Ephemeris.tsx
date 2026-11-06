@@ -1,6 +1,6 @@
 // หน้า "ตารางตำแหน่งดาว" — ตาม design/Ephemeris.dc.html
 // [dev] #/ephemeris?at=2026-11-04T12:00 = จำลองวันนี้
-import { useEffect, useRef, useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import { computeChart, type Chart } from '../engine/chart.ts'
 import { getBrowserSwe } from '../engine/ephe-browser.ts'
 import { monthEvents, monthRows, thaiOf, type Cell, type EphEvent } from '../engine/ephemeris.ts'
@@ -25,7 +25,6 @@ interface Data { y: number; mo: number; today: number; rows: Cell[][]; ev: EphEv
 export function Ephemeris() {
   const [d, setD] = useState<Data | null>(null)
   const [sel, setSel] = useState(1)
-  const strip = useRef<HTMLDivElement>(null)
   useEffect(() => {
     ;(async () => {
       const [swe, me] = await Promise.all([getBrowserSwe(), getMe()])
@@ -36,8 +35,6 @@ export function Ephemeris() {
       setSel(t.d)
     })().catch(() => {})
   }, [])
-  // เลื่อนแถบวันให้เห็นวันนี้
-  useEffect(() => { const el = strip.current?.children[(d?.today ?? 1) - 1] as HTMLElement | undefined; if (el && strip.current) strip.current.scrollLeft = Math.max(0, el.offsetLeft - 20 - 50 * 3) }, [d])
 
   const house = (lon: number) => (d?.natal ? d.natal.house(lon) : null)
   const wd = (day: number) => new Date(Date.UTC(d!.y, d!.mo - 1, day)).getUTCDay()
@@ -74,12 +71,17 @@ export function Ephemeris() {
           {d && (
             <>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><span style={{ fontSize: '15px', fontWeight: 600 }}>เลือกวัน</span><span class="lbl">เลื่อนซ้ายขวา</span></div>
-                <div ref={strip} style={{ display: 'flex', gap: '6px', overflowX: 'auto', margin: '0 -20px', padding: '2px 20px 6px', scrollbarWidth: 'none' }}>
-                  {d.rows.map((_, k) => {
-                    const n = k + 1, on = n === sel, ev = d.ev.some((e) => evDay(e) === n)
-                    return <button onClick={() => setSel(n)} aria-pressed={on} style={{ flex: 'none', width: '44px', height: '58px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2px', borderRadius: '14px', border: `1px solid ${on ? '#B9A6FF' : n === d.today ? 'rgba(185,166,255,.45)' : 'rgba(255,255,255,.08)'}`, background: on ? 'rgba(185,166,255,.22)' : 'rgba(255,255,255,.03)', color: '#F2F4FA', font: '500 11px var(--font)' }}><span style={{ color: '#9AA1B5' }}>{WD[wd(n)]}</span><b style={{ fontSize: '16px' }}>{n}</b><span style={{ width: '5px', height: '5px', borderRadius: '50%', background: ev ? '#FFB08A' : 'transparent' }} /></button>
-                  })}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><span style={{ fontSize: '15px', fontWeight: 600 }}>เลือกวัน</span><span class="lbl">จุดส้ม = มีเหตุการณ์</span></div>
+                {/* ผู้ใช้ขอ (6 พ.ย. 2569): ปฏิทินเล็กแทนแถบเลื่อน */}
+                <div class="card" style={{ padding: '12px 12px 10px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,minmax(0,1fr))', textAlign: 'center', fontSize: '11px', color: '#9AA1B5', marginBottom: '4px' }}>{WD.map((w) => <span>{w}</span>)}</div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,minmax(0,1fr))', gap: '2px' }}>
+                    {Array.from({ length: wd(1) }, () => <span />)}
+                    {d.rows.map((_, k) => {
+                      const n = k + 1, on = n === sel, ev = d.ev.some((e) => evDay(e) === n)
+                      return <button onClick={() => setSel(n)} aria-pressed={on} aria-label={`${n}`} style={{ height: '40px', borderRadius: '12px', border: `1px solid ${on ? '#B9A6FF' : n === d.today ? 'rgba(185,166,255,.45)' : 'transparent'}`, background: on ? 'rgba(185,166,255,.22)' : 'transparent', color: '#F2F4FA', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2px', padding: 0, font: `${on ? 600 : 500} 14px var(--font)` }}><span>{n}</span><span style={{ width: '4px', height: '4px', borderRadius: '50%', background: ev ? '#FFB08A' : 'transparent' }} /></button>
+                    })}
+                  </div>
                 </div>
               </div>
 

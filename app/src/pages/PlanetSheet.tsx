@@ -1,4 +1,5 @@
 // แผ่นคำอธิบายดาว (Bottom sheet) — ตาม design/Sheet.dc.html · เปิดจากการแตะดาวในวงชาร์ต (#/main?p=a)
+import { AspectParts } from '../ui/AspectParts.tsx'
 import { useState } from 'preact/hooks'
 import type { Aspect, AspectType } from '../engine/aspects.ts'
 import type { Chart, Pt } from '../engine/chart.ts'
@@ -163,7 +164,7 @@ export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; li
                 <div style={{ padding: '12px 14px', borderRadius: '14px', background: '#1D2135', border: '1px solid rgba(127,184,255,.30)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                   <span style={{ fontSize: '14px', fontWeight: 600 }}>{name} {TS[cur.type]} {NAME[other(cur)]}</span>
                   <span style={{ fontSize: '12px', color: '#9AA1B5' }}>{TN[cur.type]} · ห่างจากมุมพอดี {Math.round(cur.orb)}°</span>
-                  {curText && <span style={{ fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA' }}>{splitTitle(curText).body}</span>}
+                  {curText && <div style={{ marginTop: '6px' }}><AspectParts text={curText} /></div>}
                 </div>
               )}
             </div>

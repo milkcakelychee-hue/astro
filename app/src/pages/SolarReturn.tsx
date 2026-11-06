@@ -1,5 +1,6 @@
 // หน้า "ดวงรอบปีนับจากวันเกิด (Solar Return)" — ตาม design/SolarReturn.dc.html
 // [dev] #/solar-return?at=2026-11-01T12:00 = จำลองวันนี้
+import { AspectParts } from '../ui/AspectParts.tsx'
 import { useEffect, useState } from 'preact/hooks'
 import type { AspectType } from '../engine/aspects.ts'
 import { computeChart, type Chart, type Pt } from '../engine/chart.ts'
@@ -30,14 +31,7 @@ const sg = (lon: number) => Math.floor(lon / 30)
 const fdLong = (jd: number) => { const p = thaiParts(dateOfJd(jd)); return `${p.d} ${MONTH[p.mo - 1]} ${p.y + 543}` }
 const body = (lib: InterpLib, cat: 'return' | 'aspect', k: string) => { const s = text(lib, cat, k); return s ? splitTitle(s).body : '' }
 
-/** ข้อความคลังมุม: "แก่นเรื่อง: … ด้านดี: … · ระวัง: …" → [สรุป, ด้านดี, ระวัง] */
-function aspText(lib: InterpLib, a: SrAspect): [string, string, string] {
-  const s = body(lib, 'aspect', aspectKey(a.a, a.b, a.type)).replace(/^แก่นเรื่อง: /, '')
-  const i = s.indexOf(' ด้านดี: ')
-  if (i < 0) return [s, '', '']
-  const [good, bad] = s.slice(i + 9).split(' · ระวัง: ')
-  return [s.slice(0, i), good ?? '', bad ?? '']
-}
+const aspRaw = (lib: InterpLib, a: SrAspect) => text(lib, 'aspect', aspectKey(a.a, a.b, a.type))
 
 interface Yr { jd: number; end: number; c: Chart; age: number }
 interface Data { name: string; prov: string; known: boolean; yrs: Yr[]; lib: InterpLib }
@@ -157,7 +151,7 @@ export function SolarReturn() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {asps.map((a, ai) => {
                   const A = AS[a.type], on = as === ai, om = Math.floor(a.orb * 60)
-                  const [sum, good, bad] = aspText(d.lib, a)
+                  
                   return (
                     <button onClick={() => setAs(on ? -1 : ai)} aria-expanded={on} style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', padding: '12px 14px', boxSizing: 'border-box', borderRadius: '16px', background: on ? 'rgba(185,166,255,.08)' : 'rgba(255,255,255,.04)', border: `1px solid ${on ? 'rgba(185,166,255,.55)' : 'rgba(255,255,255,.08)'}`, color: '#F2F4FA', fontFamily: 'inherit', textAlign: 'left' }}>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '12px', width: '100%' }}>
@@ -165,12 +159,10 @@ export function SolarReturn() {
                         <span style={{ display: 'flex', flexDirection: 'column', gap: '3px', flex: 1, minWidth: 0 }}><span style={{ fontSize: '14.5px', fontWeight: 600, lineHeight: 1.35 }}>{NM[a.a]} {A[3]} {NM[a.b]}</span><span style={{ fontSize: '12px', color: '#9AA1B5' }}>{om < 30 ? 'แน่นมาก รู้สึกได้ทั้งปี' : om < 90 ? 'ชัดเจน' : 'เป็นพื้นหลัง'} · {Math.floor(om / 60)}°{String(om % 60).padStart(2, '0')}′</span></span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9CEDC" stroke-width="2" aria-hidden="true" style={{ flex: 'none', ...(on ? { transform: 'rotate(180deg)' } : {}) }}><path d="m6 9 6 6 6-6" /></svg>
                       </span>
-                      <span style={{ fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA' }}>{sum}</span>
+                      <AspectParts text={aspRaw(d.lib, a)} skip={on ? [] : ['how', 'good', 'warn']} />
                       {on && (
                         <span style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '12px', borderRadius: '14px', background: 'rgba(6,7,13,.45)', border: '1px solid rgba(255,255,255,.08)' }}>
                           <span style={{ fontSize: '12px', color: A[1] }}>{A[3]} ({A[4]}) · {A[5]}</span>
-                          {good && <span style={{ display: 'flex', gap: '8px', fontSize: '13px', lineHeight: 1.6 }}><span style={{ flex: 'none', color: '#9AA1B5', width: '78px' }}>ด้านดี</span><span style={{ color: '#F2F4FA' }}>{good}</span></span>}
-                          {bad && <span style={{ display: 'flex', gap: '8px', fontSize: '13px', lineHeight: 1.6 }}><span style={{ flex: 'none', color: '#9AA1B5', width: '78px' }}>ระวัง</span><span style={{ color: '#F2F4FA' }}>{bad}</span></span>}
                         </span>
                       )}
                     </button>
