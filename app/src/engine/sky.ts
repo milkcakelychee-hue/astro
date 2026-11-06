@@ -4,7 +4,7 @@ import { ANGLE_DEG, type AspectType } from './aspects.ts'
 import { mod, type Chart, type Pt } from './chart.ts'
 import { DELTAT_AUTOMATIC, SPEED, SWIEPH, type Swe } from './swe.ts'
 
-const IDS: Partial<Record<Pt, number>> = { S: 0, M: 1, m: 2, V: 3, a: 4, J: 5, s: 6, U: 7, N: 8, P: 9, n: 10 }
+const IDS: Partial<Record<Pt, number>> = { S: 0, M: 1, m: 2, V: 3, a: 4, J: 5, s: 6, U: 7, N: 8, P: 9, n: 10, c: 15 }
 /** ดาวจรที่แสดง (ดาว 10 ดวง + ราหู Mean) */
 export const SKY_PTS: Pt[] = ['S', 'M', 'm', 'V', 'a', 'J', 's', 'U', 'N', 'P', 'n']
 const VOC_PTS: Pt[] = ['S', 'm', 'V', 'a', 'J', 's', 'U', 'N', 'P']

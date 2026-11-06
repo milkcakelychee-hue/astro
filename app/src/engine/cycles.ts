@@ -7,7 +7,9 @@ export type CycleKind = 'return' | 'sq1' | 'opp' | 'sq2'
 /** ระยะ (ดาวจร − ดาวเดิม) ของแต่ละหมุดหมาย */
 const ANGLE: Record<CycleKind, number> = { sq1: 90, opp: 180, sq2: 270, return: 0 }
 /** คาบโคจรโดยประมาณ (ปี) — ใช้นับว่าเป็นครั้งที่เท่าไรในชีวิตเท่านั้น */
-export const PERIOD: Partial<Record<Pt, number>> = { J: 11.86, s: 29.46, U: 84.0, N: 164.8, P: 248.0 }
+export const PERIOD: Partial<Record<Pt, number>> = { a: 1.88, J: 11.86, s: 29.46, U: 84.0, N: 164.8, P: 248.0, n: 18.6, c: 50.7 }
+/** ระยะรอบตอนนี้ 0–360 (โหนดเดินถอยหลัง: นับย้อน) */
+export const cycleAngle = (swe: Swe, natal: Chart, p: Pt, jd: number) => { const n0 = (p === 'c' ? natal.aspectPos : natal.pos)[p].lon; return mod(p === 'n' ? n0 - bodyAt(swe, jd, p).lon : bodyAt(swe, jd, p).lon - n0, 360) }
 
 export interface CycleEvent {
   p: Pt
@@ -22,12 +24,13 @@ const signed = (x: number) => mod(x + 180, 360) - 180
 
 /** หมุดหมายถัดไปของดาว p หลัง jd0 ภายใน maxYears · หาจุดตัดด้วย bisection */
 export function nextCycleEvent(swe: Swe, natal: Chart, p: Pt, jd0: number, maxYears: number): CycleEvent | null {
-  const n0 = natal.pos[p].lon
+  // ไครอนในชาร์ตแสดงแบบ TRUEPOS — เทียบกับดาวจรใช้ค่าปกติ (aspectPos) ให้วิธีเดียวกัน
+  const n0 = (p === 'c' ? natal.aspectPos : natal.pos)[p].lon
   // ดาวช้าเดินไม่ถึง 0.1°/วัน ก้าว 10 วันไม่พลาดจุดตัด
-  const step = p === 'J' || p === 's' ? 5 : 10
+  const step = p === 'a' ? 2 : p === 'J' || p === 's' || p === 'n' ? 5 : 10
   let best: CycleEvent | null = null
   for (const kind of Object.keys(ANGLE) as CycleKind[]) {
-    const f = (jd: number) => signed(bodyAt(swe, jd, p).lon - n0 - ANGLE[kind])
+    const f = (jd: number) => signed((p === 'n' ? n0 - bodyAt(swe, jd, p).lon : bodyAt(swe, jd, p).lon - n0) - ANGLE[kind])
     let a = jd0
     let fa = f(a)
     const end = Math.min(jd0 + maxYears * 365.25, best ? best.jd : Infinity)
