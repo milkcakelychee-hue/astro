@@ -15,7 +15,7 @@ describe('คลังข้อความ', () => {
     const n = Object.fromEntries(Object.entries(lib).map(([k, v]) => [k, Object.keys(v).length]))
     expect(n).toEqual({
       planet_sign: 180, planet_house: 156, aspect: 520, transit: 650, transit_house: 120, synastry: 700, eclipse: 64,
-      moon: 21, retrograde: 10, return: 72, direction: 2340, cycle: 44, numerology: 30, electional: 10,
+      moon: 21, retrograde: 10, return: 84, direction: 2340, cycle: 44, numerology: 30, electional: 10,
     })
   })
 
