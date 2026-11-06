@@ -61,7 +61,7 @@ export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; li
 
   const mine = props.aspects
     // DC/IC ซ้ำกับลัคนา/กลางฟ้า (ตามตัวอย่างในดีไซน์ไม่แสดง)
-    .filter((a) => (a.a === pt || a.b === pt) && !['D', 'I'].includes(a.a) && !['D', 'I'].includes(a.b))
+    .filter((a) => (a.a === pt || a.b === pt) && !['D', 'I', 'F', 'X'].includes(a.a) && !['D', 'I', 'F', 'X'].includes(a.b))
     .sort((x, y) => x.orb - y.orb)
   const [sel, setSel] = useState(0)
   const [open1, setOpen1] = useState(false)

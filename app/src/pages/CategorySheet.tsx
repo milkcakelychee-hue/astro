@@ -92,7 +92,7 @@ export function CategorySheet(props: { cat: Cat; chart: Chart; aspects: Aspect[]
       ['🔥 กุมกัน', 'ดาวอยู่ตำแหน่งเดียวกัน พลังรวมเป็นหนึ่ง', (a) => a.type === '0'],
     ]
     body = groups.map(([t, sub, f]) => {
-      const xs = aspects.filter((a) => f(a) && ![a.a, a.b].some((p) => p === 'D' || p === 'I')).sort((x, y) => x.orb - y.orb)
+      const xs = aspects.filter((a) => f(a) && ![a.a, a.b].some((p) => p === 'D' || p === 'I' || p === 'F' || p === 'X')).sort((x, y) => x.orb - y.orb)
       if (!xs.length) return null
       return (
         <>
