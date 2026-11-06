@@ -11,7 +11,6 @@ const VERSION = __APP_VERSION__
 
 const chev = <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
 const ri = (bg: string, fg: string, kids: preact.ComponentChildren, fs?: string) => <span class="ri" style={{ background: bg, color: fg, ...(fs ? { fontSize: fs } : {}) }}>{kids}</span>
-const ic = (d: preact.ComponentChildren) => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">{d}</svg>
 const two = (a: string, b: string) => <span style={{ flex: 1, display: 'flex', flexDirection: 'column' }}><span>{a}</span><span class="lbl">{b}</span></span>
 
 export function Settings() {
