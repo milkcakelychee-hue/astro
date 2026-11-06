@@ -5,3 +5,6 @@
 .pg-sr .seg { flex: 1; height: 40px; border: none; border-radius: 12px; background: transparent; color: #C9CEDC; font: 500 13px var(--font); white-space: nowrap; }
 .pg-sr .seg.on { background: #F2F4FA; color: #06070D; font-weight: 600; }
 .pg-sr .ht { display: flex; flex-direction: column; gap: 4px; min-height: 74px; padding: 8px; box-sizing: border-box; border-radius: 14px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03); }
+.pg-sr .xd svg { transition: transform .2s; }
+.pg-sr .xd[open] svg { transform: rotate(180deg); }
+.pg-sr summary::-webkit-details-marker { display: none; }
