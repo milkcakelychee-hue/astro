@@ -32,15 +32,6 @@ export function Settings() {
         </div>
 
         <div class="sec">
-          <span class="sh">ระบบการคำนวณ</span>
-          <div class="box">
-            <button class="row">{ri('rgba(127,184,255,.16)', '#7FB8FF', ic(<path d="M4 11 12 4l8 7v9H4z" />))}{two('ระบบเรือน', 'วิธีแบ่งชาร์ตเป็น 12 เรือน')}<span class="rv">Placidus {chev}</span></button>
-            <div class="row">{ri('rgba(185,166,255,.16)', '#B9A6FF', ic(<><circle cx="12" cy="12" r="9" /><path d="M12 3v18M3 12h18" /></>))}{two('ระบบการวางราศี', 'ใช้แบบเดียวทั้งแอป')}<span class="rv">แบบสากล (Tropical)</span></div>
-            <button class="row">{ri('rgba(243,212,110,.16)', '#F3D46E', '☊' + V, '16px')}{two('ราหู / เกตุ', 'ตำแหน่งจริง หรือค่าเฉลี่ย')}<span class="rv">ค่าเฉลี่ย (Mean) {chev}</span></button>
-          </div>
-        </div>
-
-        <div class="sec">
           <span class="sh">การแสดงผล</span>
           <div class="box">
             <div class="row" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '10px' }}>

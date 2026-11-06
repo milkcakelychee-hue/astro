@@ -74,6 +74,6 @@ export function App() {
       return <DesignPreview />
     default:
       // หน้าที่ยังไม่ได้ทำ
-      return <ComingSoon />
+      return <ComingSoon route={route} />
   }
 }

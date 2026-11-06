@@ -65,3 +65,16 @@ export function birthInput(p: Person): BirthInput {
   if (!prov) throw new Error('ไม่พบจังหวัด ' + p.province)
   return { y: p.y, mo: p.mo, d: p.d, hh: p.hh ?? 12, mi: p.mi ?? 0, lat: latOf(prov), lon: lonOf(prov) }
 }
+
+/** นำเข้าไฟล์สำรอง (JSON: [Person] หรือ { people: [Person] }) — คืนจำนวนคนที่นำเข้า */
+export async function importBackup(json: string): Promise<number> {
+  const raw = JSON.parse(json) as unknown
+  const list = (Array.isArray(raw) ? raw : (raw as { people?: unknown[] }).people) ?? []
+  let n = 0
+  for (const x of list as Partial<Person>[]) {
+    if (typeof x?.id !== 'string' || typeof x.name !== 'string' || typeof x.y !== 'number' || typeof x.mo !== 'number' || typeof x.d !== 'number' || typeof x.province !== 'string') continue
+    await savePerson({ id: x.id, name: x.name, y: x.y, mo: x.mo, d: x.d, hh: x.hh ?? null, mi: x.mi ?? null, province: x.province, relation: x.relation ?? (x.isMe ? 'me' : 'friend'), note: x.note, isMe: !!x.isMe, createdAt: x.createdAt ?? Date.now() })
+    n++
+  }
+  return n
+}
