@@ -44,7 +44,10 @@ export function parseAspect(t: string | null) {
   if (!t) return null
   const body = splitTitle(t).body.replace(/^แก่นเรื่อง: /, '')
   const m = /^(.*?) — (.*?) ด้านดี: (.*?) · ระวัง: (.*)$/.exec(body)
-  return m ? { theme: m[1]!, how: m[2]!, good: m[3]!, warn: m[4]! } : { theme: body, how: '', good: '', warn: '' }
+  if (m) return { theme: m[1]!, how: m[2]!, good: m[3]!, warn: m[4]! }
+  // ไม่มีส่วน "พลังทำงานแบบ" (เช่น หมวด shape)
+  const n = /^(.*?) ด้านดี: (.*?) · ระวัง: (.*)$/.exec(body)
+  return n ? { theme: n[1]!, how: '', good: n[2]!, warn: n[3]! } : { theme: body, how: '', good: '', warn: '' }
 }
 
 export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; lib: InterpLib; known: boolean; personId: string; onClose: () => void; onBack?: () => void; backLabel?: string }) {

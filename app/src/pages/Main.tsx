@@ -12,13 +12,15 @@ import {
 } from '../ui/astro-labels.ts'
 import { ChartWheel } from '../ui/ChartWheel.tsx'
 import { keepDark } from '../ui/light.ts'
+import { AspectParts } from '../ui/AspectParts.tsx'
+import { chartShape } from '../engine/shape.ts'
 import { c, isLightTheme, setRenderLight } from '../ui/theme.ts'
 import { BackLink, HelpHead, Page } from '../ui/components.tsx'
 import { TabBar } from '../ui/TabBar.tsx'
 import { MainEmpty } from './MainEmpty.tsx'
 import { PlanetSheet } from './PlanetSheet.tsx'
 import { CategorySheet, CAT_TITLE, type Cat } from './CategorySheet.tsx'
-import { loadLib, type InterpLib } from '../lib/interp.ts'
+import { loadLib, type InterpLib, text } from '../lib/interp.ts'
 import './main.css'
 import './main-light.css'
 
@@ -85,7 +87,7 @@ function mainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
   const cat = (qs.get('cat') ?? '') as Cat | ''
   const [lib, setLib] = useState<InterpLib | null>(null)
   useEffect(() => {
-    if ((sheetPt || cat) && !lib) loadLib().then(setLib)
+    if (!lib) loadLib().then(setLib) // ใช้ทั้งแผ่นรายละเอียดและการ์ดรูปแบบชาร์ต
   }, [sheetPt, cat])
   const known = timeKnown(person)
   // ผู้ใช้ขอ: แตะ Big Three / ดาวเด่น → เปิด Sheet อ่านเพิ่มเติม
@@ -299,6 +301,29 @@ function mainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
             </div>
             <span style={{ fontSize: '14px', fontWeight: 500, color: c('#7FB8FF') }}>ดูมุมทั้งหมดและความหมาย</span>
           </a>
+
+          {/* ผู้ใช้ขอ (6 พ.ย. 2569): รูปแบบชาร์ต ล่างสุด · นิยามตาม astro-seek · ข้อความจากคลังหมวด shape */}
+          {lib && (() => {
+            const L10 = PLANETS.map((p) => chart.pos[p].lon)
+            const sh = chartShape(L10)
+            const raw = text(lib, 'shape', sh) ?? ''
+            const [head, rest = ''] = raw.split(' ‖ ')
+            const nm = /^(.*?) \((.*?)\): (.*)$/.exec(head ?? '')
+            const asc = known ? chart.pos.A.lon : 0
+            const xy = (lon: number) => { const a = ((180 + lon - asc) * Math.PI) / 180; return [30 * Math.cos(a), -30 * Math.sin(a)] }
+            return (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <HelpHead k="shape" aria="รูปแบบชาร์ตคืออะไร" head={<h2 class="h2">รูปแบบชาร์ต <span class="lbl" style={{ fontWeight: 400 }}>(Chart Shape)</span></h2>} />
+                <div class="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+                    <svg width="72" height="72" viewBox="-40 -40 80 80" style={{ flex: 'none' }} aria-hidden="true"><circle r="34" fill="none" stroke={c('rgba(255,255,255,.18)')} />{L10.map((l) => { const [x, y] = xy(l); return <circle cx={x} cy={y} r="3.2" fill={c('#B9A6FF')} /> })}</svg>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}><span style={{ fontSize: '18px', fontWeight: 600 }}>{nm?.[1]} <span class="lbl" style={{ fontSize: '13px', fontWeight: 400 }}>({nm?.[2]})</span></span><span class="lbl">{nm?.[3]}</span></div>
+                  </div>
+                  <AspectParts text={rest} />
+                </div>
+              </div>
+            )
+          })()}
         </div>
         {/* ดาวที่ควรรู้จักก่อน + รูปแบบพิเศษ: รอข้อความหมวดใหม่จาก lib/gen2.py */}
       </div>

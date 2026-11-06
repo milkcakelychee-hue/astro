@@ -26,5 +26,6 @@
 | cycle | `{ดาว}_rule`, `{ดาว}_{return|sq1|opp|sq2}`, `venus_*` | รอบโคจรของดาวเคราะห์, วงโคจรดาวศุกร์ |
 | numerology | `life{n}` `year{n}` `month{n}` | เลขศาสตร์ |
 | electional | `new` `waxing` `waning` `moon_benefic` … `voc` | หาฤกษ์ |
+| shape | `bundle` `bowl` `bucket` `locomotive` `seesaw` `splash` | ชาร์ตของฉัน · รูปแบบชาร์ต (ผู้ใช้ขอ 6 พ.ย. 2569) |
 
 ข้อความ "?" (คืออะไร · ใช้ดู · ทำไมสำคัญ) ของแต่ละหน้า ใช้ตามที่อยู่ในไฟล์ดีไซน์ได้เลย (เป็นข้อความ UI ไม่ใช่คำตีความ)
