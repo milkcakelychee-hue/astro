@@ -1,3 +1,4 @@
+import { keepDark } from '../ui/light.ts'
 // หน้า "วันนี้" — ตาม design/Today.dc.html
 // [dev] #/today?at=2026-10-31T10:00 = จำลองเวลาไทย (ใช้เทียบกับข้อมูลตัวอย่างในดีไซน์)
 import { useEffect, useState } from 'preact/hooks'
@@ -124,11 +125,14 @@ function MoonDisc({ elong, illum }: { elong: number; illum: number }) {
   const s1 = waxing ? 1 : 0
   const s2 = waxing ? (gib ? 1 : 0) : gib ? 0 : 1
   const d = `M42 0 A42 42 0 0 ${s1} 42 84 A${rx.toFixed(2)} 42 0 0 ${s2} 42 0Z`
-  return (
+  keepDark(true) // ธีมสว่างห้ามกลับสีดวงจันทร์
+  const el = (
     <div aria-hidden="true" style={{ width: '84px', height: '84px', flex: 'none', borderRadius: '999px', position: 'relative', overflow: 'hidden', background: '#0E1120', boxShadow: '0 0 40px rgba(200,210,255,.35)' }}>
       <svg width="84" height="84" viewBox="0 0 84 84" style={{ display: 'block' }}><path d={d} fill="#E9ECF7" /></svg>
     </div>
   )
+  keepDark(false)
+  return el
 }
 
 /** ระยะผลของทรานซิตจากเวลาที่จะพ้น orb */
