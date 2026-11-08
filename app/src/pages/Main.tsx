@@ -188,7 +188,7 @@ function mainView({ person, chart, aspects, dom, navTab }: Data & { navTab: 'mai
               const lon = chart.pos[b.p].lon
               const s = signOf(lon)
               return (
-                <a href={sheetHref(b.p)} class="card" style={{ padding: '14px 12px', display: 'grid', gridTemplateRows: '28px 18px 18px 24px 18px 20px', gap: '2px', textDecoration: 'none', color: c('#F2F4FA') }}>
+                <a href={sheetHref(b.p)} class="card" style={{ padding: '14px 12px', display: 'grid', gridTemplateRows: 'minmax(28px,auto) minmax(18px,auto) minmax(18px,auto) minmax(24px,auto) minmax(18px,auto) minmax(20px,auto)', gap: '2px', textDecoration: 'none', color: c('#F2F4FA') }}>
                   {b.p === 'A'
                     ? <span style={{ fontSize: '15px', fontWeight: 700, lineHeight: '28px', color: b.color }}>AC</span>
                     : <span style={{ fontSize: '22px', lineHeight: '28px', color: b.color }}>{glyph(b.p)}</span>}
