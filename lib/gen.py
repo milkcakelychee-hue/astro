@@ -38,3 +38,33 @@ for i,a in enumerate(keys):
 json.dump(lib,open('interp_lib_th.json','w'),ensure_ascii=False,indent=0)
 print({k:len(v) for k,v in lib.items()})
 print(lib['planet_sign']['S4']); print(lib['planet_house']['S6']); print(lib['aspect']['Sqa'])
+
+# ===== หมวด placement: คำอธิบายตำแหน่งดาวแบบ 3 ส่วน =====
+# คีย์: {p} = ดาวเรื่องอะไร · {p}s{ราศี 0-11} = อยู่ราศี · {p}h{เรือน 1-12} = อยู่เรือน
+def dig_txt(p,si,th,sn):
+    if RULER.get(si)==p: return f'ราศี{sn}เป็นบ้านของ{th} (เกษตร · Domicile) พลังของดาวจึงออกมาได้เต็มที่'
+    if EXALT.get(p)==si: return f'{th}ในราศีนี้ได้รับการยกย่อง (อุจ · Exaltation) พลังจึงดีเป็นพิเศษ'
+    if si in DETR.get(p,[]): return f'ราศี{sn}อยู่ตรงข้ามบ้านของ{th} (ประ · Detriment) ดาวจึงต้องปรับตัวมากกว่าปกติ'
+    if FALL.get(p)==si: return f'{th}ในราศีนี้พลังอ่อน (นิจ · Fall) ต้องใช้ความพยายามมากขึ้นจึงจะแสดงผลได้ดี'
+    return ''
+pl={}
+for p,(intro,subj,feel) in PLACE.items():
+    th,en=PLANETS[p][0],PLANETS[p][1]
+    pl[p]=f'{th} ({en}) {intro}'
+    for si,(sn,se,el,mo,style,str_,weak) in enumerate(SIGNS):
+        t=f'{subj}จึงแสดงออกแบบ{style} จุดเด่นคือ{str_} ส่วนที่ควรระวังคือ{weak}'
+        d=dig_txt(p,si,th,sn)
+        if d: t+=f' {d}'
+        if p=='c': t+=f' แผลและการเยียวยาของคุณผูกอยู่กับเรื่อง{SIGN_THEME[si]}'
+        if p=='L': t+=f' ด้านที่ถูกกดไว้เกี่ยวกับเรื่อง{SIGN_THEME[si]}'
+        if p=='n': t+=f' บทเรียนชีวิตคือพัฒนาเรื่อง{SIGN_THEME[si]} และค่อย ๆ ปล่อยนิสัยเดิมที่คุ้นเคย'
+        if p in OUTER: t+=' ดาวดวงนี้อยู่ราศีเดียวกันหลายปี ราศีจึงบอกลักษณะของคนทั้งรุ่น ส่วนที่เป็นตัวคุณให้ดูที่เรือน'
+        pl[f'{p}s{si}']=t
+    if p in 'AC': continue
+    for h in range(1,13):
+        act=HOUSE_ACT[h]
+        f=feel.replace('{act}', act.removeprefix('ได้') if p=='n' else act)
+        pl[f'{p}h{h}']=f'{subj}จะเด่นในเรื่อง{HOUSE_AREA[h]} {f}'
+lib['placement']=pl
+json.dump(lib,open('interp_lib_th.json','w'),ensure_ascii=False,indent=0)
+print('placement',len(pl))

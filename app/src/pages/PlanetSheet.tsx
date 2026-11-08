@@ -68,7 +68,6 @@ export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; li
     .filter((a) => (a.a === pt || a.b === pt) && !['D', 'I', 'F', 'X'].includes(a.a) && !['D', 'I', 'F', 'X'].includes(a.b))
     .sort((x, y) => x.orb - y.orb)
   const [sel, setSel] = useState(0)
-  const [open1, setOpen1] = useState(false)
 
   // เหตุผลที่ดาวมีพลังเข้มข้น (ตามรายการในดีไซน์) — มุมรูปแบบใหญ่ (Grand Cross ฯลฯ) รอเครื่องคำนวณ patterns
   const tight = mine.filter((a) => a.orb <= 3).length
@@ -133,11 +132,8 @@ export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; li
           {ps && (
             <div class="blk">
               <div class="bh"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B9A6FF" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 8v5M12 16h.01" /></svg>ความหมาย</div>
-              <p class="bp">{ps.head}</p>
-              {open1 && (ph || ps.extra.length > 0) && <p class="bp" style={{ color: '#C9CEDC' }}>{[ph?.body, ...ps.extra].filter(Boolean).join(' · ')}</p>}
-              {(ph || ps.extra.length > 0) && (
-                <button class="more" onClick={() => setOpen1(!open1)}>{open1 ? 'ย่อ' : 'อ่านแบบละเอียด'} <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style={open1 ? { transform: 'rotate(180deg)' } : undefined}><path d="m6 9 6 6 6-6" /></svg></button>
-              )}
+              {[[null, text(lib, 'placement', pt)], [`อยู่ราศี${SIGN_TH[s]}`, text(lib, 'placement', `${pt}s${s}`)], [h && pt !== 'A' && pt !== 'C' ? `อยู่เรือน ${h}` : null, h && pt !== 'A' && pt !== 'C' ? text(lib, 'placement', `${pt}h${h}`) : null]]
+                .filter(([, t]) => t).map(([k, t]) => <p class="bp">{k && <b style={{ color: '#F2F4FA' }}>{k}: </b>}{t}</p>)}
             </div>
           )}
           {ps?.strong && (
