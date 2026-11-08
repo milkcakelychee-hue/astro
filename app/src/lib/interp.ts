@@ -5,7 +5,7 @@ import type { AspectType } from '../engine/aspects.ts'
 
 export type Category =
   | 'planet_sign' | 'planet_house' | 'aspect' | 'transit' | 'transit_house' | 'synastry' | 'eclipse'
-  | 'moon' | 'retrograde' | 'return' | 'direction' | 'cycle' | 'numerology' | 'electional' | 'shape' | 'placement' | 'transit_story'
+  | 'moon' | 'retrograde' | 'return' | 'direction' | 'cycle' | 'numerology' | 'electional' | 'shape' | 'placement' | 'transit_story' | 'aspect_story' | 'synastry_story' | 'direction_story'
 export type InterpLib = Record<Category, Record<string, string>>
 
 let libP: Promise<InterpLib> | null = null

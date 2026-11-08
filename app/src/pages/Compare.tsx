@@ -1,3 +1,4 @@
+import { Rich } from '../ui/rich.tsx'
 // หน้า "เปรียบเทียบ" — ตาม design/Compare.dc.html · เปิดจากหน้าบุคคล #/compare?a=<id>&b=<id>
 import { useEffect, useState } from 'preact/hooks'
 import type { AspectType } from '../engine/aspects.ts'
@@ -93,6 +94,8 @@ function CompareView({ A, B, lib }: Data) {
   }
   /** ข้อความคลัง: แทน A/B ด้วยชื่อ */
   const meaning = (x: SynAspect) => {
+    const st = text(lib, 'synastry_story', synastryKey(x.a, x.type, x.b))
+    if (st) return <>{st.replace(/\{A\}/g, L.p.name).replace(/\{B\}/g, R.p.name).split('\n').map((l, i) => <>{i > 0 && <br />}<Rich s={l} /></>)}</>
     const t = text(lib, 'synastry', synastryKey(x.a, x.type, x.b))
     if (!t) return null
     return splitTitle(t).body.replace(/^แก่นเรื่อง: /, '').replace(/\bA\b/g, L.p.name).replace(/\bB\b/g, R.p.name).replace(/ของA/g, 'ของ' + L.p.name).replace(/ของB/g, 'ของ' + R.p.name)

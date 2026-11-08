@@ -270,6 +270,58 @@ for t in P10:
             l3 = f'💡 **ควรทำ:** {TR_TIP[t][g]} · {DUR[t]}'
             lib['transit_story'][f'{t}{k}{n}'] = f'{l1}\n{l2}\n{l3}'
 
+
+# ===== หมวด *_story: มุมดาว / คู่ดวง / โปรเกรส แบบเล่าเรื่อง (ผู้ใช้ขอ 8 พ.ย. 2569) · บรรทัดคั่นด้วย \n · **ตัวหนา** =====
+import ast, re
+_g = open('gen.py').read()
+GOOD = ast.literal_eval(re.search(r'^GOOD=(\{.*\})$', _g, re.M).group(1))
+BAD = ast.literal_eval(re.search(r'^BAD=(\{.*\})$', _g, re.M).group(1))
+ASP_NAME = {k: f'มุม{v[0]} ({v[1]})' for k, v in ASPECTS.items()}
+grp = lambda k: 'c' if k == 'c' else ('e' if k in 'xt' else 'h')
+# 1) มุมดาวในชาร์ตเกิด
+lib['aspect_story'] = {}
+keys = list(PLANETS)
+for i, a in enumerate(keys):
+    for b in keys[i + 1:]:
+        if a in 'AC' and b in 'AC':
+            continue
+        for k, (an, ae, dyn, lvl) in ASPECTS.items():
+            pa, pb = PLANETS[a], PLANETS[b]
+            c = core(a, b)
+            l1 = f'**{pa[0]}{an}{pb[0]}** {ASP_NAME[k]} คือ{dyn}'
+            l2 = f'{pa[0]}ดูแลเรื่อง{pa[2]} ส่วน{pb[0]}ดูแลเรื่อง{pb[2]}' + (f' เมื่อสองดาวนี้ทำมุมกัน ในชีวิตคุณจึงเห็นเป็นเรื่อง{c}' if c else ' สองเรื่องนี้จึงผูกกันในชีวิตคุณ')
+            lib['aspect_story'][f'{a}{k}{b}'] = f'{l1}\n{l2}\n✨ **ด้านดี:** {GOOD[k]}\n⚠️ **ระวัง:** {BAD[k]}'
+# 2) คู่ดวง ({A} {B} = ชื่อคน แอปแทนให้)
+SYN_TIP = {'c': 'ใช้ความใกล้ชิดนี้เป็นแรงร่วม แต่ให้พื้นที่ส่วนตัวกันบ้าง', 'e': 'ใช้จุดที่เข้ากันง่ายนี้เป็นฐาน ทำสิ่งที่ทั้งคู่ชอบด้วยกัน', 'h': 'คุยกันตรง ๆ เมื่อรู้สึกขัด และยอมรับว่าต่างกันได้'}
+lib['synastry_story'] = {}
+for a in P10 + 'nA':
+    for b in P10 + 'nA':
+        if a in 'nA' and b in 'nA':
+            continue
+        for k, (an, ae, dyn, lvl) in ASPECTS.items():
+            pa, pb = PLANETS[a], PLANETS[b]
+            c = core(a, b)
+            l1 = f'**{pa[0]}ของ{{A}} {an}{pb[0]}ของ{{B}}** {TONE_Y[k]}'
+            l2 = f'{pa[0]}ของ{{A}}คือเรื่อง{pa[2]} ส่วน{pb[0]}ของ{{B}}คือเรื่อง{pb[2]}' + (f' ระหว่างสองคนนี้จึงเห็นเป็นเรื่อง{c}' if c else '')
+            lib['synastry_story'][f'{a}{k}{b}'] = f'{l1}\n{l2}\n💡 **ควรทำ:** {SYN_TIP[grp(k)]}'
+# 3) โปรเกรส / Solar Arc / Primary Directions
+DIR_ASP = {'c': 'มากุม', 'x': 'มาทำมุมโยค (Sextile) กับ', 't': 'มาทำมุมตรีโกณ (Trine) กับ', 'q': 'มาทำมุมฉาก (Square) กับ', 'o': 'มาเล็ง (Opposition) กับ'}
+DIR_EFF = {'c': 'กลายเป็นเรื่องหลักของชีวิต', 'x': 'มีโอกาสเติบโต ถ้าคุณลงมือ', 't': 'พัฒนาไปอย่างราบรื่น',
+           'q': 'มีแรงกดดันที่ผลักให้ต้องเปลี่ยน', 'o': 'ต้องหาจุดสมดุล มักเห็นผ่านคนรอบตัว'}
+DIR_TIP = {'c': 'ตั้งใจเริ่มบทใหม่ของชีวิตในเรื่องนี้', 'e': 'ใช้จังหวะนี้พัฒนาตัวเองในเรื่องนี้อย่างต่อเนื่อง', 'h': 'ยอมรับการเปลี่ยนแปลง แล้วค่อย ๆ ปรับทีละขั้น'}
+lib['direction_story'] = {}
+for d, dname in (('pr', 'โปรเกรส'), ('sa', 'Solar Arc'), ('pd', 'Primary Directions')):
+    for p in list(P10) + ['n', 'A', 'C']:
+        for n in list(P10) + ['n', 'A', 'C']:
+            if p == n:
+                continue
+            for k, (an, ae, dyn, lvl) in ASPECTS.items():
+                c = core(p, n)
+                c = c.replace('ดาวรุ่น: ', '') if c else c
+                l1 = f'**{PLANETS[p][0]} ({dname})** ซึ่งค่อย ๆ เคลื่อนตามอายุ {DIR_ASP[k]}{PLANETS[n][0]}ในชาร์ตเกิดของคุณ'
+                l2 = f'{PLANETS[n][0]}ดูแลเรื่อง{PLANETS[n][2]} ช่วงนี้' + (f'เรื่อง{c} ' if c else 'เรื่องเหล่านี้') + f'{DIR_EFF[k]} เป็นการเปลี่ยนแปลงจากข้างในที่ค่อย ๆ ชัดในช่วงราว 1 ปี'
+                lib['direction_story'][f'{d}{p}{k}{n}'] = f'{l1}\n{l2}\n💡 **ควรทำ:** {DIR_TIP[grp(k)]}'
+
 json.dump(lib, open('interp_lib_th.json', 'w'), ensure_ascii=False, indent=0)
 print({k: len(v) for k, v in lib.items()})
 print(lib['transit']['Uqv' if 'Uqv' in lib['transit'] else 'UqV'])

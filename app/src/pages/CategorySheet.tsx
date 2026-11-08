@@ -1,3 +1,4 @@
+import { AspectParts } from '../ui/AspectParts.tsx'
 // แผ่นหมวดละเอียดของหน้าชาร์ต (ผู้ใช้ขอ): ดาว · เรือน · มุมดาว · สถิติ — เปิดจากปุ่มหมวด (#/main?cat=…)
 // ใช้กรอบเดียวกับ PlanetSheet (design/Sheet.dc.html) · ข้อความทั้งหมดมาจากคลัง
 import { useLayoutEffect, useRef } from 'preact/hooks'
@@ -98,11 +99,12 @@ export function CategorySheet(props: { cat: Cat; chart: Chart; aspects: Aspect[]
         <>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: '10px' }}><span style={{ fontSize: '17px', fontWeight: 600 }}>{t} · {xs.length} มุม</span><span style={{ fontSize: '12px', color: '#9AA1B5' }}>{sub}</span></div>
           {xs.map((a) => {
+            const story = text(lib, 'aspect_story', aspectKey(a.a, a.b, a.type))
             const pa = parseAspect(text(lib, 'aspect', aspectKey(a.a, a.b, a.type)))
             return (
               <div style={card}>
                 <span class="bh"><span>{glyph(a.a)}</span><b style={{ color: ASPECT_COLOR[a.type] }}>{ASPECT_GLYPH[a.type]}</b><span>{glyph(a.b)}</span><span style={{ flex: 1 }}>{PT_TH[a.a]} {ASPECT_MOOD[a.type]} {PT_TH[a.b]}</span><span style={{ fontSize: '12px', color: '#9AA1B5', fontWeight: 400 }}>{Math.floor(a.orbMin / 60)}°{String(a.orbMin % 60).padStart(2, '0')}′</span></span>
-                {pa && <>{hr}
+                {story ? <>{hr}<AspectParts text={null} story={story} /></> : pa && <>{hr}
                   <Q k="แก่นเรื่อง" c="#B9A6FF">{pa.theme}</Q>
                   {pa.how && <Q k="พลังทำงานแบบ" c="#7FB8FF">{pa.how}</Q>}
                   {pa.good && <Q k="ด้านดี" c="#7FE3C0">{pa.good}</Q>}

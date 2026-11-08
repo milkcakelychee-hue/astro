@@ -159,7 +159,7 @@ export function SolarReturn() {
                         <span style={{ display: 'flex', flexDirection: 'column', gap: '3px', flex: 1, minWidth: 0 }}><span style={{ fontSize: '14.5px', fontWeight: 600, lineHeight: 1.35 }}>{NM[a.a]} {A[3]} {NM[a.b]}</span><span style={{ fontSize: '12px', color: '#9AA1B5' }}>{om < 30 ? 'แน่นมาก รู้สึกได้ทั้งปี' : om < 90 ? 'ชัดเจน' : 'เป็นพื้นหลัง'} · {Math.floor(om / 60)}°{String(om % 60).padStart(2, '0')}′</span></span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9CEDC" stroke-width="2" aria-hidden="true" style={{ flex: 'none', ...(on ? { transform: 'rotate(180deg)' } : {}) }}><path d="m6 9 6 6 6-6" /></svg>
                       </span>
-                      <AspectParts text={aspRaw(d.lib, a)} skip={on ? [] : ['how', 'good', 'warn']} />
+                      <AspectParts text={aspRaw(d.lib, a)} story={text(d.lib, 'aspect_story', aspectKey(a.a, a.b, a.type))} skip={on ? [] : ['how', 'good', 'warn']} />
                       {on && (
                         <span style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '12px', borderRadius: '14px', background: 'rgba(6,7,13,.45)', border: '1px solid rgba(255,255,255,.08)' }}>
                           <span style={{ fontSize: '12px', color: A[1] }}>{A[3]} ({A[4]}) · {A[5]}</span>

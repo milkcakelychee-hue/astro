@@ -163,7 +163,7 @@ export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; li
                 <div style={{ padding: '12px 14px', borderRadius: '14px', background: '#1D2135', border: '1px solid rgba(127,184,255,.30)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                   <span style={{ fontSize: '14px', fontWeight: 600 }}>{name} {TS[cur.type]} {NAME[other(cur)]}</span>
                   <span style={{ fontSize: '12px', color: '#9AA1B5' }}>{TN[cur.type]} · ห่างจากมุมพอดี {Math.round(cur.orb)}°</span>
-                  {curText && <div style={{ marginTop: '6px' }}><AspectParts text={curText} /></div>}
+                  {curText && <div style={{ marginTop: '6px' }}><AspectParts text={curText} story={cur ? text(lib, 'aspect_story', aspectKey(cur.a, cur.b, cur.type)) : null} /></div>}
                 </div>
               )}
             </div>

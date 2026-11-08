@@ -1,3 +1,4 @@
+import { Rich } from '../ui/rich.tsx'
 // หน้า "ตัวตนฉันเติบโตไปทางไหน" — ตาม design/Growth.dc.html · 3 แท็บ: โปรเกรส / Solar Arc / Primary Directions
 // [dev] #/growth?at=2026-11-04T12:00 = จำลองวันนี้
 import { useEffect, useState } from 'preact/hooks'
@@ -81,8 +82,9 @@ export function Growth() {
       return { jd: e.jd, g1: glyph(e.a), g2: SIGN_GLYPH[e.sign!]!, k: 'i', t, d: d && (e.a === 'M' || e.a === 'S') ? body(d.lib, 'return', `${e.a === 'M' ? 'pm' : 'ps'}_sign${e.sign}`)?.body ?? '' : '' }
     }
     const L = d ? body(d.lib, 'direction', `${kind}${e.a}${ASPECT_CODE[e.type!]}${e.b}`) : null
+    const S = d ? text(d.lib, 'direction_story', `${kind}${e.a}${ASPECT_CODE[e.type!]}${e.b}`) : null
     const t = L?.title || `${NAME[e.a]} (${kind === 'pr' ? 'โปรเกรส' : 'Solar Arc'}) ${AS[e.type!][2]}${NAME[e.b!]}เดิม`
-    return { jd: e.jd, g1: glyph(e.a), g2: glyph(e.b!), k: e.type!, t, d: L?.body ?? '' }
+    return { jd: e.jd, g1: glyph(e.a), g2: glyph(e.b!), k: e.type!, t, d: S ?? L?.body ?? '' }
   }
   const list: Ev[] = !d ? [] : tab === 0 ? d.prog.map((e) => toEv(e, 'pr')) : tab === 1 ? d.sa.map((e) => toEv(e, 'sa')) : d.pd
   const years: { y: number; items: { e: Ev; i: number }[] }[] = []
@@ -193,7 +195,7 @@ export function Growth() {
                                 {e.d && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9CEDC" stroke-width="2" aria-hidden="true" style={{ marginLeft: 'auto', flex: 'none', transform: on ? 'rotate(180deg)' : undefined }}><path d="m6 9 6 6 6-6" /></svg>}
                               </span>
                               <span style={{ fontSize: '14px', fontWeight: 600, lineHeight: 1.4 }}>{e.t}</span>
-                              {on && <span style={{ fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA', padding: '10px 12px', borderRadius: '12px', background: 'rgba(6,7,13,.45)' }}>{e.d}</span>}
+                              {on && <span style={{ fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA', padding: '10px 12px', borderRadius: '12px', background: 'rgba(6,7,13,.45)' }}>{e.d.split('\n').map((l, j) => <>{j > 0 && <br />}<Rich s={l} /></>)}</span>}
                             </button>
                           </div>
                         )

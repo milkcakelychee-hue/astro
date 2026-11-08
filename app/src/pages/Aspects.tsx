@@ -34,7 +34,7 @@ const TIERS: [number, string, string, string, string][] = [
 const tierOf = (p: number) => TIERS.findIndex((t) => p >= t[0])
 const fo = (m: number) => `${Math.floor(m / 60)}°${String(m % 60).padStart(2, '0')}′`
 
-interface Row { a: Aspect; max: number; p: number; tier: number; mean: string | null }
+interface Row { a: Aspect; max: number; p: number; tier: number; mean: string | null; story: string | null }
 
 export function Aspects() {
   const [d, setD] = useState<{ person: Person; asp: Aspect[]; lib: InterpLib } | null>(null)
@@ -76,7 +76,7 @@ export function Aspects() {
       const max = allowedOrb(a.a, a.b, a.type)
       const p = 1 - a.orbMin / 60 / max
       const t = text(lib, 'aspect', aspectKey(a.a, a.b, a.type))
-      return { a, max, p, tier: tierOf(p), mean: t }
+      return { a, max, p, tier: tierOf(p), mean: t, story: text(lib, 'aspect_story', aspectKey(a.a, a.b, a.type)) }
     })
     .sort((x, y) => y.p - x.p)
 
@@ -205,7 +205,7 @@ function AspRow({ r, i, open, onPick }: { r: Row; i: number; open: boolean; onPi
             <span style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#9AA1B5' }}><span>ระดับอิทธิพล <b style={{ color: '#F2F4FA' }}>{pct}</b></span><span>ห่าง {fo(a.orbMin)} จากที่นับได้ {r.max}°</span></span>
           </span>
           <span style={{ fontSize: '11.5px', lineHeight: 1.5, color: '#9AA1B5' }}>มุมนี้จะนับว่าเกิดขึ้นเมื่อดาวสองดวงห่างจากองศาพอดีไม่เกิน {r.max}° ({lum ? 'มีอาทิตย์หรือจันทร์ จึงได้ระยะกว้างกว่า' : 'ดาวทั่วไป'}) มุมนี้ห่าง {fo(a.orbMin)} จึงมีอิทธิพล {pct}</span>
-          {r.mean && <AspectParts text={r.mean} />}
+          {r.mean && <AspectParts text={r.mean} story={r.story} />}
         </span>
       )}
     </button>
