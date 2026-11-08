@@ -65,7 +65,7 @@ export function installLight() {
   document.documentElement.classList.add('light')
   const prev = options.vnode
   options.vnode = (vn) => {
-    if (keep <= 0 && typeof vn.type === 'string') {
+    if (keep <= 0 && typeof vn.type === 'string' && !(vn.props as Record<string, unknown>)['data-moon']) {
       const p = vn.props as Record<string, unknown>
       const st = p.style
       if (st && typeof st === 'object') { const o: Record<string, unknown> = {}; for (const [k, v] of Object.entries(st)) o[k] = typeof v === 'string' ? convValue(k, v) : v; p.style = o }

@@ -81,7 +81,7 @@ export function MoonPhases() {
           {d && day && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '18px', borderRadius: '24px', background: 'linear-gradient(140deg,rgba(60,66,100,.9),rgba(59,107,255,.28) 60%,rgba(138,92,255,.25))', border: '1px solid rgba(200,210,255,.30)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <span style={{ flex: 'none', width: '88px', height: '88px', borderRadius: '50%', background: '#E9ECF5', boxShadow: `${shade(day.info.elong, 88)},0 0 24px rgba(220,227,245,.35)`, overflow: 'hidden' }} />
+                <span data-moon="1" style={{ flex: 'none', width: '88px', height: '88px', borderRadius: '50%', background: '#E9ECF5', boxShadow: `${shade(day.info.elong, 88)},0 0 24px rgba(220,227,245,.35)`, overflow: 'hidden' }} />
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', minWidth: 0, flex: 1 }}>
                   <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#D6DEFF' }}><span>{sel === d.today ? 'วันนี้ · ' : 'วันที่เลือก · '}วัน{WD[(d.first + sel - 1) % 7]}ที่ {sel} {MS[d.mo - 1]} {d.y + 543}</span>{sel !== d.today && <button onClick={() => setSel(d.today)} style={{ flex: 'none', padding: '2px 10px', borderRadius: '999px', border: '1px solid rgba(214,222,255,.45)', background: 'transparent', color: '#D6DEFF', font: '500 11.5px var(--font)' }}>กลับวันนี้</button>}</span>
                   <span style={{ fontSize: '20px', fontWeight: 600 }}>{mean(day.info.phaseKey).title.replace(/ \(.*\)$/, '')} · {lday(day.info.elong)}</span>
@@ -117,7 +117,7 @@ export function MoonPhases() {
                   return (
                     <button onClick={() => setSel(x.d)} style={{ height: '52px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2px', padding: 0, boxSizing: 'border-box', borderRadius: '12px', border: `1.5px solid ${on ? '#F2F4FA' : 'transparent'}`, background: hasV ? 'rgba(255,176,138,.30)' : 'rgba(255,255,255,.06)', color: '#F2F4FA', font: '600 13px var(--font)', lineHeight: 1.1 }}>
                       <span style={{ color: x.d === d.today ? '#D6CEFF' : '#F2F4FA' }}>{x.d}</span>
-                      <span style={{ flex: 'none', display: 'block', width: '14px', height: '14px', borderRadius: '50%', background: '#E9ECF5', boxShadow: shade(x.info.elong, 14), overflow: 'hidden' }} />
+                      <span data-moon="1" style={{ flex: 'none', display: 'block', width: '14px', height: '14px', borderRadius: '50%', background: '#E9ECF5', boxShadow: shade(x.info.elong, 14), overflow: 'hidden' }} />
                       <span style={{ fontSize: '9px', fontWeight: 500, lineHeight: 1, color: '#C9CEDC' }}>{SIGN_TH[x.sign]}</span>
                     </button>
                   )

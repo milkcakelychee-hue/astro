@@ -118,7 +118,7 @@ export function Lunations() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '18px', borderRadius: '24px', background: 'linear-gradient(140deg,rgba(40,44,70,.9),rgba(138,92,255,.30) 60%,rgba(59,107,255,.25))', border: '1px solid rgba(200,205,255,.30)' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 600, color: '#D6CEFF' }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2.5 2.5M9 2h6" /></svg>ครั้งถัดไป · {(() => { const n = Math.round(hero.jd - d.now); return n <= 0 ? 'วันนี้' : `อีก ${n} วัน` })()}</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                <span style={{ width: '60px', height: '60px', flex: 'none', borderRadius: '999px', boxSizing: 'border-box', ...(hero.full ? { background: 'radial-gradient(circle at 35% 35%,#FFFFFF,#C9CEDC 70%)', boxShadow: '0 0 24px rgba(220,227,245,.55)' } : { background: 'radial-gradient(circle at 35% 35%,#1A1C26,#06070D)', border: '2px solid rgba(220,227,245,.55)', boxShadow: '0 0 24px rgba(185,166,255,.35)' }) }} />
+                <span data-moon="1" style={{ width: '60px', height: '60px', flex: 'none', borderRadius: '999px', boxSizing: 'border-box', ...(hero.full ? { background: 'radial-gradient(circle at 35% 35%,#FFFFFF,#C9CEDC 70%)', boxShadow: '0 0 24px rgba(220,227,245,.55)' } : { background: 'radial-gradient(circle at 35% 35%,#1A1C26,#06070D)', border: '2px solid rgba(220,227,245,.55)', boxShadow: '0 0 24px rgba(185,166,255,.35)' }) }} />
                 <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.35 }}>
                   <span style={{ fontSize: '19px', fontWeight: 600 }}>{title(hero)}</span>
                   <span style={{ fontSize: '13px', color: '#C9CEDC' }}>{when(hero)}</span>
@@ -179,7 +179,7 @@ export function Lunations() {
                   const icon = !l ? {} : !l.full ? { background: '#06070D', border: `2px solid ${l.eclipse ? '#FF8A8A' : 'rgba(220,227,245,.6)'}` } : { background: 'radial-gradient(circle at 35% 35%,#FFF,#C9CEDC 70%)', boxShadow: `0 0 8px ${l.eclipse ? 'rgba(255,107,107,.8)' : 'rgba(220,227,245,.5)'}` }
                   return (
                     <button onClick={() => { if (idx >= 0) setSel(on ? -1 : idx) }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', height: '56px', paddingTop: '6px', boxSizing: 'border-box', borderRadius: '12px', border: `1px solid ${on ? '#B9A6FF' : today ? 'rgba(185,166,255,.6)' : 'transparent'}`, background: on ? 'rgba(185,166,255,.25)' : l ? 'rgba(255,255,255,.05)' : 'transparent', color: l ? '#F2F4FA' : '#9AA1B5', font: '500 13px var(--font)' }}>
-                      <span>{day}</span><span style={{ flex: 'none', display: 'block', width: '16px', height: '16px', minWidth: '16px', minHeight: '16px', boxSizing: 'border-box', borderRadius: '50%', ...icon }} /><span style={{ fontSize: '9px', color: '#D6CEFF', lineHeight: 1 }}>{l && d.known ? `เรือน ${l.house}` : ''}</span>
+                      <span>{day}</span><span data-moon="1" style={{ flex: 'none', display: 'block', width: '16px', height: '16px', minWidth: '16px', minHeight: '16px', boxSizing: 'border-box', borderRadius: '50%', ...icon }} /><span data-moon="1" style={{ fontSize: '9px', color: '#D6CEFF', lineHeight: 1 }}>{l && d.known ? `เรือน ${l.house}` : ''}</span>
                     </button>
                   )
                 })}
@@ -211,7 +211,7 @@ export function Lunations() {
                       return (
                         <button onClick={() => setSel(on ? -1 : i)} aria-expanded={on} style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', padding: '14px', boxSizing: 'border-box', borderRadius: '18px', border: `1px solid ${on ? 'rgba(185,166,255,.55)' : l.eclipse ? 'rgba(255,107,107,.35)' : 'rgba(255,255,255,.10)'}`, background: on ? 'rgba(185,166,255,.08)' : 'rgba(255,255,255,.05)', color: '#F2F4FA', fontFamily: 'inherit', textAlign: 'left' }}>
                           <span style={{ display: 'flex', alignItems: 'center', gap: '12px', width: '100%' }}>
-                            <span style={{ flex: 'none', display: 'block', width: '40px', height: '40px', boxSizing: 'border-box', borderRadius: '50%', ...iconBig(l) }} />
+                            <span data-moon="1" style={{ flex: 'none', display: 'block', width: '40px', height: '40px', boxSizing: 'border-box', borderRadius: '50%', ...iconBig(l) }} />
                             <span style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0, lineHeight: 1.35 }}><span style={{ fontSize: '15px', fontWeight: 600 }}>{title(l)}</span><span class="lbl">{when(l)}</span></span>
                             <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '3px' }}>
                               {d.known && <span style={{ width: '44px', height: '24px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 700, background: 'rgba(185,166,255,.18)', color: '#D6CEFF', whiteSpace: 'nowrap' }}>เรือน {l.house}</span>}
