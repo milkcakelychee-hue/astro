@@ -12,7 +12,7 @@ import './addperson.css'
 const BG = 'radial-gradient(520px 420px at 90% -40px,rgba(138,92,255,.42),transparent 70%),radial-gradient(460px 380px at -10% 300px,rgba(31,165,135,.30),transparent 70%),#06070D'
 const MONTHS = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม']
 // ephemeris รองรับ ค.ศ. 1995 เป็นต้นไป (ดีไซน์: "ตั้งแต่ พ.ศ. 2538")
-const Y0 = 1995
+const Y0 = 1966 // พ.ศ. 2509 (ผู้ใช้ขอ 8 พ.ย. 2569)
 const BY_TH = new Map(PROVINCES.map((p) => [PROVINCE_TH[p.name]!, p]))
 
 const ic = (d: preact.ComponentChildren) => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">{d}</svg>
