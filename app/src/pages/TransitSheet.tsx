@@ -8,6 +8,7 @@ import { exactPasses } from '../engine/transits.ts'
 import { birthInput, getMe, timeKnown } from '../data/people.ts'
 import { houseKey, splitTitle, text, transitKey, type InterpLib } from '../lib/interp.ts'
 import { ASPECT_COLOR, ASPECT_GLYPH, HOUSE_TOPIC, PT_TH, glyph } from '../ui/astro-labels.ts'
+import { Rich, transitStory } from '../ui/rich.tsx'
 
 const AN: Record<AspectType, [string, string, string]> = {
   '0': ['กุม', 'มุมกุมกัน (Conjunction) 0°', 'รวมพลัง เข้มข้น'], '6': ['โยค', 'มุมเปิดโอกาส (Sextile) 60°', 'เปิดโอกาส ใช้ได้ถ้าลงมือ'],
@@ -45,6 +46,7 @@ export function TransitSheet(props: { tr: Transit; jd: number; lib: InterpLib; d
     })()
   }, [])
   const tx = parseTransit(text(lib, 'transit', transitKey(tr.t, tr.type, tr.n)))
+  const story = transitStory(lib, transitKey(tr.t, tr.type, tr.n))
   const a = AN[tr.type], col = ASPECT_COLOR[tr.type]
   const om = Math.floor(tr.orb * 60)
   const nh = st?.known ? (tr.n === 'A' ? 1 : tr.n === 'C' ? 10 : st.natal.house(st.natal.pos[tr.n].lon)) : null
@@ -89,8 +91,8 @@ export function TransitSheet(props: { tr: Transit; jd: number; lib: InterpLib; d
             <div style={{ padding: '10px', background: col + '1A', display: 'flex', flexDirection: 'column', gap: '2px', borderLeft: '1px solid rgba(255,255,255,.12)' }}><span style={{ fontSize: '11px', color: col }}>มุม = อย่างไร</span><span style={{ fontSize: '13.5px', fontWeight: 600 }}>{a[0]}</span><span style={{ fontSize: '12px', color: '#9AA1B5' }}>{a[2]}</span></div>
             <div style={{ padding: '10px', background: 'rgba(255,143,177,.10)', display: 'flex', flexDirection: 'column', gap: '2px', borderLeft: '1px solid rgba(255,255,255,.12)' }}><span style={{ fontSize: '11px', color: '#FFC0D2' }}>ดาวเดิม = เรื่องไหน</span><span style={{ fontSize: '13.5px', fontWeight: 600 }}>{PT_TH[tr.n]}{nh ? ` เรือน ${nh}` : ''}</span><span style={{ fontSize: '12px', color: '#9AA1B5' }}>{nh ? HOUSE_TOPIC[nh] : kw(lib, tr.n)}</span></div>
           </div>
-          {tx?.mean && <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', padding: '14px', borderRadius: '16px', background: 'rgba(255,255,255,.05)', border: '1px solid rgba(255,255,255,.08)' }}><span style={{ fontSize: '15px', fontWeight: 600 }}>ความหมาย</span><p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7, color: '#DCE0EA' }}>{tx.mean}</p></div>}
-          {tx?.tip && <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', padding: '14px', borderRadius: '16px', background: 'rgba(79,209,165,.08)', border: '1px solid rgba(79,209,165,.30)' }}><span style={{ fontSize: '15px', fontWeight: 600, color: '#9FEAC0' }}>ควรทำช่วงนี้</span><p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7, color: '#DCE0EA' }}>{tx.tip}</p></div>}
+          {tx?.mean && <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', padding: '14px', borderRadius: '16px', background: 'rgba(255,255,255,.05)', border: '1px solid rgba(255,255,255,.08)' }}><span style={{ fontSize: '15px', fontWeight: 600 }}>ความหมาย</span>{story ? <><p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7, color: '#DCE0EA' }}><Rich s={story[0]} /></p><p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7, color: '#DCE0EA' }}><Rich s={story[1]} /></p></> : <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7, color: '#DCE0EA' }}>{tx.mean}</p>}</div>}
+          {tx?.tip && <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', padding: '14px', borderRadius: '16px', background: 'rgba(79,209,165,.08)', border: '1px solid rgba(79,209,165,.30)' }}><span style={{ fontSize: '15px', fontWeight: 600, color: '#9FEAC0' }}>ควรทำช่วงนี้</span><p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7, color: '#DCE0EA' }}>{story ? <Rich s={story[2]} /> : tx.tip}</p></div>}
           <a href="#/transit" style={{ height: '52px', borderRadius: '16px', font: '600 16px var(--font)', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,.06)', border: '1px solid rgba(255,255,255,.14)', color: '#F2F4FA', textDecoration: 'none' }}>ดูมุมทั้งหมดในหน้าดาวจร</a>
         </div>
       </section>

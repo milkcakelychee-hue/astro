@@ -1,3 +1,4 @@
+import { Rich, transitStory } from '../ui/rich.tsx'
 import { keepDark } from '../ui/light.ts'
 // หน้า "วันนี้" — ตาม design/Today.dc.html
 // [dev] #/today?at=2026-10-31T10:00 = จำลองเวลาไทย (ใช้เทียบกับข้อมูลตัวอย่างในดีไซน์)
@@ -260,7 +261,8 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
                 {transits.map((t, i) => {
                   const col = ASPECT_COLOR[t.type]
                   const dur = durationChip(jd, t.endsJd)
-                  const line = transitLine(lib, t)
+                  const st2 = transitStory(lib, transitKey(t.t, t.type, t.n))
+                  const line = st2 ? null : transitLine(lib, t)
                   const om = Math.floor(t.orb * 60)
                   return (
                     <button class="tr" onClick={() => setTs(t)} style={i ? { borderTop: '1px solid rgba(255,255,255,.06)' } : undefined}>
@@ -268,7 +270,7 @@ function TodayView({ jd, now, moon, rows, transits, lib }: Data) {
                       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3px' }}>
                         <span style={{ fontSize: '15px', fontWeight: 600 }}>{NAME[t.t]}{t.retro ? ' (ถอยหลัง)' : ''} {VERB[t.type]} {NAME[t.n]}ของคุณ</span>
                         <span style={{ fontSize: '12px', color: col, fontWeight: 600 }}>{ASPECT_GLYPH[t.type]} {TN[t.type]}</span>
-                        {line && <span style={{ fontSize: '13px', color: '#C9CEDC', lineHeight: 1.5 }}>{line}</span>}
+                        {st2 ? <span style={{ fontSize: '13px', color: '#C9CEDC', lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}><Rich s={st2[1]} /></span> : line && <span style={{ fontSize: '13px', color: '#C9CEDC', lineHeight: 1.5 }}>{line}</span>}
                         <span style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                           <span class="tchip" style={dur.hot ? { background: 'rgba(79,209,165,.15)', color: '#7FE3C0' } : undefined}>{dur.t}</span>
                           <span class="tchip">ห่าง {Math.floor(om / 60)}°{String(om % 60).padStart(2, '0')}′</span>

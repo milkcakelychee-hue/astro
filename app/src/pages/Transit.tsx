@@ -1,3 +1,4 @@
+import { Rich, transitStory } from '../ui/rich.tsx'
 // หน้า "ดาวตอนนี้กระทบชาร์ตฉัน (Transit)" — ตาม design/Transit.dc.html
 // [dev] #/transit?at=2026-11-01T12:00 = จำลองเวลาไทย
 import { useEffect, useState } from 'preact/hooks'
@@ -37,6 +38,11 @@ const fd = (jd: number) => { const p = thaiParts(dateOfJd(jd)); return `${p.d} $
 /** แรงที่สุด = orb ไม่เกินครึ่ง และเข้าใกล้ (ถ้าห่างออกต้องไม่เกินหนึ่งในสี่) — ตามดีไซน์ */
 const grpOf = (r: TransitRow) => (r.f <= 0.5 && (r.applying || r.f <= 0.25) ? 0 : r.applying ? 1 : 2)
 
+/** ข้อความทรานซิตแบบเล่าเรื่อง (transit_story): บรรทัดเหตุการณ์ + 💡 ควรทำ (ตัดระยะผล) */
+function story(lib: InterpLib, r: TransitRow) {
+  const st = transitStory(lib, transitKey(r.t, r.type, r.n))
+  return st ? <><Rich s={st[1]} /><br /><Rich s={st[2].split(' · ผล')[0]!} /></> : null
+}
 function meaning(lib: InterpLib, r: TransitRow): string {
   const s = text(lib, 'transit', transitKey(r.t, r.type, r.n))
   if (!s) return ''
@@ -119,7 +125,7 @@ export function Transit() {
                     <span class="lbl" style={{ color: '#C9CEDC' }}>{fut ? `ตรงพอดี ${fd(fut)} · ${days <= 0 ? 'วันนี้' : `อีก\u00a0${days}\u00a0วัน`}` : hero.applying ? 'กำลังเข้าใกล้จุดตรงพอดี' : 'ผ่านจุดตรงแล้ว กำลังคลายลง'}</span>
                   </div>
                 </div>
-                <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.6, color: '#E6E9F2' }}>{meaning(d.lib, hero)}</p>
+                <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.6, color: '#E6E9F2' }}>{story(d.lib, hero) ?? meaning(d.lib, hero)}</p>
               </div>
             )
           })()}
@@ -195,7 +201,7 @@ export function Transit() {
                                   <span style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}><span class="lbl">มุม = อย่างไร</span><span>{a[3]}: {a[4]}</span></span>
                                   <span style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}><span class="lbl">เรือน = ที่ไหน</span><span>{d.known ? `เรือน ${nh} ${HOUSE_TOPIC[nh]}` : 'ต้องมีเวลาเกิด'}</span></span>
                                 </span>
-                                <span style={{ fontSize: '13px', lineHeight: 1.65, color: '#DCE0EA' }}>{meaning(d.lib, r)}</span>
+                                <span style={{ fontSize: '13px', lineHeight: 1.65, color: '#DCE0EA' }}>{story(d.lib, r) ?? meaning(d.lib, r)}</span>
                                 {r.passes.length > 0 && (
                                   <span style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}><span class="lbl">วันที่ตรงพอดี</span>
                                     {r.passes.map((x) => { const fu = x >= d.now; return <span class="chip" style={{ color: fu ? '#F2F4FA' : '#9AA1B5', background: fu ? 'rgba(185,166,255,.20)' : 'rgba(255,255,255,.06)' }}>{fd(x)}</span> })}

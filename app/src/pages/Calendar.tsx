@@ -1,3 +1,4 @@
+import { Rich, transitStory } from '../ui/rich.tsx'
 // หน้า "ปฏิทินดวงส่วนตัว" — ตาม design/Calendar.dc.html
 // [dev] #/calendar?at=2026-11-01T10:00 = จำลองวันนี้
 import { useEffect, useMemo, useState } from 'preact/hooks'
@@ -38,6 +39,11 @@ const g = (s: string) => (s.length > 1 ? s : s + V)
 const chev = (d: string) => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d={d} /></svg>
 
 /** ข้อความคลังทรานซิต: ตัด "แก่นเรื่อง:" และ "ผลราว…" (วันนี้คือวันมุมพอดี) */
+/** ข้อความทรานซิตแบบเล่าเรื่อง (transit_story): บรรทัดเหตุการณ์ + 💡 ควรทำ (ตัดระยะผล) */
+function story(lib: InterpLib, t: Pt, type: AspectType, n: Pt) {
+  const st = transitStory(lib, transitKey(t, type, n))
+  return st ? <><Rich s={st[1]} /><br /><Rich s={st[2].split(' · ผล')[0]!} /></> : null
+}
 function meaning(lib: InterpLib, t: Pt, type: AspectType, n: Pt): string | null {
   const s = text(lib, 'transit', transitKey(t, type, n))
   if (!s) return null
@@ -200,7 +206,7 @@ function CalendarView({ ctx }: { ctx: Ctx }) {
             )}
             {selEv.map((e) => {
               const a = AS[e.type], t = PL[e.t]!, n = PL[e.n]!
-              const mean = meaning(ctx.lib, e.t, e.type, e.n)
+              const mean = story(ctx.lib, e.t, e.type, e.n) ?? meaning(ctx.lib, e.t, e.type, e.n)
               return (
                 <div class="ev">
                   <span class="ei" style={{ color: a[1], background: a[2], border: `1px solid ${a[3]}` }}>{g(a[0])}</span>

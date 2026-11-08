@@ -1,3 +1,4 @@
+import { Rich, transitStory } from '../ui/rich.tsx'
 // หน้า "ไทม์ไลน์ชีวิต" — ตาม design/Timeline.dc.html
 // [dev] #/timeline?at=2026-11-01T00:00 = จำลองวันนี้
 import { useEffect, useMemo, useState } from 'preact/hooks'
@@ -213,6 +214,7 @@ export function Timeline() {
                   const mo = Math.max(1, Math.round((r[1] - r[0]) / 30.4))
                   const p = e.passes
                   const [mean, how] = meaning(lib, e)
+                  const st2 = lib ? transitStory(lib, transitKey(e.t, e.type, e.n)) : null
                   return (
                     <button class="ev" onClick={() => setSel(open ? '' : id)} aria-expanded={open} style={open ? { borderColor: 'rgba(185,166,255,.55)', background: 'rgba(185,166,255,.08)' } : e.big ? { borderColor: 'rgba(243,212,110,.35)' } : undefined}>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%' }}>
@@ -225,11 +227,11 @@ export function Timeline() {
                       </span>
                       {open && (
                         <span style={{ display: 'flex', flexDirection: 'column', gap: '8px', paddingTop: '4px' }}>
-                          <span style={{ fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA' }}>{mean}</span>
+                          <span style={{ fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA' }}>{st2 ? <Rich s={st2[1]} /> : mean}</span>
                           <span style={{ display: 'flex', flexDirection: 'column', gap: '6px', padding: '10px 12px', borderRadius: '14px', background: 'rgba(6,7,13,.45)', border: '1px solid rgba(255,255,255,.08)' }}>
                             <span style={{ fontSize: '12px', color: '#9AA1B5' }}>มีผลราว {mo} เดือน · วันที่มุมพอดี{p.length > 1 ? ` · ผ่าน ${p.length} รอบ (ดาวถอยหลัง)` : ''}</span>
                             <span style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>{p.map((x) => <span class="chip" style={{ color: '#F2F4FA', background: 'rgba(255,255,255,.08)' }}>{fd(x)}</span>)}</span>
-                            {how && <span style={{ fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA' }}><b style={{ color: '#F2F4FA' }}>ควรทำ:</b> {how}</span>}
+                            {st2 ? <span style={{ fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA' }}><Rich s={st2[2].split(' · ผล')[0]!} /></span> : how && <span style={{ fontSize: '13px', lineHeight: 1.6, color: '#DCE0EA' }}><b style={{ color: '#F2F4FA' }}>ควรทำ:</b> {how}</span>}
                           </span>
                         </span>
                       )}

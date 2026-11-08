@@ -263,10 +263,11 @@ for t in P10:
         for k in ASPECTS:
             tp, np_ = PLANETS[t], PLANETS[n]
             c = core(t, n)
-            l1 = f'{tp[0]}จร{TR_INTRO[t]}'
-            l2 = f'{TR_ASP[k]}{np_[0]}ในชาร์ตคุณ ซึ่งดูแลเรื่อง{NAT_DOMAIN[n]} ช่วงนี้{f"เรื่อง{c} " if c else "เรื่องเหล่านี้"}{TR_EFF[k]}{TR_FLAVOR.get(t, "")}'
+            c = c.replace('ดาวรุ่น: ', '') if c else c
+            l1 = f'**{tp[0]}จร** {TR_INTRO[t]}'
+            l2 = f'**{TR_ASP[k]}{np_[0]}ในชาร์ตคุณ** ซึ่งดูแลเรื่อง{NAT_DOMAIN[n]} ช่วงนี้{f"เรื่อง{c} " if c else "เรื่องเหล่านี้"}{TR_EFF[k]}{TR_FLAVOR.get(t, "")}'
             g = 'c' if k == 'c' else ('e' if k in 'xt' else 'h')
-            l3 = f'💡 ควรทำ: {TR_TIP[t][g]} · {DUR[t]}'
+            l3 = f'💡 **ควรทำ:** {TR_TIP[t][g]} · {DUR[t]}'
             lib['transit_story'][f'{t}{k}{n}'] = f'{l1}\n{l2}\n{l3}'
 
 json.dump(lib, open('interp_lib_th.json', 'w'), ensure_ascii=False, indent=0)
