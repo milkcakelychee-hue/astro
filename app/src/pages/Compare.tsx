@@ -95,7 +95,19 @@ function CompareView({ A, B, lib }: Data) {
   /** ข้อความคลัง: แทน A/B ด้วยชื่อ */
   const meaning = (x: SynAspect) => {
     const st = text(lib, 'synastry_story', synastryKey(x.a, x.type, x.b))
-    if (st) return <>{st.replace(/\{A\}/g, L.p.name).replace(/\{B\}/g, R.p.name).split('\n').map((l, i) => <>{i > 0 && <br />}<Rich s={l} /></>)}</>
+    if (st) {
+      // ผู้ใช้ขอ: หัวใหญ่ (คู่ดาว) → หัวรอง 1 บรรทัด (ท่อนฮุค) → คำอธิบาย → 💡 ควรทำ
+      const [l1 = '', l2 = '', l3 = ''] = st.replace(/\{A\}/g, L.p.name).replace(/\{B\}/g, R.p.name).split('\n')
+      const m = /^\*\*(.+?)\*\* ?(.*)$/.exec(l1)
+      return (
+        <span style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+          <span style={{ display: 'block', fontSize: '15px', fontWeight: 600, lineHeight: 1.45, color: '#F2F4FA' }}>{m ? m[1] : l1}</span>
+          {m?.[2] && <span style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, lineHeight: 1.5, color: '#C9B8FF' }}>{m[2]}</span>}
+          <span style={{ display: 'block', marginTop: '2px' }}>{l2}</span>
+          {l3 && <span style={{ display: 'block', marginTop: '2px' }}><Rich s={l3} /></span>}
+        </span>
+      )
+    }
     const t = text(lib, 'synastry', synastryKey(x.a, x.type, x.b))
     if (!t) return null
     return splitTitle(t).body.replace(/^แก่นเรื่อง: /, '').replace(/\bA\b/g, L.p.name).replace(/\bB\b/g, R.p.name).replace(/ของA/g, 'ของ' + L.p.name).replace(/ของB/g, 'ของ' + R.p.name)
