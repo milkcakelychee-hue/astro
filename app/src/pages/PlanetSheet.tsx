@@ -132,7 +132,7 @@ export function PlanetSheet(props: { pt: Pt; chart: Chart; aspects: Aspect[]; li
           {ps && (
             <div class="blk">
               <div class="bh"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B9A6FF" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 8v5M12 16h.01" /></svg>ความหมาย</div>
-              {[[null, text(lib, 'placement', pt)], [`อยู่ราศี${SIGN_TH[s]}`, text(lib, 'placement', `${pt}s${s}`)], [h && pt !== 'A' && pt !== 'C' ? `อยู่เรือน ${h}` : null, h && pt !== 'A' && pt !== 'C' ? text(lib, 'placement', `${pt}h${h}`) : null]]
+              {[[null, text(lib, 'placement', pt)], [`อยู่ราศี${SIGN_TH[s]}`, text(lib, 'placement', `${pt}s${s}`)], [h ? `อยู่เรือน ${h}` : null, h ? text(lib, 'placement', `${pt}h${h}`) : null]]
                 .filter(([, t]) => t).map(([k, t]) => <p class="bp">{k && <b style={{ color: '#F2F4FA' }}>{k}: </b>}{t}</p>)}
             </div>
           )}
